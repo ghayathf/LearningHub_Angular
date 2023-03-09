@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AllCoursesComponent } from './all-courses/all-courses.component';
 import { MainComponent } from './main/main.component';
 
 const routes: Routes = [
   {
-    path:'main',
+    path:'',
     component:MainComponent
-  }
+  },
+  {path:'all-courses/AI',component:AllCoursesComponent}
 ];
 
 @NgModule({

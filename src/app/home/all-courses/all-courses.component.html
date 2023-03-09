@@ -1,0 +1,39 @@
+<app-home-header></app-home-header>
+<div class="card rounded overflow-hidden shadow" *ngFor="let item of courses">
+	<div class="row g-0">
+		<!-- Image -->
+		<div class="col-md-4">
+			<img src="../../../assets/HomeAssets/images/courses/4by3/16.jpg" alt="card image">
+		</div>
+
+		<!-- Card body -->
+		<div class="col-md-8">
+			<div class="card-body">
+				<!-- Title -->
+				<div class="d-flex justify-content-between mb-2 mb-sm-3">
+					<h5 class="card-title mb-0"><a href="#">{{ item.name }}</a></h5>
+					<!-- Wishlist icon -->
+					<a href="#"><i class="far fa-heart text-dark"></i></a>
+				</div>
+				<!-- Content -->
+				<!-- Info -->
+				<ul class="list-inline mb-2">
+					<li class="list-inline-item text-dark mb-1 mb-sm-0"><i class="far fa-clock text-danger me-2"></i>{{ item.duration }}</li>
+					<li class="list-inline-item text-dark mb-1 mb-sm-0"><i class="fas fa-table text-orange me-2"></i>{{ item.lectures }} lectures</li>
+					<li class="list-inline-item text-dark"><i class="fas fa-signal text-success me-2"></i>{{ item.level }}</li>
+				</ul>
+				<!-- Rating -->
+				<ul class="list-inline mb-0">
+					<li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+					<li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+					<li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+					<li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+					<li class="list-inline-item me-0 small"><i class="far fa-star text-warning"></i></li>
+					<li class="list-inline-item ms-2 text-dark">4.0/5.0</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<app-home-footer></app-home-footer>
+

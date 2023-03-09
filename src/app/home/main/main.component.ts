@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -6,6 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent {
+  image:string=""
+  name:string=""
+  details:string=""
 cats =
 [
   {
@@ -59,4 +63,11 @@ cats =
     catDetails:"90 Hours"
   }
 ]
+constructor(private router:Router) {
+
+}
+GetValues(name:any)
+{
+  this.router.navigate(['/all-courses',name])
+}
 }

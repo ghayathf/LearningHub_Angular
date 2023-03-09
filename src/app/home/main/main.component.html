@@ -351,7 +351,7 @@
         <div class="col-sm-6 col-md-3 col-xl-3" *ngFor="let item of cats">
           <div class="row">
             <div class="col">
-              <app-card [cardName]="item.catName" [cardDetails]="item.catDetails" [cardImage]="item.catImage"></app-card>
+              <app-card (click)="GetValues(item.catName)"  [cardName]="item.catName" [cardDetails]="item.catDetails" [cardImage]="item.catImage"></app-card>
             </div>
           </div>
         </div>
