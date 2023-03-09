@@ -4,13 +4,13 @@ import { CommonModule } from '@angular/common';
 import { HomeRoutingModule } from './home-routing.module';
 import { MainComponent } from './main/main.component';
 import { SharedModule } from '../shared/shared.module';
-import { CategoryComponent } from './category/category.component';
+import { CardComponent } from './card/card.component';
 
 
 @NgModule({
   declarations: [
     MainComponent,
-    CategoryComponent
+    CardComponent
   ],
   imports: [
     CommonModule,
