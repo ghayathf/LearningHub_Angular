@@ -11,7 +11,12 @@ import { HomeFooterComponent } from './home-footer/home-footer.component';
     HomeFooterComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+
+  ],
+  exports:[
+    HomeHeaderComponent,
+    HomeFooterComponent
   ]
 })
 export class SharedModule { }
