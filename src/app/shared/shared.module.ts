@@ -6,12 +6,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { RouterModule } from '@angular/router';
+import { AdminSideBarComponent } from './admin-side-bar/admin-side-bar.component';
 
 
 @NgModule({
   declarations: [
     HomeHeaderComponent,
-    HomeFooterComponent
+    HomeFooterComponent,
+    AdminSideBarComponent
   ],
   imports: [
     CommonModule,
@@ -26,6 +28,7 @@ import { RouterModule } from '@angular/router';
     ReactiveFormsModule,
     MatInputModule,
     NgxSpinnerModule,
+    AdminSideBarComponent
 
   ]
 })
