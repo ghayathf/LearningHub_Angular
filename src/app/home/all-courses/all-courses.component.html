@@ -1,39 +1,57 @@
 <app-home-header></app-home-header>
-<div class="card rounded overflow-hidden shadow" *ngFor="let item of courses">
-	<div class="row g-0">
-		<!-- Image -->
-		<div class="col-md-4">
-			<img src="../../../assets/HomeAssets/images/courses/4by3/16.jpg" alt="card image">
-		</div>
-
-		<!-- Card body -->
-		<div class="col-md-8">
-			<div class="card-body">
-				<!-- Title -->
-				<div class="d-flex justify-content-between mb-2 mb-sm-3">
-					<h5 class="card-title mb-0"><a href="#">{{ item.name }}</a></h5>
-					<!-- Wishlist icon -->
-					<a href="#"><i class="far fa-heart text-dark"></i></a>
-				</div>
-				<!-- Content -->
-				<!-- Info -->
-				<ul class="list-inline mb-2">
-					<li class="list-inline-item text-dark mb-1 mb-sm-0"><i class="far fa-clock text-danger me-2"></i>{{ item.duration }}</li>
-					<li class="list-inline-item text-dark mb-1 mb-sm-0"><i class="fas fa-table text-orange me-2"></i>{{ item.lectures }} lectures</li>
-					<li class="list-inline-item text-dark"><i class="fas fa-signal text-success me-2"></i>{{ item.level }}</li>
-				</ul>
-				<!-- Rating -->
-				<ul class="list-inline mb-0">
-					<li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-					<li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-					<li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-					<li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-					<li class="list-inline-item me-0 small"><i class="far fa-star text-warning"></i></li>
-					<li class="list-inline-item ms-2 text-dark">4.0/5.0</li>
-				</ul>
-			</div>
-		</div>
-	</div>
+<div style="justify-content: center; flex-wrap: wrap;" class="card-group ">
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+  <div class="col-md-4" *ngFor="let item of courses" style="margin: 20px; width: 20%;">
+    <div class="rounded-top overflow-hidden">
+      <div class="card-overlay-hover">
+        <!-- Image -->
+        <img src="../../../assets/HomeAssets/images/courses/4by3/02.jpg" class="card-img-top" alt="course image">
+      </div>
+      <!-- Hover element -->
+    </div>
+    <!-- Card body -->
+    <div class="card-body">
+      <!-- Badge and icon -->
+      <div class="d-flex justify-content-between">
+        <!-- Rating and info -->
+        <ul class="list-inline hstack gap-2 mb-0" style="margin: 5px;">
+          <!-- Info -->
+          <li class="list-inline-item d-flex justify-content-center align-items-center">
+            <div class="icon-md bg-orange bg-opacity-10 text-orange rounded-circle"><i class="fas fa-user-graduate"></i>
+            </div>
+            <span class="text-white ms-2">9.1k</span>
+          </li>
+          <!-- Rating -->
+          <li class="list-inline-item d-flex justify-content-center align-items-center">
+            <div class="icon-md bg-warning bg-opacity-15 text-warning rounded-circle"><i class="fas fa-star"></i>
+            </div>
+            <span class="text-white ms-2">4.5</span>
+          </li>
+          <li class="list-inline-item d-flex justify-content-center align-items-center">
+            <div class="icon-md bg-warning bg-opacity-15 text-warning rounded-circle"><i class="fas fa-book"></i>
+            </div>
+            <span class="text-white ms-2">{{ item.lectures }}</span>
+          </li>
+        </ul>
+        <!-- Avatar -->
+        <div class="avatar avatar-sm">
+        </div>
+      </div>
+      <!-- Divider -->
+      <hr>
+      <!-- Title -->
+      <h5 class="card-title"><a href="#">{{ item.name }}</a></h5>
+      <!-- Badge and Price -->
+      <div class="d-flex justify-content-between align-items-center mb-0">
+        <div>
+          <a href="#" class="badge bg-info bg-opacity-10 text-info me-2"><i class="fas fa-circle small fw-bold"></i> {{ item.level }} </a>
+        </div>
+        <!-- Price -->
+        <h3 class="text-success mb-0">{{ item.duration }} Hours</h3>
+      </div>
+    </div>
+  </div>
 </div>
-<app-home-footer></app-home-footer>
+    </div>
 
+<app-home-footer></app-home-footer>

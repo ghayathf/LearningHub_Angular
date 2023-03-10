@@ -8,7 +8,7 @@ const routes: Routes = [
     path:'',
     component:MainComponent
   },
-  {path:'all-courses/AI',component:AllCoursesComponent}
+  {path:'all-courses/:name',component:AllCoursesComponent}
 ];
 
 @NgModule({

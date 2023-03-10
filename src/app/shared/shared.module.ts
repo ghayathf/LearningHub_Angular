@@ -4,6 +4,8 @@ import { HomeHeaderComponent } from './home-header/home-header.component';
 import { HomeFooterComponent } from './home-footer/home-footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -14,14 +16,17 @@ import { MatInputModule } from '@angular/material/input';
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
   ],
   exports: [
     HomeHeaderComponent,
     HomeFooterComponent,
     FormsModule,
     ReactiveFormsModule,
-    MatInputModule
+    MatInputModule,
+    NgxSpinnerModule,
+
   ]
 })
 export class SharedModule { }
