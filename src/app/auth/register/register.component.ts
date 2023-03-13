@@ -10,7 +10,7 @@ export class RegisterComponent {
   constructor(private router: Router) { }
 
   onNext(): void {
-    this.router.navigate(['/Auth/register2']);
+    this.router.navigate(['/register2']);
   }
 
 

@@ -4,24 +4,32 @@ import { HomeHeaderComponent } from './home-header/home-header.component';
 import { HomeFooterComponent } from './home-footer/home-footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { RouterModule } from '@angular/router';
+import { AdminSideBarComponent } from './admin-side-bar/admin-side-bar.component';
 
 
 @NgModule({
   declarations: [
     HomeHeaderComponent,
-    HomeFooterComponent
+    HomeFooterComponent,
+    AdminSideBarComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
   ],
   exports: [
     HomeHeaderComponent,
     HomeFooterComponent,
     FormsModule,
     ReactiveFormsModule,
-    MatInputModule
+    MatInputModule,
+    NgxSpinnerModule,
+    AdminSideBarComponent
+
   ]
 })
 export class SharedModule { }
