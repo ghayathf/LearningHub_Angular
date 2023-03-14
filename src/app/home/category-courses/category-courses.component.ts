@@ -13,9 +13,8 @@ export class CategoryCoursesComponent {
   constructor(private route:ActivatedRoute,public courseService:CourseService,public categoryService:CategoryService) {}
   courses:any=[]
   ngOnInit(){
-    this.courses = this.courseService.GetAllCourses()
+    this.courses = []
   }
-
   GetCoursesByCategoryId(categoryId:number){
     this.courses.filter((x: {category_Id: number}) => x.category_Id == categoryId);
   }

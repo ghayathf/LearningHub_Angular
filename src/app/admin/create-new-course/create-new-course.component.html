@@ -27,10 +27,10 @@
 				<div class="card-body">
 					<!-- Step content START -->
 					<div class="bs-stepper-content">
-						<form onsubmit="return false">
+						<form [formGroup]="CreateForm">
 
 							<!-- Step 1 content START -->
-							<div id="step-1" role="tabpanel" class="content" aria-labelledby="steppertrigger1">
+
 								<!-- Title -->
 								<h4>Course details</h4>
 
@@ -39,19 +39,29 @@
 								<!-- Basic information START -->
 								<div class="row g-4">
 									<!-- Course title -->
-									<div class="col-12">
-										<label class="form-label">Course title</label>
-										<input class="form-control" type="text" placeholder="Enter course title">
-									</div>
+									<div>
+                    <mat-form-field class="example-full-width">
+                      <mat-label>CourseName</mat-label>
+                      <input type="text" matInput formControlName="coursename">
+                      <mat-error *ngIf="CreateForm.controls['coursename'].hasError('required')">
+                        Course Name is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
 
 									<!-- Short description -->
 									<div class="col-12">
-										<label class="form-label">Description</label>
-										<textarea class="form-control" rows="2" placeholder="Enter keywords"></textarea>
+										<mat-form-field class="example-full-width">
+                      <mat-label>course Description</mat-label>
+                      <input type="text" matInput formControlName="coursedescription">
+                      <mat-error *ngIf="CreateForm.controls['coursedescription'].hasError('required')">
+                        course Description is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
 									</div>
 
 									<!-- Course category -->
-									<div class="col-md-6">
+									<!-- <div class="col-md-6">
 										<label class="form-label">Course category</label>
 										<select class="form-select js-choice border-0 z-index-9 bg-transparent" aria-label=".form-select-sm" data-search-enabled="true">
 											<option value="">Select category</option>
@@ -61,55 +71,55 @@
 											<option>Finance</option>
 											<option>Marketing</option>
 										</select>
+									</div> -->
+                  <div class="col-12">
+										<mat-form-field class="example-full-width">
+                      <mat-label>course Image</mat-label>
+                      <input type="text" matInput formControlName="courseimage">
+                      <mat-error *ngIf="CreateForm.controls['courseimage'].hasError('required')">
+                        course image is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
 									</div>
 
 									<!-- Course level -->
 									<div class="col-md-6">
-										<label class="form-label">Course level</label>
+										<!-- <label class="form-label">Course level</label>
 										<select class="form-select js-choice border-0 z-index-9 bg-transparent" aria-label=".form-select-sm" data-search-enabled="false" data-remove-item-button="true">
 											<option value="">Select course level</option>
 											<option>All level</option>
 											<option>Beginner</option>
 											<option>Intermediate</option>
 											<option>Advance</option>
-										</select>
+										</select> -->
+                    <mat-form-field class="example-full-width">
+                      <mat-label>course level</mat-label>
+                      <input type="number" matInput formControlName="courselevel">
+                      <mat-error *ngIf="CreateForm.controls['courselevel'].hasError('required')">
+                        course level is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
 									</div>
-									<!-- Total lecture -->
-									<div class="col-md-6">
-										<label class="form-label">Total lecture</label>
-										<input class="form-control" type="text" placeholder="Enter total lecture">
+                  <div class="col-12">
+										<mat-form-field class="example-full-width">
+                      <mat-label>category_Id</mat-label>
+                      <input type="number" matInput formControlName="category_Id">
+                      <mat-error *ngIf="CreateForm.controls['category_Id'].hasError('required')">
+                        category_Id is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
 									</div>
-<!-- Upload image START -->
-<div class="col-12">
-  <div class="text-center justify-content-center align-items-center p-4 p-sm-5 border border-2 border-dashed position-relative rounded-3">
-    <!-- Image -->
-    <img src="assets/images/element/gallery.svg" class="h-50px" alt="">
-    <div>
-      <h6 class="my-2">Upload course image here, or<a href="#!" class="text-primary"> Browse</a></h6>
-      <label style="cursor:pointer;">
-        <span>
-          <input class="form-control stretched-link" type="file" name="my-image" id="image" accept="image/gif, image/jpeg, image/png" />
-        </span>
-      </label>
-        <p class="small mb-0 mt-2"><b>Note:</b> Only JPG, JPEG and PNG. Our suggested dimensions are 600px * 450px. Larger image will be cropped to 4:3 to fit our thumbnails/previews.</p>
-    </div>
-  </div>
 
-  <!-- Button -->
-  <div class="d-sm-flex justify-content-end mt-2">
-    <button type="button" class="btn btn-sm btn-danger-soft mb-3">Remove image</button>
-  </div>
-</div>
-<!-- Upload image END -->
+
 
 
 									<!-- Step 1 button -->
 									<div class="d-flex justify-content-end mt-3">
-										<button class="btn btn-primary next-btn mb-0">Next</button>
+										<input class="btn btn-primary" type="button" [disabled]="CreateForm.invalid" value="Create" (click)="CreateCourse()">
 									</div>
 								</div>
 								<!-- Basic information START -->
-							</div>
+
 							<!-- Step 1 content END -->
 						</form>
 					</div>
