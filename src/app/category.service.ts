@@ -45,7 +45,6 @@ export class CategoryService {
 
     )
   }
-
   CreateCategory(course: any) {
     return new Promise<void>((resolve, reject) => {
       this.spinner.show();
@@ -65,6 +64,8 @@ export class CategoryService {
       )
     })
   }
-
-
+  GetSelectedCategory()
+  {
+    return this.category;
+  }
 }
