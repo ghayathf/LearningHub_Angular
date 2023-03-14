@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { CategoryService } from 'src/app/category.service';
+import { CourseService } from 'src/app/course.service';
 
 @Component({
   selector: 'app-main',
@@ -11,35 +13,8 @@ export class MainComponent {
   image:string=""
   name:string=""
   details:string=""
-cats =
-[
-  {
-    catImage:"../../../assets/HomeAssets/images/element/data-science.svg",
-    catName:"AI",
-    catDetails:"25 Hours"
-  },
-  {
-    catImage:"../../../assets/HomeAssets/images/element/engineering.svg",
-    catName:"IT & Software",
-    catDetails:"35 Hours"
-  },
-  {
-    catImage:"../../../assets/HomeAssets/images/element/engineering.svg",
-    catName:"Engineering",
-    catDetails:"70 Hours"
-  },
-  {
-    catImage:"../../../assets/HomeAssets/images/element/coding.svg",
-    catName:"Web Development",
-    catDetails:"25 Hours"
-  },
-  {
-    catImage:"../../../assets/HomeAssets/images/element/profit.svg",
-    catName:"Finance",
-    catDetails:"90 Hours"
-  }
-]
-constructor(private router:Router,private spinner:NgxSpinnerService) {
+cats :any=[]
+constructor(private router:Router,private spinner:NgxSpinnerService,public categoryService:CategoryService,public courseService:CourseService) {
 }
 ngOnInit() {
   /** spinner starts on init */
@@ -57,9 +32,14 @@ ngOnInit() {
     template:
       "<img src='https://media.giphy.com/media/o8igknyuKs6aY/giphy.gif' />",
   });
+  this.categoryService.GetAllCategories()
+  console.log(this.categoryService.GetAllCategories());
+
+
 }
-GetValues(name:any)
+GetValues(categoryid:any)
 {
-  this.router.navigate(['/all-courses',name])
+  this.courseService.GetCoursesByCategoryId(categoryid)
+  this.router.navigate(["/all-courses"])
 }
 }

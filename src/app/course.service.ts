@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CourseService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private router:Router,private http:HttpClient) { }
 
   courses:any = []
   GetAllCourses(){
@@ -26,5 +27,11 @@ export class CourseService {
       }
     )
   }
-  
+  courseCategories:any=[]
+  GetCoursesByCategoryId(categoryId:number){
+    this.GetAllCourses()
+    this.courseCategories=this.courses.filter((x: {category_Id: number}) => x.category_Id == categoryId);
+    this.router.navigate(["/all-courses"])
+  }
+
 }

@@ -7,6 +7,7 @@ import { SharedModule } from '../shared/shared.module';
 import { CardComponent } from './card/card.component';
 import { AllCoursesComponent } from './all-courses/all-courses.component';
 import { CourseCardComponent } from './course-card/course-card.component';
+import { CategoryCoursesComponent } from './category-courses/category-courses.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { CourseCardComponent } from './course-card/course-card.component';
     MainComponent,
     CardComponent,
     AllCoursesComponent,
-    CourseCardComponent
+    CourseCardComponent,
+    CategoryCoursesComponent
   ],
   imports: [
     CommonModule,

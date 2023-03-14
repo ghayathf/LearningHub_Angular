@@ -1,11 +1,11 @@
 <div class="card card-metro overflow-hidden rounded-3">
-	<img (click)="SendCourses(cardName,cardImage,cardDetails)" [src]="cardImage" alt="">
-	<!-- Image overlay -->
+	<img (click)="SendCourses(cardName,cardImage)" [src]="cardImage" alt=""> 
+<!--   <img src="../../../assets/HomeAssets/images/bg/03.jpg" alt="">
+ -->	<!-- Image overlay -->
 	<div class="card-img-overlay d-flex flex-column">
 		<!-- Info -->
 		<div class="mt-auto card-text">
 			<a class="text-light mt-auto fs-5 stretched-link">{{ cardName }}</a>
-			<div> <a  class="text-white">{{ cardDetails }}</a> </div>
 		</div>
 	</div>
 </div>

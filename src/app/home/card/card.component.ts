@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input,OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { CategoryService } from 'src/app/category.service';
+import { CourseService } from 'src/app/course.service';
 
 @Component({
   selector: 'app-card',
@@ -10,22 +12,20 @@ export class CardComponent {
   /**
    *
    */
-  constructor(private router:Router) {
+  constructor(private router:Router,public courseService:CourseService,public categoryService:CategoryService) {
 
 
   }
 @Input() cardImage?:string
 @Input() cardName?:string
-@Input() cardDetails?:string
 
 @Output() SendValues = new EventEmitter()
 SendCourses(name?:string,image?:string,details?:string){
   const product = {
     proImage:image,
     proName:name,
-    proDes:details
   }
   this.SendValues.emit(product)
-  
+
 }
 }
