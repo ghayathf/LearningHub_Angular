@@ -352,7 +352,7 @@
         <div class="col-sm-6 col-md-3 col-xl-3" *ngFor="let item of categoryService.categories">
           <div class="row">
             <div class="col">
-              <app-card (click)="courseService.GetCoursesByCategoryId(item.categoryid)" [cardName]="item.categoryname"[cardImage]="item.categoryimage"></app-card>
+              <app-card (click)="selectCategory(item.categoryid)" [cardName]="item.categoryname"[cardImage]="item.categoryimage"></app-card>
             </div>
           </div>
         </div>
