@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CourseService } from 'src/app/course.service';
 
 @Component({
@@ -9,6 +10,7 @@ import { CourseService } from 'src/app/course.service';
 })
 export class CreateNewCourseComponent
 {
+
   CreateForm = new FormGroup(
     {
     coursename : new FormControl('',Validators.required),
@@ -18,10 +20,9 @@ export class CreateNewCourseComponent
     category_Id : new FormControl('',Validators.required)
     }
   )
-  constructor(public courseService:CourseService) {}
+  constructor(public courseService:CourseService,private router:Router) {}
   CreateCourse(){
     this.courseService.CreateCourse(this.CreateForm.value)
-    console.log(this.CreateForm.value);
-
+    this.router.navigate(["Admin/AllCourses"])
   }
 }
