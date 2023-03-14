@@ -16,6 +16,7 @@ export class CategoryCoursesComponent {
     this.courses = []
   }
   GetCoursesByCategoryId(categoryId:number){
+    this.courses=this.categoryService.GetSelectedCategory().finalCourses
     this.courses.filter((x: {category_Id: number}) => x.category_Id == categoryId);
   }
 }

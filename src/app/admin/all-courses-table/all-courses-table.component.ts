@@ -17,5 +17,6 @@ ngOnInit(){
 }
 GetCourseById(courseid:number){
   this.courseService.GetCourseById(courseid)
+  this.router.navigate(["Admin/CourseDetails"])
 }
 }

@@ -26,9 +26,11 @@ export class CourseService {
   }
   course:any
   GetCourseById(courseId:number){
+    this.spinner.show()
     this.http.get("https://localhost:44391/api/Courses/GetCourseById/"+courseId).subscribe(
       {
-        next:(res)=>{this.course=res},
+        next:(res)=>{this.course=res
+          this.spinner.hide()},
         error:(err)=>{console.log(err);
         }
       }
@@ -40,7 +42,7 @@ export class CourseService {
     this.courseCategories=this.courses.filter((x: {category_Id: number}) => x.category_Id == categoryId);
     //this.router.navigate(["/all-courses"])
     this.router.navigate(["/category-courses"])
-    
+
   }
   CreateCourse(newCourse:any){
     this.spinner.show()
