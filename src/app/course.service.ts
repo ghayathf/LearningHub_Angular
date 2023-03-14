@@ -31,7 +31,7 @@ export class CourseService {
   GetCoursesByCategoryId(categoryId:number){
     
     this.courseCategories=this.courses.filter((x: {category_Id: number}) => x.category_Id == categoryId);
-    this.router.navigate(["/all-courses"])
+    this.router.navigate(["/CategoryCourses"])
   }
 
 }
