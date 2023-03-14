@@ -7,6 +7,9 @@ import { SharedModule } from '../shared/shared.module';
 import { CreateNewCourseComponent } from './create-new-course/create-new-course.component';
 import { AllCoursesTableComponent } from './all-courses-table/all-courses-table.component';
 import { CourseDetailsComponent } from './course-details/course-details.component';
+import { CategoriesComponent } from './categories/categories.component';
+import { CategoryDetailsComponent } from './category-details/category-details.component';
+import { CreateCategoryComponent } from './create-category/create-category.component';
 
 
 @NgModule({
@@ -14,7 +17,10 @@ import { CourseDetailsComponent } from './course-details/course-details.componen
     MainComponent,
     CreateNewCourseComponent,
     AllCoursesTableComponent,
-    CourseDetailsComponent
+    CourseDetailsComponent,
+    CategoriesComponent,
+    CategoryDetailsComponent,
+    CreateCategoryComponent
   ],
   imports: [
     CommonModule,

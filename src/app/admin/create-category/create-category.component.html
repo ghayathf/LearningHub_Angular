@@ -1,0 +1,106 @@
+<app-admin-side-bar></app-admin-side-bar>
+<section class="py-0 bg-blue h-100px align-items-center d-flex h-200px rounded-0"
+    style="background:url(../../../assets/HomeAssets/images/pattern/04.png) no-repeat center center; background-size:cover;">
+    <!-- Main banner background image -->
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <!-- Title -->
+                <h1 class="text-white">Submit a new Category</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto text-center">
+                <!-- Content -->
+            </div>
+        </div>
+
+        <div class="card bg-transparent border rounded-3 mb-5">
+            <div id="stepper" class="bs-stepper stepper-outline">
+
+
+                <!-- Card body START -->
+                <div class="card-body">
+                    <!-- Step content START -->
+                    <div class="bs-stepper-content">
+
+
+                        <!-- Step 1 content START -->
+                        <div id="step-1" role="tabpanel" class="content" aria-labelledby="steppertrigger1">
+                            <!-- Title -->
+                            <h4>Category details</h4>
+
+                            <hr> <!-- Divider -->
+
+                            <!-- Basic information START -->
+                            <div class="row g-4">
+                                <!-- Course title -->
+                                <div class="col-12">
+                                    <form [formGroup]="CreateForm" class="example-form">
+                                        <mat-form-field class="example-full-width">
+                                            <mat-label>Category name</mat-label>
+                                            <input type="email" matInput formControlName="categoryname">
+
+                                            <mat-error *ngIf="CreateForm.controls['categoryname'].hasError('required')">
+                                                Category name is <strong>required</strong>
+                                            </mat-error>
+                                        </mat-form-field>
+
+                                    </form>
+                                </div>
+
+
+                                <div class="col-12">
+                                    <div
+                                        class="text-center justify-content-center align-items-center p-4 p-sm-5 border border-2 border-dashed position-relative rounded-3">
+                                        <!-- Image -->
+                                        <img src="assets/images/element/gallery.svg" class="h-50px" alt="">
+                                        <div>
+                                            <h6 class="my-2">Upload Cayrgory image here, or<a href="#!"
+                                                    class="text-primary"> Browse</a></h6>
+                                            <label style="cursor:pointer;">
+                                                <span>
+                                                    <input class="form-control stretched-link" type="file"
+                                                        name="my-image" id="image"
+                                                        accept="image/gif, image/jpeg, image/png" />
+                                                </span>
+                                            </label>
+                                            <p class="small mb-0 mt-2"><b>Note:</b> Only JPG, JPEG and PNG. Our
+                                                suggested dimensions are 600px * 450px. Larger image will be cropped
+                                                to 4:3 to fit our thumbnails/previews.</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Button -->
+                                    <div class="d-sm-flex justify-content-end mt-2">
+                                        <button type="button" class="btn btn-sm btn-danger-soft mb-3">Remove
+                                            image</button>
+                                    </div>
+                                </div>
+                                <!-- Upload image END -->
+
+
+                                <!-- Step 1 button -->
+                                <div class="d-flex justify-content-end mt-3">
+                                    <button class="btn btn-primary next-btn mb-0" [disabled]="CreateForm.invalid"
+                                        (click)="createCategory()">Create</button>
+                                </div>
+                            </div>
+                            <!-- Basic information START -->
+                        </div>
+                        <!-- Step 1 content END -->
+
+                    </div>
+                </div>
+                <!-- Card body END -->
+            </div>
+        </div>
+    </div>
+</section>
+<!-- =======================
+Steps END -->
