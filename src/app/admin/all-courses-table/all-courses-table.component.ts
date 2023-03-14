@@ -8,9 +8,7 @@ import { CourseService } from 'src/app/course.service';
   styleUrls: ['./all-courses-table.component.css']
 })
 export class AllCoursesTableComponent {
-/**
- *
- */
+
 constructor(public courseService:CourseService,private router:Router) {
 }
 ngOnInit(){
