@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { CourseService } from 'src/app/course.service';
 
 @Component({
@@ -9,13 +10,12 @@ import { CourseService } from 'src/app/course.service';
 })
 export class AllCoursesTableComponent {
 
-constructor(public courseService:CourseService,private router:Router) {
+constructor(public courseService:CourseService,private router:Router,public spinner:NgxSpinnerService) {
 }
 ngOnInit(){
   this.courseService.GetAllCourses()
 }
 GetCourseById(courseid:number){
   this.courseService.GetCourseById(courseid)
-  this.router.navigate(["Admin/CourseDetails"])
 }
 }
