@@ -25,4 +25,8 @@ export class CategoryService {
       }
     )
   }
+  GetSelectedCategory()
+  {
+    return this.category;
+  }
 }

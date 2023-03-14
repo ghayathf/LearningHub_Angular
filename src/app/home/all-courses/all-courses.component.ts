@@ -16,7 +16,7 @@ export class AllCoursesComponent implements OnInit {
   ngOnInit(){
     this.courses = this.courseService.GetAllCourses()
   }
-
+  
   
 
 }
