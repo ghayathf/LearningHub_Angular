@@ -33,9 +33,6 @@ ngOnInit() {
       "<img src='https://media.giphy.com/media/o8igknyuKs6aY/giphy.gif' />",
   });
   this.categoryService.GetAllCategories()
-  console.log(this.categoryService.GetAllCategories());
-
-
 }
 GetValues(categoryid:any)
 {
