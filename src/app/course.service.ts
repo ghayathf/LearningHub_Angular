@@ -53,4 +53,15 @@ export class CourseService {
       }
     )
   }
+  deleteCourse(courseId: number){
+    return this.http.delete("https://localhost:44391/api/Courses/DeleteCourse/"+courseId).subscribe(
+      {
+      next:()=>{this.spinner.hide()},
+        error:()=>{this.spinner.hide()}
+      }
+    );
+    
+  }
+  
+  
 }
