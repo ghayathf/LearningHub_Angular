@@ -10,6 +10,8 @@ import { CourseDetailsComponent } from './course-details/course-details.componen
 import { CategoriesComponent } from './categories/categories.component';
 import { CategoryDetailsComponent } from './category-details/category-details.component';
 import { CreateCategoryComponent } from './create-category/create-category.component';
+import { ContactusComponent } from './contactus/contactus.component';
+
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { CreateCategoryComponent } from './create-category/create-category.compo
     CourseDetailsComponent,
     CategoriesComponent,
     CategoryDetailsComponent,
-    CreateCategoryComponent
+    CreateCategoryComponent,
+    ContactusComponent,
+
   ],
   imports: [
     CommonModule,
