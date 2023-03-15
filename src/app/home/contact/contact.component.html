@@ -1,5 +1,7 @@
 <app-home-header></app-home-header>
 <!-- **************** MAIN CONTENT START **************** -->
+
+
 <main>
 
     <!-- =======================
@@ -14,6 +16,10 @@
                     <h1 class="mb-4">We're here to help!</h1>
                 </div>
             </div>
+            <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="wheat" type="square-jelly-box"
+                [fullScreen]="true">
+                <p style="color: wheat"> Waiting... </p>
+            </ngx-spinner>
 
             <!-- Contact info box -->
             <div class="row g-4 g-md-5 mt-0 mt-lg-3">
