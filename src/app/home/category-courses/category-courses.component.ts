@@ -12,10 +12,14 @@ export class CategoryCoursesComponent {
 
   constructor(private route:ActivatedRoute,public courseService:CourseService,public categoryService:CategoryService) {}
   courses:any=[]
+  categoryID:any
   ngOnInit(){
-    this.courses = []
+    
+    this.categoryID=this.categoryService.GetSelectedCategory()
+    this.GetCoursesByCategoryId(this.categoryID)
+    console.log(this.categoryID)
   }
-  GetCoursesByCategoryId(categoryId:number){
+  GetCoursesByCategoryId(categoryId:any){
     this.courses.filter((x: {category_Id: number}) => x.category_Id == categoryId);
   }
 }

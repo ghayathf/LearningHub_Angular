@@ -21,8 +21,8 @@ export class CourseService {
   }
   category:any
   ngOnInit(): void {
-    this.category = this.categoryService.GetSelectedCategory();
-    this.GetCoursesByCategoryId(this.category.categoryid);
+   // this.category = this.categoryService.GetSelectedCategory();
+    //this.GetCoursesByCategoryId(this.category.categoryid);
   }
   course:any
   GetCourseById(courseId:number){
@@ -36,9 +36,11 @@ export class CourseService {
   }
   courseCategories:any=[]
   GetCoursesByCategoryId(categoryId:number){
-
+    this.GetAllCourses()
     this.courseCategories=this.courses.filter((x: {category_Id: number}) => x.category_Id == categoryId);
     //this.router.navigate(["/all-courses"])
+    this.categoryService.GetCategoryById(categoryId)
+    console.log(categoryId)
     this.router.navigate(["/category-courses"])
     
   }

@@ -16,6 +16,7 @@ export class CategoryService {
     )
   }
   category:any
+  categoryID?:any
   GetCategoryById(categoryid:number){
     this.http.get("https://localhost:44391/api/Categories/GetCategoryById/"+categoryid).subscribe(
       {
@@ -24,9 +25,12 @@ export class CategoryService {
         }
       }
     )
+    this.categoryID=categoryid
+
   }
+ 
   GetSelectedCategory()
   {
-    return this.category;
+    return this.categoryID;
   }
 }
