@@ -496,7 +496,7 @@
 
                         <!-- Card header -->
                         <div class="card-header border-bottom d-flex justify-content-between align-items-center p-4">
-                            <h5 class="card-header-title">Top Instructors</h5>
+                            <h5 class="card-header-title">Trainers</h5>
                             <a href="#" class="btn btn-link p-0 mb-0">View all</a>
                         </div>
 
@@ -504,7 +504,7 @@
                         <div class="card-body p-4">
 
                             <!-- Instructor item START -->
-                            <div class="d-sm-flex justify-content-between align-items-center">
+                            <div class="d-sm-flex justify-content-between align-items-center" *ngFor="let item of trainerService.tr">
                                 <!-- Avatar and info -->
                                 <div class="d-sm-flex align-items-center mb-1 mb-sm-0">
                                     <!-- Avatar -->
@@ -514,132 +514,27 @@
                                     </div>
                                     <!-- Info -->
                                     <div class="ms-0 ms-sm-2 mt-2 mt-sm-0">
-                                        <h6 class="mb-1">Lori Stevens<i
-                                                class="bi bi-patch-check-fill text-info small ms-1"></i></h6>
+                                        <h3 class="mb-1">{{ item.username }}<i
+                                                class="bi bi-patch-check-fill text-info small ms-1"></i></h3>
                                         <ul class="list-inline mb-0 small">
                                             <li class="list-inline-item fw-light me-2 mb-1 mb-sm-0"><i
-                                                    class="fas fa-book text-purple me-1"></i>25 Courses</li>
-                                            <li class="list-inline-item fw-light me-2 mb-1 mb-sm-0"><i
-                                                    class="fas fa-star text-warning me-1"></i>4.5/5.0</li>
+                                                    class="fas fa-envelope text-purple me-1"></i>{{ item.email }}</li>
+                                            <li class="list-inline-item fw-light me-2 mb-1 mb-sm-0">
+                                              <i class="fas fa-phone text-warning me-1"></i>{{ item.phonenumber }}</li>
                                         </ul>
+                                        <hr>
                                     </div>
                                 </div>
                                 <!-- Button -->
                                 <a href="#" class="btn btn-sm btn-light mb-0">View</a>
+
+
                             </div>
                             <!-- Instructor item END -->
-
-                            <hr><!-- Divider -->
-
-                            <!-- Instructor item START -->
-                            <div class="d-sm-flex justify-content-between align-items-center">
-                                <!-- Avatar and info -->
-                                <div class="d-sm-flex align-items-center mb-1 mb-sm-0">
-                                    <!-- Avatar -->
-                                    <div class="avatar avatar-md flex-shrink-0">
-                                        <img class="avatar-img rounded-circle"
-                                            src="../../../assets/HomeAssets/images/avatar/03.jpg" alt="avatar">
-                                    </div>
-                                    <!-- Info -->
-                                    <div class="ms-0 ms-sm-2 mt-2 mt-sm-0">
-                                        <h6 class="mb-1">Dennis Barrett</h6>
-                                        <ul class="list-inline mb-0 small">
-                                            <li class="list-inline-item fw-light me-2 mb-1 mb-sm-0"><i
-                                                    class="fas fa-book text-purple me-1"></i>18 Courses</li>
-                                            <li class="list-inline-item fw-light me-2 mb-1 mb-sm-0"><i
-                                                    class="fas fa-star text-warning me-1"></i>4.5/5.0</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- Button -->
-                                <a href="#" class="btn btn-sm btn-light mb-0">View</a>
-                            </div>
-                            <!-- Instructor item END -->
-
-                            <hr><!-- Divider -->
-
-                            <!-- Instructor item START -->
-                            <div class="d-sm-flex justify-content-between align-items-center">
-                                <!-- Avatar and info -->
-                                <div class="d-sm-flex align-items-center mb-1 mb-sm-0">
-                                    <!-- Avatar -->
-                                    <div class="avatar avatar-md flex-shrink-0">
-                                        <img class="avatar-img rounded-circle"
-                                            src="../../../assets/HomeAssets/images/avatar/01.jpg" alt="avatar">
-                                    </div>
-                                    <!-- Info -->
-                                    <div class="ms-0 ms-sm-2 mt-2 mt-sm-0">
-                                        <h6 class="mb-1">Jacqueline Miller<i
-                                                class="bi bi-patch-check-fill text-info small ms-1"></i></h6>
-                                        <ul class="list-inline mb-0 small">
-                                            <li class="list-inline-item fw-light me-2 mb-1 mb-sm-0"><i
-                                                    class="fas fa-book text-purple me-1"></i>21 Courses</li>
-                                            <li class="list-inline-item fw-light me-2 mb-1 mb-sm-0"><i
-                                                    class="fas fa-star text-warning me-1"></i>4.8/5.0</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- Button -->
-                                <a href="#" class="btn btn-sm btn-light mb-0">View</a>
-                            </div>
-                            <!-- Instructor item END -->
-
-                            <hr><!-- Divider -->
-
-                            <!-- Instructor item START -->
-                            <div class="d-sm-flex justify-content-between align-items-center">
-                                <!-- Avatar and info -->
-                                <div class="d-sm-flex align-items-center mb-1 mb-sm-0">
-                                    <!-- Avatar -->
-                                    <div class="avatar avatar-md flex-shrink-0">
-                                        <img class="avatar-img rounded-circle"
-                                            src="../../../assets/HomeAssets/images/avatar/04.jpg" alt="avatar">
-                                    </div>
-                                    <!-- Info -->
-                                    <div class="ms-0 ms-sm-2 mt-2 mt-sm-0">
-                                        <h6 class="mb-1">Billy Vasquez</h6>
-                                        <ul class="list-inline mb-0 small">
-                                            <li class="list-inline-item fw-light me-2 mb-1 mb-sm-0"><i
-                                                    class="fas fa-book text-purple me-1"></i>15 Courses</li>
-                                            <li class="list-inline-item fw-light me-2 mb-1 mb-sm-0"><i
-                                                    class="fas fa-star text-warning me-1"></i>4.5/5.0</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- Button -->
-                                <a href="#" class="btn btn-sm btn-light mb-0">View</a>
-                            </div>
-                            <!-- Instructor item END -->
-
-                            <hr><!-- Divider -->
-
-                            <!-- Instructor item START -->
-                            <div class="d-sm-flex justify-content-between align-items-center">
-                                <!-- Avatar and info -->
-                                <div class="d-sm-flex align-items-center mb-1 mb-sm-0">
-                                    <!-- Avatar -->
-                                    <div class="avatar avatar-md flex-shrink-0">
-                                        <img class="avatar-img rounded-circle"
-                                            src="../../../assets/HomeAssets/images/avatar/05.jpg" alt="avatar">
-                                    </div>
-                                    <!-- Info -->
-                                    <div class="ms-0 ms-sm-2 mt-2 mt-sm-0">
-                                        <h6 class="mb-1">Amanda Reed<i
-                                                class="bi bi-patch-check-fill text-info small ms-1"></i></h6>
-                                        <ul class="list-inline mb-0 small">
-                                            <li class="list-inline-item fw-light me-2 mb-1 mb-sm-0"><i
-                                                    class="fas fa-book text-purple me-1"></i>29 Courses</li>
-                                            <li class="list-inline-item fw-light me-2 mb-1 mb-sm-0"><i
-                                                    class="fas fa-star text-warning me-1"></i>4.5/5.0</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- Button -->
-                                <a href="#" class="btn btn-sm btn-light mb-0">View</a>
-                            </div>
-                            <!-- Instructor item END -->
+                                  <!-- Divider -->
 
                         </div>
+
                         <!-- Card body END -->
                     </div>
                 </div>

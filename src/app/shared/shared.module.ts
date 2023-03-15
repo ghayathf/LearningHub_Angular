@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { RouterModule } from '@angular/router';
 import { AdminSideBarComponent } from './admin-side-bar/admin-side-bar.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { AdminSideBarComponent } from './admin-side-bar/admin-side-bar.component
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    MatDialogModule
   ],
   exports: [
     HomeHeaderComponent,
@@ -28,7 +30,8 @@ import { AdminSideBarComponent } from './admin-side-bar/admin-side-bar.component
     ReactiveFormsModule,
     MatInputModule,
     NgxSpinnerModule,
-    AdminSideBarComponent
+    AdminSideBarComponent,
+    MatDialogModule
 
   ]
 })

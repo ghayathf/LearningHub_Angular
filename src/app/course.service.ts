@@ -26,9 +26,11 @@ export class CourseService {
   }
   course:any
   GetCourseById(courseId:number){
+    this.spinner.show()
     this.http.get("https://localhost:44391/api/Courses/GetCourseById/"+courseId).subscribe(
       {
-        next:(res)=>{this.course=res},
+        next:(res)=>{this.course=res
+          this.spinner.hide()},
         error:(err)=>{console.log(err);
         }
       }
@@ -42,7 +44,7 @@ export class CourseService {
     this.categoryService.GetCategoryById(categoryId)
     console.log(categoryId)
     this.router.navigate(["/category-courses"])
-    
+
   }
   CreateCourse(newCourse:any){
     this.spinner.show()
@@ -53,4 +55,15 @@ export class CourseService {
       }
     )
   }
+  deleteCourse(courseId: number){
+    return this.http.delete("https://localhost:44391/api/Courses/DeleteCourse/"+courseId).subscribe(
+      {
+      next:()=>{this.spinner.hide()},
+        error:()=>{this.spinner.hide()}
+      }
+    );
+    
+  }
+  
+  
 }

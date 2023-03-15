@@ -17,5 +17,11 @@ ngOnInit(){
 }
 GetCourseById(courseid:number){
   this.courseService.GetCourseById(courseid)
+  this.router.navigate(["Admin/CourseDetails"])
 }
+onDeleteCourse(courseId: number) {
+  this.courseService.deleteCourse(courseId);
+  this.router.navigate(["Admin/AllCourses"])
+}
+
 }
