@@ -64,6 +64,25 @@ export class CategoryService {
       )
     })
   }
+  DeleteCategory(categoryId: number) {
+    return new Promise<void>((resolve, reject) => {
+      this.spinner.show();
+      this.http.delete("https://localhost:44391/api/Categories/DeleteCategory/"+categoryId).subscribe(
+        {
+          next: () => {
+            this.spinner.hide();
+            this.toaster.success("Deleted Successfuly");
+            resolve();
+          },
+          error: () => {
+            this.spinner.hide();
+            this.toaster.error("Error");
+
+          }
+        }
+      )
+    })
+  }
   GetSelectedCategory()
   {
     return this.category;
