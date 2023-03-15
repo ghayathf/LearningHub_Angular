@@ -21,14 +21,16 @@ export class CourseService {
   }
   category:any
   ngOnInit(): void {
-    this.category = this.categoryService.GetSelectedCategory();
-    this.GetCoursesByCategoryId(this.category.categoryid);
+   // this.category = this.categoryService.GetSelectedCategory();
+    //this.GetCoursesByCategoryId(this.category.categoryid);
   }
   course:any
   GetCourseById(courseId:number){
+    this.spinner.show()
     this.http.get("https://localhost:44391/api/Courses/GetCourseById/"+courseId).subscribe(
       {
-        next:(res)=>{this.course=res},
+        next:(res)=>{this.course=res
+          this.spinner.hide()},
         error:(err)=>{console.log(err);
         }
       }
@@ -36,11 +38,13 @@ export class CourseService {
   }
   courseCategories:any=[]
   GetCoursesByCategoryId(categoryId:number){
-
+    this.GetAllCourses()
     this.courseCategories=this.courses.filter((x: {category_Id: number}) => x.category_Id == categoryId);
     //this.router.navigate(["/all-courses"])
+    this.categoryService.GetCategoryById(categoryId)
+    console.log(categoryId)
     this.router.navigate(["/category-courses"])
-    
+
   }
   CreateCourse(newCourse:any){
     this.spinner.show()
@@ -51,4 +55,15 @@ export class CourseService {
       }
     )
   }
+  deleteCourse(courseId: number){
+    return this.http.delete("https://localhost:44391/api/Courses/DeleteCourse/"+courseId).subscribe(
+      {
+      next:()=>{this.spinner.hide()},
+        error:()=>{this.spinner.hide()}
+      }
+    );
+    
+  }
+  
+  
 }

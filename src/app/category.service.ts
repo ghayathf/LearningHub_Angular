@@ -24,12 +24,11 @@ export class CategoryService {
       }
     )
   }
-
-  category: any
+  category:any
+  categoryID?:any
   num?: number
-  GetCategoryById(categoryid: number) {
-    this.spinner.show();
-    this.http.get("https://localhost:44391/api/Categories/GetCategoryById/" + categoryid).subscribe(
+  GetCategoryById(categoryid:number){
+    this.http.get("https://localhost:44391/api/Categories/GetCategoryById/"+categoryid).subscribe(
       {
         next: (res) => {
           this.category = res
@@ -44,7 +43,10 @@ export class CategoryService {
 
 
     )
+    this.categoryID=categoryid
+
   }
+ 
   CreateCategory(course: any) {
     return new Promise<void>((resolve, reject) => {
       this.spinner.show();
@@ -64,8 +66,27 @@ export class CategoryService {
       )
     })
   }
+  DeleteCategory(categoryId: number) {
+    return new Promise<void>((resolve, reject) => {
+      this.spinner.show();
+      this.http.delete("https://localhost:44391/api/Categories/DeleteCategory/"+categoryId).subscribe(
+        {
+          next: () => {
+            this.spinner.hide();
+            this.toaster.success("Deleted Successfuly");
+            resolve();
+          },
+          error: () => {
+            this.spinner.hide();
+            this.toaster.error("Error");
+
+          }
+        }
+      )
+    })
+  }
   GetSelectedCategory()
   {
-    return this.category;
+    return this.categoryID;
   }
 }

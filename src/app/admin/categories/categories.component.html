@@ -396,7 +396,7 @@
                                 <td>
                                     <a class="btn btn-sm btn-info-soft me-1 mb-1 mb-md-0"
                                         (click)="GetCategoryById(item.categoryid)">Details</a>
-                                    <button class="btn btn-sm btn-danger-soft mb-0">Delete</button>
+                                    <button class="btn btn-sm btn-danger-soft mb-0" (click)="openDeleteDialog(item.categoryid)">Delete</button>
                                 </td>
                             </tr>
 
@@ -441,3 +441,11 @@
 </div>
 <a class="btn btn-success-soft" href="#">Create Category</a>
 <!-- Page content END -->
+
+<ng-template #DeleteForm>
+  <h2 mat-dialog-content>Would you like to Delete this course ?</h2>
+  <div mat-dialog-actions>
+  <input type="button" mat-dialog-close class="btn btn-success" value="Yes" (click)="DeleteCategory()">
+  <input type="button" mat-dialog-close class="btn btn-error" value="No">
+</div>
+</ng-template>

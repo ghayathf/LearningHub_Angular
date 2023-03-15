@@ -42,5 +42,6 @@ GetValues(categoryid:any)
 selectCategory(categoryid:number)
 {
   this.categoryService.GetCategoryById(categoryid);
+  this.router.navigate(["/category-courses"])
 }
 }

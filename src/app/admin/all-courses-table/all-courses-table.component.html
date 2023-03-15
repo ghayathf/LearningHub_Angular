@@ -346,7 +346,7 @@
 								<!-- Table data -->
 								<td>
 									<a  class="btn btn-sm btn-info-soft me-1 mb-1 mb-md-0" (click)="GetCourseById(item.courseid)">Details</a>
-									<button class="btn btn-sm btn-danger-soft mb-0">Delete</button>
+									<button (click)="onDeleteCourse(item.courseid)" class="btn btn-sm btn-danger-soft mb-0">Delete</button>
 								</td>
 							</tr>
 
@@ -388,3 +388,4 @@
 </div>
 <!-- Page content END -->
 
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "wheat" type = "square-jelly-box" [fullScreen] = "true"><p style="color: wheat" > Waiting... </p></ngx-spinner>
