@@ -24,11 +24,11 @@ export class CategoryService {
       }
     )
   }
-  category:any
-  categoryID?:any
+  category: any
+  categoryID?: any
   num?: number
-  GetCategoryById(categoryid:number){
-    this.http.get("https://localhost:44391/api/Categories/GetCategoryById/"+categoryid).subscribe(
+  GetCategoryById(categoryid: number) {
+    this.http.get("https://localhost:44391/api/Categories/GetCategoryById/" + categoryid).subscribe(
       {
         next: (res) => {
           this.category = res
@@ -43,10 +43,10 @@ export class CategoryService {
 
 
     )
-    this.categoryID=categoryid
+    this.categoryID = categoryid
 
   }
- 
+
   CreateCategory(course: any) {
     return new Promise<void>((resolve, reject) => {
       this.spinner.show();
@@ -69,7 +69,7 @@ export class CategoryService {
   DeleteCategory(categoryId: number) {
     return new Promise<void>((resolve, reject) => {
       this.spinner.show();
-      this.http.delete("https://localhost:44391/api/Categories/DeleteCategory/"+categoryId).subscribe(
+      this.http.delete("https://localhost:44391/api/Categories/DeleteCategory/" + categoryId).subscribe(
         {
           next: () => {
             this.spinner.hide();
@@ -85,8 +85,33 @@ export class CategoryService {
       )
     })
   }
-  GetSelectedCategory()
-  {
+
+  async UpdateCategory(Category: any) {
+    return new Promise<void>((resolve, reject) => {
+      this.spinner.show();
+      this.http.put("https://localhost:44391/api/Categories/UpdateCategory", Category).subscribe(
+        {
+          next: () => {
+            this.spinner.hide();
+            this.toaster.success("Category Update Successfully");
+            resolve();
+          },
+          error: () => {
+            this.spinner.hide();
+            this.toaster.error("Try again");
+
+          }
+
+
+        }
+      )
+    })
+
+  }
+
+
+
+  GetSelectedCategory() {
     return this.categoryID;
   }
 }

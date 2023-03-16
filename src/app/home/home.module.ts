@@ -9,6 +9,8 @@ import { AllCoursesComponent } from './all-courses/all-courses.component';
 import { CourseCardComponent } from './course-card/course-card.component';
 import { CategoryCoursesComponent } from './category-courses/category-courses.component';
 
+import { ContactComponent } from './contact/contact.component';
+
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { CategoryCoursesComponent } from './category-courses/category-courses.co
     AllCoursesComponent,
     CourseCardComponent,
     CategoryCoursesComponent,
+
+    ContactComponent
   ],
   imports: [
     CommonModule,

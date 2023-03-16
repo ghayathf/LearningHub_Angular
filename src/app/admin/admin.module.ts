@@ -15,6 +15,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 
+import { ContactusComponent } from './contactus/contactus.component';
+
 
 
 @NgModule({
@@ -26,7 +28,8 @@ import { MatIconModule } from '@angular/material/icon';
     CategoriesComponent,
     CategoryDetailsComponent,
     CreateCategoryComponent,
-    AllMaterialsComponent,
+    ContactusComponent,
+
   ],
   imports: [
     CommonModule,
