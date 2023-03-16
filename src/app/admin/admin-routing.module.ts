@@ -45,6 +45,10 @@ const routes: Routes = [
   {
     path: "contactus",
     component: ContactusComponent
+  },
+  {
+    path: "AllMaterials",
+    component: AllMaterialsComponent
   }
 ];
 

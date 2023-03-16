@@ -86,30 +86,22 @@ export class MaterialService {
     })
   }
   searchedMat:any = []
-   searchMaterials(startDate?: any, endDate?: any) {
+  searchMaterials(startDate?: Date, endDate?: Date): Observable<any> {
     const body: { [key: string]: any } = {};
     if (startDate) {
-      body['DateFrom'] = startDate;
+      body['DateFrom'] = startDate.toISOString();
     }
     if (endDate) {
-      body['DateTo'] = endDate;
+      body['DateTo'] = endDate.toISOString();
     }
-    this.http.post("https://localhost:44391/api/Material/SearchMaterials",body).subscribe(
-      {
-        next: (res) => {
-
-          this.spinner.hide();
-          this.toaster.success("Successfuly");
-          this.searchedMat = res
-        },
-        error: () => {
-          this.spinner.hide();
-          this.toaster.error("Error");
-
-        }
-      }
-    )
+    return this.http.post("https://localhost:44391/api/Material/SearchMaterials",body);
   }
+  getItemsBetweenDates(startDate: Date, endDate: Date) {
+    this.searchedMat = this.materials.filter(
+      (item: { date: { getTime: () => number; }; }) =>
+        item.date.getTime() >= startDate.getTime() &&
+        item.date.getTime() <= endDate.getTime()
+    );
 
-
+}
 }

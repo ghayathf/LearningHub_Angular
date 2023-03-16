@@ -325,7 +325,7 @@
                             </button>
                         </form>
                     </div> -->
-                    <!-- <form class="rounded position-relative">
+                    <form class="rounded position-relative">
                       <mat-form-field appearance="fill" style="width: 25%; margin-right: 2rem;">
                         <mat-label>Date From</mat-label>
                         <input matInput [matDatepicker]="picker1" [(ngModel)]="startDate" name="startDate">
@@ -340,8 +340,8 @@
                         <mat-datepicker #picker2></mat-datepicker>
                       </mat-form-field>
 
-                      <button mat-raised-button color="primary" style="margin-left: 2rem;" (click)="searchBetweenInterval()">Search</button>
-                    </form> -->
+                      <button mat-raised-button color="primary" style="margin-left: 2rem;" (click)="searchBetweenInterval()" class="btn btn-info">Search</button>
+                    </form>
 
 
                     <!-- Select option -->
@@ -541,6 +541,7 @@
     <tbody>
         <!-- Table row -->
         <tr *ngFor="let item of materialService.searchedMat">
+
             <!-- Table data -->
             <td>
                 <div class="d-flex align-items-center mb-3">

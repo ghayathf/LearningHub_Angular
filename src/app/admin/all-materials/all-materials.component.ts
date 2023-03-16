@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { MaterialService } from 'src/app/material.service';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class AllMaterialsComponent {
    *
    */
 
-  constructor(public materialService:MaterialService, private router: Router, public dialog: MatDialog) {
+  constructor(public materialService:MaterialService, private router: Router, public dialog: MatDialog,public spinner:NgxSpinnerService) {
 
   }
   ngOnInit() {
@@ -44,17 +45,21 @@ export class AllMaterialsComponent {
     DateTo : new FormControl('',Validators.required),
     }
   )
-  async searchBetweenInterval() {
-    const filteredMaterials = this.materialService.materials.filter((material: { date: string | number | Date; }) => {
-      const materialDate = new Date(material.date);
-      return materialDate >= this.startDate && materialDate <= this.endDate;
-    });
-
-    this.materialService.searchedMat = filteredMaterials;
-    console.log(this.materialService.searchedMat);
-    console.log(this.startDate.toJSON());
-
-    this.dialog.open(this.Search);
+  searchBetweenInterval() {
+    this.spinner.show();
+    this.materialService.searchMaterials(this.startDate, this.endDate).subscribe(
+      {
+        next: (res) => {
+          this.spinner.hide();
+          this.materialService.searchedMat = res;
+          this.dialog.open(this.Search);
+        },
+        error: () => {
+          this.spinner.hide();
+          console.error('An error occurred while searching for materials');
+        }
+      }
+    );
   }
 
 
