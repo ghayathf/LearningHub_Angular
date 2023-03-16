@@ -16,6 +16,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 
 import { ContactusComponent } from './contactus/contactus.component';
+import { AdminSideBarComponent } from '../shared/admin-side-bar/admin-side-bar.component';
 
 
 
@@ -29,7 +30,7 @@ import { ContactusComponent } from './contactus/contactus.component';
     CategoryDetailsComponent,
     CreateCategoryComponent,
     ContactusComponent,
-
+    AllMaterialsComponent
   ],
   imports: [
     CommonModule,
@@ -37,7 +38,9 @@ import { ContactusComponent } from './contactus/contactus.component';
     SharedModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatIconModule
+    MatIconModule,
+
+
   ]
 })
 export class AdminModule { }

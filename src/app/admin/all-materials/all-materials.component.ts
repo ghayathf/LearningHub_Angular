@@ -4,6 +4,8 @@ import { MatDatepicker, MatDatepickerActions } from '@angular/material/datepicke
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { MaterialService } from 'src/app/material.service';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
 
 @Component({
   selector: 'app-all-materials',
