@@ -275,7 +275,7 @@
         <div class="row mb-3">
             <div class="col-12 d-sm-flex justify-content-between align-items-center">
                 <h1 class="h3 mb-2 mb-sm-0">categories</h1>
-                <a class="btn btn-sm btn-primary mb-0" (click)="OpenDialog()">Create a Category</a>
+                <a class="btn btn-sm btn-primary mb-0" (click)="OpenDialog()">Create a material</a>
             </div>
         </div>
 
@@ -284,8 +284,8 @@
             <!-- Course item -->
             <div class="col-sm-6 col-lg-4">
                 <div class="text-center p-4 bg-primary bg-opacity-10 border border-primary rounded-3">
-                    <h5>Total Categories</h5>
-                    <h2 class="mb-0 fs-1 text-primary">{{ this.categoryService.categories.length }}</h2>
+                    <h5>Total Materials</h5>
+                    <h2 class="mb-0 fs-1 text-primary">{{ this.materialService.materials.length }}</h2>
                 </div>
             </div>
 
@@ -315,7 +315,7 @@
                 <!-- Search and select START -->
                 <div class="row g-3 align-items-center justify-content-between">
                     <!-- Search bar -->
-                    <div class="col-md-8">
+                    <!-- <div class="col-md-8">
                         <form class="rounded position-relative">
                             <input class="form-control bg-body" type="search" placeholder="Search" aria-label="Search">
                             <button
@@ -324,7 +324,25 @@
                                 <i class="fas fa-search fs-6 "></i>
                             </button>
                         </form>
-                    </div>
+                    </div> -->
+                    <form class="rounded position-relative">
+                      <mat-form-field appearance="fill" style="width: 25%; margin-right: 2rem;">
+                        <mat-label>Date From</mat-label>
+                        <input matInput [matDatepicker]="picker1" [(ngModel)]="startDate" name="startDate">
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1></mat-datepicker>
+                      </mat-form-field>
+
+                      <mat-form-field appearance="fill" style="width: 25%;">
+                        <mat-label>Date To</mat-label>
+                        <input matInput [matDatepicker]="picker2" [(ngModel)]="endDate" name="endDate">
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
+                      </mat-form-field>
+
+                      <button mat-raised-button color="primary" style="margin-left: 2rem;" (click)="searchBetweenInterval()">Search</button>
+                    </form>
+
 
                     <!-- Select option -->
                     <div class="col-md-3">
@@ -353,9 +371,9 @@
                         <!-- Table head -->
                         <thead>
                             <tr>
-                                <th scope="col" class="border-0 rounded-start">Category ID</th>
-                                <th scope="col" class="border-0">Category Name</th>
-
+                                <th scope="col" class="border-0">Material Name</th>
+                                <th scope="col" class="border-0 rounded-end">Date Uploaded</th>
+                                <th scope="col" class="border-0 rounded-end">Section ID</th>
                                 <th scope="col" class="border-0 rounded-end">Action</th>
                             </tr>
                         </thead>
@@ -364,21 +382,8 @@
                         <tbody>
 
                             <!-- Table row -->
-                            <tr *ngFor="let item of categoryService.categories">
-                                <!-- Table data -->
-                                <td>
-                                    <div class="d-flex align-items-center position-relative">
-                                        <!-- Image -->
-                                        <div class="w-60px">
-                                            <img src="../../../assets/HomeAssets/images/courses/4by3/08.jpg"
-                                                class="rounded" alt="">
-                                        </div>
-                                        <!-- Title -->
-                                        <h4 class="table-responsive-title mb-0 ms-2">
-                                            <a href="#" class="stretched-link">{{ item.categoryid }}</a>
-                                        </h4>
-                                    </div>
-                                </td>
+                            <tr *ngFor="let item of materialService.materials">
+
 
                                 <!-- Table data -->
                                 <td>
@@ -386,17 +391,33 @@
 
                                         <!-- Info -->
                                         <div class="ms-2">
-                                            <h4 class="mb-0 fw-light">{{ item.categoryname }}</h4>
+                                            <h4 class="mb-0 fw-light">{{ item.materialname }}</h4>
                                         </div>
                                     </div>
                                 </td>
+                                <td>
+                                  <div class="d-flex align-items-center mb-3">
+
+                                      <!-- Info -->
+                                      <div class="ms-2">
+                                          <h4 class="mb-0 fw-light">{{ item.dateuploaded | slice:0:10  }}</h4>
+                                      </div>
+                                  </div>
+                              </td>
+                              <td>
+                                <div class="d-flex align-items-center mb-3">
+
+                                    <!-- Info -->
+                                    <div class="ms-2">
+                                        <h4 class="mb-0 fw-light">{{ item.section_Id }}</h4>
+                                    </div>
+                                </div>
+                            </td>
 
 
 
                                 <td>
-                                    <a class="btn btn-sm btn-info-soft me-1 mb-1 mb-md-0"
-                                        (click)="GetCategoryById(item.categoryid)">Details</a>
-                                    <button class="btn btn-sm btn-danger-soft mb-0" (click)="openDeleteDialog(item.categoryid)">Delete</button>
+                                    <button class="btn btn-sm btn-danger-soft mb-0" (click)="openDeleteDialog(item.materialid)">Delete</button>
                                 </td>
                             </tr>
 
@@ -445,7 +466,112 @@
 <ng-template #DeleteForm>
   <h2 mat-dialog-content>Would you like to Delete this course ?</h2>
   <div mat-dialog-actions>
-  <input type="button" mat-dialog-close class="btn btn-success" value="Yes" (click)="DeleteCategory()">
+  <input type="button" mat-dialog-close class="btn btn-success" value="Yes" (click)="DeleteMaterial()">
   <input type="button" mat-dialog-close class="btn btn-error" value="No">
 </div>
+</ng-template>
+
+<ng-template #CreateForm>
+  <form [formGroup]="CreateMaterialForm" class="example-form">
+  <!-- <input type="file" #file (change)="UploadImage(file)"> -->
+  <div>
+    <mat-form-field class="example-full-width">
+      <mat-label>CategoryId</mat-label>
+      <input type="number" matInput formControlName="section_Id">
+
+      <mat-error *ngIf="CreateMaterialForm.controls['section_Id'].hasError('required')">
+        CategoryId is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field class="example-full-width">
+      <mat-label>Material Name</mat-label>
+      <input type="text" matInput formControlName="materialname">
+
+      <mat-error *ngIf="CreateMaterialForm.controls['materialname'].hasError('required')">
+        price is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+   <!--  <mat-form-field class="example-full-width">
+      <mat-label>start_Date</mat-label>
+      <input type="date" matInput formControlName="dateuploaded" >
+
+      <mat-error *ngIf="CreateMaterialForm.controls['dateuploaded'].hasError('required')">
+        start_Date is <strong>required</strong>
+      </mat-error>
+    </mat-form-field> -->
+
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Choose a date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="dateuploaded">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker">
+        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+      </mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+    <div><input type="button" [disabled]="CreateMaterialForm.invalid" mat-dialog-close value="create" (click)="CreateMaterial()"></div>
+  </form>
+
+
+
+
+
+</ng-template>
+
+<ng-template #Search>
+
+  <table class="table table-dark-gray align-middle p-4 mb-0 table-hover">
+    <!-- Table head -->
+    <thead>
+        <tr>
+            <th scope="col" class="border-0">Material Name</th>
+            <th scope="col" class="border-0 rounded-end">Date Uploaded</th>
+            <th scope="col" class="border-0 rounded-end">Section ID</th>
+            <th scope="col" class="border-0 rounded-end">Action</th>
+        </tr>
+    </thead>
+    <!-- Table body START -->
+    <tbody>
+        <!-- Table row -->
+        <tr *ngFor="let item of materialService.searchedMat">
+            <!-- Table data -->
+            <td>
+                <div class="d-flex align-items-center mb-3">
+                    <!-- Info -->
+                    <div class="ms-2">
+                        <h4 class="mb-0 fw-light">{{ item.materialname }}</h4>
+                    </div>
+                </div>
+            </td>
+            <td>
+              <div class="d-flex align-items-center mb-3">
+                  <!-- Info -->
+                  <div class="ms-2">
+                      <h4 class="mb-0 fw-light">{{ item.dateuploaded | slice:0:10  }}</h4>
+                  </div>
+              </div>
+          </td>
+          <td>
+            <div class="d-flex align-items-center mb-3">
+                <!-- Info -->
+                <div class="ms-2">
+                    <h4 class="mb-0 fw-light">{{ item.section_Id }}</h4>
+                </div>
+            </div>
+        </td>
+            <td>
+                <button class="btn btn-sm btn-danger-soft mb-0" (click)="openDeleteDialog(item.materialid)">Delete</button>
+            </td>
+        </tr>
+    </tbody>
+    <!-- Table body END -->
+</table>
+
 </ng-template>

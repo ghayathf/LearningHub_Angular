@@ -8,7 +8,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { RouterModule } from '@angular/router';
 import { AdminSideBarComponent } from './admin-side-bar/admin-side-bar.component';
 import { MatDialogModule } from '@angular/material/dialog';
-
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    MatDialogModule
+    MatDialogModule,
+    MatDatepickerModule
   ],
   exports: [
     HomeHeaderComponent,
@@ -31,7 +33,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatInputModule,
     NgxSpinnerModule,
     AdminSideBarComponent,
-    MatDialogModule
+    MatDialogModule,
+    MatDatepickerModule,
+    MatIconModule
 
   ]
 })

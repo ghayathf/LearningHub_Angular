@@ -3,6 +3,7 @@ import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CategoryService } from 'src/app/category.service';
+import { CourseService } from 'src/app/course.service';
 import { CreateCategoryComponent } from '../create-category/create-category.component';
 
 @Component({
@@ -21,7 +22,7 @@ export class CategoriesComponent {
     await this.categoryService.DeleteCategory(this.selectedItem)
     this.categoryService.GetAllCategories()
   }
-  constructor(public categoryService: CategoryService, private router: Router, private dialog: MatDialog) { }
+  constructor(public categoryService: CategoryService, private router: Router, private dialog: MatDialog,public courseService:CourseService) { }
   ngOnInit() {
     this.categoryService.GetAllCategories();
   }

@@ -10,6 +10,11 @@ import { CourseDetailsComponent } from './course-details/course-details.componen
 import { CategoriesComponent } from './categories/categories.component';
 import { CategoryDetailsComponent } from './category-details/category-details.component';
 import { CreateCategoryComponent } from './create-category/create-category.component';
+import { AllMaterialsComponent } from './all-materials/all-materials.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
+
 
 
 @NgModule({
@@ -20,12 +25,16 @@ import { CreateCategoryComponent } from './create-category/create-category.compo
     CourseDetailsComponent,
     CategoriesComponent,
     CategoryDetailsComponent,
-    CreateCategoryComponent
+    CreateCategoryComponent,
+    AllMaterialsComponent,
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
-    SharedModule
+    SharedModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatIconModule
   ]
 })
 export class AdminModule { }

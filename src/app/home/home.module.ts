@@ -16,7 +16,7 @@ import { CategoryCoursesComponent } from './category-courses/category-courses.co
     CardComponent,
     AllCoursesComponent,
     CourseCardComponent,
-    CategoryCoursesComponent
+    CategoryCoursesComponent,
   ],
   imports: [
     CommonModule,
