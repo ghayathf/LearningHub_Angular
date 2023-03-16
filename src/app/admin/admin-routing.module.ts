@@ -10,6 +10,7 @@ import { ContactusComponent } from './contactus/contactus.component';
 import { CourseDetailsComponent } from './course-details/course-details.component';
 import { CreateCategoryComponent } from './create-category/create-category.component';
 import { CreateNewCourseComponent } from './create-new-course/create-new-course.component';
+import { EmployeesComponent } from './employees/employees.component';
 import { MainComponent } from './main/main.component';
 
 const routes: Routes = [
@@ -49,7 +50,11 @@ const routes: Routes = [
   {
     path: "AllMaterials",
     component: AllMaterialsComponent
-  }
+  },
+  {
+    path: "Employees",
+    component: EmployeesComponent
+  },
 ];
 
 @NgModule({
