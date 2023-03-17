@@ -7,6 +7,7 @@ import { CategoryService } from 'src/app/category.service';
 import { CourseService } from 'src/app/course.service';
 import { CreateCategoryComponent } from '../create-category/create-category.component';
 import { MatDialogConfig } from '@angular/material/dialog';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -26,7 +27,7 @@ export class CategoriesComponent {
 
     })
 
-constructor(public categoryService: CategoryService, private router: Router, private dialog: MatDialog,public courseService:CourseService) { }
+constructor(public categoryService: CategoryService, private router: Router, private dialog: MatDialog,public courseService:CourseService,public spinner: NgxSpinnerService) { }
   ngOnInit() {
     this.categoryService.GetAllCategories();
   }
@@ -35,13 +36,13 @@ constructor(public categoryService: CategoryService, private router: Router, pri
     this.categoryService.GetCategoryById(categoryid);
     this.router.navigate(["Admin/CategoryDetails"]);
   }
-  
+
 
   selectedItem = 0
   async openDeleteDialog(itemId: number) {
     this.selectedItem = itemId
     this.dialog.open(this.Delete)
-  }  
+  }
   async DeleteCategory() {
     await this.categoryService.DeleteCategory(this.selectedItem)
     this.categoryService.GetAllCategories()
@@ -63,7 +64,7 @@ async UpdateCategory() {
   }
 
   OpenDialog() {
-    
+
     this.dialog.open(CreateCategoryComponent)
   }
 }

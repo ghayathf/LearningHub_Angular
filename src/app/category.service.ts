@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { NgxSpinner, NgxSpinnerService } from 'ngx-spinner';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
@@ -27,13 +27,15 @@ export class CategoryService {
   category: any
   categoryID?: any
   num?: number
-  GetCategoryById(categoryid: number) {
+  async GetCategoryById(categoryid: number) {
+    return new Promise<void>((resolve, reject) => {
+    this.spinner.show()
     this.http.get("https://localhost:44391/api/Categories/GetCategoryById/" + categoryid).subscribe(
       {
         next: (res) => {
           this.category = res
           this.spinner.hide();
-
+          resolve()
         },
         error: (err) => {
           console.log(err);
@@ -43,6 +45,7 @@ export class CategoryService {
 
 
     )
+  })
     this.categoryID = categoryid
 
   }
@@ -101,8 +104,6 @@ export class CategoryService {
             this.toaster.error("Try again");
 
           }
-
-
         }
       )
     })

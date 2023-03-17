@@ -12,20 +12,21 @@ export class ContactusService {
 
   ListOfMessage: any = [];
   GetAllMessage() {
+    return new Promise<void>((resolve, reject) => {
     this.spinner.show();
     this.http.get("https://localhost:44391/api/ContactUs/GetAllContactUs").subscribe(
       {
         next: (res) => {
           this.ListOfMessage = res;
           this.spinner.hide();
-
+          resolve()
         },
         error: () => {
           this.spinner.hide();
           this.toaster.error("Error!!");
         }
       }
-    )
+    )})
   }
   counter: number = 0;
 

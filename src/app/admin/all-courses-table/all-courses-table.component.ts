@@ -43,14 +43,19 @@ export class AllCoursesTableComponent {
     this.courseService.GetCourseById(courseid)
     this.router.navigate(["Admin/CourseDetails"])
   }
-  onDeleteCourse(courseId: number) {
-    this.courseService.deleteCourse(courseId);
-    this.router.navigate(["Admin/AllCourses"])
+  selectedItem = 0
+  async openDeleteDialog(itemId: number) {
+    this.selectedItem = itemId
+    this.dialog.open(this.Delete)
+  }
+  async DeleteCourse() {
+    await this.courseService.deleteCourse(this.selectedItem)
+    this.courseService.GetAllCourses()
   }
   async openUpdateDialog(courseid: number) {
     await this.courseService.GetCourseById(courseid);
     await this.UpdateCourseForm.patchValue(this.courseService.course);
-    
+
     const dialogConfig = new MatDialogConfig();
     dialogConfig.maxWidth = '500px';
     dialogConfig.maxHeight = '90vh';

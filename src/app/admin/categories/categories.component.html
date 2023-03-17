@@ -1,7 +1,12 @@
 <app-admin-side-bar></app-admin-side-bar>
 <!-- Page content START -->
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="wheat" type="square-jelly-box" [fullScreen]="true">
+	<p style="color: wheat"> Waiting... </p>
+</ngx-spinner>
 <div class="page-content">
-
+  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="wheat" type="square-jelly-box" [fullScreen]="true">
+    <p style="color: wheat"> Waiting... </p>
+  </ngx-spinner>
     <!-- Top bar START -->
     <nav class="navbar top-bar navbar-light border-bottom py-0 py-xl-3">
         <div class="container-fluid p-0">
@@ -367,7 +372,7 @@
                                 <!-- Table data -->
                                 <td>
                                     <div class="d-flex align-items-center position-relative">
-                                        
+
                                         <!-- Title -->
                                         <h4 class="table-responsive-title mb-0 ms-2">
                                             <a href="#" class="stretched-link">{{ item.categoryname  }}</a>
@@ -388,7 +393,7 @@
 
 
                                 <td>
-                                    
+
                                     <button class="btn btn-sm btn-danger-soft mb-0"
                                         (click)="openDeleteDialog(item.categoryid)">Delete</button>
 
@@ -501,7 +506,7 @@
                                     </div>
 
 
-                                 
+
                                     <!-- Upload image END -->
 
 

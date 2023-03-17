@@ -401,7 +401,7 @@
 								<td>
 									<button class="btn btn-sm btn-info-soft me-1 mb-1 mb-md-0"
 										(click)="openDetailsDialog(item.courseid)">Details</button>
-									<button (click)="onDeleteCourse(item.courseid)"
+									<button (click)="openDeleteDialog(item.courseid)"
 										class="btn btn-sm btn-danger-soft mb-0">Delete</button>
 										<button (click)="openUpdateDialog(item.courseid)"
 										class="btn btn-sm btn-info-soft mb-0">Update</button>
@@ -552,7 +552,7 @@
                                     </div>
 
 
-                                    
+
 
 
                                     <!-- Step 1 button -->
@@ -579,7 +579,7 @@
 	<!-- Page main content START -->
 	<div class="page-content-wrapper border" style="background-color: #333">
 
-		
+
 
 		<div class="row g-4">
 
@@ -655,3 +655,12 @@
 		</div> <!-- Row END -->
 	</div>
 </ng-template>
+
+<ng-template #DeleteForm>
+  <h2 mat-dialog-content>Would you like to Delete this Course ?</h2>
+  <div mat-dialog-actions>
+      <input type="button" mat-dialog-close class="btn btn-success" value="Yes" (click)="DeleteCourse()">
+      <input type="button" mat-dialog-close class="btn btn-error" value="No">
+  </div>
+</ng-template>
+

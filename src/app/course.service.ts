@@ -14,11 +14,16 @@ export class CourseService {
 
   courses:any = []
   GetAllCourses(){
+    return new Promise<void>((resolve, reject) => {
+      this.spinner.show()
     this.http.get("https://localhost:44391/api/Courses/GetAllCourses").subscribe(
-      (res)=>{this.courses=res},
+      (res)=>{this.courses=res
+      this.spinner.hide()
+    resolve()},
       (err)=>{console.log(err);
+        this.spinner.hide()
       }
-    )
+    )})
   }
   category:any
   ngOnInit(): void {
@@ -27,17 +32,19 @@ export class CourseService {
   }
   course:any
   GetCourseById(courseId:number){
+    return new Promise<void>((resolve, reject) => {
     this.spinner.show()
     this.http.get("https://localhost:44391/api/Courses/GetCourseById/"+courseId).subscribe(
       {
         next:(res)=>
         {this.course=res
           this.spinner.hide()
+          resolve()
         },
         error:(err)=>{console.log(err);
         }
       }
-    )
+    )})
   }
   courseCategories:any=[]
   GetCoursesByCategoryId(categoryId:number){
@@ -50,24 +57,32 @@ export class CourseService {
 
   }
   CreateCourse(newCourse:any){
+    return new Promise<void>((resolve, reject) => {
     this.spinner.show()
     this.http.post("https://localhost:44391/api/Courses/CreateCourse",newCourse).subscribe(
       {
-        next:()=>{this.spinner.hide()},
-        error:()=>{this.spinner.hide()}
+        next:()=>{this.spinner.hide()
+          this.toaster.success("Create Course Successfuly");
+        resolve()},
+        error:()=>{this.spinner.hide()
+          this.toaster.error("Try Again");}
       }
-    )
+    )})
   }
   deleteCourse(courseId: number){
-    return this.http.delete("https://localhost:44391/api/Courses/DeleteCourse/"+courseId).subscribe(
+    return new Promise<void>((resolve, reject) => {
+    this.http.delete("https://localhost:44391/api/Courses/DeleteCourse/"+courseId).subscribe(
       {
-      next:()=>{this.spinner.hide()},
-        error:()=>{this.spinner.hide()}
+      next:()=>{this.spinner.hide()
+        this.toaster.success("Deleted Category Successfuly");
+      resolve()},
+        error:()=>{this.spinner.hide()
+          this.toaster.success("Try Again");}
       }
-    );
-    
+    )})
+
   }
-  
+
   async UpdateCourse(Course: any) {
     return new Promise<void>((resolve, reject) => {
       this.spinner.show();
@@ -90,5 +105,5 @@ export class CourseService {
     })
 
   }
-  
+
 }
