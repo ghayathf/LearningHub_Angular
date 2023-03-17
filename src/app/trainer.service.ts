@@ -13,24 +13,30 @@ export class TrainerService {
   constructor(private router:Router,private http:HttpClient,public spinner:NgxSpinnerService,private categoryService:CategoryService,public toaster:ToastrService) { this.tr=[]}
   trainers:any=[]
   async GetAllTrainers(){
+    return new Promise<void>((resolve, reject) => {
     this.spinner.show()
     this.http.get("https://localhost:44391/api/Trainer/GetAllTrainers").subscribe(
       {
+
         next:async (res)=>{
+          this.spinner.hide()
+          await this.getAllUsersTrainers()
+    this.filterUsers()
           this.trainers=res
 
-    await this.getAllUsersTrainers()
-    this.filterUsers()
-    this.spinner.hide()},
+
+
+  resolve()},
         error:(err)=>{this.spinner.hide()
         console.log(err);
         }
       }
-    )
+    )})
   }
   lastid:any
   users:any=[]
   async getAllUsersTrainers(){
+    return new Promise<void>((resolve, reject) => {
     this.spinner.show()
     this.http.get("https://localhost:44391/api/User/GetAllUsers").subscribe(
       {
@@ -38,12 +44,13 @@ export class TrainerService {
         this.spinner.hide()
         const maxId = Math.max(...this.tr.map((trainer: { userid: any; }) => trainer.userid));
         this.lastid = maxId
+        resolve()
     },
         error:(err)=>{this.spinner.hide()
         console.log(err);
         }
       }
-    )
+    )})
   }
 filterUsers()
 {
@@ -143,7 +150,7 @@ DeleteUser(trainerId: number) {
   })
 }
 trainer:any
-GetMaterialById(trainerId:number){
+GetTrainerById(trainerId:number){
   this.http.get("https://localhost:44391/api/Trainer/GetTrainerByID/"+trainerId).subscribe(
     {
       next: (res) => {

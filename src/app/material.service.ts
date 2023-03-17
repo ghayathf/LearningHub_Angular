@@ -32,29 +32,32 @@ export class MaterialService {
   }
   materials: any = []
   GetAllMaterial() {
+    return new Promise<void>((resolve, reject) => {
     this.spinner.show();
     this.http.get("https://localhost:44391/api/Material/gatAllMaterials").subscribe(
       (res) => {
         this.materials = res
         this.spinner.hide();
-
+        resolve()
       },
       (err) => {
         console.log(err);
         this.spinner.hide();
       }
-    )
+    )})
   }
   Material:any
   MatId?:any
   num?: number
   GetMaterialById(MaterialId:number){
+    return new Promise<void>((resolve, reject) => {
+      this.spinner.hide();
     this.http.get("https://localhost:44391/api/Material/GetMaterialById/"+MaterialId).subscribe(
       {
         next: (res) => {
           this.Material = res
           this.spinner.hide();
-
+          resolve()
         },
         error: (err) => {
           console.log(err);
@@ -63,7 +66,7 @@ export class MaterialService {
       }
 
 
-    )
+    )})
     this.MatId=MaterialId
   }
   CreateMaterial(material: any) {
