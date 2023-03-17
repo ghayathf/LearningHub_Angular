@@ -35,9 +35,10 @@ export class SectionService {
     )
   })}
   deleteSeection(courseId: number){
-    return this.http.delete("https://localhost:44391/api/Courses/DeleteCourse/"+courseId).subscribe(
+    return this.http.delete("https://localhost:44391/api/Section/DeleteSection/"+courseId).subscribe(
       {
-      next:()=>{this.spinner.hide()},
+      next:()=>{this.spinner.hide();  
+      this.toaster.success("Section Deleted Successfuly");},
         error:()=>{this.spinner.hide()}
       }
     );
