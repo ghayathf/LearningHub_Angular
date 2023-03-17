@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ContactusService } from 'src/app/contactus.service';
 
 @Component({
@@ -7,9 +8,24 @@ import { ContactusService } from 'src/app/contactus.service';
   styleUrls: ['./contactus.component.css']
 })
 export class ContactusComponent {
-  constructor(public messageService: ContactusService) { }
+  @ViewChild('DeleteForm') Delete: any
+  constructor(public messageService: ContactusService, private dialog: MatDialog) { }
 
   ngOnInit() {
+    this.messageService.GetAllMessage();
+  }
+  selectedItem = 0
+  async openDeleteDialog(messageId: number) {
+
+
+    this.selectedItem = messageId
+    this.dialog.open(this.Delete)
+
+  }
+  c: number = this.messageService.counter;
+
+  async DeleteMessage() {
+    await this.messageService.DeleteMessage(this.selectedItem);
     this.messageService.GetAllMessage();
   }
 }

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { AdminRoutingModule } from './admin-routing.module';
 import { MainComponent } from './main/main.component';
 import { SharedModule } from '../shared/shared.module';
@@ -14,9 +13,8 @@ import { AllMaterialsComponent } from './all-materials/all-materials.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
-
 import { ContactusComponent } from './contactus/contactus.component';
-import { AdminSideBarComponent } from '../shared/admin-side-bar/admin-side-bar.component';
+import { EmployeesComponent } from './employees/employees.component';
 
 
 
@@ -30,7 +28,9 @@ import { AdminSideBarComponent } from '../shared/admin-side-bar/admin-side-bar.c
     CategoryDetailsComponent,
     CreateCategoryComponent,
     ContactusComponent,
-    AllMaterialsComponent
+    AllMaterialsComponent,
+    EmployeesComponent,
+
   ],
   imports: [
     CommonModule,

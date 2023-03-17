@@ -34,7 +34,6 @@ export class AllMaterialsComponent {
     dateuploaded : new FormControl('',Validators.required),
     materialname : new FormControl('',Validators.required),
     section_Id : new FormControl('',Validators.required)
-
     }
   )
   startDate!: Date;
@@ -61,9 +60,6 @@ export class AllMaterialsComponent {
       }
     );
   }
-
-
-  isDisabled = true
   selectedItem = 0
   openDeleteDialog(MaterialId:number){
     this.selectedItem = MaterialId
