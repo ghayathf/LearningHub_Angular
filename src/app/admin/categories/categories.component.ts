@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { CategoryService } from 'src/app/category.service';
 import { CourseService } from 'src/app/course.service';
 import { CreateCategoryComponent } from '../create-category/create-category.component';
+import { MatDialogConfig } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-categories',
@@ -24,25 +26,7 @@ export class CategoriesComponent {
 
     })
 
-
-
-
-  selectedItem = 0
-  async openDeleteDialog(itemId: number) {
-    this.selectedItem = itemId
-    this.dialog.open(this.Delete)
-  }
-  async openUpdateDialog(categoryid: number) {
-    await this.categoryService.GetCategoryById(categoryid);
-    this.UpdateCategoryForm.patchValue(this.categoryService.category);
-    this.dialog.open(this.Update);
-  }
-
-  async DeleteCategory() {
-    await this.categoryService.DeleteCategory(this.selectedItem)
-    this.categoryService.GetAllCategories()
-  }
-  constructor(public categoryService: CategoryService, private router: Router, private dialog: MatDialog,public courseService:CourseService) { }
+constructor(public categoryService: CategoryService, private router: Router, private dialog: MatDialog,public courseService:CourseService) { }
   ngOnInit() {
     this.categoryService.GetAllCategories();
   }
@@ -51,12 +35,35 @@ export class CategoriesComponent {
     this.categoryService.GetCategoryById(categoryid);
     this.router.navigate(["Admin/CategoryDetails"]);
   }
-  async UpdateCategory() {
+  
+
+  selectedItem = 0
+  async openDeleteDialog(itemId: number) {
+    this.selectedItem = itemId
+    this.dialog.open(this.Delete)
+  }  
+  async DeleteCategory() {
+    await this.categoryService.DeleteCategory(this.selectedItem)
+    this.categoryService.GetAllCategories()
+  }
+
+  async openUpdateDialog(categoryid: number) {
+    await this.categoryService.GetCategoryById(categoryid);
+    await this.UpdateCategoryForm.patchValue(this.categoryService.category);
+
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.maxWidth = '500px';
+    dialogConfig.maxHeight = '90vh';
+
+    this.dialog.open(this.Update, dialogConfig);
+  }
+async UpdateCategory() {
     await this.categoryService.UpdateCategory(this.UpdateCategoryForm.value);
     this.categoryService.GetAllCategories();
   }
 
   OpenDialog() {
+    
     this.dialog.open(CreateCategoryComponent)
   }
 }

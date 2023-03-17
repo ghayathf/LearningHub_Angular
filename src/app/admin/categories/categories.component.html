@@ -353,7 +353,6 @@
                         <!-- Table head -->
                         <thead>
                             <tr>
-                                <th scope="col" class="border-0 rounded-start">Category ID</th>
                                 <th scope="col" class="border-0">Category Name</th>
 
                                 <th scope="col" class="border-0 rounded-end">Action</th>
@@ -368,34 +367,28 @@
                                 <!-- Table data -->
                                 <td>
                                     <div class="d-flex align-items-center position-relative">
-                                        <!-- Image -->
-                                        <div class="w-60px">
-                                            <img src="../../../assets/HomeAssets/images/courses/4by3/08.jpg"
-                                                class="rounded" alt="">
-                                        </div>
+                                        
                                         <!-- Title -->
                                         <h4 class="table-responsive-title mb-0 ms-2">
-                                            <a href="#" class="stretched-link">{{ item.categoryid }}</a>
+                                            <a href="#" class="stretched-link">{{ item.categoryname  }}</a>
                                         </h4>
                                     </div>
                                 </td>
 
                                 <!-- Table data -->
-                                <td>
+                                <!-- <td>
                                     <div class="d-flex align-items-center mb-3">
 
-                                        <!-- Info -->
                                         <div class="ms-2">
-                                            <h4 class="mb-0 fw-light">{{ item.categoryname }}</h4>
+                                            <h4 class="mb-0 fw-light">{{ item }}</h4>
                                         </div>
                                     </div>
-                                </td>
+                                </td> -->
 
 
 
                                 <td>
-                                    <a class="btn btn-sm btn-info-soft me-1 mb-1 mb-md-0"
-                                        (click)="GetCategoryById(item.categoryid)">Details</a>
+                                    
                                     <button class="btn btn-sm btn-danger-soft mb-0"
                                         (click)="openDeleteDialog(item.categoryid)">Delete</button>
 
@@ -508,39 +501,13 @@
                                     </div>
 
 
-                                    <div class="col-12">
-                                        <div
-                                            class="text-center justify-content-center align-items-center p-4 p-sm-5 border border-2 border-dashed position-relative rounded-3">
-                                            <!-- Image -->
-                                            <!-- <img src="assets/images/element/gallery.svg" class="h-50px" alt=""> -->
-                                            <div>
-                                                <h6 class="my-2">Upload Cayrgory image here, or<a href="#!"
-                                                        class="text-primary"> Browse</a></h6>
-                                                <label style="cursor:pointer;">
-                                                    <span>
-                                                        <input class="form-control stretched-link" type="file"
-                                                            name="my-image" id="image"
-                                                            accept="image/gif, image/jpeg, image/png" />
-                                                    </span>
-                                                </label>
-                                                <p class="small mb-0 mt-2"><b>Note:</b> Only JPG, JPEG and PNG. Our
-                                                    suggested dimensions are 600px * 450px. Larger image will be cropped
-                                                    to 4:3 to fit our thumbnails/previews.</p>
-                                            </div>
-                                        </div>
-
-                                        <!-- Button -->
-                                        <div class="d-sm-flex justify-content-end mt-2">
-                                            <button type="button" class="btn btn-sm btn-danger-soft mb-3">Remove
-                                                image</button>
-                                        </div>
-                                    </div>
+                                 
                                     <!-- Upload image END -->
 
 
                                     <!-- Step 1 button -->
                                     <div class="d-flex justify-content-end mt-3">
-                                        <button class="btn btn-primary next-btn mb-0"
+                                        <button mat-dialog-close class="btn btn-primary next-btn mb-0"
                                             [disabled]="UpdateCategoryForm.invalid"
                                             (click)="UpdateCategory()">Update</button>
                                     </div>

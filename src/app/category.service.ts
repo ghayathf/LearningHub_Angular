@@ -47,10 +47,10 @@ export class CategoryService {
 
   }
 
-  CreateCategory(course: any) {
+  CreateCategory(category: any) {
     return new Promise<void>((resolve, reject) => {
       this.spinner.show();
-      this.http.post("https://localhost:44391/api/Categories/CreateCategory", course).subscribe(
+      this.http.post("https://localhost:44391/api/Categories/CreateCategory", category).subscribe(
         {
           next: () => {
             this.spinner.hide();

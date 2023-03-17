@@ -399,10 +399,12 @@
 
 								<!-- Table data -->
 								<td>
-									<a class="btn btn-sm btn-info-soft me-1 mb-1 mb-md-0"
-										(click)="GetCourseById(item.courseid)">Details</a>
+									<button class="btn btn-sm btn-info-soft me-1 mb-1 mb-md-0"
+										(click)="openDetailsDialog(item.courseid)">Details</button>
 									<button (click)="onDeleteCourse(item.courseid)"
 										class="btn btn-sm btn-danger-soft mb-0">Delete</button>
+										<button (click)="openUpdateDialog(item.courseid)"
+										class="btn btn-sm btn-info-soft mb-0">Update</button>
 								</td>
 							</tr>
 
@@ -459,3 +461,197 @@
 <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="wheat" type="square-jelly-box" [fullScreen]="true">
 	<p style="color: wheat"> Waiting... </p>
 </ngx-spinner>
+
+<ng-template #UpdateForm>
+    <section class="py-0 bg-blue h-100px align-items-center d-flex h-200px rounded-0"
+        style="background:url(../../../assets/HomeAssets/images/pattern/04.png) no-repeat center center; background-size:cover;">
+        <!-- Main banner background image -->
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <!-- Title -->
+                    <h1 class="text-white">Update Course</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container" >
+
+
+            <div class="card bg-transparent border rounded-3 mb-5">
+                <div id="stepper" class="bs-stepper stepper-outline">
+
+
+                    <!-- Card body START -->
+                    <div class="card-body">
+                        <!-- Step content START -->
+                        <div class="bs-stepper-content">
+
+
+                            <!-- Step 1 content START -->
+                            <div id="step-1" role="tabpanel" class="content" aria-labelledby="steppertrigger1">
+                                <!-- Title -->
+                                <h4>Update Category </h4>
+
+                                <hr> <!-- Divider -->
+
+                                <!-- Basic information START -->
+                                <div class="row g-4">
+                                    <!-- Course title -->
+                                    <div class="col-12">
+                                        <form [formGroup]="UpdateCourseForm" class="example-form">
+                                            <mat-form-field class="example-full-width">
+                                                <mat-label>Course name</mat-label>
+                                                <input type="text" matInput formControlName="coursename">
+
+                                                <mat-error
+                                                    *ngIf="UpdateCourseForm.controls['coursename'].hasError('required')">
+                                                    Course name is <strong>required</strong>
+                                                </mat-error>
+                                            </mat-form-field>
+											<mat-form-field class="example-full-width">
+                                                <mat-label>Course Description</mat-label>
+                                                <input type="text" matInput formControlName="coursedescription">
+
+                                                <mat-error
+                                                    *ngIf="UpdateCourseForm.controls['coursedescription'].hasError('required')">
+                                                    Course description is <strong>required</strong>
+                                                </mat-error>
+                                            </mat-form-field>
+											<mat-form-field class="example-full-width">
+                                                <mat-label>Course Image</mat-label>
+                                                <input type="text" matInput formControlName="courseimage">
+
+                                                <mat-error
+                                                    *ngIf="UpdateCourseForm.controls['courseimage'].hasError('required')">
+                                                    Course Image is <strong>required</strong>
+                                                </mat-error>
+                                            </mat-form-field>
+											<mat-form-field class="example-full-width">
+                                                <mat-label>Course Level</mat-label>
+                                                <input type="number" matInput formControlName="courselevel">
+
+                                                <mat-error
+                                                    *ngIf="UpdateCourseForm.controls['courselevel'].hasError('required')">
+                                                    Course Level is <strong>required</strong>
+                                                </mat-error>
+                                            </mat-form-field>
+											<mat-form-field class="example-full-width">
+                                                <mat-label>Category ID</mat-label>
+                                                <input type="number" matInput formControlName="category_Id">
+
+                                                <mat-error
+                                                    *ngIf="UpdateCourseForm.controls['category_Id'].hasError('required')">
+                                                    Category ID is <strong>required</strong>
+                                                </mat-error>
+                                            </mat-form-field>
+
+                                        </form>
+                                    </div>
+
+
+                                    
+
+
+                                    <!-- Step 1 button -->
+                                    <div class="d-flex justify-content-end mt-3">
+                                        <button mat-dialog-close class="btn btn-primary next-btn mb-0"
+                                            [disabled]="UpdateCourseForm.invalid"
+                                            (click)="UpdateCourse()">Update</button>
+                                    </div>
+                                </div>
+                                <!-- Basic information START -->
+                            </div>
+                            <!-- Step 1 content END -->
+
+                        </div>
+                    </div>
+                    <!-- Card body END -->
+                </div>
+            </div>
+        </div>
+    </section>
+</ng-template>
+
+<ng-template #DetailsForm>
+	<!-- Page main content START -->
+	<div class="page-content-wrapper border" style="background-color: #333">
+
+		
+
+		<div class="row g-4">
+
+			<!-- Course information START -->
+			<div class="col-xxl-12">
+				<div class="card bg-transparent border rounded-3 h-100">
+					<!-- Card body START -->
+					<div class="card-body">
+
+						<!-- Course image and info START -->
+						<div class="row g-4">
+							<!-- Course image -->
+							<div class="col-md-6">
+								<img src="../../../assets/HomeAssets/images/courses/4by3/01.jpg" class="rounded" alt="">
+							</div>
+							<!-- Course info and avatar -->
+							<div class="col-md-6">
+                <h1>{{ this.courseService.course.coursename }}</h1>
+								<!-- Info -->
+								<h3 class="mb-3">{{this.courseService.course.coursedescription}}</h3>
+
+
+
+							</div>
+						</div>
+						<!-- Course image and info END -->
+
+						<!-- Information START -->
+						<div class="row mt-3">
+
+							<!-- Information item -->
+							<div class="col-md-6">
+								<ul class="list-group list-group-borderless">
+
+
+									<li class="list-group-item">
+										<span>Total Enrolled:</span>
+										<span class="h6 mb-0">12,000+</span>
+									</li>
+
+									<li class="list-group-item">
+										<span>Certificate:</span>
+										<span class="h6 mb-0">Yes</span>
+									</li>
+								</ul>
+							</div>
+
+							<!-- Information item -->
+							<div class="col-md-6">
+								<ul class="list-group list-group-borderless">
+									<li class="list-group-item">
+										<span>Level:</span>
+										<span class="h6 mb-0">{{ this.courseService.course.courselevel }}</span>
+									</li>
+
+									<li class="list-group-item">
+										<span>Total Lecture:</span>
+										<span class="h6 mb-0">30</span>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<!-- Information END -->
+					</div>
+					<!-- Card body END -->
+				</div>
+			</div>
+			<!-- Course information END -->
+
+
+			<!-- Student review END -->
+
+		</div> <!-- Row END -->
+	</div>
+</ng-template>
