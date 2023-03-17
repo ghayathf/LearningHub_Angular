@@ -1,12 +1,12 @@
 <app-admin-side-bar></app-admin-side-bar>
 <!-- Page content START -->
 <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="wheat" type="square-jelly-box" [fullScreen]="true">
-	<p style="color: wheat"> Waiting... </p>
+    <p style="color: wheat"> Waiting... </p>
 </ngx-spinner>
 <div class="page-content">
-  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="wheat" type="square-jelly-box" [fullScreen]="true">
-    <p style="color: wheat"> Waiting... </p>
-  </ngx-spinner>
+    <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="wheat" type="square-jelly-box" [fullScreen]="true">
+        <p style="color: wheat"> Waiting... </p>
+    </ngx-spinner>
     <!-- Top bar START -->
     <nav class="navbar top-bar navbar-light border-bottom py-0 py-xl-3">
         <div class="container-fluid p-0">
@@ -375,7 +375,7 @@
 
                                         <!-- Title -->
                                         <h4 class="table-responsive-title mb-0 ms-2">
-                                            <a href="#" class="stretched-link">{{ item.categoryname  }}</a>
+                                            <a href="#" class="stretched-link">{{ item.categoryname }}</a>
                                         </h4>
                                     </div>
                                 </td>
@@ -447,7 +447,7 @@
 <ng-template #DeleteForm>
     <h2 mat-dialog-content>Would you like to Delete this Category ?</h2>
     <div mat-dialog-actions>
-        <input type="button" mat-dialog-close class="btn btn-success" value="Yes" (click)="DeleteCategory()">
+        <input type="button" mat-dialog-close class="btn btn-danger" value="Yes" (click)="DeleteCategory()">
         <input type="button" mat-dialog-close class="btn btn-error" value="No">
     </div>
 </ng-template>
@@ -466,7 +466,7 @@
         </div>
     </section>
 
-    <section>
+    <section style="background-color:#2a2c31">
         <div class="container">
 
 
