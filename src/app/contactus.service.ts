@@ -27,4 +27,47 @@ export class ContactusService {
       }
     )
   }
+  counter: number = 0;
+
+  CreateMessage(message: any) {
+    this.spinner.show();
+    this.http.post("https://localhost:44391/api/ContactUs/CreateContactUs", message).subscribe(
+      {
+        next: () => {
+          this.counter++;
+          this.spinner.hide();
+          this.toaster.success("Email sent");
+          console.log(this.counter);
+
+
+        },
+        error: (err) => {
+          this.spinner.hide();
+          this.toaster.error("error");
+          console.log(err);
+
+        }
+      }
+    )
+  }
+
+  DeleteMessage(messageId: any) {
+    this.spinner.show();
+    return new Promise<void>((resolve, reject) => {
+      this.http.delete("https://localhost:44391/api/ContactUs/DeleteContactUs/" + messageId).subscribe(
+        {
+          next: () => {
+            this.spinner.hide();
+            this.toaster.success("Message Deleted Successfuly");
+            resolve();
+          },
+          error: () => {
+            this.spinner.hide();
+            this.toaster.error("error");
+          }
+        }
+      )
+    })
+  }
+
 }

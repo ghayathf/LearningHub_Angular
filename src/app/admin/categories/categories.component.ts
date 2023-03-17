@@ -42,7 +42,7 @@ export class CategoriesComponent {
     await this.categoryService.DeleteCategory(this.selectedItem)
     this.categoryService.GetAllCategories()
   }
-  constructor(public categoryService: CategoryService, private router: Router, private dialog: MatDialog,public courseService:CourseService) { }
+  constructor(public categoryService: CategoryService, private router: Router, private dialog: MatDialog, public courseService: CourseService) { }
   ngOnInit() {
     this.categoryService.GetAllCategories();
   }
@@ -51,6 +51,7 @@ export class CategoriesComponent {
     this.categoryService.GetCategoryById(categoryid);
     this.router.navigate(["Admin/CategoryDetails"]);
   }
+ 
   async UpdateCategory() {
     await this.categoryService.UpdateCategory(this.UpdateCategoryForm.value);
     this.categoryService.GetAllCategories();

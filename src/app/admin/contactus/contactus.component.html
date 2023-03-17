@@ -274,37 +274,13 @@
         <!-- Title -->
         <div class="row mb-3">
             <div class="col-12 d-sm-flex justify-content-between align-items-center">
-                <h1 class="h3 mb-2 mb-sm-0">Courses</h1>
-                <a routerLink="/Admin/CreateCourse" class="btn btn-sm btn-primary mb-0">Create a Course</a>
+                <h1 class="h3 mb-2 mb-sm-0">Messages</h1>
+
             </div>
         </div>
 
         <!-- Course boxes START -->
-        <div class="row g-4 mb-4">
-            <!-- Course item -->
-            <div class="col-sm-6 col-lg-4">
-                <div class="text-center p-4 bg-primary bg-opacity-10 border border-primary rounded-3">
-                    <h6>Total Courses</h6>
-                    <h2 class="mb-0 fs-1 text-primary">1200</h2>
-                </div>
-            </div>
 
-            <!-- Course item -->
-            <div class="col-sm-6 col-lg-4">
-                <div class="text-center p-4 bg-success bg-opacity-10 border border-success rounded-3">
-                    <h6>Activated Courses</h6>
-                    <h2 class="mb-0 fs-1 text-success">996</h2>
-                </div>
-            </div>
-
-            <!-- Course item -->
-            <div class="col-sm-6 col-lg-4">
-                <div class="text-center p-4  bg-warning bg-opacity-15 border border-warning rounded-3">
-                    <h6>Pending Courses</h6>
-                    <h2 class="mb-0 fs-1 text-warning">200</h2>
-                </div>
-            </div>
-        </div>
         <!-- Course boxes END -->
 
         <!-- Card START -->
@@ -358,6 +334,7 @@
                                 <th scope="col" class="border-0">Message</th>
                                 <th scope="col" class="border-0 rounded-end">Email</th>
                                 <th scope="col" class="border-0 rounded-end">Phone Number</th>
+                                <th scope="col" class="border-0 rounded-end"></th>
                                 <th scope="col" class="border-0 rounded-end"></th>
                             </tr>
                         </thead>
@@ -415,6 +392,10 @@
                                 <!-- Table data -->
                                 <td>
                                     <input type="button" class="btn btn-primary" value="Replay">
+
+                                </td>
+                                <td>
+                                    <a (click)="openDeleteDialog(item.contactid)"><i class="bi bi-x-lg"></i></a>
                                 </td>
                             </tr>
 
@@ -467,6 +448,14 @@
 	</div>
 </ng-template> -->
 
+
+<ng-template #DeleteForm>
+    <h2 mat-dialog-content>Would you like to Delete this Message ?</h2>
+    <div mat-dialog-actions>
+        <input type="button" mat-dialog-close class="btn btn-danger" value="Yes" (click)="DeleteMessage()">
+        <input type="button" mat-dialog-close class="btn btn-error" value="No">
+    </div>
+</ng-template>
 
 <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="wheat" type="square-jelly-box" [fullScreen]="true">
     <p style="color: wheat"> Waiting... </p>
