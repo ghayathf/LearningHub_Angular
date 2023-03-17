@@ -22,7 +22,13 @@
     "lib": [
       "ES2022",
       "dom"
+    ],
+    "types": [
+      "@types/node",
+      "@types/body-parser"
     ]
+ 
+  
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

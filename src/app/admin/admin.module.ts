@@ -14,13 +14,13 @@ import { AllMaterialsComponent } from './all-materials/all-materials.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
-
 import { ContactusComponent } from './contactus/contactus.component';
 import { AdminSideBarComponent } from '../shared/admin-side-bar/admin-side-bar.component';
 import { AllSectionsComponent } from './all-sections/all-sections.component';
 import { CreateSectionComponent } from './create-section/create-section.component';
-
-
+import { MatTimepickerModule } from 'mat-timepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -43,9 +43,11 @@ import { CreateSectionComponent } from './create-section/create-section.componen
     MatDatepickerModule,
     MatNativeDateModule,
     MatIconModule,
+    MatTimepickerModule,
+    MatInputModule,
+    MatFormFieldModule
+
     
-
-
   ]
 })
 export class AdminModule { }

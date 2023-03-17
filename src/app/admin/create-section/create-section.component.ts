@@ -1,7 +1,13 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SectionService } from 'src/app/section.service';
-
+import { MatTimepickerModule } from 'mat-timepicker';
+import { MatDatepicker, MatDatepickerActions } from '@angular/material/datepicker';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { MaterialService } from 'src/app/material.service';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-create-section',
   templateUrl: './create-section.component.html',
@@ -23,6 +29,7 @@ export class CreateSectionComponent {
     }
   )
   async CreateSection() {
+    
     await this.sectionService.CreateSection(this.CreateForm.value);
     this.sectionService.GetAllSections();
 
