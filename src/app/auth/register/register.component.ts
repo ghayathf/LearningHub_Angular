@@ -44,6 +44,7 @@ export class RegisterComponent {
   CreateNewTrainee() {
     this.TraineeForm.controls['user_Id'].setValue(this.UserService.lastid);
     this.UserService.CreateTrainne(this.TraineeForm.value);
+    window.location.reload();
   }
 
 

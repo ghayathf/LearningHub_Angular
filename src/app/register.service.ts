@@ -68,6 +68,7 @@ export class RegisterService {
       {
         next: (res) => {
           this.Trainee = res;
+
           this.spinner.hide();
         },
         error: () => {
@@ -94,4 +95,28 @@ export class RegisterService {
       }
     )
   }
+
+  filterData: any = [];
+
+  GetAllTraineeUser() {
+
+    this.spinner.show();
+    this.http.get("https://localhost:44391/api/Trainee/GetAllTraineeUser").subscribe(
+      {
+        next: (res) => {
+          this.spinner.hide();
+          this.filterData = res;
+
+        },
+        error: (err) => {
+          this.spinner.hide();
+          console.log(err);
+
+        }
+      }
+    )
+
+  }
+
+
 }

@@ -1,0 +1,24 @@
+<table class="table table-borderd">
+    <thead>
+        <tr>
+            <th>Trainee Id</th>
+            <th>Address</th>
+            <th>Major</th>
+            <th>Universty</th>
+            <th>Status</th>
+            <th>first name</th>
+            <th>last name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of TraineeService.filterData">
+            <td>{{item.traineeid}}</td>
+            <td>{{item.address}}</td>
+            <td>{{item.major}}</td>
+            <td>{{item.university}}</td>
+            <td>{{item.registerstatus}}</td>
+            <td>{{item.firstname}}</td>
+            <td>{{item.lastname}}</td>
+        </tr>
+    </tbody>
+</table>

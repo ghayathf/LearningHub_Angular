@@ -15,6 +15,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { ContactusComponent } from './contactus/contactus.component';
 import { EmployeesComponent } from './employees/employees.component';
+import { TraineeRequestsComponent } from './trainee-requests/trainee-requests.component';
 
 
 
@@ -30,6 +31,7 @@ import { EmployeesComponent } from './employees/employees.component';
     ContactusComponent,
     AllMaterialsComponent,
     EmployeesComponent,
+    TraineeRequestsComponent,
 
   ],
   imports: [
