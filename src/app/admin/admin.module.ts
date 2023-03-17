@@ -17,6 +17,8 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { ContactusComponent } from './contactus/contactus.component';
 import { AdminSideBarComponent } from '../shared/admin-side-bar/admin-side-bar.component';
+import { AllSectionsComponent } from './all-sections/all-sections.component';
+import { CreateSectionComponent } from './create-section/create-section.component';
 
 
 
@@ -30,7 +32,9 @@ import { AdminSideBarComponent } from '../shared/admin-side-bar/admin-side-bar.c
     CategoryDetailsComponent,
     CreateCategoryComponent,
     ContactusComponent,
-    AllMaterialsComponent
+    AllMaterialsComponent,
+    AllSectionsComponent,
+    CreateSectionComponent
   ],
   imports: [
     CommonModule,
@@ -39,6 +43,7 @@ import { AdminSideBarComponent } from '../shared/admin-side-bar/admin-side-bar.c
     MatDatepickerModule,
     MatNativeDateModule,
     MatIconModule,
+    
 
 
   ]
