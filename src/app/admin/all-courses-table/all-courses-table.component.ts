@@ -5,6 +5,7 @@ import { CourseService } from 'src/app/course.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Dialog } from '@angular/cdk/dialog';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { CreateNewCourseComponent } from '../create-new-course/create-new-course.component'
 
 @Component({
   selector: 'app-all-courses-table',
@@ -71,4 +72,11 @@ async openDetailsDialog(courseid: number)
   await this.courseService.GetCourseById(courseid);
   this.dialog.open(this.Details);
 }
+OpenDialog() {
+
+  const dialogConfig = new MatDialogConfig();
+    dialogConfig.maxWidth = '500px';
+    dialogConfig.maxHeight = '90vh';
+    this.dialog.open(CreateNewCourseComponent, dialogConfig)
+  }
 }

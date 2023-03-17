@@ -23,6 +23,7 @@ export class CreateNewCourseComponent
   constructor(public courseService:CourseService,private router:Router) {}
   CreateCourse(){
     this.courseService.CreateCourse(this.CreateForm.value)
-    this.router.navigate(["Admin/AllCourses"])
+    // this.router.navigate(["Admin/AllCourses"])
+    this.courseService.GetAllCourses();
   }
 }

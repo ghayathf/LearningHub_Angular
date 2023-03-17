@@ -65,6 +65,9 @@ async UpdateCategory() {
 
   OpenDialog() {
 
-    this.dialog.open(CreateCategoryComponent)
+  const dialogConfig = new MatDialogConfig();
+    dialogConfig.maxWidth = '850px';
+    dialogConfig.maxHeight = '90vh';
+    this.dialog.open(CreateCategoryComponent, dialogConfig)
   }
 }
