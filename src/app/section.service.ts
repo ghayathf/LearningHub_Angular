@@ -34,15 +34,64 @@ export class SectionService {
       }
     )
   })}
-  deleteSeection(courseId: number){
-    return this.http.delete("https://localhost:44391/api/Section/DeleteSection/"+courseId).subscribe(
-      {
-      next:()=>{this.spinner.hide();  
-      this.toaster.success("Section Deleted Successfuly");},
-        error:()=>{this.spinner.hide()}
-      }
-    );
+  DeleteSection(sectionId: number) {
     
+    return new Promise<void>((resolve, reject) => {
+      this.spinner.show();
+      this.http.delete("https://localhost:44391/api/Section/DeleteSection/"+sectionId).subscribe(
+        {
+          next: () => {
+            this.spinner.hide();
+            this.toaster.success("Section Deleted Successfuly");
+           
+            resolve();
+          },
+          error: () => {
+            this.spinner.hide();
+            this.toaster.error("Error");
+  
+          }
+        }
+      )
+    })
+  }
+  section:any
+  GetSectionById(sectionId:number){
+    return new Promise<void>((resolve, reject) => {
+    this.spinner.show()
+    this.http.get("https://localhost:44391/api/Section/GetSectionByID/"+sectionId).subscribe(
+      {
+        next:(res)=>
+        {this.section=res
+          this.spinner.hide()
+          resolve()
+        },
+        error:(err)=>{console.log(err);
+        }
+      }
+    )})
+  }
+  async UpdateSection(section: any) {
+    return new Promise<void>((resolve, reject) => {
+      this.spinner.show();
+      this.http.put("https://localhost:44391/api/Section/UpdateSection", section).subscribe(
+        {
+          next: () => {
+            this.spinner.hide();
+            this.toaster.success("Section Updated Successfully");
+            resolve();
+          },
+          error: () => {
+            this.spinner.hide();
+            this.toaster.error("Try again");
+
+          }
+
+
+        }
+      )
+    })
+
   }
   ngOnInit(): void {
    

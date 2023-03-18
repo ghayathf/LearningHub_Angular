@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CategoryService } from 'src/app/category.service';
 import { CourseService } from 'src/app/course.service';
-
+import { SharedModule } from 'src/app/shared/shared.module';
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',

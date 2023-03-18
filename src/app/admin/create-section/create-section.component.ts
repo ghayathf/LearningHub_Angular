@@ -34,4 +34,5 @@ export class CreateSectionComponent {
     this.sectionService.GetAllSections();
 
   }
+  
 }

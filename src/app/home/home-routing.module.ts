@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AllCoursesComponent } from './all-courses/all-courses.component';
 import { CategoryCoursesComponent } from './category-courses/category-courses.component';
 import { ContactComponent } from './contact/contact.component';
-
+import { SharedModule } from '../shared/shared.module';
 
 import { MainComponent } from './main/main.component';
 
