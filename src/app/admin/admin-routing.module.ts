@@ -4,6 +4,7 @@ import { AllCoursesComponent } from '../home/all-courses/all-courses.component';
 
 import { AllCoursesTableComponent } from './all-courses-table/all-courses-table.component';
 import { AllMaterialsComponent } from './all-materials/all-materials.component';
+import { AllSectionsComponent } from './all-sections/all-sections.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { CategoryDetailsComponent } from './category-details/category-details.component';
 import { ContactusComponent } from './contactus/contactus.component';
@@ -11,6 +12,7 @@ import { CourseDetailsComponent } from './course-details/course-details.componen
 import { CreateCategoryComponent } from './create-category/create-category.component';
 import { CreateNewCourseComponent } from './create-new-course/create-new-course.component';
 import { EmployeesComponent } from './employees/employees.component';
+import { CreateSectionComponent } from './create-section/create-section.component';
 import { MainComponent } from './main/main.component';
 import { TraineeRequestsComponent } from './trainee-requests/trainee-requests.component';
 
@@ -59,6 +61,10 @@ const routes: Routes = [
   {
     path: "TraineeRequest",
     component: TraineeRequestsComponent
+  }, 
+  {
+    path: "AllSections",
+    component: AllSectionsComponent
   }
 ];
 

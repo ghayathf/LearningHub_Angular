@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+
 import { CommonModule } from '@angular/common';
 
 import { HomeRoutingModule } from './home-routing.module';
@@ -27,5 +28,6 @@ import { ContactComponent } from './contact/contact.component';
     HomeRoutingModule,
     SharedModule
   ],
+ 
 })
 export class HomeModule { }

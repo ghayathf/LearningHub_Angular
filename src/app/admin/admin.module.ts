@@ -18,6 +18,12 @@ import { EmployeesComponent } from './employees/employees.component';
 import { TraineeRequestsComponent } from './trainee-requests/trainee-requests.component';
 
 
+import { AdminSideBarComponent } from '../shared/admin-side-bar/admin-side-bar.component';
+import { AllSectionsComponent } from './all-sections/all-sections.component';
+import { CreateSectionComponent } from './create-section/create-section.component';
+import { MatTimepickerModule } from 'mat-timepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -33,6 +39,9 @@ import { TraineeRequestsComponent } from './trainee-requests/trainee-requests.co
     EmployeesComponent,
     TraineeRequestsComponent,
 
+  
+    AllSectionsComponent,
+    CreateSectionComponent
   ],
   imports: [
     CommonModule,
@@ -41,8 +50,11 @@ import { TraineeRequestsComponent } from './trainee-requests/trainee-requests.co
     MatDatepickerModule,
     MatNativeDateModule,
     MatIconModule,
+    MatTimepickerModule,
+    MatInputModule,
+    MatFormFieldModule
 
-
+    
   ]
 })
 export class AdminModule { }

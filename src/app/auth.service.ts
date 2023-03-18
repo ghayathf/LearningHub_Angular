@@ -42,6 +42,9 @@ export class AuthService {
           if (data.RoleId == 2){
             this.router.navigate([""]);
           }
+          if (data.RoleId == 3){
+            this.router.navigate([""]);
+          }
 
           resolve()
         },
