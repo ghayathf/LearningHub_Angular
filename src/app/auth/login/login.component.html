@@ -1,4 +1,7 @@
 <main>
+  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="wheat" type="square-jelly-box" [fullScreen]="true">
+    <p style="color: wheat"> Waiting... </p>
+  </ngx-spinner>
     <section class="p-0 d-flex align-items-center position-relative overflow-hidden">
 
         <div class="container-fluid">
@@ -51,31 +54,28 @@
                             <p class="lead mb-4">Nice to see you! Please log in with your account.</p>
 
                             <!-- Form START -->
-                            <form [formGroup]="Loginform">
+                            <form [formGroup]="LoginformChecking">
                                 <!-- Email -->
                                 <!-- Email -->
                                 <mat-form-field class="example-full-width">
 
                                     <mat-label>Email</mat-label>
-                                    <input type="email" matInput formControlName="email"
+                                    <input type="text" matInput formControlName="username"
                                         placeholder="Ex. pat@example.com">
-                                    <mat-error
-                                        *ngIf="Loginform.controls['email'].hasError('email') && !Loginform.controls['email'].hasError('required')">
-                                        Please enter a valid email address
-                                    </mat-error>
-                                    <mat-error *ngIf="Loginform.controls['email'].hasError('required')">
+
+                                    <mat-error *ngIf="LoginformChecking.controls['username'].hasError('required')">
                                         Email is <strong>required</strong>
                                     </mat-error>
                                 </mat-form-field>
                                 <!-- Password -->
                                 <mat-form-field class="example-full-width">
                                     <mat-label>Password</mat-label>
-                                    <input type="password" matInput formControlName="password" placeholder="********">
+                                    <input type="password" matInput formControlName="userpassword" placeholder="********">
                                     <mat-error
-                                        *ngIf="Loginform.controls['password'].hasError('minlength') && !Loginform.controls['password'].hasError('required')">
+                                        *ngIf="LoginformChecking.controls['userpassword'].hasError('minlength') && !LoginformChecking.controls['userpassword'].hasError('required')">
                                         Please enter a valid password
                                     </mat-error>
-                                    <mat-error *ngIf="Loginform.controls['password'].hasError('required')">
+                                    <mat-error *ngIf="LoginformChecking.controls['userpassword'].hasError('required')">
                                         Email is <strong>required</strong>
                                     </mat-error>
                                 </mat-form-field>
@@ -96,7 +96,7 @@
                                 <!-- Button -->
                                 <div class="align-items-center mt-0">
                                     <div class="d-grid">
-                                        <button class="btn btn-primary mb-0" type="button">Login</button>
+                                        <input class="btn btn-primary mb-0" type="button" value="Login" [disabled]="LoginformChecking.invalid" (click)="Login()">
                                     </div>
                                 </div>
                             </form>
