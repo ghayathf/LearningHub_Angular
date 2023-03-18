@@ -3,12 +3,8 @@ import { CommonModule } from '@angular/common';
 import { AdminRoutingModule } from './admin-routing.module';
 import { MainComponent } from './main/main.component';
 import { SharedModule } from '../shared/shared.module';
-import { CreateNewCourseComponent } from './create-new-course/create-new-course.component';
 import { AllCoursesTableComponent } from './all-courses-table/all-courses-table.component';
-import { CourseDetailsComponent } from './course-details/course-details.component';
 import { CategoriesComponent } from './categories/categories.component';
-import { CategoryDetailsComponent } from './category-details/category-details.component';
-import { CreateCategoryComponent } from './create-category/create-category.component';
 import { AllMaterialsComponent } from './all-materials/all-materials.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -20,28 +16,21 @@ import { TraineeRequestsComponent } from './trainee-requests/trainee-requests.co
 
 import { AdminSideBarComponent } from '../shared/admin-side-bar/admin-side-bar.component';
 import { AllSectionsComponent } from './all-sections/all-sections.component';
-import { CreateSectionComponent } from './create-section/create-section.component';
-import { MatTimepickerModule } from 'mat-timepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
     MainComponent,
-    CreateNewCourseComponent,
     AllCoursesTableComponent,
-    CourseDetailsComponent,
     CategoriesComponent,
-    CategoryDetailsComponent,
-    CreateCategoryComponent,
     ContactusComponent,
     AllMaterialsComponent,
     EmployeesComponent,
     TraineeRequestsComponent,
 
-  
+
     AllSectionsComponent,
-    CreateSectionComponent
   ],
   imports: [
     CommonModule,
@@ -50,11 +39,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatDatepickerModule,
     MatNativeDateModule,
     MatIconModule,
-    MatTimepickerModule,
     MatInputModule,
     MatFormFieldModule
 
-    
+
   ]
 })
 export class AdminModule { }

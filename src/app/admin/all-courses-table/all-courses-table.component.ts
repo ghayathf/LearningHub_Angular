@@ -5,7 +5,6 @@ import { CourseService } from 'src/app/course.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Dialog } from '@angular/cdk/dialog';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { CreateNewCourseComponent } from '../create-new-course/create-new-course.component'
 
 @Component({
   selector: 'app-all-courses-table',

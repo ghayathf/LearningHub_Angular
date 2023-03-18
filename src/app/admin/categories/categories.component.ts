@@ -5,7 +5,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CategoryService } from 'src/app/category.service';
 import { CourseService } from 'src/app/course.service';
-import { CreateCategoryComponent } from '../create-category/create-category.component';
 import { MatDialogConfig } from '@angular/material/dialog';
 import { NgxSpinnerService } from 'ngx-spinner';
 
