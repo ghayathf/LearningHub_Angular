@@ -1,9 +1,10 @@
+<!-- Page content START -->
 <app-admin-side-bar></app-admin-side-bar>
 <!-- Page content START -->
 
 <div class="page-content">
     <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="wheat" type="square-jelly-box" [fullScreen]="true">
-        <p style="color: wheat"> Waiting... </p>
+        <p style="color: wheat"> Waiting.... </p>
     </ngx-spinner>
     <!-- Top bar START -->
     <nav class="navbar top-bar navbar-light border-bottom py-0 py-xl-3">
@@ -397,7 +398,7 @@
                                         <!-- Table data -->
                                         <td>
                                             <input type="button" class="btn btn-success" value="Accept"
-                                                (click)="ChangeStatus(item,item.userid)">
+                                                (click)="ChangeStatus(item)">
 
                                         </td>
                                         <td>

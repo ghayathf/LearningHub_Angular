@@ -24,12 +24,12 @@ export class TraineeRequestsComponent {
     await this.TraineeService.DeleteRequest(this.selectedItem);
     this.TraineeService.GetAllTraineeUser();
   }
+  SelectdUserId = 0;
+  ChangeStatus(requestt: any) {
 
-  ChangeStatus(requestt: any, id: number) {
-
-    this.TraineeService.UpdateRequest(requestt, id);
+    this.TraineeService.UpdateRequest(requestt);
     this.TraineeService.GetAllTraineeUser();
-
+    window.location.reload();
 
   }
 }

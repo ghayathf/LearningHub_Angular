@@ -6,7 +6,7 @@ import { SharedModule } from '../shared/shared.module';
 import { AllCoursesTableComponent } from './all-courses-table/all-courses-table.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { AllMaterialsComponent } from './all-materials/all-materials.component';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { ContactusComponent } from './contactus/contactus.component';
