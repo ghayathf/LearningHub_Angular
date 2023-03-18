@@ -17,9 +17,20 @@ export class AllCoursesTableComponent {
   @ViewChild('DeleteForm') Delete: any
   @ViewChild('UpdateForm') Update: any
   @ViewChild('DetailsForm') Details:any
+  @ViewChild('CreateForm') Create:any
 
   constructor(public courseService: CourseService, private router: Router, public spinner: NgxSpinnerService, private dialog: MatDialog) {
   }
+
+  CreateCourseForm = new FormGroup(
+    {
+    coursename : new FormControl('',Validators.required),
+    coursedescription : new FormControl('',Validators.required),
+    courseimage : new FormControl('',Validators.required),
+    courselevel : new FormControl('',Validators.required),
+    category_Id : new FormControl('',Validators.required)
+    }
+  )
 
   UpdateCourseForm = new FormGroup(
     {
@@ -72,11 +83,16 @@ async openDetailsDialog(courseid: number)
   await this.courseService.GetCourseById(courseid);
   this.dialog.open(this.Details);
 }
-OpenDialog() {
 
+ OpenCreateDialog() {
   const dialogConfig = new MatDialogConfig();
     dialogConfig.maxWidth = '500px';
     dialogConfig.maxHeight = '90vh';
-    this.dialog.open(CreateNewCourseComponent, dialogConfig)
+    this.dialog.open(this.Create, dialogConfig)
+  }
+  async CreateCourse()
+  {
+    await this.courseService.CreateCourse(this.CreateCourseForm.value);
+    this.courseService.GetAllCourses();
   }
 }
