@@ -7,7 +7,7 @@ import { ToastrService } from 'ngx-toastr';
   providedIn: 'root'
 })
 export class CategoryService {
-
+                                                                                                                                                                                                                              
   constructor(private http: HttpClient, private spinner: NgxSpinnerService, private toaster: ToastrService) { }
   categories: any = []
   GetAllCategories() {
@@ -18,11 +18,12 @@ export class CategoryService {
         this.spinner.hide();
 
       },
-      (err) => {
+      (err) => {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
         console.log(err);
         this.spinner.hide();
-      }
-    )
+        
+      })
+      
   }
   category: any
   categoryID?: any
@@ -82,7 +83,6 @@ export class CategoryService {
           error: () => {
             this.spinner.hide();
             this.toaster.error("Error");
-
           }
         }
       )

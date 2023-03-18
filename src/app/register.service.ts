@@ -10,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class RegisterService {
   tr: any;
-  constructor(private http: HttpClient, private spinner: NgxSpinnerService, private router: Router) {
+  constructor(private http: HttpClient, private spinner: NgxSpinnerService, private router: Router, private toaster: ToastrService) {
 
     this.tr = []
   }
@@ -58,7 +58,7 @@ export class RegisterService {
   }
 
   filterUsers() {
-    this.tr = this.users.filter((x: { role_Id: number; }) => x.role_Id == 2)
+    this.tr = this.users.filter((x: { roleId: number; }) => x.roleId == 2)
   }
 
   Trainee: any = [];
@@ -85,7 +85,7 @@ export class RegisterService {
       {
         next: () => {
           this.spinner.hide();
-          this.router.navigate(['/Auth/register']);
+
         },
         error: (err) => {
           this.spinner.hide();
@@ -118,5 +118,54 @@ export class RegisterService {
 
   }
 
+  userid: any;
+
+  // DeleteRequest(requestId: any) {
+  //   this.spinner.show();
+  //   this.userid = requestId;
+  //   return new Promise<void>((resolve, reject) => {
+  //     this.http.delete("https://localhost:44391/api/User/DeleteUser/" + requestId).subscribe(
+  //       {
+  //         next: () => {
+  //           this.spinner.hide();
+  //           this.toaster.success("Request Deleted Successfuly");
+  //           resolve();
+  //         },
+  //         error: () => {
+  //           this.spinner.hide();
+  //           this.toaster.error("error");
+  //         }
+  //       }
+  //     )
+  //   })
+
+
+  // }
+
+
+  // async UpdateRequest(Request: any) {
+  //   return new Promise<void>((resolve, reject) => {
+  //     this.spinner.show();
+  //     Request.registerstatus = 1;
+  //     Request.userid = this.userid;
+  //     this.http.put("https://localhost:44391/api/Trainee/UpdateTrainee", Request).subscribe(
+  //       {
+  //         next: () => {
+  //           this.spinner.hide();
+  //           this.toaster.success("Accepted");
+  //           resolve();
+  //         },
+  //         error: () => {
+  //           this.spinner.hide();
+  //           this.toaster.error("Try again");
+
+  //         }
+
+
+  //       }
+  //     )
+  //   })
+
+  // }
 
 }
