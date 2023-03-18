@@ -155,10 +155,10 @@ export class RegisterService {
     })
   }
   user2: any;
-  async UpdateRequest(Request: any, userid: number) {
+  async UpdateRequest(Request: any) {
     return new Promise<void>((resolve, reject) => {
       this.spinner.show();
-      Request.userid = userid;
+
 
       Request.registerstatus = 1;
 

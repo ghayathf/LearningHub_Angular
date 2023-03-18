@@ -1,4 +1,4 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeHeaderComponent } from './home-header/home-header.component';
 import { HomeFooterComponent } from './home-footer/home-footer.component';
@@ -31,7 +31,7 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatDatepickerModule,
     MatFormFieldModule,
     MatBadgeModule,
-    MatStepperModule
+    MatStepperModule,
 
   ],
   exports: [
@@ -46,12 +46,12 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatDatepickerModule,
     MatIconModule,
     MatFormFieldModule,
-    
+
     MatBadgeModule,
     MatStepperModule
 
   ],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
-  
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+
 })
 export class SharedModule { }

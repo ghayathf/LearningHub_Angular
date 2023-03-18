@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { RegisterService } from 'src/app/register.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { RegisterService } from 'src/app/register.service';
 })
 export class TraineeRequestsComponent {
   @ViewChild('DeleteForm') Delete: any
-  constructor(public TraineeService: RegisterService, private dialog: MatDialog) { }
+  constructor(public TraineeService: RegisterService, private dialog: MatDialog, public spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     this.TraineeService.GetAllTraineeUser();
@@ -23,12 +24,12 @@ export class TraineeRequestsComponent {
     await this.TraineeService.DeleteRequest(this.selectedItem);
     this.TraineeService.GetAllTraineeUser();
   }
+  SelectdUserId = 0;
+  ChangeStatus(requestt: any) {
 
-  ChangeStatus(requestt: any, id: number) {
-
-    this.TraineeService.UpdateRequest(requestt, id);
+    this.TraineeService.UpdateRequest(requestt);
     this.TraineeService.GetAllTraineeUser();
-
+    window.location.reload();
 
   }
 }
