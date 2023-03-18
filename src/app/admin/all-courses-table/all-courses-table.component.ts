@@ -17,7 +17,7 @@ export class AllCoursesTableComponent {
   @ViewChild('UpdateForm') Update: any
   @ViewChild('DetailsForm') Details:any
   @ViewChild('CreateForm') Create:any
-
+  @ViewChild('Search') Search: any
   constructor(public courseService: CourseService, private router: Router, public spinner: NgxSpinnerService, private dialog: MatDialog) {
   }
 
@@ -93,5 +93,22 @@ async openDetailsDialog(courseid: number)
   {
     await this.courseService.CreateCourse(this.CreateCourseForm.value);
     this.courseService.GetAllCourses();
+  }
+  CourseName?:string
+  searchCourses() {
+    this.spinner.show();
+    this.courseService.searchCourses(this.CourseName).subscribe(
+      {
+        next: (res) => {
+          this.spinner.hide();
+          this.courseService.searchedCourses = res;
+          this.dialog.open(this.Search);
+        },
+        error: () => {
+          this.spinner.hide();
+          console.error('An error occurred while searching for courses');
+        }
+      }
+    );
   }
 }
