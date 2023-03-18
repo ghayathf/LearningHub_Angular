@@ -15,6 +15,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { ContactusComponent } from './contactus/contactus.component';
 import { EmployeesComponent } from './employees/employees.component';
+import { TraineeRequestsComponent } from './trainee-requests/trainee-requests.component';
 
 
 import { AdminSideBarComponent } from '../shared/admin-side-bar/admin-side-bar.component';
@@ -36,6 +37,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     ContactusComponent,
     AllMaterialsComponent,
     EmployeesComponent,
+    TraineeRequestsComponent,
 
   
     AllSectionsComponent,

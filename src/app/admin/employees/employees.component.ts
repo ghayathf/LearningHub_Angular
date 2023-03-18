@@ -25,7 +25,7 @@ export class EmployeesComponent {
       phonenumber : new FormControl('',Validators.required),
       firstname : new FormControl('',Validators.required),
       lastname : new FormControl('',Validators.required),
-      role_Id : new FormControl('',Validators.required),
+      roleId : new FormControl('',Validators.required),
     }
   )
   ngOnInit(){

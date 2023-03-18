@@ -14,6 +14,7 @@ import { CreateNewCourseComponent } from './create-new-course/create-new-course.
 import { EmployeesComponent } from './employees/employees.component';
 import { CreateSectionComponent } from './create-section/create-section.component';
 import { MainComponent } from './main/main.component';
+import { TraineeRequestsComponent } from './trainee-requests/trainee-requests.component';
 
 const routes: Routes = [
 
@@ -54,12 +55,12 @@ const routes: Routes = [
     component: AllMaterialsComponent
   },
   {
-    path: "AllSections",
-    component: AllSectionsComponent
+    path: "Employees",
+    component: EmployeesComponent
   },
   {
-    path: 'CreateSection',
-    component: CreateSectionComponent
+    path: "TraineeRequest",
+    component: TraineeRequestsComponent
   }
 ];
 

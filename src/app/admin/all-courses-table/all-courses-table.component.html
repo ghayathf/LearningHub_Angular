@@ -275,7 +275,8 @@
 		<div class="row mb-3">
 			<div class="col-12 d-sm-flex justify-content-between align-items-center">
 				<h1 class="h3 mb-2 mb-sm-0">Courses</h1>
-				<a routerLink="/Admin/CreateCourse" class="btn btn-sm btn-primary mb-0">Create a Course</a>
+				<!-- <a routerLink="/Admin/CreateCourse" class="btn btn-sm btn-primary mb-0">Create a Course</a> -->
+				<a (click)="OpenCreateDialog()" class="btn btn-sm btn-primary mb-0">Create a Course</a>
 			</div>
 		</div>
 
@@ -403,7 +404,7 @@
 										(click)="openDetailsDialog(item.courseid)">Details</button>
 									<button (click)="openDeleteDialog(item.courseid)"
 										class="btn btn-sm btn-danger-soft mb-0">Delete</button>
-										<button (click)="openUpdateDialog(item.courseid)"
+									<button (click)="openUpdateDialog(item.courseid)"
 										class="btn btn-sm btn-info-soft mb-0">Update</button>
 								</td>
 							</tr>
@@ -463,116 +464,116 @@
 </ngx-spinner>
 
 <ng-template #UpdateForm>
-    <section class="py-0 bg-blue h-100px align-items-center d-flex h-200px rounded-0"
-        style="background:url(../../../assets/HomeAssets/images/pattern/04.png) no-repeat center center; background-size:cover;">
-        <!-- Main banner background image -->
-        <div class="container">
-            <div class="row">
-                <div class="col-12 text-center">
-                    <!-- Title -->
-                    <h1 class="text-white">Update Course</h1>
-                </div>
-            </div>
-        </div>
-    </section>
+	<section class="py-0 bg-blue h-100px align-items-center d-flex h-200px rounded-0"
+		style="background:url(../../../assets/HomeAssets/images/pattern/04.png) no-repeat center center; background-size:cover;">
+		<!-- Main banner background image -->
+		<div class="container">
+			<div class="row">
+				<div class="col-12 text-center">
+					<!-- Title -->
+					<h1 class="text-white">Update Course</h1>
+				</div>
+			</div>
+		</div>
+	</section>
 
-    <section>
-        <div class="container" >
-
-
-            <div class="card bg-transparent border rounded-3 mb-5">
-                <div id="stepper" class="bs-stepper stepper-outline">
+	<section style="background-color:#2a2c31">
+		<div class="container">
 
 
-                    <!-- Card body START -->
-                    <div class="card-body">
-                        <!-- Step content START -->
-                        <div class="bs-stepper-content">
+			<div class="card bg-transparent border rounded-3 mb-5">
+				<div id="stepper" class="bs-stepper stepper-outline">
 
 
-                            <!-- Step 1 content START -->
-                            <div id="step-1" role="tabpanel" class="content" aria-labelledby="steppertrigger1">
-                                <!-- Title -->
-                                <h4>Update Category </h4>
+					<!-- Card body START -->
+					<div class="card-body">
+						<!-- Step content START -->
+						<div class="bs-stepper-content">
 
-                                <hr> <!-- Divider -->
 
-                                <!-- Basic information START -->
-                                <div class="row g-4">
-                                    <!-- Course title -->
-                                    <div class="col-12">
-                                        <form [formGroup]="UpdateCourseForm" class="example-form">
-                                            <mat-form-field class="example-full-width">
-                                                <mat-label>Course name</mat-label>
-                                                <input type="text" matInput formControlName="coursename">
+							<!-- Step 1 content START -->
+							<div id="step-1" role="tabpanel" class="content" aria-labelledby="steppertrigger1">
+								<!-- Title -->
+								<h4>Update Category </h4>
 
-                                                <mat-error
-                                                    *ngIf="UpdateCourseForm.controls['coursename'].hasError('required')">
-                                                    Course name is <strong>required</strong>
-                                                </mat-error>
-                                            </mat-form-field>
+								<hr> <!-- Divider -->
+
+								<!-- Basic information START -->
+								<div class="row g-4">
+									<!-- Course title -->
+									<div class="col-12">
+										<form [formGroup]="UpdateCourseForm" class="example-form">
 											<mat-form-field class="example-full-width">
-                                                <mat-label>Course Description</mat-label>
-                                                <input type="text" matInput formControlName="coursedescription">
+												<mat-label>Course name</mat-label>
+												<input type="text" matInput formControlName="coursename">
 
-                                                <mat-error
-                                                    *ngIf="UpdateCourseForm.controls['coursedescription'].hasError('required')">
-                                                    Course description is <strong>required</strong>
-                                                </mat-error>
-                                            </mat-form-field>
+												<mat-error
+													*ngIf="UpdateCourseForm.controls['coursename'].hasError('required')">
+													Course name is <strong>required</strong>
+												</mat-error>
+											</mat-form-field>
 											<mat-form-field class="example-full-width">
-                                                <mat-label>Course Image</mat-label>
-                                                <input type="text" matInput formControlName="courseimage">
+												<mat-label>Course Description</mat-label>
+												<input type="text" matInput formControlName="coursedescription">
 
-                                                <mat-error
-                                                    *ngIf="UpdateCourseForm.controls['courseimage'].hasError('required')">
-                                                    Course Image is <strong>required</strong>
-                                                </mat-error>
-                                            </mat-form-field>
+												<mat-error
+													*ngIf="UpdateCourseForm.controls['coursedescription'].hasError('required')">
+													Course description is <strong>required</strong>
+												</mat-error>
+											</mat-form-field>
 											<mat-form-field class="example-full-width">
-                                                <mat-label>Course Level</mat-label>
-                                                <input type="number" matInput formControlName="courselevel">
+												<mat-label>Course Image</mat-label>
+												<input type="text" matInput formControlName="courseimage">
 
-                                                <mat-error
-                                                    *ngIf="UpdateCourseForm.controls['courselevel'].hasError('required')">
-                                                    Course Level is <strong>required</strong>
-                                                </mat-error>
-                                            </mat-form-field>
+												<mat-error
+													*ngIf="UpdateCourseForm.controls['courseimage'].hasError('required')">
+													Course Image is <strong>required</strong>
+												</mat-error>
+											</mat-form-field>
 											<mat-form-field class="example-full-width">
-                                                <mat-label>Category ID</mat-label>
-                                                <input type="number" matInput formControlName="category_Id">
+												<mat-label>Course Level</mat-label>
+												<input type="number" matInput formControlName="courselevel">
 
-                                                <mat-error
-                                                    *ngIf="UpdateCourseForm.controls['category_Id'].hasError('required')">
-                                                    Category ID is <strong>required</strong>
-                                                </mat-error>
-                                            </mat-form-field>
+												<mat-error
+													*ngIf="UpdateCourseForm.controls['courselevel'].hasError('required')">
+													Course Level is <strong>required</strong>
+												</mat-error>
+											</mat-form-field>
+											<mat-form-field class="example-full-width">
+												<mat-label style="background-color: #2a2c31;">Category ID</mat-label>
+												<input type="number" matInput formControlName="category_Id">
 
-                                        </form>
-                                    </div>
+												<mat-error
+													*ngIf="UpdateCourseForm.controls['category_Id'].hasError('required')">
+													Category ID is <strong>required</strong>
+												</mat-error>
+											</mat-form-field>
+
+										</form>
+									</div>
 
 
 
 
 
-                                    <!-- Step 1 button -->
-                                    <div class="d-flex justify-content-end mt-3">
-                                        <button mat-dialog-close class="btn btn-primary next-btn mb-0"
-                                            [disabled]="UpdateCourseForm.invalid"
-                                            (click)="UpdateCourse()">Update</button>
-                                    </div>
-                                </div>
-                                <!-- Basic information START -->
-                            </div>
-                            <!-- Step 1 content END -->
+									<!-- Step 1 button -->
+									<div class="d-flex justify-content-end mt-3">
+										<button mat-dialog-close class="btn btn-primary next-btn mb-0"
+											[disabled]="UpdateCourseForm.invalid"
+											(click)="UpdateCourse()">Update</button>
+									</div>
+								</div>
+								<!-- Basic information START -->
+							</div>
+							<!-- Step 1 content END -->
 
-                        </div>
-                    </div>
-                    <!-- Card body END -->
-                </div>
-            </div>
-        </div>
-    </section>
+						</div>
+					</div>
+					<!-- Card body END -->
+				</div>
+			</div>
+		</div>
+	</section>
 </ng-template>
 
 <ng-template #DetailsForm>
@@ -597,7 +598,7 @@
 							</div>
 							<!-- Course info and avatar -->
 							<div class="col-md-6">
-                <h1>{{ this.courseService.course.coursename }}</h1>
+								<h1>{{ this.courseService.course.coursename }}</h1>
 								<!-- Info -->
 								<h3 class="mb-3">{{this.courseService.course.coursedescription}}</h3>
 
@@ -657,10 +658,148 @@
 </ng-template>
 
 <ng-template #DeleteForm>
-  <h2 mat-dialog-content>Would you like to Delete this Course ?</h2>
-  <div mat-dialog-actions>
-      <input type="button" mat-dialog-close class="btn btn-success" value="Yes" (click)="DeleteCourse()">
-      <input type="button" mat-dialog-close class="btn btn-error" value="No">
-  </div>
+	<h2 mat-dialog-content>Would you like to Delete this Course ?</h2>
+	<div mat-dialog-actions>
+		<input type="button" mat-dialog-close class="btn btn-danger" value="Yes" (click)="DeleteCourse()">
+		<input type="button" mat-dialog-close class="btn btn-error" value="No">
+	</div>
 </ng-template>
 
+<ng-template #CreateForm>
+	<app-admin-side-bar></app-admin-side-bar>
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "wheat" type = "square-jelly-box" [fullScreen] = "true"><p style="color: wheat" > Waiting... </p></ngx-spinner>
+
+<section class="py-0 bg-blue h-100px align-items-center d-flex h-200px rounded-0" style="background:url(../../../assets/HomeAssets/images/pattern/04.png) no-repeat center center; background-size:cover;">
+	<!-- Main banner background image -->
+	<div class="container">
+		<div class="row">
+			<div class="col-12 text-center">
+				<!-- Title -->
+				<h1 class="text-white">Create a new Course</h1>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section style="background-color:#2a2c31">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 mx-auto text-center">
+				<!-- Content -->
+			</div>
+		</div>
+
+		<div class="card bg-transparent border rounded-3 mb-5">
+			<div id="stepper" class="bs-stepper stepper-outline">
+
+
+				<!-- Card body START -->
+				<div class="card-body">
+					<!-- Step content START -->
+					<div class="bs-stepper-content">
+						<form [formGroup]="CreateCourseForm">
+
+							<!-- Step 1 content START -->
+
+								<!-- Title -->
+								<h4>Course details</h4>
+
+								<hr> <!-- Divider -->
+
+								<!-- Basic information START -->
+								<div class="row g-4">
+									<!-- Course title -->
+									<div>
+                    <mat-form-field class="example-full-width">
+                      <mat-label>CourseName</mat-label>
+                      <input type="text" matInput formControlName="coursename">
+                      <mat-error *ngIf="CreateCourseForm.controls['coursename'].hasError('required')">
+                        Course Name is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+									<!-- Short description -->
+									<div class="col-12">
+										<mat-form-field class="example-full-width">
+                      <mat-label>course Description</mat-label>
+                      <input type="text" matInput formControlName="coursedescription">
+                      <mat-error *ngIf="CreateCourseForm.controls['coursedescription'].hasError('required')">
+                        course Description is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+									</div>
+
+									<!-- Course category -->
+									<!-- <div class="col-md-6">
+										<label class="form-label">Course category</label>
+										<select class="form-select js-choice border-0 z-index-9 bg-transparent" aria-label=".form-select-sm" data-search-enabled="true">
+											<option value="">Select category</option>
+											<option>Engineer</option>
+											<option>Medical</option>
+											<option>Information technology</option>
+											<option>Finance</option>
+											<option>Marketing</option>
+										</select>
+									</div> -->
+                  <div class="col-12">
+										<mat-form-field class="example-full-width">
+                      <mat-label>course Image</mat-label>
+                      <input type="text" matInput formControlName="courseimage">
+                      <mat-error *ngIf="CreateCourseForm.controls['courseimage'].hasError('required')">
+                        course image is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+									</div>
+
+									<!-- Course level -->
+									<div class="col-md-6">
+										<!-- <label class="form-label">Course level</label>
+										<select class="form-select js-choice border-0 z-index-9 bg-transparent" aria-label=".form-select-sm" data-search-enabled="false" data-remove-item-button="true">
+											<option value="">Select course level</option>
+											<option>All level</option>
+											<option>Beginner</option>
+											<option>Intermediate</option>
+											<option>Advance</option>
+										</select> -->
+                    <mat-form-field class="example-full-width">
+                      <mat-label>course level</mat-label>
+                      <input type="number" matInput formControlName="courselevel">
+                      <mat-error *ngIf="CreateCourseForm.controls['courselevel'].hasError('required')">
+                        course level is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+									</div>
+                  <div class="col-12">
+										<mat-form-field class="example-full-width">
+                      <mat-label>category_Id</mat-label>
+                      <input type="number" matInput formControlName="category_Id">
+                      <mat-error *ngIf="CreateCourseForm.controls['category_Id'].hasError('required')">
+                        category_Id is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+									</div>
+
+
+
+
+									<!-- Step 1 button -->
+									<div class="d-flex justify-content-end mt-3">
+										<button class="btn btn-primary" mat-dialog-close [disabled]="CreateCourseForm.invalid" value="Create" (click)="CreateCourse()">Create</button>
+									</div>
+								</div>
+								<!-- Basic information START -->
+
+							<!-- Step 1 content END -->
+						</form>
+					</div>
+				</div>
+				<!-- Card body END -->
+			</div>
+		</div>
+	</div>
+</section>
+<!-- =======================
+Steps END -->
+
+</ng-template>

@@ -27,6 +27,11 @@ export class CategoriesComponent {
 
     })
 
+  CreateCategoryForm = new FormGroup(
+    {
+        categoryname: new FormControl('', Validators.required)
+    }
+  )
 constructor(public categoryService: CategoryService, private router: Router, private dialog: MatDialog,public courseService:CourseService,public spinner: NgxSpinnerService) { }
   ngOnInit() {
     this.categoryService.GetAllCategories();
@@ -63,8 +68,14 @@ async UpdateCategory() {
     this.categoryService.GetAllCategories();
   }
 
-  OpenDialog() {
-
-    this.dialog.open(CreateCategoryComponent)
+  OpenCreateDialog() {
+  const dialogConfig = new MatDialogConfig();
+    dialogConfig.maxWidth = '850px';
+    dialogConfig.maxHeight = '90vh';
+    this.dialog.open(this.Create, dialogConfig)
+  }
+  async createCategory() {
+    await this.categoryService.CreateCategory(this.CreateCategoryForm.value);
+    this.categoryService.GetAllCategories();
   }
 }
