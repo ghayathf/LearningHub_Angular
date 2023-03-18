@@ -136,37 +136,68 @@
                     <h2 class="mt-4 mt-md-0">Let's talk</h2>
                     <p>To request a quote or want to meet up for coffee, contact us directly or fill out the form and we
                         will get back to you promptly</p>
-                    <form class="example-form">
 
 
-
-                    </form>
-
-                    <form>
-                        <!-- Name -->
+                    <form [formGroup]="CreateMessageForm">
+                        <!-- First Name -->
                         <div class="mb-4 bg-light-input">
                             <mat-form-field class="example-full-width">
-                                <mat-label>Your Name</mat-label>
-                                <input matInput placeholder="Jak">
+                                <mat-label>First Name</mat-label>
+                                <input matInput placeholder="Jak" formControlName="firstname">
+                                <mat-error *ngIf="CreateMessageForm.controls['firstname'].hasError('required')">
+                                    first name is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <!--Last Name-->
+                        <div class="mb-4 bg-light-input">
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Last Name</mat-label>
+                                <input matInput placeholder="Jak" formControlName="lastname">
+                                <mat-error *ngIf="CreateMessageForm.controls['lastname'].hasError('required')">
+                                    last name is <strong>required</strong>
+                                </mat-error>
                             </mat-form-field>
                         </div>
                         <!-- Email -->
                         <div class="mb-4 bg-light-input">
                             <mat-form-field class="example-full-width">
                                 <mat-label>Email Address</mat-label>
-                                <input matInput placeholder="jak@gmail.com">
+                                <input matInput placeholder="jak@gmail.com" formControlName="email">
+                                <mat-error
+                                    *ngIf="CreateMessageForm.controls['email'].hasError('email') && !CreateMessageForm.controls['email'].hasError('required')">
+                                    Please enter a valid email address
+                                </mat-error>
+                                <mat-error *ngIf="CreateMessageForm.controls['email'].hasError('required')">
+                                    Email is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <!--Phone-->
+                        <div class="mb-4 bg-light-input">
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Phone</mat-label>
+                                <input matInput placeholder="+962 000" formControlName="phonenumber">
+                                <mat-error *ngIf="CreateMessageForm.controls['phonenumber'].hasError('required')">
+                                    phone number is <strong>required</strong>
+                                </mat-error>
                             </mat-form-field>
                         </div>
                         <!-- Message -->
                         <div class="mb-4 bg-light-input">
                             <mat-form-field class="example-full-width">
                                 <mat-label>Leave a comment</mat-label>
-                                <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+                                <textarea matInput placeholder="Ex. It makes me feel..."
+                                    formControlName="message"></textarea>
+                                <mat-error *ngIf="CreateMessageForm.controls['message'].hasError('required')">
+                                    Message is <strong>required</strong>
+                                </mat-error>
                             </mat-form-field>
                         </div>
                         <!-- Button -->
                         <div class="d-grid">
-                            <button class="btn btn-lg btn-primary mb-0" type="button">Send Message</button>
+                            <input type="submit" class="btn btn-lg btn-primary mb-0" value="Send Message"
+                                [disabled]="CreateMessageForm.invalid" (click)="CreateMessage()">
                         </div>
                     </form>
                 </div>
@@ -195,5 +226,6 @@
 
 </main>
 <!-- **************** MAIN CONTENT END **************** -->
+
 
 <app-home-footer></app-home-footer>

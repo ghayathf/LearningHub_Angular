@@ -274,13 +274,37 @@
         <!-- Title -->
         <div class="row mb-3">
             <div class="col-12 d-sm-flex justify-content-between align-items-center">
-                <h1 class="h3 mb-2 mb-sm-0">Messages</h1>
-
+                <h1 class="h3 mb-2 mb-sm-0">categories</h1>
+                <a class="btn btn-sm btn-primary mb-0" (click)="OpenDialog()">Create New Trainer</a>
             </div>
         </div>
 
         <!-- Course boxes START -->
+        <div class="row g-4 mb-4">
+            <!-- Course item -->
+            <div class="col-sm-6 col-lg-4">
+                <div class="text-center p-4 bg-primary bg-opacity-10 border border-primary rounded-3">
+                    <h5>Total Materials</h5>
+                    <h2 class="mb-0 fs-1 text-primary">{{ this.trainerService.tr.length }}</h2>
+                </div>
+            </div>
 
+            <!-- Course item -->
+            <div class="col-sm-6 col-lg-4">
+                <div class="text-center p-4 bg-success bg-opacity-10 border border-success rounded-3">
+                    <h6>Activated Courses</h6>
+                    <h2 class="mb-0 fs-1 text-success">996</h2>
+                </div>
+            </div>
+
+            <!-- Course item -->
+            <div class="col-sm-6 col-lg-4">
+                <div class="text-center p-4  bg-warning bg-opacity-15 border border-warning rounded-3">
+                    <h6>Pending Courses</h6>
+                    <h2 class="mb-0 fs-1 text-warning">200</h2>
+                </div>
+            </div>
+        </div>
         <!-- Course boxes END -->
 
         <!-- Card START -->
@@ -301,6 +325,8 @@
                             </button>
                         </form>
                     </div>
+
+
 
                     <!-- Select option -->
                     <div class="col-md-3">
@@ -329,13 +355,10 @@
                         <!-- Table head -->
                         <thead>
                             <tr>
-                                <th scope="col" class="border-0 rounded-start">First Name</th>
-                                <th scope="col" class="border-0">Last Name</th>
-                                <th scope="col" class="border-0">Message</th>
+                                <th scope="col" class="border-0">Trainer Name</th>
                                 <th scope="col" class="border-0 rounded-end">Email</th>
                                 <th scope="col" class="border-0 rounded-end">Phone Number</th>
-                                <th scope="col" class="border-0 rounded-end"></th>
-                                <th scope="col" class="border-0 rounded-end"></th>
+                                <th scope="col" class="border-0 rounded-end">Action</th>
                             </tr>
                         </thead>
 
@@ -343,17 +366,8 @@
                         <tbody>
 
                             <!-- Table row -->
-                            <tr *ngFor="let item of messageService.ListOfMessage">
-                                <!-- Table data -->
-                                <td>
-                                    <div class="d-flex align-items-center position-relative">
+                            <tr *ngFor="let item of trainerService.tr">
 
-                                        <!-- Title -->
-                                        <h4 class="table-responsive-title mb-0 ms-2">
-                                            <a href="#" class="stretched-link">{{ item.firstname }}</a>
-                                        </h4>
-                                    </div>
-                                </td>
 
                                 <!-- Table data -->
                                 <td>
@@ -361,41 +375,33 @@
 
                                         <!-- Info -->
                                         <div class="ms-2">
-                                            <h4 class="mb-0 fw-light">{{ item.lastname }}</h4>
+                                            <h4 class="mb-0 fw-light">{{ item.username }}</h4>
                                         </div>
                                     </div>
                                 </td>
-
-
-                                <!-- Table data -->
                                 <td>
-                                    <div class="ms-2">
-                                        <h4 class="mb-0 fw-light">{{ item.message }}</h4>
-                                    </div>
+                                  <div class="d-flex align-items-center mb-3">
 
-                                </td>
-                                <td>
-                                    <div class="ms-2">
-                                        <h4 class="mb-0 fw-light">{{ item.email }}</h4>
-                                    </div>
+                                      <!-- Info -->
+                                      <div class="ms-2">
+                                          <h4 class="mb-0 fw-light">{{ item.email  }}</h4>
+                                      </div>
+                                  </div>
+                              </td>
+                              <td>
+                                <div class="d-flex align-items-center mb-3">
 
-                                </td>
-                                <td>
+                                    <!-- Info -->
                                     <div class="ms-2">
                                         <h4 class="mb-0 fw-light">{{ item.phonenumber }}</h4>
                                     </div>
+                                </div>
+                            </td>
 
-                                </td>
 
 
-
-                                <!-- Table data -->
                                 <td>
-                                    <input type="button" class="btn btn-primary" value="Replay">
-
-                                </td>
-                                <td>
-                                    <a (click)="openDeleteDialog(item.contactid)"><i class="bi bi-x-lg"></i></a>
+                                    <button class="btn btn-sm btn-danger-soft mb-0" (click)="openDeleteDialog(item.userid)">Delete</button>
                                 </td>
                             </tr>
 
@@ -438,25 +444,126 @@
     <!-- Page main content END -->
 
 </div>
+<a class="btn btn-success-soft" href="#">Create Category</a>
 <!-- Page content END -->
 
-<!-- <ng-template #DeleteForm>
-	<h2 mat-dialog-content>Would you like to Delete this C ?</h2>
-	<div mat-dialog-actions>
-		<input type="button" mat-dialog-close class="btn btn-success" value="Yes" (click)="DeleteCategory()">
-		<input type="button" mat-dialog-close class="btn btn-error" value="No">
-	</div>
-</ng-template> -->
-
-
 <ng-template #DeleteForm>
-    <h2 mat-dialog-content>Would you like to Delete this Message ?</h2>
-    <div mat-dialog-actions>
-        <input type="button" mat-dialog-close class="btn btn-danger" value="Yes" (click)="DeleteMessage()">
-        <input type="button" mat-dialog-close class="btn btn-error" value="No">
-    </div>
+  <h2 mat-dialog-content>Would you like to Delete this course ?</h2>
+  <div mat-dialog-actions>
+  <input type="button" mat-dialog-close class="btn btn-success" value="Yes" (click)="DeleteTrainer()">
+  <input type="button" mat-dialog-close class="btn btn-error" value="No">
+</div>
 </ng-template>
 
-<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="wheat" type="square-jelly-box" [fullScreen]="true">
-    <p style="color: wheat"> Waiting... </p>
-</ngx-spinner>
+<ng-template #CreateForm>
+  <form [formGroup]="CreateUserForm" class="example-form">
+  <!-- <input type="file" #file (change)="UploadImage(file)"> -->
+  <div>
+    <mat-form-field class="example-full-width">
+      <mat-label>User Name</mat-label>
+      <input type="text" matInput formControlName="username">
+
+      <mat-error *ngIf="CreateUserForm.controls['username'].hasError('required')">
+        CategoryId is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field class="example-full-width">
+      <mat-label>Password</mat-label>
+      <input type="password" matInput formControlName="userpassword">
+
+      <mat-error *ngIf="CreateUserForm.controls['userpassword'].hasError('required')">
+        price is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field class="example-full-width">
+      <mat-label>Email</mat-label>
+      <input type="text" matInput formControlName="email">
+
+      <mat-error *ngIf="CreateUserForm.controls['email'].hasError('required')">
+        CategoryId is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field class="example-full-width">
+      <mat-label>Phone number</mat-label>
+      <input type="text" matInput formControlName="phonenumber">
+
+      <mat-error *ngIf="CreateUserForm.controls['phonenumber'].hasError('required')">
+        price is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field class="example-full-width">
+      <mat-label>First Number</mat-label>
+      <input type="text" matInput formControlName="firstname">
+
+      <mat-error *ngIf="CreateUserForm.controls['firstname'].hasError('required')">
+        CategoryId is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field class="example-full-width">
+      <mat-label>Last Name</mat-label>
+      <input type="text" matInput formControlName="lastname">
+
+      <mat-error *ngIf="CreateUserForm.controls['lastname'].hasError('required')">
+        price is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+
+    <div><input type="button"  mat-dialog-close value="create" (click)="CreateUser()"></div>
+  </form>
+
+
+
+
+
+</ng-template>
+
+
+<ng-template #CreateTrainerrForm>
+  <form [formGroup]="CreateTrainerForm" class="example-form">
+  <!-- <input type="file" #file (change)="UploadImage(file)"> -->
+  <div>
+    <mat-form-field class="example-full-width">
+      <mat-label>Salary</mat-label>
+      <input type="number" matInput formControlName="salary">
+
+      <mat-error *ngIf="CreateTrainerForm.controls['salary'].hasError('required')">
+        CategoryId is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field class="example-full-width">
+      <mat-label>Trainer Position</mat-label>
+      <input type="text" matInput formControlName="trainerposition">
+
+      <mat-error *ngIf="CreateTrainerForm.controls['trainerposition'].hasError('required')">
+        price is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field class="example-full-width">
+      <mat-label>Qualification</mat-label>
+      <input type="text" matInput formControlName="qualification">
+
+      <mat-error *ngIf="CreateTrainerForm.controls['qualification'].hasError('required')">
+        CategoryId is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+    <div><input type="button"  mat-dialog-close value="create" (click)="CreateTrainerr()"></div>
+  </form>
+</ng-template>

@@ -7,11 +7,13 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { RouterModule } from '@angular/router';
 import { AdminSideBarComponent } from './admin-side-bar/admin-side-bar.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatStepperModule } from '@angular/material/stepper';
 
 
 @NgModule({
@@ -27,10 +29,12 @@ import { MatInputModule } from '@angular/material/input';
     RouterModule,
     MatDialogModule,
     MatDatepickerModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatBadgeModule,
+    MatStepperModule
+
   ],
   exports: [
-    HomeHeaderComponent,
     HomeFooterComponent,
     FormsModule,
     ReactiveFormsModule,
@@ -42,6 +46,9 @@ import { MatInputModule } from '@angular/material/input';
     MatIconModule,
     MatFormFieldModule,
     
+    MatBadgeModule,
+    MatStepperModule
+
   ]
 })
 export class SharedModule { }
