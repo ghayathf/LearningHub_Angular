@@ -54,7 +54,7 @@ export class TrainerService {
   }
 filterUsers()
 {
-  this.tr = this.users.filter((x: { role_Id: number; }) => x.role_Id == 3)
+  this.tr = this.users.filter((x: { roleId: number; }) => x.roleId == 3)
 }
 getTrainerUserIdByUserId(paramUserId: number): number {
   const filteredTrainers = this.trainers.filter((trainer: { user_Id: number; }) => trainer.user_Id === paramUserId);
@@ -90,7 +90,7 @@ CreateUser(user: any): Promise<any> {
 
   return new Promise<void>((resolve, reject) => {
     this.spinner.show();
-    user.role_Id = 3
+    user.roleId = 3
     this.http.post("https://localhost:44391/api/User/CreateUser", user).subscribe(
       {
         next: () => {
