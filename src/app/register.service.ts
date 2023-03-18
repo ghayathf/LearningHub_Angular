@@ -120,52 +120,68 @@ export class RegisterService {
 
   userid: any;
 
-  // DeleteRequest(requestId: any) {
-  //   this.spinner.show();
-  //   this.userid = requestId;
-  //   return new Promise<void>((resolve, reject) => {
-  //     this.http.delete("https://localhost:44391/api/User/DeleteUser/" + requestId).subscribe(
-  //       {
-  //         next: () => {
-  //           this.spinner.hide();
-  //           this.toaster.success("Request Deleted Successfuly");
-  //           resolve();
-  //         },
-  //         error: () => {
-  //           this.spinner.hide();
-  //           this.toaster.error("error");
-  //         }
-  //       }
-  //     )
-  //   })
+  DeleteRequest(requestId: any) {
+    this.spinner.show();
+    this.userid = requestId;
+    return new Promise<void>((resolve, reject) => {
+      this.http.delete("https://localhost:44391/api/User/DeleteUser/" + requestId).subscribe(
+        {
+          next: () => {
+            this.spinner.hide();
+            this.toaster.success("Request Deleted Successfuly");
+            resolve();
+          },
+          error: () => {
+            this.spinner.hide();
+            this.toaster.error("error");
+          }
+        }
+      )
+    })
 
 
-  // }
+  }
+
+  User: any;
+  GetUserById(userid: number) {
+    this.http.get("https://localhost:44391/api/User/GetUserByID/" + userid).subscribe({
+      next: (res) => {
+        this.User = res;
+      },
+      error: (err) => {
+        console.log(err);
+
+      }
+    })
+  }
+  user2: any;
+  async UpdateRequest(Request: any, userid: number) {
+    return new Promise<void>((resolve, reject) => {
+      this.spinner.show();
+      Request.userid = userid;
+
+      Request.registerstatus = 1;
 
 
-  // async UpdateRequest(Request: any) {
-  //   return new Promise<void>((resolve, reject) => {
-  //     this.spinner.show();
-  //     Request.registerstatus = 1;
-  //     Request.userid = this.userid;
-  //     this.http.put("https://localhost:44391/api/Trainee/UpdateTrainee", Request).subscribe(
-  //       {
-  //         next: () => {
-  //           this.spinner.hide();
-  //           this.toaster.success("Accepted");
-  //           resolve();
-  //         },
-  //         error: () => {
-  //           this.spinner.hide();
-  //           this.toaster.error("Try again");
 
-  //         }
+      this.http.put("https://localhost:44391/api/Trainee/UpdateTrainee", Request).subscribe(
+        {
+          next: () => {
+            this.spinner.hide();
+            this.toaster.success("Accepted");
+            resolve();
+          },
+          error: () => {
+            this.spinner.hide();
+            this.toaster.error("Try again");
+
+          }
 
 
-  //       }
-  //     )
-  //   })
+        }
+      )
+    })
 
-  // }
+  }
 
 }

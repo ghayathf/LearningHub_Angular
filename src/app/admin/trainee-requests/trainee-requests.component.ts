@@ -19,13 +19,16 @@ export class TraineeRequestsComponent {
     this.selectedItem = id;
     this.dialog.open(this.Delete);
   }
-  // async DeleteRequest() {
-  //   await this.TraineeService.DeleteRequest(this.selectedItem);
-  //   this.TraineeService.GetAllTraineeUser();
-  // }
+  async DeleteRequest() {
+    await this.TraineeService.DeleteRequest(this.selectedItem);
+    this.TraineeService.GetAllTraineeUser();
+  }
 
-  // ChangeStatus(request: any) {
-  //   this.TraineeService.UpdateRequest(request);
-  //   this.TraineeService.GetAllTraineeUser();
-  // }
+  ChangeStatus(requestt: any, id: number) {
+
+    this.TraineeService.UpdateRequest(requestt, id);
+    this.TraineeService.GetAllTraineeUser();
+
+
+  }
 }

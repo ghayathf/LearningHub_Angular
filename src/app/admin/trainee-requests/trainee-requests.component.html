@@ -398,8 +398,8 @@
 
                                         <!-- Table data -->
                                         <td>
-                                            <!-- <input type="button" class="btn btn-success" value="Accept"
-                                                (click)="ChangeStatus(item)"> -->
+                                            <input type="button" class="btn btn-success" value="Accept"
+                                                (click)="ChangeStatus(item,item.userid)">
 
                                         </td>
                                         <td>
@@ -451,7 +451,7 @@
         <ng-template #DeleteForm>
             <h2 mat-dialog-content>Would you like to Delete this Request ?</h2>
             <div mat-dialog-actions>
-                <!-- <input type="button" mat-dialog-close class="btn btn-danger" value="Yes" (click)="DeleteRequest()"> -->
+                <input type="button" mat-dialog-close class="btn btn-danger" value="Yes" (click)="DeleteRequest()">
                 <input type="button" mat-dialog-close class="btn btn-error" value="No">
             </div>
         </ng-template>
