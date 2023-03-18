@@ -22,7 +22,7 @@ export class RegisterComponent {
     username: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required, Validators.email]),
     userpassword: new FormControl('', [Validators.required, Validators.minLength(10)]),
-    role_Id: new FormControl('')
+    roleId: new FormControl('')
   })
 
   TraineeForm: FormGroup = new FormGroup(

@@ -19,7 +19,7 @@ export class RegisterService {
 
   CreateUser(User: any) {
     this.spinner.show();
-    User.role_Id = 2;
+    User.roleId = 2;
     this.http.post("https://localhost:44391/api/User/CreateUser", User).subscribe(
       {
         next: () => {
