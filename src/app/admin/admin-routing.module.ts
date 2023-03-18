@@ -61,6 +61,10 @@ const routes: Routes = [
   {
     path: "TraineeRequest",
     component: TraineeRequestsComponent
+  }, 
+  {
+    path: "AllSections",
+    component: AllSectionsComponent
   }
 ];
 
