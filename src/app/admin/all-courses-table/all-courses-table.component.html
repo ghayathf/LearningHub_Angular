@@ -771,13 +771,22 @@
                     </mat-form-field>
 									</div>
                   <div class="col-12">
-										<mat-form-field class="example-full-width">
+										<!--<mat-form-field class="example-full-width">
                       <mat-label>category_Id</mat-label>
                       <input type="number" matInput formControlName="category_Id">
                       <mat-error *ngIf="CreateCourseForm.controls['category_Id'].hasError('required')">
                         category_Id is <strong>required</strong>
                       </mat-error>
-                    </mat-form-field>
+                    </mat-form-field>-->
+					<mat-form-field appearance="fill">
+						<mat-label>Category</mat-label>
+						<mat-select formControlName="category_Id" [(ngModel)]="selectedCategory">
+						  <mat-option *ngFor="let cate of categoryService.categories" [value]="cate.categoryid" (click)="print(cate.categoryname)">
+							{{cate.categoryname}}
+							
+						  </mat-option>
+						</mat-select>
+					  </mat-form-field>
 									</div>
 
 

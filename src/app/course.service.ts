@@ -109,10 +109,7 @@ export class CourseService {
   searchedCourses:any = []
   searchCourses(courseName?: string): Observable<any> {
     const body: { [key: string]: any } = {};
-    
       body['coursename'] = courseName
-    
-  
     return this.http.post("https://localhost:44391/api/Courses/SearchCourse",body);
   }
 

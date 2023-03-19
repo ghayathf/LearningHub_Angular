@@ -12,8 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ContactusComponent } from './contactus/contactus.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { TraineeRequestsComponent } from './trainee-requests/trainee-requests.component';
-
-
+import { MatSelectModule } from '@angular/material/select';
 import { AdminSideBarComponent } from '../shared/admin-side-bar/admin-side-bar.component';
 import { AllSectionsComponent } from './all-sections/all-sections.component';
 import { MatInputModule } from '@angular/material/input';
@@ -40,7 +39,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatNativeDateModule,
     MatIconModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatSelectModule
 
 
   ]
