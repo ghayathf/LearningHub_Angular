@@ -42,7 +42,7 @@ export class AllCoursesTableComponent {
         Validators.required,
         Validators.pattern(/^\d+$/),
       ]),
-      category_Id: new FormControl('', [
+      category_Id: new FormControl('', [ 
         Validators.required,
         Validators.pattern(/^\d+$/),
       ]),
