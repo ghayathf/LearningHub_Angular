@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/auth.service';
 import { RegisterService } from 'src/app/register.service';
 import { TrainerService } from 'src/app/trainer.service';
 
+
 @Component({
   selector: 'app-admin-header',
   templateUrl: './admin-header.component.html',
@@ -15,6 +16,7 @@ export class AdminHeaderComponent {
 constructor(public ngbDropdown:NgbDropdownModule,public auth:AuthGuard,public userService:RegisterService,public authService:AuthService) {
 
 }
+
 firstnamee:any
 ngOnInit(){
   this.auth.gh

@@ -4,12 +4,12 @@ import { Router } from '@angular/router';
 import jwt_decode from 'jwt-decode';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
   constructor(private http: HttpClient, private spinner: NgxSpinnerService, private toaster: ToastrService,private router:Router) { }
 
   login(user:any){
@@ -53,9 +53,8 @@ export class AuthService {
       }
     )})
   }
+  //not ready
   async logout() {
-
-
     await localStorage.removeItem('token');
     await localStorage.removeItem('user');
     await localStorage.clear();
