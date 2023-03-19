@@ -15,6 +15,7 @@ import { TraineeRequestsComponent } from './trainee-requests/trainee-requests.co
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap'; 
 
 
+import { MatSelectModule } from '@angular/material/select';
 import { AdminSideBarComponent } from '../shared/admin-side-bar/admin-side-bar.component';
 import { AllSectionsComponent } from './all-sections/all-sections.component';
 import { MatInputModule } from '@angular/material/input';
@@ -45,6 +46,9 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
     MatInputModule,
     MatFormFieldModule,
     NgbDropdownModule,
+   
+    MatSelectModule
+
 
   ]
 })

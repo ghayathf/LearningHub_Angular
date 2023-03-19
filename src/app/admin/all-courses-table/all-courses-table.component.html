@@ -57,10 +57,10 @@
 					<!-- Search bar -->
 					<div class="col-md-8">
 						<form class="rounded position-relative">
-							<input class="form-control bg-body" type="search" placeholder="Search" aria-label="Search">
+							<input class="form-control bg-body" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="CourseName" name="CourseName">
 							<button
 								class="bg-transparent p-2 position-absolute top-50 end-0 translate-middle-y border-0 text-primary-hover text-reset"
-								type="submit">
+								type="submit"(click)="searchCourses()">
 								<i class="fas fa-search fs-6 "></i>
 							</button>
 						</form>
@@ -510,13 +510,22 @@
                     </mat-form-field>
 									</div>
                   <div class="col-12">
-										<mat-form-field class="example-full-width">
+										<!--<mat-form-field class="example-full-width">
                       <mat-label>category_Id</mat-label>
                       <input type="number" matInput formControlName="category_Id">
                       <mat-error *ngIf="CreateCourseForm.controls['category_Id'].hasError('required')">
                         category_Id is <strong>required</strong>
                       </mat-error>
-                    </mat-form-field>
+                    </mat-form-field>-->
+					<mat-form-field appearance="fill">
+						<mat-label>Category</mat-label>
+						<mat-select formControlName="category_Id" [(ngModel)]="selectedCategory">
+						  <mat-option *ngFor="let cate of categoryService.categories" [value]="cate.categoryid" (click)="print(cate.categoryname)">
+							{{cate.categoryname}}
+							
+						  </mat-option>
+						</mat-select>
+					  </mat-form-field>
 									</div>
 
 
@@ -541,4 +550,77 @@
 <!-- =======================
 Steps END -->
 
+</ng-template>
+<ng-template #Search>
+	<div class="card-body" style="background-color: #333">
+		<!-- Course table START -->
+		<div class="table-responsive border-0 rounded-3">
+			<!-- Table START -->
+			<table class="table table-dark-gray align-middle p-4 mb-0 table-hover">
+				<!-- Table head -->
+				<thead>
+					<tr>
+						<th scope="col" class="border-0 rounded-start">Course Name</th>
+						<th scope="col" class="border-0">Category</th>
+						<th scope="col" class="border-0">Level</th>
+						<th scope="col" class="border-0 rounded-end">Action</th>
+					</tr>
+				</thead>
+
+				<!-- Table body START -->
+				<tbody>
+
+					<!-- Table row -->
+					<tr *ngFor="let item of courseService.searchedCourses">
+						<!-- Table data -->
+						<td>
+							<div class="d-flex align-items-center position-relative">
+								<!-- Image -->
+								<div class="w-60px">
+									<img src="../../../assets/HomeAssets/images/courses/4by3/08.jpg"
+										class="rounded" alt="">
+								</div>
+								<!-- Title -->
+								<h4 class="table-responsive-title mb-0 ms-2">
+									<a href="#" class="stretched-link">{{ item.coursename }}</a>
+								</h4>
+							</div>
+						</td>
+
+						<!-- Table data -->
+						<td>
+							<div class="d-flex align-items-center mb-3">
+
+								<!-- Info -->
+								<div class="ms-2">
+									<h4 class="mb-0 fw-light">{{ item.category_Id }}</h4>
+								</div>
+							</div>
+						</td>
+
+
+						<!-- Table data -->
+						<td> <span class="badge text-bg-primary">{{ item.courselevel }}</span> </td>
+
+
+
+						<!-- Table data -->
+						<td>
+							<button class="btn btn-sm btn-info-soft me-1 mb-1 mb-md-0"
+								(click)="openDetailsDialog(item.courseid)">Details</button>
+							<button (click)="openDeleteDialog(item.courseid)"
+								class="btn btn-sm btn-danger-soft mb-0">Delete</button>
+							<button (click)="openUpdateDialog(item.courseid)"
+								class="btn btn-sm btn-info-soft mb-0">Update</button>
+						</td>
+					</tr>
+
+
+				</tbody>
+				<!-- Table body END -->
+			</table>
+			<!-- Table END -->
+		</div>
+		<!-- Course table END -->
+	</div>
 </ng-template>

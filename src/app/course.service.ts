@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CategoryService } from './category.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -104,6 +105,12 @@ export class CourseService {
       )
     })
 
+  }
+  searchedCourses:any = []
+  searchCourses(courseName?: string): Observable<any> {
+    const body: { [key: string]: any } = {};
+      body['coursename'] = courseName
+    return this.http.post("https://localhost:44391/api/Courses/SearchCourse",body);
   }
 
 }
