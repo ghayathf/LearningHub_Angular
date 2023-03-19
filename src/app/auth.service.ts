@@ -53,4 +53,12 @@ export class AuthService {
       }
     )})
   }
+  async logout() {
+
+
+    await localStorage.removeItem('token');
+    await localStorage.removeItem('user');
+    await localStorage.clear();
+    await this.router.navigate(['']);
+  }
 }
