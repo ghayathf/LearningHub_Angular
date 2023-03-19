@@ -11,9 +11,10 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatStepperModule } from '@angular/material/stepper';
+import { AdminHeaderComponent } from './admin-header/admin-header.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { MatStepperModule } from '@angular/material/stepper';
     HomeHeaderComponent,
     HomeFooterComponent,
     AdminSideBarComponent,
+    AdminHeaderComponent,
   ],
   imports: [
     CommonModule,
@@ -32,7 +34,7 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatFormFieldModule,
     MatBadgeModule,
     MatStepperModule,
-
+    NgbDropdownModule
   ],
   exports: [
     HomeHeaderComponent,
@@ -46,9 +48,10 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatDatepickerModule,
     MatIconModule,
     MatFormFieldModule,
-
+    AdminHeaderComponent,
     MatBadgeModule,
-    MatStepperModule
+    MatStepperModule,
+    NgbDropdownModule
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

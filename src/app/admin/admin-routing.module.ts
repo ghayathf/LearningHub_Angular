@@ -7,6 +7,7 @@ import { AllMaterialsComponent } from './all-materials/all-materials.component';
 import { AllSectionsComponent } from './all-sections/all-sections.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { ContactusComponent } from './contactus/contactus.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { MainComponent } from './main/main.component';
 import { TraineeRequestsComponent } from './trainee-requests/trainee-requests.component';
@@ -20,6 +21,10 @@ const routes: Routes = [
   {
     path: 'AllCourses',
     component: AllCoursesTableComponent
+  },
+  {
+    path: 'EditProfile',
+    component: EditProfileComponent
   },
   {
     path: 'categories',

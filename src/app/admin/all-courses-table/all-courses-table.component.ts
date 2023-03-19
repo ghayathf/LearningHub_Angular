@@ -5,6 +5,7 @@ import { CourseService } from 'src/app/course.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Dialog } from '@angular/cdk/dialog';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap'; 
 import { CategoryService } from 'src/app/category.service';
 
 @Component({
@@ -43,7 +44,7 @@ export class AllCoursesTableComponent {
         Validators.required,
         Validators.pattern(/^\d+$/),
       ]),
-      category_Id: new FormControl('', [
+      category_Id: new FormControl('', [ 
         Validators.required,
         Validators.pattern(/^\d+$/),
       ]),

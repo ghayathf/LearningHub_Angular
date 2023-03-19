@@ -11,4 +11,4 @@ import { TrainerRoutingModule } from './trainer-routing.module';
     TrainerRoutingModule
   ]
 })
-export class TrainerModule { }
+export class TrainerModule { } 
