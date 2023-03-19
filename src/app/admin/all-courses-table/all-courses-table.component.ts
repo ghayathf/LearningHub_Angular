@@ -5,6 +5,7 @@ import { CourseService } from 'src/app/course.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Dialog } from '@angular/cdk/dialog';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap'; 
 
 @Component({
   selector: 'app-all-courses-table',
@@ -18,7 +19,7 @@ export class AllCoursesTableComponent {
   @ViewChild('DetailsForm') Details:any
   @ViewChild('CreateForm') Create:any
 
-  constructor(public courseService: CourseService, private router: Router, public spinner: NgxSpinnerService, private dialog: MatDialog) {
+  constructor(public courseService: CourseService, private router: Router, public spinner: NgxSpinnerService, private dialog: MatDialog,public ngbDropdown:NgbDropdownModule) {
   }
 
   CreateCourseForm = new FormGroup(

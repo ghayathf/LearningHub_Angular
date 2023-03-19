@@ -21,15 +21,11 @@ export class AuthService {
     const Options={
       headers:new HttpHeaders(header)
     }
-
-
     this.spinner.show()
     this.http.post("https://localhost:44391/api/User/login",user , Options).subscribe(
       {
         next:(res:any)=>{
-          console.log(res);
           let data : any = jwt_decode(res)
-          console.log(data);
 
           localStorage.setItem('token',res)
           localStorage.setItem('user',JSON.stringify(data))

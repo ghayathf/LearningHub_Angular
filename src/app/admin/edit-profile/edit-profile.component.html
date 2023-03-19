@@ -1,0 +1,125 @@
+<app-admin-side-bar></app-admin-side-bar>
+<section class="pt-0">
+<app-admin-header></app-admin-header>
+	<div>
+		<div class="row mt-4" style="margin-left: 200px;">
+
+			<!-- Left sidebar START -->
+
+			<!-- Left sidebar END -->
+
+			<!-- Main content START -->
+				<!-- Edit profile START -->
+				<div class="card bg-transparent border rounded-3" style="width: 70%; margin-left: 250px;">
+					<!-- Card header -->
+					<div class="card-header bg-transparent border-bottom ">
+						<h1 class="card-header-title mb-0 ">Edit Profile</h1>
+					</div>
+					<!-- Card body START -->
+					<div class="card-body">
+						<!-- Form -->
+
+
+							<!-- Profile picture -->
+							<div class="col-12 justify-content-center align-items-center">
+								<div class="d-flex align-items-center justify-content-center">
+									<label class="position-relative me-4" for="uploadfile-1" title="Replace this pic">
+										<!-- Avatar place holder -->
+										<span class="avatar avatar-xl ">
+											<img id="uploadfile-1-preview" class="avatar-img rounded-circle border border-white border-3 shadow" src="../../../assets/HomeAssets/images/avatar/07.jpg" alt="">
+										</span>
+										<!-- Remove btn -->
+										<button type="button" class="uploadremove"><i class="bi bi-x text-white"></i></button>
+									</label>
+									<!-- Upload button -->
+									<input id="uploadfile-1" class="form-control d-none" type="file">
+								</div>
+							</div>
+              <form [formGroup]="CreateUserForm" class="row g-4">
+<div class="row g-4 justify-content-center">
+							<!-- Full name -->
+								<mat-form-field class="example-full-width col-4">
+                  <mat-label>User name</mat-label>
+                  <input type="text" matInput formControlName="username">
+
+                  <mat-error
+                    *ngIf="CreateUserForm.controls['username'].hasError('required')">
+                    User name is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+
+							<!-- Password -->
+								<mat-form-field class="example-full-width col-4">
+                  <mat-label>password</mat-label>
+                  <input type="password" matInput formControlName="userpassword">
+
+                  <mat-error
+                    *ngIf="CreateUserForm.controls['userpassword'].hasError('required')">
+                    password is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+</div>
+<div class="row g-4 justify-content-center">
+							<!-- Email id -->
+								<mat-form-field class="example-full-width  col-4">
+                  <mat-label>email</mat-label>
+                  <input type="text" matInput formControlName="email">
+
+                  <mat-error
+                    *ngIf="CreateUserForm.controls['email'].hasError('required')">
+                    email is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+
+							<!-- Phone number -->
+								<mat-form-field class="example-full-width  col-4">
+                  <mat-label>Phone Number</mat-label>
+                  <input type="text" matInput formControlName="phonenumber">
+
+                  <mat-error
+                    *ngIf="CreateUserForm.controls['phonenumber'].hasError('required')">
+                    Phone Number is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+</div>
+<div class="row g-4 justify-content-center">
+							<!-- firstname -->
+								<mat-form-field class="example-full-width  col-4">
+                  <mat-label>first name</mat-label>
+                  <input type="text" matInput formControlName="firstname">
+
+                  <mat-error
+                    *ngIf="CreateUserForm.controls['firstname'].hasError('required')">
+                    first name is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+
+							<!-- About me -->
+								<mat-form-field class="example-full-width  col-4">
+                  <mat-label>last name</mat-label>
+                  <input type="text" matInput formControlName="lastname" style="color:#2a2c31">
+
+                  <mat-error
+                    *ngIf="CreateUserForm.controls['lastname'].hasError('required')">
+                    last name is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+</div>
+							<!-- Education -->
+
+
+							<!-- Save button -->
+							<div class="d-sm-flex justify-content-center">
+                <button mat-dialog-close class="btn btn-primary next-btn mb-0"
+
+											(click)="UpdateInformation()">Update</button>
+							</div>
+						</form>
+					</div>
+					<!-- Card body END -->
+				</div>
+				<!-- Edit profile END -->
+
+      </div>
+    </div>
+  </section>

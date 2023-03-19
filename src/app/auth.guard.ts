@@ -13,6 +13,8 @@ export class AuthGuard implements CanActivate {
   constructor(private toastr:ToastrService,private router:Router) {
 
   }
+  gh:any
+  loggedUser:any
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
@@ -27,7 +29,9 @@ export class AuthGuard implements CanActivate {
       {
         if(user.RoleId == 1)
         {
-          this.toastr.success('Welcome Admin')
+          this.toastr.success('Welcome Admin '+user.Username)
+          this.gh = user.Userid
+          this.loggedUser = user
           return true
         }
         else
@@ -41,7 +45,7 @@ export class AuthGuard implements CanActivate {
       {
         if(user.RoleId == 2)
         {
-          this.toastr.success('Welcome Trainee')
+          this.toastr.success('Welcome Trainee '+user.Username)
           return true
         }
         else
@@ -55,7 +59,7 @@ export class AuthGuard implements CanActivate {
       {
         if(user.RoleId == 3)
         {
-          this.toastr.success('Welcome Trainer')
+          this.toastr.success('Welcome Trainer '+user.Username)
           return true
         }
         else

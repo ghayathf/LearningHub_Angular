@@ -12,12 +12,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { ContactusComponent } from './contactus/contactus.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { TraineeRequestsComponent } from './trainee-requests/trainee-requests.component';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap'; 
 
 
 import { AdminSideBarComponent } from '../shared/admin-side-bar/admin-side-bar.component';
 import { AllSectionsComponent } from './all-sections/all-sections.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
 
     AllSectionsComponent,
+        EditProfileComponent,
   ],
   imports: [
     CommonModule,
@@ -40,8 +43,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatNativeDateModule,
     MatIconModule,
     MatInputModule,
-    MatFormFieldModule
-
+    MatFormFieldModule,
+    NgbDropdownModule,
 
   ]
 })

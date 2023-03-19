@@ -24,8 +24,6 @@ export class TrainerService {
     this.filterUsers()
           this.trainers=res
 
-
-
   resolve()},
         error:(err)=>{this.spinner.hide()
         console.log(err);
@@ -37,7 +35,6 @@ export class TrainerService {
   users:any=[]
   async getAllUsersTrainers(){
     return new Promise<void>((resolve, reject) => {
-    this.spinner.show()
     this.http.get("https://localhost:44391/api/User/GetAllUsers").subscribe(
       {
         next:(res)=>{this.users=res
