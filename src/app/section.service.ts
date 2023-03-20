@@ -35,7 +35,7 @@ export class SectionService {
     )
   })}
   DeleteSection(sectionId: number) {
-    
+
     return new Promise<void>((resolve, reject) => {
       this.spinner.show();
       this.http.delete("https://localhost:44391/api/Section/DeleteSection/"+sectionId).subscribe(
@@ -43,13 +43,13 @@ export class SectionService {
           next: () => {
             this.spinner.hide();
             this.toaster.success("Section Deleted Successfuly");
-           
+
             resolve();
           },
           error: () => {
             this.spinner.hide();
             this.toaster.error("Error");
-  
+
           }
         }
       )
@@ -93,10 +93,28 @@ export class SectionService {
     })
 
   }
-  ngOnInit(): void {
-   
-  }
 
+async GenerateCertificate(type:number,sectionId:number){
+  return new Promise<void>((resolve, reject) => {
+    this.spinner.show();
+    this.http.post(`https://localhost:44391/api/Admin/GenerateCertificate/${type}/${sectionId}`,{}).subscribe(
+      {
+        next: () => {
+          this.spinner.hide();
+          this.toaster.success("Certificates Generated Successfully");
+          resolve();
+        },
+        error: () => {
+          this.spinner.hide();
+          this.toaster.error("Try again");
+
+        }
+
+
+      }
+    )
+  })
+}
 
 
 }
