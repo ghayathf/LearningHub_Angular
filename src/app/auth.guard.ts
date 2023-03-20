@@ -30,7 +30,7 @@ export class AuthGuard implements CanActivate {
         if(user.RoleId == 1)
         {
           this.toastr.success('Welcome Admin '+user.Username)
-          this.gh = user.Userid
+          this.gh = parseInt(user.Userid)
           this.loggedUser = user
           return true
         }

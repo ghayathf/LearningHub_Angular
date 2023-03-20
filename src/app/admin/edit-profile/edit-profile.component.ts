@@ -16,7 +16,10 @@ export class EditProfileComponent {
 
   CreateUserForm = new FormGroup(
     {
-      userid : new FormControl('',),
+      userid : new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^\d+$/),
+      ]),
       username : new FormControl('',Validators.required),
       userpassword : new FormControl('',Validators.required),
       email : new FormControl('',Validators.required),
@@ -46,7 +49,9 @@ export class EditProfileComponent {
     this.loggedUser = this.auth.gh
     await this.CreateUserForm.controls['userid'].setValue(this.loggedUser)
     await this.CreateUserForm.controls['roleId'].setValue(this.role)
+
     await this.userService.UpdateUser(this.CreateUserForm.value)
+debugger
   }
 
 }
