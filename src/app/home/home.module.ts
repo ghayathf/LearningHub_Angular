@@ -11,6 +11,7 @@ import { CourseCardComponent } from './course-card/course-card.component';
 import { CategoryCoursesComponent } from './category-courses/category-courses.component';
 
 import { ContactComponent } from './contact/contact.component';
+import { TestimonialsComponent } from './testimonials/testimonials.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { ContactComponent } from './contact/contact.component';
     CourseCardComponent,
     CategoryCoursesComponent,
 
-    ContactComponent
+    ContactComponent,
+      TestimonialsComponent
   ],
   imports: [
     CommonModule,
