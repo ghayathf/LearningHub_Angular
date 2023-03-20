@@ -93,7 +93,6 @@ UpdateUser(user: any): Promise<any> {
 
   return new Promise<void>((resolve, reject) => {
     this.spinner.show();
-    debugger
     this.http.put("https://localhost:44391/api/User/UpdateUser", user).subscribe(
       {
 
@@ -109,7 +108,7 @@ UpdateUser(user: any): Promise<any> {
         }
       }
     )
-  });
-
+  }
+  );
 }
 }

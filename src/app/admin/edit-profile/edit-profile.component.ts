@@ -51,7 +51,6 @@ export class EditProfileComponent {
     await this.CreateUserForm.controls['roleId'].setValue(this.role)
 
     await this.userService.UpdateUser(this.CreateUserForm.value)
-debugger
   }
 
 }

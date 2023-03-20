@@ -5,22 +5,35 @@ import { SectionService } from 'src/app/section.service';
 import { MatDatepicker, MatDatepickerActions } from '@angular/material/datepicker';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators,FormBuilder } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 
 
 
 @Component({
   selector: 'app-all-sections',
   templateUrl: './all-sections.component.html',
-  styleUrls: ['./all-sections.component.css']
+  styleUrls: ['./all-sections.component.css'],
+  providers: [DatePipe]
 })
 export class AllSectionsComponent {
   @ViewChild('CreateSection') Create: any
   @ViewChild('UpdateSection') Update: any
   @ViewChild('DeleteForm') Delete: any
   @ViewChild('DetailsForm') Details: any
-constructor(public sectionService: SectionService, private router: Router, public dialog: MatDialog,public spinner:NgxSpinnerService,private formBuilder: FormBuilder){}
+constructor(public sectionService: SectionService, private router: Router, public dialog: MatDialog,
+  public spinner:NgxSpinnerService,private formBuilder: FormBuilder,private datePipe: DatePipe){}
+  currentDate:any
 ngOnInit() {
   this.sectionService.GetAllSections()
+
+  this.currentDate = new Date(Date.now()).toISOString().slice(0,10)
+
+}
+GenerateCertificate(id:number){
+this.sectionService.GenerateCertificate(1,id)
+}
+sliceDate(d:any){
+  return d.slice(0,10)
 }
 
 OpenDialog() {
@@ -57,7 +70,7 @@ UpdateForm =new FormGroup(
 
 
 async CreateSections() {
-  
+
   await this.sectionService.CreateSection(this.CreateForm.value);
   this.sectionService.GetAllSections();
 
