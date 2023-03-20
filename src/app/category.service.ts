@@ -7,7 +7,7 @@ import { ToastrService } from 'ngx-toastr';
   providedIn: 'root'
 })
 export class CategoryService {
-                                                                                                                                                                                                                              
+
   constructor(private http: HttpClient, private spinner: NgxSpinnerService, private toaster: ToastrService) { }
   categories: any = []
   GetAllCategories() {
@@ -18,40 +18,41 @@ export class CategoryService {
         this.spinner.hide();
 
       },
-      (err) => {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+      (err) => {
         console.log(err);
         this.spinner.hide();
-        
+
       })
-      
+
   }
   category: any
   categoryID?: any
   num?: number
   async GetCategoryById(categoryid: number) {
     return new Promise<void>((resolve, reject) => {
-    this.spinner.show()
-    this.http.get("https://localhost:44391/api/Categories/GetCategoryById/" + categoryid).subscribe(
-      {
-        next: (res) => {
-          this.category = res
-          this.spinner.hide();
-          resolve()
-        },
-        error: (err) => {
-          console.log(err);
-          this.spinner.hide();
+      this.spinner.show()
+      this.http.get("https://localhost:44391/api/Categories/GetCategoryById/" + categoryid).subscribe(
+        {
+          next: (res) => {
+            this.category = res
+            this.spinner.hide();
+            resolve()
+          },
+          error: (err) => {
+            console.log(err);
+            this.spinner.hide();
+          }
         }
-      }
 
 
-    )
-  })
+      )
+    })
     this.categoryID = categoryid
 
   }
 
   CreateCategory(category: any) {
+    category.categoryimage = this.ImgaeName;
     return new Promise<void>((resolve, reject) => {
       this.spinner.show();
       this.http.post("https://localhost:44391/api/Categories/CreateCategory", category).subscribe(
@@ -90,6 +91,7 @@ export class CategoryService {
   }
 
   async UpdateCategory(Category: any) {
+    Category.categoryimage = this.ImgaeName;
     return new Promise<void>((resolve, reject) => {
       this.spinner.show();
       this.http.put("https://localhost:44391/api/Categories/UpdateCategory", Category).subscribe(
@@ -110,7 +112,18 @@ export class CategoryService {
 
   }
 
+  ImgaeName = "";
 
+  UploadImage(imageFile: any) {
+    this.http.post("https://localhost:44391/api/Courses/UploadImage", imageFile).subscribe(
+      {
+        next: (res: any) => {
+          this.ImgaeName = res.courseimage;
+        },
+        error: () => { }
+      }
+    )
+  }
 
   GetSelectedCategory() {
     return this.categoryID;

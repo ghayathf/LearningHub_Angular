@@ -28,10 +28,10 @@ export class CategoriesComponent {
 
   CreateCategoryForm = new FormGroup(
     {
-        categoryname: new FormControl('', Validators.required)
+      categoryname: new FormControl('', Validators.required)
     }
   )
-constructor(public categoryService: CategoryService, private router: Router, private dialog: MatDialog,public courseService:CourseService,public spinner: NgxSpinnerService) { }
+  constructor(public categoryService: CategoryService, private router: Router, private dialog: MatDialog, public courseService: CourseService, public spinner: NgxSpinnerService) { }
   ngOnInit() {
     this.categoryService.GetAllCategories();
   }
@@ -62,13 +62,13 @@ constructor(public categoryService: CategoryService, private router: Router, pri
 
     this.dialog.open(this.Update, dialogConfig);
   }
-async UpdateCategory() {
+  async UpdateCategory() {
     await this.categoryService.UpdateCategory(this.UpdateCategoryForm.value);
     this.categoryService.GetAllCategories();
   }
 
   OpenCreateDialog() {
-  const dialogConfig = new MatDialogConfig();
+    const dialogConfig = new MatDialogConfig();
     dialogConfig.maxWidth = '850px';
     dialogConfig.maxHeight = '90vh';
     this.dialog.open(this.Create, dialogConfig)
@@ -76,5 +76,14 @@ async UpdateCategory() {
   async createCategory() {
     await this.categoryService.CreateCategory(this.CreateCategoryForm.value);
     this.categoryService.GetAllCategories();
+  }
+
+  UploadImage(input: any) {
+    if (input.files[0] != null) {
+      let uplodedFile = input.files[0]; // image fille 
+      let formdata = new FormData();
+      formdata.append('file', uplodedFile);
+      this.categoryService.UploadImage(formdata);
+    }
   }
 }

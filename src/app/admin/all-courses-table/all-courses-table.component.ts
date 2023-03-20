@@ -26,11 +26,10 @@ export class AllCoursesTableComponent {
 
   CreateCourseForm = new FormGroup(
     {
-    coursename : new FormControl('',Validators.required),
-    coursedescription : new FormControl('',Validators.required),
-    courseimage : new FormControl('',Validators.required),
-    courselevel : new FormControl('',Validators.required),
-    category_Id : new FormControl('',Validators.required)
+      coursename: new FormControl('', Validators.required),
+      coursedescription: new FormControl('', Validators.required),
+      courselevel: new FormControl('', Validators.required),
+      category_Id: new FormControl('', Validators.required)
     }
   )
 
@@ -44,7 +43,7 @@ export class AllCoursesTableComponent {
         Validators.required,
         Validators.pattern(/^\d+$/),
       ]),
-      category_Id: new FormControl('', [ 
+      category_Id: new FormControl('', [
         Validators.required,
         Validators.pattern(/^\d+$/),
       ]),
@@ -81,21 +80,19 @@ export class AllCoursesTableComponent {
     await this.courseService.UpdateCourse(this.UpdateCourseForm.value);
     this.courseService.GetAllCourses();
   }
-async openDetailsDialog(courseid: number)
-{
-  await this.courseService.GetCourseById(courseid);
-  this.dialog.open(this.Details);
-}
+  async openDetailsDialog(courseid: number) {
+    await this.courseService.GetCourseById(courseid);
+    this.dialog.open(this.Details);
+  }
 
- OpenCreateDialog() {
-  const dialogConfig = new MatDialogConfig();
+  OpenCreateDialog() {
+    const dialogConfig = new MatDialogConfig();
     dialogConfig.maxWidth = '500px';
     dialogConfig.maxHeight = '90vh';
     this.dialog.open(this.Create, dialogConfig)
   }
   selectedCategory:any
-  async CreateCourse()
-  {
+  async CreateCourse() {
     this.CreateCourseForm.patchValue({
       category_Id: this.selectedCategory
     });
@@ -123,4 +120,12 @@ async openDetailsDialog(courseid: number)
  console.log(category)
   }
 
+  UploadImage(input: any) {
+    if (input.files[0] != null) {
+      let uplodedFile = input.files[0]; // image fille 
+      let formdata = new FormData();
+      formdata.append('file', uplodedFile);
+      this.courseService.UploadImage(formdata);
+    }
+  }
 }

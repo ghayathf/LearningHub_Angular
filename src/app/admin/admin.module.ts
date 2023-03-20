@@ -21,6 +21,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { MatDialogModule } from '@angular/material/dialog';
 
+import { TestimonialComponent } from './testimonial/testimonial.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     TraineeRequestsComponent,
     AllSectionsComponent,
         EditProfileComponent,
-
+        TestimonialComponent,
   ],
   imports: [
     CommonModule,

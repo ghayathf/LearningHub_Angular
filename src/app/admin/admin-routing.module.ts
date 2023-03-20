@@ -10,6 +10,7 @@ import { ContactusComponent } from './contactus/contactus.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { MainComponent } from './main/main.component';
+import { TestimonialComponent } from './testimonial/testimonial.component';
 import { TraineeRequestsComponent } from './trainee-requests/trainee-requests.component';
 
 const routes: Routes = [
@@ -49,6 +50,10 @@ const routes: Routes = [
   {
     path: "AllSections",
     component: AllSectionsComponent
+  },
+  {
+    path: "Testimonial",
+    component: TestimonialComponent
   }
 ];
 
