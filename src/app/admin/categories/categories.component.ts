@@ -65,6 +65,7 @@ export class CategoriesComponent {
   async UpdateCategory() {
     await this.categoryService.UpdateCategory(this.UpdateCategoryForm.value);
     this.categoryService.GetAllCategories();
+    window.location.reload()
   }
 
   OpenCreateDialog() {
@@ -80,7 +81,7 @@ export class CategoriesComponent {
 
   UploadImage(input: any) {
     if (input.files[0] != null) {
-      let uplodedFile = input.files[0]; // image fille 
+      let uplodedFile = input.files[0]; // image fille
       let formdata = new FormData();
       formdata.append('file', uplodedFile);
       this.categoryService.UploadImage(formdata);

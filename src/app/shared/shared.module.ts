@@ -36,6 +36,7 @@ import { MatDialogRef, MatDialogClose } from '@angular/material/dialog';
     MatStepperModule,
     NgbDropdownModule,
     MatInputModule,
+
   ],
   exports: [
     HomeHeaderComponent,
@@ -43,7 +44,6 @@ import { MatDialogRef, MatDialogClose } from '@angular/material/dialog';
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
-    NgxSpinnerModule,
     AdminSideBarComponent,
     MatDialogModule,
     MatDatepickerModule,
@@ -54,6 +54,7 @@ import { MatDialogRef, MatDialogClose } from '@angular/material/dialog';
     MatStepperModule,
     NgbDropdownModule,
     MatDialogClose,
+    NgxSpinnerModule
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

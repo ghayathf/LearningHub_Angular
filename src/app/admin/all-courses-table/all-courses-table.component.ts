@@ -4,9 +4,11 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { CourseService } from 'src/app/course.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Dialog } from '@angular/cdk/dialog';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap'; 
 import { CategoryService } from 'src/app/category.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+
+
 
 @Component({
   selector: 'app-all-courses-table',
@@ -79,6 +81,7 @@ export class AllCoursesTableComponent {
   async UpdateCourse() {
     await this.courseService.UpdateCourse(this.UpdateCourseForm.value);
     this.courseService.GetAllCourses();
+    window.location.reload()
   }
   async openDetailsDialog(courseid: number) {
     await this.courseService.GetCourseById(courseid);
@@ -122,7 +125,7 @@ export class AllCoursesTableComponent {
 
   UploadImage(input: any) {
     if (input.files[0] != null) {
-      let uplodedFile = input.files[0]; // image fille 
+      let uplodedFile = input.files[0]; // image fille
       let formdata = new FormData();
       formdata.append('file', uplodedFile);
       this.courseService.UploadImage(formdata);
