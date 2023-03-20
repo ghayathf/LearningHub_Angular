@@ -53,6 +53,7 @@ export class AuthService {
       }
     )})
   }
+  
   //not ready
   async logout() {
     await localStorage.removeItem('token');

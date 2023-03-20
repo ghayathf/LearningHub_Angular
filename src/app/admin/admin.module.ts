@@ -12,15 +12,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { ContactusComponent } from './contactus/contactus.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { TraineeRequestsComponent } from './trainee-requests/trainee-requests.component';
-import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap'; 
-
-
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatSelectModule } from '@angular/material/select';
 import { AdminSideBarComponent } from '../shared/admin-side-bar/admin-side-bar.component';
 import { AllSectionsComponent } from './all-sections/all-sections.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { MatDialogModule } from '@angular/material/dialog';
+
 
 @NgModule({
   declarations: [
@@ -31,10 +31,9 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
     AllMaterialsComponent,
     EmployeesComponent,
     TraineeRequestsComponent,
-
-
     AllSectionsComponent,
         EditProfileComponent,
+
   ],
   imports: [
     CommonModule,
@@ -46,9 +45,8 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
     MatInputModule,
     MatFormFieldModule,
     NgbDropdownModule,
-   
-    MatSelectModule
-
+    MatSelectModule,
+    MatDialogModule
 
   ]
 })
