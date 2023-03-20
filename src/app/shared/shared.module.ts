@@ -16,7 +16,6 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatStepperModule } from '@angular/material/stepper';
 import { AdminHeaderComponent } from './admin-header/admin-header.component';
 
-
 @NgModule({
   declarations: [
     HomeHeaderComponent,

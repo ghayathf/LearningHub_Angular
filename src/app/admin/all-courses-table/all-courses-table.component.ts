@@ -5,7 +5,7 @@ import { CourseService } from 'src/app/course.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Dialog } from '@angular/cdk/dialog';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap'; 
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-all-courses-table',
@@ -16,19 +16,18 @@ export class AllCoursesTableComponent {
 
   @ViewChild('DeleteForm') Delete: any
   @ViewChild('UpdateForm') Update: any
-  @ViewChild('DetailsForm') Details:any
-  @ViewChild('CreateForm') Create:any
+  @ViewChild('DetailsForm') Details: any
+  @ViewChild('CreateForm') Create: any
 
-  constructor(public courseService: CourseService, private router: Router, public spinner: NgxSpinnerService, private dialog: MatDialog,public ngbDropdown:NgbDropdownModule) {
+  constructor(public courseService: CourseService, private router: Router, public spinner: NgxSpinnerService, private dialog: MatDialog, public ngbDropdown: NgbDropdownModule) {
   }
 
   CreateCourseForm = new FormGroup(
     {
-    coursename : new FormControl('',Validators.required),
-    coursedescription : new FormControl('',Validators.required),
-    courseimage : new FormControl('',Validators.required),
-    courselevel : new FormControl('',Validators.required),
-    category_Id : new FormControl('',Validators.required)
+      coursename: new FormControl('', Validators.required),
+      coursedescription: new FormControl('', Validators.required),
+      courselevel: new FormControl('', Validators.required),
+      category_Id: new FormControl('', Validators.required)
     }
   )
 
@@ -42,14 +41,14 @@ export class AllCoursesTableComponent {
         Validators.required,
         Validators.pattern(/^\d+$/),
       ]),
-      category_Id: new FormControl('', [ 
+      category_Id: new FormControl('', [
         Validators.required,
         Validators.pattern(/^\d+$/),
       ]),
     })
 
   ngOnInit() {
-    this.courseService.GetAllCourses()
+    this.courseService.GetAllCourses();
   }
   GetCourseById(courseid: number) {
     this.courseService.GetCourseById(courseid)
@@ -78,21 +77,27 @@ export class AllCoursesTableComponent {
     await this.courseService.UpdateCourse(this.UpdateCourseForm.value);
     this.courseService.GetAllCourses();
   }
-async openDetailsDialog(courseid: number)
-{
-  await this.courseService.GetCourseById(courseid);
-  this.dialog.open(this.Details);
-}
+  async openDetailsDialog(courseid: number) {
+    await this.courseService.GetCourseById(courseid);
+    this.dialog.open(this.Details);
+  }
 
- OpenCreateDialog() {
-  const dialogConfig = new MatDialogConfig();
+  OpenCreateDialog() {
+    const dialogConfig = new MatDialogConfig();
     dialogConfig.maxWidth = '500px';
     dialogConfig.maxHeight = '90vh';
     this.dialog.open(this.Create, dialogConfig)
   }
-  async CreateCourse()
-  {
+  async CreateCourse() {
     await this.courseService.CreateCourse(this.CreateCourseForm.value);
     this.courseService.GetAllCourses();
+  }
+  UploadImage(input: any) {
+    if (input.files[0] != null) {
+      let uplodedFile = input.files[0]; // image fille 
+      let formdata = new FormData();
+      formdata.append('file', uplodedFile);
+      this.courseService.UploadImage(formdata);
+    }
   }
 }

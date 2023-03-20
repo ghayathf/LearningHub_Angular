@@ -20,6 +20,7 @@ import { AllSectionsComponent } from './all-sections/all-sections.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { TestimonialComponent } from './testimonial/testimonial.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
     AllSectionsComponent,
         EditProfileComponent,
+        TestimonialComponent,
   ],
   imports: [
     CommonModule,
