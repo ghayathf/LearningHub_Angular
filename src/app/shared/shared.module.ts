@@ -38,7 +38,7 @@ import { NgChartsModule } from 'ng2-charts';
     MatStepperModule,
     NgbDropdownModule,
     MatInputModule,
-    NgChartsModule,
+    NgChartsModule
 
   ],
   exports: [

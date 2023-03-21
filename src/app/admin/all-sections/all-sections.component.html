@@ -448,7 +448,7 @@
 																	<mat-label>Select Trainer </mat-label>
 																	<mat-select formControlName="trainer_Id" [(ngModel)]="selectedUpdatedTrainer">
 																		<mat-option *ngFor="let trainer of combinedArray" [value]="trainer.trainerid" >
-																			{{ combinedArray.firstname+' '+combinedArray.lastname }}
+																			{{ combinedArray.firstname }}
 																		  </mat-option>
 																	  </mat-select>
 																  </mat-form-field>
