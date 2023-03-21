@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { TrainerService } from 'src/app/trainer.service';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { ChartConfiguration, ChartOptions } from 'chart.js';
 
 @Component({
   selector: 'app-main',
@@ -9,36 +10,51 @@ import { BrowserModule } from '@angular/platform-browser';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent {
-  chartOptions = {
-	  title: {
-		  text: "Angular Column Chart with Index Labels"
-	  },
-	  animationEnabled: true,
-	  axisY: {
-		includeZero: true
-	  },
-	  data: [{
-		type: "column", //change type to bar, line, area, pie, etc
-		//indexLabel: "{y}", //Shows y value on all Data Points
-		indexLabelFontColor: "#5A5757",
-		dataPoints: [
-			{ x: 10, y: 71 },
-			{ x: 20, y: 55 },
-			{ x: 30, y: 50 },
-			{ x: 40, y: 65 },
-			{ x: 50, y: 71 },
-			{ x: 60, y: 92, indexLabel: "Highest\u2191" },
-			{ x: 70, y: 68 },
-			{ x: 80, y: 38, indexLabel: "Lowest\u2193"  },
-			{ x: 90, y: 54 },
-			{ x: 100, y: 60 }
-		]
-	  }]
-	}
 constructor(public trainerService:TrainerService) {
 
 }
 ngOnInit(){
 this.trainerService.GetAllTrainers()
 }
+title2 = 'ng2-charts-demo';
+
+// Pie
+public pieChartOptions: ChartOptions<'pie'> = {
+  responsive: false,
+};
+public pieChartLabels = [ [ 'Download', 'Sales' ], [ 'In', 'Store', 'Sales' ], 'Mail Sales' ];
+public pieChartDatasets = [ {
+  data: [ 300, 500, 100 ]
+} ];
+public pieChartLegend = true;
+public pieChartPlugins = [];
+title = 'ng2-charts-demo';
+
+  public lineChartData: ChartConfiguration<'line'>['data'] = {
+    labels: [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July'
+    ],
+    datasets: [
+      {
+        data: [ 65, 59, 80, 81, 56, 55, 40 ],
+        label: 'Series A',
+        fill: true,
+        tension: 0.5,
+        borderColor: '#fff',
+        backgroundColor: 'rgba(255,0,0,0.3)'
+      }
+    ]
+  };
+  public lineChartOptions: ChartOptions<'line'> = {
+    responsive: false
+  };
+  public lineChartLegend = true;
+
+
 }
