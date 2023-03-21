@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { TokenInterceptor } from './Interceptor';
-
+import { NgChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -21,6 +21,7 @@ import { TokenInterceptor } from './Interceptor';
     BrowserAnimationsModule,
     HttpClientModule,
     ToastrModule.forRoot(),
+    NgChartsModule,
 
   ],
   providers: [

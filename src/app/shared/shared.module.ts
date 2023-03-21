@@ -16,6 +16,8 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatStepperModule } from '@angular/material/stepper';
 import { AdminHeaderComponent } from './admin-header/admin-header.component';
 import { MatDialogRef, MatDialogClose } from '@angular/material/dialog';
+import { NgChartsModule } from 'ng2-charts';
+
 
 @NgModule({
   declarations: [
@@ -36,6 +38,7 @@ import { MatDialogRef, MatDialogClose } from '@angular/material/dialog';
     MatStepperModule,
     NgbDropdownModule,
     MatInputModule,
+    NgChartsModule,
 
   ],
   exports: [
@@ -54,7 +57,8 @@ import { MatDialogRef, MatDialogClose } from '@angular/material/dialog';
     MatStepperModule,
     NgbDropdownModule,
     MatDialogClose,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    NgChartsModule
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
