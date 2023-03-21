@@ -28,7 +28,7 @@ export class TestimonialService {
 
   }
 
-  DeleteMessage(messageId: any) {
+  DeleteMessage(messageId: number) {
     this.spinner.show();
     return new Promise<void>((resolve, reject) => {
       this.http.delete("https://localhost:44391/api/Testimonial/DeleteTestimonial/" + messageId).subscribe(
@@ -50,13 +50,7 @@ export class TestimonialService {
   async UpdateRequest(Request: any) {
     this.spinner.show();
     return new Promise<void>((resolve, reject) => {
-
-
-
       Request.testimonialstatus = 1;
-
-
-
       this.http.put("https://localhost:44391/api/Testimonial/UpdateTestimonial", Request).subscribe(
         {
           next: () => {
@@ -67,7 +61,6 @@ export class TestimonialService {
           error: () => {
             this.spinner.hide();
             this.toaster.error("Try again");
-
           }
 
 
