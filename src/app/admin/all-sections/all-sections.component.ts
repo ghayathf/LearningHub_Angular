@@ -33,15 +33,6 @@ UserTrainer? :any
   currentDate:any
 ngOnInit() {
   this.sectionService.GetAllSections()
-
-  this.currentDate = new Date(Date.now()).toISOString().slice(0,10)
-
-}
-GenerateCertificate(id:number){
-this.sectionService.GenerateCertificate(1,id)
-}
-sliceDate(d:any){
-  return d.slice(0,10)
   this.userService.getAllUsers()
   this.trainerService.GetAllTrainers()
   this.courseService.GetAllCourses()
@@ -52,6 +43,15 @@ sliceDate(d:any){
   
   }));
   console.log(this.combinedArray)
+  this.currentDate = new Date(Date.now()).toISOString().slice(0,10)
+
+}
+GenerateCertificate(id:number){
+this.sectionService.GenerateCertificate(1,id)
+}
+sliceDate(d:any){
+  return d.slice(0,10)
+
   
 }
 
