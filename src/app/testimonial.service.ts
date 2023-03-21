@@ -62,12 +62,10 @@ export class TestimonialService {
             this.spinner.hide();
             this.toaster.error("Try again");
           }
-
-
         }
       )
-    })
-
-  }
+    }
+  )
+}
 
 }
