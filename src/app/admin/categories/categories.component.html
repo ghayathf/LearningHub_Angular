@@ -112,9 +112,9 @@
                                             <img src="../../../assets/HomeAssets/images/courses/4by3/01.jpg" class="rounded" alt="">
                                         </div> -->
                                         <!-- Title -->
-                                        <div class="avatar avatar-md">
-                                            <img class="avatar-img rounded-circle"
-                                                src="../../../assets/HomeAssets/images/avatar/08.jpg" alt="avatar">
+                                        <div class="w-80px">
+                                            <img src="../../../assets/HomeAssets/images/{{item.categoryimage}}"
+                                                class="rounded" alt="">
                                         </div>
                                         <h4 class="table-responsive-title mb-0 ms-2">
                                             <a href="#" class="stretched-link">{{ item.categoryname }}</a>
@@ -246,7 +246,29 @@
 
                                         </form>
                                     </div>
+                                    <div class="col-12">
+                                        <div
+                                            class="text-center justify-content-center align-items-center p-4 p-sm-5 border border-2 border-dashed position-relative rounded-3">
+                                            <!-- Image -->
+                                            <img src="assets/images/element/gallery.svg" class="h-50px" alt="">
+                                            <div>
+                                                <h6 class="my-2">Upload Cayrgory image here, or<a href="#!"
+                                                        class="text-primary"> Browse</a></h6>
+                                                <label style="cursor:pointer;">
+                                                    <span>
 
+                                                        <input class="form-control stretched-link" type="file"
+                                                            name="my-image" id="image"
+                                                            accept="image/gif, image/jpeg, image/png"
+                                                            (change)="UploadImage(file)" #file />
+                                                    </span>
+                                                </label>
+                                                <p class="small mb-0 mt-2"><b>Note:</b> Only JPG, JPEG and PNG. Our
+                                                    suggested dimensions are 600px * 450px. Larger image will be cropped
+                                                    to 4:3 to fit our thumbnails/previews.</p>
+                                            </div>
+                                        </div>
+                                    </div>
 
 
                                     <!-- Upload image END -->
@@ -341,9 +363,11 @@
                                                         class="text-primary"> Browse</a></h6>
                                                 <label style="cursor:pointer;">
                                                     <span>
+
                                                         <input class="form-control stretched-link" type="file"
                                                             name="my-image" id="image"
-                                                            accept="image/gif, image/jpeg, image/png" />
+                                                            accept="image/gif, image/jpeg, image/png"
+                                                            (change)="UploadImage(file)" #file />
                                                     </span>
                                                 </label>
                                                 <p class="small mb-0 mt-2"><b>Note:</b> Only JPG, JPEG and PNG. Our

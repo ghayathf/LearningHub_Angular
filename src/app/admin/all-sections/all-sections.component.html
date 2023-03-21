@@ -95,7 +95,7 @@
 								<th scope="col" class="border-0">Course</th>
 								<th scope="col" class="border-0">Trainer</th>
 
-								<th scope="col" class="border-0 rounded-end">Action</th>
+								<th scope="col" class="border-0 rounded-end" style="margin-left: 30px;">Action</th>
 							</tr>
 						</thead>
 
@@ -141,11 +141,14 @@
 								<td>
 
 									<button (click)="openDetailsDialog(item.sectionid)"
-										class="btn btn-sm btn-info-soft mb-0">Details</button>
+										class="btn btn-sm btn-info-soft mb-0" >Details</button>
 									<button (click)="openDeleteDialog(item.sectionid)"
-										class="btn btn-sm btn-danger-soft mb-0">Delete</button>
+										class="btn btn-sm btn-danger-soft mb-0" style="margin-left: 15px;">Delete</button>
 										<button (click)="openUpdateDialog(item.sectionid)"
-										class="btn btn-sm btn-info-soft mb-0">Update</button>
+										class="btn btn-sm btn-warning-soft mb-0" style="margin-left: 15px;">Update</button>
+
+                    <button *ngIf="sliceDate(item.enddate) < this.currentDate" (click)="GenerateCertificate(item.sectionid)"
+										class="btn btn-sm btn-success-soft mb-0" style="margin-left: 15px;">Generate Certificate</button>
 								</td>
 
 							</tr>

@@ -15,7 +15,7 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatStepperModule } from '@angular/material/stepper';
 import { AdminHeaderComponent } from './admin-header/admin-header.component';
-
+import { MatDialogRef, MatDialogClose } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,9 @@ import { AdminHeaderComponent } from './admin-header/admin-header.component';
     MatFormFieldModule,
     MatBadgeModule,
     MatStepperModule,
-    NgbDropdownModule
+    NgbDropdownModule,
+    MatInputModule,
+
   ],
   exports: [
     HomeHeaderComponent,
@@ -42,7 +44,6 @@ import { AdminHeaderComponent } from './admin-header/admin-header.component';
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
-    NgxSpinnerModule,
     AdminSideBarComponent,
     MatDialogModule,
     MatDatepickerModule,
@@ -51,7 +52,9 @@ import { AdminHeaderComponent } from './admin-header/admin-header.component';
     AdminHeaderComponent,
     MatBadgeModule,
     MatStepperModule,
-    NgbDropdownModule
+    NgbDropdownModule,
+    MatDialogClose,
+    NgxSpinnerModule
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

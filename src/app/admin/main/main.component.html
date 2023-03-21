@@ -107,7 +107,11 @@
                         <!-- Card body -->
                         <div class="card-body">
                             <!-- Apex chart -->
-                            <div id="ChartPayout"></div>
+                            <div id="ChartPayout">
+                              <div>
+                                <!-- <canvasjs-chart [options]="chartOptions" [styles]="{width: '100%', height:'360px'}"></canvasjs-chart> -->
+                            </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -234,7 +238,8 @@
                         <div class="card-body p-4">
 
                             <!-- Instructor item START -->
-                            <div class="d-sm-flex justify-content-between align-items-center" *ngFor="let item of trainerService.tr">
+                            <div class="d-sm-flex justify-content-between align-items-center"
+                                *ngFor="let item of trainerService.tr">
                                 <!-- Avatar and info -->
                                 <div class="d-sm-flex align-items-center mb-1 mb-sm-0">
                                     <!-- Avatar -->
@@ -250,7 +255,8 @@
                                             <li class="list-inline-item fw-light me-2 mb-1 mb-sm-0"><i
                                                     class="fas fa-envelope text-purple me-1"></i>{{ item.email }}</li>
                                             <li class="list-inline-item fw-light me-2 mb-1 mb-sm-0">
-                                              <i class="fas fa-phone text-warning me-1"></i>{{ item.phonenumber }}</li>
+                                                <i class="fas fa-phone text-warning me-1"></i>{{ item.phonenumber }}
+                                            </li>
                                         </ul>
                                         <hr>
                                     </div>
@@ -261,7 +267,7 @@
 
                             </div>
                             <!-- Instructor item END -->
-                                  <!-- Divider -->
+                            <!-- Divider -->
 
                         </div>
 
@@ -287,7 +293,8 @@
                                     <div class="d-sm-flex">
                                         <div
                                             class="icon-lg bg-purple bg-opacity-10 text-purple rounded-2 flex-shrink-0">
-                                            <i class="fas fa-user-tie fs-5"></i></div>
+                                            <i class="fas fa-user-tie fs-5"></i>
+                                        </div>
                                         <!-- Info -->
                                         <div class="ms-0 ms-sm-3 mt-2 mt-sm-0">
                                             <h6 class="mb-0"><a href="#" class="stretched-link">Join New Instructor</a>
@@ -307,7 +314,8 @@
                                     <div class="d-sm-flex">
                                         <div
                                             class="icon-lg bg-orange bg-opacity-10 text-orange rounded-2 flex-shrink-0">
-                                            <i class="fas fa-book-open fs-5"></i></div>
+                                            <i class="fas fa-book-open fs-5"></i>
+                                        </div>
                                         <!-- Info -->
                                         <div class="ms-0 ms-sm-3 mt-2 mt-sm-0">
                                             <h6 class="mb-0"><a href="#" class="stretched-link">Update New Course</a>
@@ -343,7 +351,8 @@
                                     <div class="d-sm-flex">
                                         <div
                                             class="icon-lg bg-danger bg-opacity-10 text-danger rounded-2 flex-shrink-0">
-                                            <i class="fas fa-globe fs-5"></i></div>
+                                            <i class="fas fa-globe fs-5"></i>
+                                        </div>
                                         <!-- Info -->
                                         <div class="ms-0 ms-sm-3 mt-2 mt-sm-0">
                                             <h6 class="mb-0"><a href="#" class="stretched-link">Update New Feature</a>
@@ -416,4 +425,22 @@
         </div>
         <!-- Page main content END -->
     </div>
+    <section class="bg-light position-relative">
+        <!-- SVG Image -->
+        <figure class="position-absolute start-0 bottom-0 mb-0">
+            <img src="assets/images/element/10.svg" class="h-200px" alt="">
+        </figure>
+
+        <div class="container">
+            <!-- Title -->
+            <div class="row mb-4">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2>Our Customer Feedback</h2>
+                    <p class="mb-0">Perceived end knowledge certainly day sweetness why cordially</p>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
 </main>

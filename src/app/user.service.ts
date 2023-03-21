@@ -95,6 +95,7 @@ UpdateUser(user: any): Promise<any> {
     this.spinner.show();
     this.http.put("https://localhost:44391/api/User/UpdateUser", user).subscribe(
       {
+
         next: () => {
           this.spinner.hide();
           this.toaster.success("User Account Updated Successfuly");
@@ -102,12 +103,12 @@ UpdateUser(user: any): Promise<any> {
         },
         error: (err) => {
           console.log(err);
-
           this.spinner.hide();
           this.toaster.error("Error");
         }
       }
     )
-  });
+  }
+  );
 }
 }
