@@ -4,184 +4,189 @@
   <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="wheat" type="square-jelly-box" [fullScreen]="true">
     <p style="color: wheat"> Waiting... </p>
   </ngx-spinner>
-    <!-- Top bar START -->
-    <app-admin-header></app-admin-header>
-    <!-- Top bar END -->
+  <!-- Top bar START -->
+  <app-admin-header></app-admin-header>
+  <!-- Top bar END -->
 
-    <!-- Page main content START -->
-    <div class="page-content-wrapper border">
+  <!-- Page main content START -->
+  <div class="page-content-wrapper border">
 
-        <!-- Title -->
-        <div class="row mb-3">
-            <div class="col-12 d-sm-flex justify-content-between align-items-center">
-                <h1 class="h3 mb-2 mb-sm-0">categories</h1>
-                <a class="btn btn-sm btn-primary mb-0" (click)="OpenDialog()">Create New Trainer</a>
-            </div>
-        </div>
-
-        <!-- Course boxes START -->
-        <div class="row g-4 mb-4">
-            <!-- Course item -->
-            <div class="col-sm-6 col-lg-4">
-                <div class="text-center p-4 bg-primary bg-opacity-10 border border-primary rounded-3">
-                    <h5>Total Materials</h5>
-                    <h2 class="mb-0 fs-1 text-primary">{{ this.trainerService.tr.length }}</h2>
-                </div>
-            </div>
-
-            <!-- Course item -->
-            <div class="col-sm-6 col-lg-4">
-                <div class="text-center p-4 bg-success bg-opacity-10 border border-success rounded-3">
-                    <h6>Activated Courses</h6>
-                    <h2 class="mb-0 fs-1 text-success">996</h2>
-                </div>
-            </div>
-
-            <!-- Course item -->
-            <div class="col-sm-6 col-lg-4">
-                <div class="text-center p-4  bg-warning bg-opacity-15 border border-warning rounded-3">
-                    <h6>Pending Courses</h6>
-                    <h2 class="mb-0 fs-1 text-warning">200</h2>
-                </div>
-            </div>
-        </div>
-        <!-- Course boxes END -->
-
-        <!-- Card START -->
-        <div class="card bg-transparent border">
-
-            <!-- Card header START -->
-            <div class="card-header bg-light border-bottom">
-                <!-- Search and select START -->
-                <div class="row g-3 align-items-center justify-content-between">
-                    <!-- Search bar -->
-                    <div class="col-md-8">
-                        <form class="rounded position-relative">
-                            <input class="form-control bg-body" type="search" placeholder="Search" aria-label="Search">
-                            <button
-                                class="bg-transparent p-2 position-absolute top-50 end-0 translate-middle-y border-0 text-primary-hover text-reset"
-                                type="submit">
-                                <i class="fas fa-search fs-6 "></i>
-                            </button>
-                        </form>
-                    </div>
-
-
-
-                    <!-- Select option -->
-                    <div class="col-md-3">
-                        <!-- Short by filter -->
-                        <form>
-                            <select class="form-select js-choice border-0 z-index-9" aria-label=".form-select-sm">
-                                <option value="">Sort by</option>
-                                <option>Newest</option>
-                                <option>Oldest</option>
-                                <option>Accepted</option>
-                                <option>Rejected</option>
-                            </select>
-                        </form>
-                    </div>
-                </div>
-                <!-- Search and select END -->
-            </div>
-            <!-- Card header END -->
-
-            <!-- Card body START -->
-            <div class="card-body">
-                <!-- Course table START -->
-                <div class="table-responsive border-0 rounded-3">
-                    <!-- Table START -->
-                    <table class="table table-dark-gray align-middle p-4 mb-0 table-hover">
-                        <!-- Table head -->
-                        <thead>
-                            <tr>
-                                <th scope="col" class="border-0">Trainer Name</th>
-                                <th scope="col" class="border-0 rounded-end">Email</th>
-                                <th scope="col" class="border-0 rounded-end">Phone Number</th>
-                                <th scope="col" class="border-0 rounded-end">Action</th>
-                            </tr>
-                        </thead>
-
-                        <!-- Table body START -->
-                        <tbody>
-
-                            <!-- Table row -->
-                            <tr *ngFor="let item of trainerService.tr">
-
-
-                                <!-- Table data -->
-                                <td>
-                                    <div class="d-flex align-items-center mb-3">
-
-                                        <!-- Info -->
-                                        <div class="ms-2">
-                                            <h4 class="mb-0 fw-light">{{ item.username }}</h4>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                  <div class="d-flex align-items-center mb-3">
-
-                                      <!-- Info -->
-                                      <div class="ms-2">
-                                          <h4 class="mb-0 fw-light">{{ item.email  }}</h4>
-                                      </div>
-                                  </div>
-                              </td>
-                              <td>
-                                <div class="d-flex align-items-center mb-3">
-
-                                    <!-- Info -->
-                                    <div class="ms-2">
-                                        <h4 class="mb-0 fw-light">{{ item.phonenumber }}</h4>
-                                    </div>
-                                </div>
-                            </td>
-
-
-
-                                <td>
-                                    <button class="btn btn-sm btn-danger-soft mb-0" (click)="openDeleteDialog(item.userid)">Delete</button>
-                                </td>
-                            </tr>
-
-
-                        </tbody>
-                        <!-- Table body END -->
-                    </table>
-                    <!-- Table END -->
-                </div>
-                <!-- Course table END -->
-            </div>
-            <!-- Card body END -->
-
-            <!-- Card footer START -->
-            <div class="card-footer bg-transparent pt-0">
-                <!-- Pagination START -->
-                <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
-                    <!-- Content -->
-                    <p class="mb-0 text-center text-sm-start">Showing 1 to 8 of 20 entries</p>
-                    <!-- Pagination -->
-                    <nav class="d-flex justify-content-center mb-0" aria-label="navigation">
-                        <ul
-                            class="pagination pagination-sm pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
-                            <li class="page-item mb-0"><a class="page-link" href="#" tabindex="-1"><i
-                                        class="fas fa-angle-left"></i></a></li>
-                            <li class="page-item mb-0"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item mb-0 active"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item mb-0"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item mb-0"><a class="page-link" href="#"><i
-                                        class="fas fa-angle-right"></i></a></li>
-                        </ul>
-                    </nav>
-                </div>
-                <!-- Pagination END -->
-            </div>
-            <!-- Card footer END -->
-        </div>
-        <!-- Card END -->
+    <!-- Title -->
+    <div class="row mb-3">
+      <div class="col-12 d-sm-flex justify-content-between align-items-center">
+        <h1 class="h3 mb-2 mb-sm-0">Instructores</h1>
+        <a class="btn btn-sm btn-primary mb-0" (click)="OpenDialog()">Create New Trainer</a>
+      </div>
     </div>
-    <!-- Page main content END -->
+
+    <!-- Course boxes START -->
+    <div class="row g-4 mb-4">
+      <!-- Course item -->
+      <div class="col-sm-6 col-lg-4">
+        <div class="text-center p-4 bg-primary bg-opacity-10 border border-primary rounded-3">
+          <h5>Total Materials</h5>
+          <h2 class="mb-0 fs-1 text-primary">{{ this.trainerService.tr.length }}</h2>
+        </div>
+      </div>
+
+      <!-- Course item -->
+      <div class="col-sm-6 col-lg-4">
+        <div class="text-center p-4 bg-success bg-opacity-10 border border-success rounded-3">
+          <h6>Activated Courses</h6>
+          <h2 class="mb-0 fs-1 text-success">996</h2>
+        </div>
+      </div>
+
+      <!-- Course item -->
+      <div class="col-sm-6 col-lg-4">
+        <div class="text-center p-4  bg-warning bg-opacity-15 border border-warning rounded-3">
+          <h6>Pending Courses</h6>
+          <h2 class="mb-0 fs-1 text-warning">200</h2>
+        </div>
+      </div>
+    </div>
+    <!-- Course boxes END -->
+
+    <!-- Card START -->
+    <div class="card bg-transparent border">
+
+      <!-- Card header START -->
+      <div class="card-header bg-light border-bottom">
+        <!-- Search and select START -->
+        <div class="row g-3 align-items-center justify-content-between">
+          <!-- Search bar -->
+          <div class="col-md-8">
+            <form class="rounded position-relative">
+              <input class="form-control bg-body" type="search" placeholder="Search" aria-label="Search">
+              <button
+                class="bg-transparent p-2 position-absolute top-50 end-0 translate-middle-y border-0 text-primary-hover text-reset"
+                type="submit">
+                <i class="fas fa-search fs-6 "></i>
+              </button>
+            </form>
+          </div>
+
+
+
+          <!-- Select option -->
+          <div class="col-md-3">
+            <!-- Short by filter -->
+            <form>
+              <select class="form-select js-choice border-0 z-index-9" aria-label=".form-select-sm">
+                <option value="">Sort by</option>
+                <option>Newest</option>
+                <option>Oldest</option>
+                <option>Accepted</option>
+                <option>Rejected</option>
+              </select>
+            </form>
+          </div>
+        </div>
+        <!-- Search and select END -->
+      </div>
+      <!-- Card header END -->
+
+      <!-- Card body START -->
+      <div class="card-body">
+        <button (click)="exportexcel()" class="btn btn-primary"> <i class="bi bi-file-earmark-excel-fill"></i>Export to
+          Excel</button>
+
+        <button class="btn btn-danger" (click)="MakePDF()"><i class="bi bi-file-earmark-pdf-fill"></i>Dawnload
+          PDF</button>
+
+        <!-- Course table START -->
+        <div class="table-responsive border-0 rounded-3" id="content" #content>
+          <!-- Table START -->
+          <table class="table table-dark-gray align-middle p-4 mb-0 table-hover" id="excel-table">
+            <!-- Table head -->
+            <thead>
+              <tr>
+                <th scope="col" class="border-0">Trainer Name</th>
+                <th scope="col" class="border-0 rounded-end">Email</th>
+                <th scope="col" class="border-0 rounded-end">Phone Number</th>
+                <th scope="col" class="border-0 rounded-end">Action</th>
+              </tr>
+            </thead>
+
+            <!-- Table body START -->
+            <tbody>
+
+              <!-- Table row -->
+              <tr *ngFor="let item of trainerService.tr">
+
+
+                <!-- Table data -->
+                <td>
+                  <div class="d-flex align-items-center mb-3">
+
+                    <!-- Info -->
+                    <div class="ms-2">
+                      <h4 class="mb-0 fw-light">{{ item.username }}</h4>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex align-items-center mb-3">
+
+                    <!-- Info -->
+                    <div class="ms-2">
+                      <h4 class="mb-0 fw-light">{{ item.email }}</h4>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex align-items-center mb-3">
+
+                    <!-- Info -->
+                    <div class="ms-2">
+                      <h4 class="mb-0 fw-light">{{ item.phonenumber }}</h4>
+                    </div>
+                  </div>
+                </td>
+
+
+
+                <td>
+                  <button class="btn btn-sm btn-danger-soft mb-0"
+                    (click)="openDeleteDialog(item.userid)">Delete</button>
+                </td>
+              </tr>
+
+
+            </tbody>
+            <!-- Table body END -->
+          </table>
+          <!-- Table END -->
+        </div>
+        <!-- Course table END -->
+      </div>
+      <!-- Card body END -->
+
+      <!-- Card footer START -->
+      <div class="card-footer bg-transparent pt-0">
+        <!-- Pagination START -->
+        <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
+          <!-- Content -->
+          <p class="mb-0 text-center text-sm-start">Showing 1 to 8 of 20 entries</p>
+          <!-- Pagination -->
+          <nav class="d-flex justify-content-center mb-0" aria-label="navigation">
+            <ul class="pagination pagination-sm pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
+              <li class="page-item mb-0"><a class="page-link" href="#" tabindex="-1"><i
+                    class="fas fa-angle-left"></i></a></li>
+              <li class="page-item mb-0"><a class="page-link" href="#">1</a></li>
+              <li class="page-item mb-0 active"><a class="page-link" href="#">2</a></li>
+              <li class="page-item mb-0"><a class="page-link" href="#">3</a></li>
+              <li class="page-item mb-0"><a class="page-link" href="#"><i class="fas fa-angle-right"></i></a></li>
+            </ul>
+          </nav>
+        </div>
+        <!-- Pagination END -->
+      </div>
+      <!-- Card footer END -->
+    </div>
+    <!-- Card END -->
+  </div>
+  <!-- Page main content END -->
 
 </div>
 <a class="btn btn-success-soft" href="#">Create Category</a>
@@ -190,77 +195,77 @@
 <ng-template #DeleteForm>
   <h2 mat-dialog-content>Would you like to Delete this Trainer ?</h2>
   <div mat-dialog-actions>
-  <input type="button" mat-dialog-close class="btn btn-success" value="Yes" (click)="DeleteTrainer()">
-  <input type="button" mat-dialog-close class="btn btn-error" value="No">
-</div>
+    <input type="button" mat-dialog-close class="btn btn-success" value="Yes" (click)="DeleteTrainer()">
+    <input type="button" mat-dialog-close class="btn btn-error" value="No">
+  </div>
 </ng-template>
 
 <ng-template #CreateForm>
   <form [formGroup]="CreateUserForm" class="example-form">
-  <!-- <input type="file" #file (change)="UploadImage(file)"> -->
-  <div>
-    <mat-form-field class="example-full-width">
-      <mat-label>User Name</mat-label>
-      <input type="text" matInput formControlName="username">
+    <!-- <input type="file" #file (change)="UploadImage(file)"> -->
+    <div>
+      <mat-form-field class="example-full-width">
+        <mat-label>User Name</mat-label>
+        <input type="text" matInput formControlName="username">
 
-      <mat-error *ngIf="CreateUserForm.controls['username'].hasError('required')">
-        CategoryId is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field class="example-full-width">
-      <mat-label>Password</mat-label>
-      <input type="password" matInput formControlName="userpassword">
+        <mat-error *ngIf="CreateUserForm.controls['username'].hasError('required')">
+          CategoryId is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="example-full-width">
+        <mat-label>Password</mat-label>
+        <input type="password" matInput formControlName="userpassword">
 
-      <mat-error *ngIf="CreateUserForm.controls['userpassword'].hasError('required')">
-        price is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field class="example-full-width">
-      <mat-label>Email</mat-label>
-      <input type="text" matInput formControlName="email">
+        <mat-error *ngIf="CreateUserForm.controls['userpassword'].hasError('required')">
+          price is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="example-full-width">
+        <mat-label>Email</mat-label>
+        <input type="text" matInput formControlName="email">
 
-      <mat-error *ngIf="CreateUserForm.controls['email'].hasError('required')">
-        CategoryId is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field class="example-full-width">
-      <mat-label>Phone number</mat-label>
-      <input type="text" matInput formControlName="phonenumber">
+        <mat-error *ngIf="CreateUserForm.controls['email'].hasError('required')">
+          CategoryId is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="example-full-width">
+        <mat-label>Phone number</mat-label>
+        <input type="text" matInput formControlName="phonenumber">
 
-      <mat-error *ngIf="CreateUserForm.controls['phonenumber'].hasError('required')">
-        price is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field class="example-full-width">
-      <mat-label>First Number</mat-label>
-      <input type="text" matInput formControlName="firstname">
+        <mat-error *ngIf="CreateUserForm.controls['phonenumber'].hasError('required')">
+          price is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="example-full-width">
+        <mat-label>First Number</mat-label>
+        <input type="text" matInput formControlName="firstname">
 
-      <mat-error *ngIf="CreateUserForm.controls['firstname'].hasError('required')">
-        CategoryId is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field class="example-full-width">
-      <mat-label>Last Name</mat-label>
-      <input type="text" matInput formControlName="lastname">
+        <mat-error *ngIf="CreateUserForm.controls['firstname'].hasError('required')">
+          CategoryId is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="example-full-width">
+        <mat-label>Last Name</mat-label>
+        <input type="text" matInput formControlName="lastname">
 
-      <mat-error *ngIf="CreateUserForm.controls['lastname'].hasError('required')">
-        price is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
-  </div>
+        <mat-error *ngIf="CreateUserForm.controls['lastname'].hasError('required')">
+          price is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
 
 
-    <div><input type="button"  mat-dialog-close value="create" (click)="CreateUser()"></div>
+    <div><input type="button" mat-dialog-close value="create" (click)="CreateUser()"></div>
   </form>
 
 
@@ -272,38 +277,38 @@
 
 <ng-template #CreateTrainerrForm>
   <form [formGroup]="CreateTrainerForm" class="example-form">
-  <!-- <input type="file" #file (change)="UploadImage(file)"> -->
-  <div>
-    <mat-form-field class="example-full-width">
-      <mat-label>Salary</mat-label>
-      <input type="number" matInput formControlName="salary">
+    <!-- <input type="file" #file (change)="UploadImage(file)"> -->
+    <div>
+      <mat-form-field class="example-full-width">
+        <mat-label>Salary</mat-label>
+        <input type="number" matInput formControlName="salary">
 
-      <mat-error *ngIf="CreateTrainerForm.controls['salary'].hasError('required')">
-        CategoryId is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field class="example-full-width">
-      <mat-label>Trainer Position</mat-label>
-      <input type="text" matInput formControlName="trainerposition">
+        <mat-error *ngIf="CreateTrainerForm.controls['salary'].hasError('required')">
+          CategoryId is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="example-full-width">
+        <mat-label>Trainer Position</mat-label>
+        <input type="text" matInput formControlName="trainerposition">
 
-      <mat-error *ngIf="CreateTrainerForm.controls['trainerposition'].hasError('required')">
-        price is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field class="example-full-width">
-      <mat-label>Qualification</mat-label>
-      <input type="text" matInput formControlName="qualification">
+        <mat-error *ngIf="CreateTrainerForm.controls['trainerposition'].hasError('required')">
+          price is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="example-full-width">
+        <mat-label>Qualification</mat-label>
+        <input type="text" matInput formControlName="qualification">
 
-      <mat-error *ngIf="CreateTrainerForm.controls['qualification'].hasError('required')">
-        CategoryId is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
-  </div>
+        <mat-error *ngIf="CreateTrainerForm.controls['qualification'].hasError('required')">
+          CategoryId is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
 
-    <div><input type="button"  mat-dialog-close value="create" (click)="CreateTrainerr()"></div>
+    <div><input type="button" mat-dialog-close value="create" (click)="CreateTrainerr()"></div>
   </form>
 </ng-template>
