@@ -5,6 +5,9 @@ import { SectionService } from 'src/app/section.service';
 import { MatDatepicker, MatDatepickerActions } from '@angular/material/datepicker';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators,FormBuilder } from '@angular/forms';
+import { TrainerService } from 'src/app/trainer.service';
+import { CourseService } from 'src/app/course.service';
+import { UserService } from 'src/app/user.service';
 
 
 
@@ -18,9 +21,25 @@ export class AllSectionsComponent {
   @ViewChild('UpdateSection') Update: any
   @ViewChild('DeleteForm') Delete: any
   @ViewChild('DetailsForm') Details: any
-constructor(public sectionService: SectionService, private router: Router, public dialog: MatDialog,public spinner:NgxSpinnerService,private formBuilder: FormBuilder){}
+constructor(public sectionService: SectionService, private router: Router, public dialog: MatDialog,public spinner:NgxSpinnerService,private formBuilder: FormBuilder,public trainerService:TrainerService,public courseService:CourseService,public userService:UserService){}
+
+users:any=[]
+trainers:any=[]
+combinedArray:any=[]
+UserTrainer? :any
 ngOnInit() {
   this.sectionService.GetAllSections()
+  this.userService.getAllUsers()
+  this.trainerService.GetAllTrainers()
+  this.courseService.GetAllCourses()
+  this. trainers= this.trainerService.trainers
+  this.users=this.userService.users
+  this. combinedArray = this.users.filter((x: { roleId: number; }) => x.roleId == 3).concat(this.trainers.filter((trainer :any)=> {
+    return this.users.find((user:any) => user.userid== trainer.user_Id);
+  
+  }));
+  console.log(this.combinedArray)
+  
 }
 
 OpenDialog() {
@@ -55,9 +74,15 @@ UpdateForm =new FormGroup(
   }
 )
 
-
+selectedCourse:any
+selectedTrainer:any
 async CreateSections() {
-  
+  this.CreateForm.patchValue({
+    course_Id: this.selectedCourse
+  });
+  this.CreateForm.patchValue({
+    trainer_Id: this.selectedTrainer
+  });
   await this.sectionService.CreateSection(this.CreateForm.value);
   this.sectionService.GetAllSections();
 
@@ -81,7 +106,15 @@ async openUpdateDialog(sectionid: number) {
 
   this.dialog.open(this.Update, dialogConfig);
 }
+selectedUpdatedCourse:any
+selectedUpdatedTrainer:any
 async UpdateSectionForm() {
+  this.UpdateForm.patchValue({
+    course_Id: this.selectedUpdatedCourse
+  });
+  this.UpdateForm.patchValue({
+    trainer_Id: this.selectedUpdatedTrainer
+  });
   await this.sectionService.UpdateSection(this.UpdateForm.value);
   this.sectionService.GetAllSections();
 }

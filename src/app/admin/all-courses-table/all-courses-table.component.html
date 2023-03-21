@@ -269,24 +269,30 @@
 													Course Image is <strong>required</strong>
 												</mat-error>
 											</mat-form-field>
-											<mat-form-field class="example-full-width">
-												<mat-label>Course Level</mat-label>
-												<input type="number" matInput formControlName="courselevel">
-
-												<mat-error
-													*ngIf="UpdateCourseForm.controls['courselevel'].hasError('required')">
-													Course Level is <strong>required</strong>
-												</mat-error>
-											</mat-form-field>
-											<mat-form-field class="example-full-width">
-												<mat-label style="background-color: #2a2c31;">Category ID</mat-label>
-												<input type="number" matInput formControlName="category_Id">
-
-												<mat-error
-													*ngIf="UpdateCourseForm.controls['category_Id'].hasError('required')">
-													Category ID is <strong>required</strong>
-												</mat-error>
-											</mat-form-field>
+											<div class="col-md-6">
+												
+							<mat-form-field appearance="fill">
+								<mat-label>Course Level</mat-label>
+								<mat-select formControlName="courselevel" [(ngModel)]="selectedUpdatedLevel">
+								  <mat-option *ngFor="let level of Levels| enumValues" [value]="level.index" >
+									{{level.name}}
+									
+								  </mat-option>
+								</mat-select>
+							  </mat-form-field>
+											</div>
+											<div class="col-12">
+									
+							<mat-form-field appearance="fill">
+								<mat-label>Category</mat-label>
+								<mat-select formControlName="category_Id" [(ngModel)]="selectedUpdatedCategory">
+								  <mat-option *ngFor="let cate of categoryService.categories" [value]="cate.categoryid" (click)="print(cate.categoryname)">
+									{{cate.categoryname}}
+									
+								  </mat-option>
+								</mat-select>
+							  </mat-form-field>
+											</div>
 
 										</form>
 									</div>
@@ -501,13 +507,22 @@
 											<option>Intermediate</option>
 											<option>Advance</option>
 										</select> -->
-                    <mat-form-field class="example-full-width">
+                   <!-- <mat-form-field class="example-full-width">
                       <mat-label>course level</mat-label>
                       <input type="number" matInput formControlName="courselevel">
                       <mat-error *ngIf="CreateCourseForm.controls['courselevel'].hasError('required')">
                         course level is <strong>required</strong>
                       </mat-error>
-                    </mat-form-field>
+                    </mat-form-field>-->
+					<mat-form-field appearance="fill">
+						<mat-label>Course Level</mat-label>
+						<mat-select formControlName="courselevel" [(ngModel)]="selectedLevel">
+						  <mat-option *ngFor="let level of Levels| enumValues" [value]="level.index" >
+							{{level.name}}
+							
+						  </mat-option>
+						</mat-select>
+					  </mat-form-field>
 									</div>
                   <div class="col-12">
 										<!--<mat-form-field class="example-full-width">

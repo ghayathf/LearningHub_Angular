@@ -7,6 +7,8 @@ import { Dialog } from '@angular/cdk/dialog';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap'; 
 import { CategoryService } from 'src/app/category.service';
+import { EnumValuesPipe } from '../../enum-values.pipe';
+
 
 @Component({
   selector: 'app-all-courses-table',
@@ -77,7 +79,15 @@ export class AllCoursesTableComponent {
 
     this.dialog.open(this.Update, dialogConfig);
   }
+  selectedUpdatedCategory:any
+  selectedUpdatedLevel:any
   async UpdateCourse() {
+    this.UpdateCourseForm.patchValue({
+      category_Id: this.selectedUpdatedCategory
+    });
+    this.UpdateCourseForm.patchValue({
+      courselevel: this.selectedUpdatedLevel
+    });
     await this.courseService.UpdateCourse(this.UpdateCourseForm.value);
     this.courseService.GetAllCourses();
   }
@@ -94,10 +104,14 @@ async openDetailsDialog(courseid: number)
     this.dialog.open(this.Create, dialogConfig)
   }
   selectedCategory:any
+  selectedLevel:any
   async CreateCourse()
   {
     this.CreateCourseForm.patchValue({
       category_Id: this.selectedCategory
+    });
+    this.CreateCourseForm.patchValue({
+      courselevel: this.selectedLevel
     });
     await this.courseService.CreateCourse(this.CreateCourseForm.value);
     this.courseService.GetAllCourses();
@@ -122,5 +136,9 @@ async openDetailsDialog(courseid: number)
   print(category:string){
  console.log(category)
   }
-
+  Levels = Levels;
 }
+enum Levels
+ { Beginner = 1,
+  Intermediate = 2, 
+  Advanced = 3, }

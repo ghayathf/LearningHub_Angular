@@ -114,3 +114,7 @@ export class CourseService {
   }
 
 }
+enum Levels
+ { Beginner = 1,
+  Intermediate = 2, 
+  Advanced = 3, }

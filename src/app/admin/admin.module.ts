@@ -21,6 +21,7 @@ import { AllSectionsComponent } from './all-sections/all-sections.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { EnumValuesPipe } from '../enum-values.pipe';
 
 @NgModule({
   declarations: [
@@ -31,10 +32,9 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
     AllMaterialsComponent,
     EmployeesComponent,
     TraineeRequestsComponent,
-
-
+    EnumValuesPipe,
     AllSectionsComponent,
-        EditProfileComponent,
+    EditProfileComponent,
   ],
   imports: [
     CommonModule,

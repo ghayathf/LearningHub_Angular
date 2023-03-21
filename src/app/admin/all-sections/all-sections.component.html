@@ -297,7 +297,7 @@
 										<div class="col-12">
 											<mat-form-field class="example-full-width">
 						  <mat-label>Section Capacity</mat-label>
-						  <input type="number" matInput formControlName='sectioncapacity'>
+						  <input type="number" matInput formControlName='sectioncapacity' min="5">
 						  <mat-error *ngIf="CreateForm.controls['sectioncapacity'].hasError('required')">
 							Section Capacity is <strong>required</strong>
 						  </mat-error>
@@ -306,22 +306,25 @@
 
 										<!-- Course level -->
 										<div class="col-12">
-											<mat-form-field class="example-full-width">
-						  <mat-label>Course </mat-label>
-						  <input type="number" matInput formControlName='course_Id'>
-						  <mat-error *ngIf="CreateForm.controls['course_Id'].hasError('required')">
-							Course is <strong>required</strong>
-						  </mat-error>
-						</mat-form-field>
+											<mat-form-field appearance="fill">
+												<mat-label>Select Course</mat-label>
+												<mat-select formControlName="course_Id" [(ngModel)]="selectedCourse">
+												  <mat-option *ngFor="let course of courseService.courses" [value]="course.courseid" >
+													{{course.coursename}}
+													
+												  </mat-option>
+												</mat-select>
+											  </mat-form-field>
 										</div>
 										<div class="col-12">
-											<mat-form-field class="example-full-width">
-						  <mat-label>Trainer </mat-label>
-						  <input type="number" matInput formControlName='trainer_Id'>
-						  <mat-error *ngIf="CreateForm.controls['trainer_Id'].hasError('required')">
-							Trainer is <strong>required</strong>
-						  </mat-error>
-						</mat-form-field>
+										<mat-form-field appearance="fill">
+											<mat-label>Select Triner</mat-label>
+											<mat-select formControlName="trainer_Id" [(ngModel)]="selectedTrainer">
+												<mat-option *ngFor="let trainer of combinedArray" [value]="trainer.trainerid">
+													{{ combinedArray.firstname+' '+combinedArray.lastname }}
+												  </mat-option>
+											  </mat-select>
+										  </mat-form-field>
 										</div>
 
 
@@ -421,28 +424,31 @@
 																<mat-form-field class="example-full-width">
 											  <mat-label>Meeting Url</mat-label>
 											  <input type="text" matInput formControlName='meetingurl'>
-											  <mat-error *ngIf="CreateForm.controls['meetingurl'].hasError('required')">
+											  <mat-error *ngIf="UpdateForm.controls['meetingurl'].hasError('required')">
 												Meeting Url is <strong>required</strong>
 											  </mat-error>
 											</mat-form-field>
 															</div>
 															<div class="col-12">
-																<mat-form-field class="example-full-width">
-											  <mat-label>Course </mat-label>
-											  <input type="number" matInput formControlName='course_Id'>
-											  <mat-error *ngIf="CreateForm.controls['course_Id'].hasError('required')">
-												Course is <strong>required</strong>
-											  </mat-error>
-											</mat-form-field>
+																<mat-form-field appearance="fill">
+																	<mat-label>Select Course </mat-label>
+																	<mat-select formControlName="course_Id" [(ngModel)]="selectedUpdatedCourse">
+																	  <mat-option *ngFor="let course of courseService.courses" [value]="course.courseid" >
+																		{{course.coursename}}
+																		
+																	  </mat-option>
+																	</mat-select>
+																  </mat-form-field>
 															</div>
 															<div class="col-12">
-																<mat-form-field class="example-full-width">
-											  <mat-label>Trainer </mat-label>
-											  <input type="number" matInput formControlName='trainer_Id'>
-											  <mat-error *ngIf="CreateForm.controls['trainer_Id'].hasError('required')">
-												Trainer is <strong>required</strong>
-											  </mat-error>
-											</mat-form-field>
+																<mat-form-field appearance="fill">
+																	<mat-label>Select Trainer </mat-label>
+																	<mat-select formControlName="trainer_Id" [(ngModel)]="selectedUpdatedTrainer">
+																		<mat-option *ngFor="let trainer of combinedArray" [value]="trainer.trainerid" >
+																			{{ combinedArray.firstname+' '+combinedArray.lastname }}
+																		  </mat-option>
+																	  </mat-select>
+																  </mat-form-field>
 															</div>
 
                                         </form>
