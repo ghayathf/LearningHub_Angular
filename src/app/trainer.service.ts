@@ -17,7 +17,6 @@ export class TrainerService {
     this.spinner.show()
     this.http.get("https://localhost:44391/api/Trainer/GetAllTrainers").subscribe(
       {
-
         next:async (res)=>{
           this.spinner.hide()
           await this.getAllUsersTrainers()
