@@ -60,6 +60,9 @@ export class AllSectionsComponent {
   console.log(combinedArray);
 
 }
+OpenImportDialog(id:number){
+this.dialog.open(this.Import)
+}
   GenerateCertificate(id: number) {
     this.sectionService.GenerateCertificate(1, id)
   }
@@ -242,8 +245,6 @@ async openDetailsDialog(sectionid: number)
       this.trainees.push(newTrainee);
     }
     for (let j = 0; j < this.trainees.length; j++) {
-
-
       await this.traineeSection.CreateTraineeSection(this.trainees[j]);
     }
   }
