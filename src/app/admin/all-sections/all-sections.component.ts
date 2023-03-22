@@ -160,6 +160,8 @@ UserTrainer? :any
     await this.sectionService.DeleteSection(this.selectedItem)
     this.sectionService.GetAllSections()
   }
+  selectedUpdatedCourse: any
+  selectedUpdatedTrainer: any
   async openUpdateDialog(sectionid: number) {
     await this.sectionService.GetSectionById(sectionid);
     await this.UpdateForm.patchValue(this.sectionService.section);
@@ -170,8 +172,7 @@ UserTrainer? :any
 
     this.dialog.open(this.Update, dialogConfig);
   }
-  selectedUpdatedCourse: any
-  selectedUpdatedTrainer: any
+
   async UpdateSectionForm() {
     this.UpdateForm.patchValue({
       course_Id: this.selectedUpdatedCourse

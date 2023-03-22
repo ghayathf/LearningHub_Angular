@@ -52,12 +52,13 @@ export class CategoriesComponent {
     this.categoryService.GetAllCategories()
   }
 categoryImage:any
-  categoryImg?:string
+
+categoryImg?:string
   async openUpdateDialog(categoryid: number) {
     await this.categoryService.GetCategoryById(categoryid);
     this.categoryImage = this.categoryService.category.categoryimage
     await this.UpdateCategoryForm.patchValue(this.categoryService.category);
-   
+
     const dialogConfig = new MatDialogConfig();
     dialogConfig.maxWidth = '500px';
     dialogConfig.maxHeight = '90vh';
@@ -88,9 +89,9 @@ currentImage:any
       formdata.append('file', uplodedFile);
       this.categoryService.UploadImage(formdata);
     }
-    
 
- 
+
+
   }
-  
+
 }
