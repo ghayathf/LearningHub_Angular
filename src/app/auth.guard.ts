@@ -46,6 +46,8 @@ export class AuthGuard implements CanActivate {
         if(user.RoleId == 2)
         {
           this.toastr.success('Welcome Trainee '+user.Username)
+          this.gh = parseInt(user.Userid)
+          this.loggedUser = user
           return true
         }
         else
@@ -60,6 +62,8 @@ export class AuthGuard implements CanActivate {
         if(user.RoleId == 3)
         {
           this.toastr.success('Welcome Trainer '+user.Username)
+          this.gh = parseInt(user.Userid)
+          this.loggedUser = user
           return true
         }
         else

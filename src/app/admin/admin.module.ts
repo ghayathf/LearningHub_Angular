@@ -20,7 +20,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { MatDialogModule } from '@angular/material/dialog';
-
 import { TestimonialComponent } from './testimonial/testimonial.component';
 import { EnumValuesPipe } from '../enum-values.pipe';
 

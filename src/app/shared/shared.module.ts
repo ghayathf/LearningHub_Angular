@@ -17,6 +17,9 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { AdminHeaderComponent } from './admin-header/admin-header.component';
 import { MatDialogRef, MatDialogClose } from '@angular/material/dialog';
 import { NgChartsModule } from 'ng2-charts';
+import { TrainerHeaderComponent } from './trainer-header/trainer-header.component';
+import { TrainerSideBarComponent } from './trainer-side-bar/trainer-side-bar.component';
+import { TrainerBannerComponent } from './trainer-banner/trainer-banner.component';
 
 
 @NgModule({
@@ -25,6 +28,9 @@ import { NgChartsModule } from 'ng2-charts';
     HomeFooterComponent,
     AdminSideBarComponent,
     AdminHeaderComponent,
+    TrainerHeaderComponent,
+    TrainerSideBarComponent,
+    TrainerBannerComponent,
   ],
   imports: [
     CommonModule,
@@ -58,7 +64,10 @@ import { NgChartsModule } from 'ng2-charts';
     NgbDropdownModule,
     MatDialogClose,
     NgxSpinnerModule,
-    NgChartsModule
+    NgChartsModule,
+    TrainerHeaderComponent,
+    TrainerSideBarComponent,
+    TrainerBannerComponent,
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
