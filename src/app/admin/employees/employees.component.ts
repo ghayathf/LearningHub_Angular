@@ -88,18 +88,15 @@ export class EmployeesComponent {
     /* save to file */
     XLSX.writeFile(wb, this.fileName);
   }
-
-  MakePDF() {
+  hideActionColumn?: boolean = false;
+  async MakePDF() {
     let pdf = new jsPDF();
-    // pdf.html(this.el.nativeElement, {
-    //   callback: (pdf) => {
-    //     pdf.save("Employee.pdf");
-    //   }
-    // });
-
-    autoTable(pdf, { html: "#excel-table" })
-    pdf.save("emp.pdf")
-
+    this.hideActionColumn = true;
+    setTimeout(async () => {
+      await autoTable(pdf, { html: "#excel-table" });
+      this.hideActionColumn = false;
+      await pdf.save("emp.pdf");
+    }, 1000);
   }
 
 }

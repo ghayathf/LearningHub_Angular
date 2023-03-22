@@ -53,12 +53,10 @@ export class AuthService {
       }
     )})
   }
-  
+
   //not ready
-  async logout() {
-    await localStorage.removeItem('token');
-    await localStorage.removeItem('user');
-    await localStorage.clear();
-    await this.router.navigate(['']);
+   logout() {
+     localStorage.clear();
+     this.router.navigate(['']);
   }
 }

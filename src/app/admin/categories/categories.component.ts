@@ -51,9 +51,10 @@ export class CategoriesComponent {
     await this.categoryService.DeleteCategory(this.selectedItem)
     this.categoryService.GetAllCategories()
   }
-  categoryImg?:string
+categoryImage:any  categoryImg?:string
   async openUpdateDialog(categoryid: number) {
     await this.categoryService.GetCategoryById(categoryid);
+    this.categoryImage = this.categoryService.category.categoryimage
     await this.UpdateCategoryForm.patchValue(this.categoryService.category);
    
     const dialogConfig = new MatDialogConfig();
@@ -78,7 +79,7 @@ export class CategoriesComponent {
     await this.categoryService.CreateCategory(this.CreateCategoryForm.value);
     this.categoryService.GetAllCategories();
   }
-
+currentImage:any
   UploadImage(input: any) {
     if (input.files[0] != null) {
       let uplodedFile = input.files[0]; // image fille
@@ -86,6 +87,8 @@ export class CategoriesComponent {
       formdata.append('file', uplodedFile);
       this.categoryService.UploadImage(formdata);
     }
+    
+
  
   }
   

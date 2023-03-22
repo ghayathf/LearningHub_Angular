@@ -120,11 +120,11 @@ export class RegisterService {
 
   userid: any;
 
-  DeleteRequest(requestId: any) {
+  DeleteRequest(userid: any) {
     this.spinner.show();
-    this.userid = requestId;
+
     return new Promise<void>((resolve, reject) => {
-      this.http.delete("https://localhost:44391/api/User/DeleteUser/" + requestId).subscribe(
+      this.http.delete("https://localhost:44391/api/User/DeleteUser/" + userid).subscribe(
         {
           next: () => {
             this.spinner.hide();
@@ -183,5 +183,29 @@ export class RegisterService {
     })
 
   }
+
+  AcceptedTrainee: any = [];
+
+  GetAllAcceptedTrainee() {
+
+    this.spinner.show();
+    this.http.get("https://localhost:44391/api/Trainee/GetAllAccepted").subscribe(
+      {
+        next: (res) => {
+          this.spinner.hide();
+          this.AcceptedTrainee = res;
+
+        },
+        error: (err) => {
+          this.spinner.hide();
+          console.log(err);
+
+        }
+      }
+    )
+
+  }
+
+
 
 }

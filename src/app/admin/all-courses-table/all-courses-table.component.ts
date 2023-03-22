@@ -1,10 +1,10 @@
-import { Component, ViewChild} from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CourseService } from 'src/app/course.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Dialog } from '@angular/cdk/dialog';
-import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap'; 
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { CategoryService } from 'src/app/category.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
@@ -21,11 +21,11 @@ export class AllCoursesTableComponent {
 
   @ViewChild('DeleteForm') Delete: any
   @ViewChild('UpdateForm') Update: any
-  @ViewChild('DetailsForm') Details:any
-  @ViewChild('CreateForm') Create:any
+  @ViewChild('DetailsForm') Details: any
+  @ViewChild('CreateForm') Create: any
   @ViewChild('Search') Search: any
-  @ViewChild('Categories') Categories:any
-  constructor(public courseService: CourseService,public categoryService:CategoryService, private router: Router, public spinner: NgxSpinnerService, private dialog: MatDialog) {
+  @ViewChild('Categories') Categories: any
+  constructor(public courseService: CourseService, public categoryService: CategoryService, private router: Router, public spinner: NgxSpinnerService, private dialog: MatDialog) {
   }
 
   CreateCourseForm = new FormGroup(
@@ -76,6 +76,7 @@ export class AllCoursesTableComponent {
  currentImg:any
   async openUpdateDialog(courseid: number) {
     await this.courseService.GetCourseById(courseid);
+   
     await this.UpdateCourseForm.patchValue(this.courseService.course);
 
     const dialogConfig = new MatDialogConfig();
@@ -120,6 +121,8 @@ export class AllCoursesTableComponent {
       });
     }
     await this.courseService.UpdateCourse(this.UpdateCourseForm.value);
+
+
     this.courseService.GetAllCourses();
     window.location.reload()
   }
@@ -134,10 +137,9 @@ export class AllCoursesTableComponent {
     dialogConfig.maxHeight = '90vh';
     this.dialog.open(this.Create, dialogConfig)
   }
-  selectedCategory:any
-  selectedLevel:any
-  async CreateCourse()
-  {
+  selectedCategory: any
+  selectedLevel: any
+  async CreateCourse() {
     this.CreateCourseForm.patchValue({
       category_Id: this.selectedCategory
     });
@@ -147,7 +149,7 @@ export class AllCoursesTableComponent {
     await this.courseService.CreateCourse(this.CreateCourseForm.value);
     this.courseService.GetAllCourses();
   }
-  CourseName?:string
+  CourseName?: string
   searchCourses() {
     this.spinner.show();
     this.courseService.searchCourses(this.CourseName).subscribe(
@@ -164,8 +166,8 @@ export class AllCoursesTableComponent {
       }
     );
   }
-  print(category:string){
- console.log(category)
+  print(category: string) {
+    console.log(category)
   }
  selectedImg:any
   UploadImage(input: any) {
@@ -179,7 +181,8 @@ export class AllCoursesTableComponent {
   }
   Levels = Levels;
 }
-enum Levels
- { Beginner = 1,
-  Intermediate = 2, 
-  Advanced = 3, }
+enum Levels {
+  Beginner = 1,
+  Intermediate = 2,
+  Advanced = 3,
+}
