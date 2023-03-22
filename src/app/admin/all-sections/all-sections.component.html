@@ -323,8 +323,8 @@
 										<mat-form-field appearance="fill">
 											<mat-label>Select Triner</mat-label>
 											<mat-select formControlName="trainer_Id" [(ngModel)]="selectedTrainer">
-												<mat-option *ngFor="let trainer of combinedArray" [value]="trainer.trainerid">
-													{{ combinedArray.firstname+' '+combinedArray.lastname }}
+												<mat-option *ngFor="let trainer of combinedArray" [value]="trainer.trainerid" >
+													{{ trainer.email }}
 												  </mat-option>
 											  </mat-select>
 										  </mat-form-field>
@@ -448,7 +448,7 @@
 																	<mat-label>Select Trainer </mat-label>
 																	<mat-select formControlName="trainer_Id" [(ngModel)]="selectedUpdatedTrainer">
 																		<mat-option *ngFor="let trainer of combinedArray" [value]="trainer.trainerid" >
-																			{{ combinedArray.firstname }}
+																			{{ trainer.email }}
 																		  </mat-option>
 																	  </mat-select>
 																  </mat-form-field>

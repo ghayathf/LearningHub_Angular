@@ -31,17 +31,17 @@ trainers:any=[]
 combinedArray:any=[]
 UserTrainer? :any
   currentDate:any
-ngOnInit() {
+  async ngOnInit() {
   this.sectionService.GetAllSections()
-  this.userService.getAllUsers()
-  this.trainerService.GetAllTrainers()
+  await this.userService.getAllUsers()
+  await this.trainerService.GetAllTrainers()
   this.courseService.GetAllCourses()
   this. trainers= this.trainerService.trainers
   this.users=this.userService.users
-  this. combinedArray = this.users.filter((x: { roleId: number; }) => x.roleId == 3).concat(this.trainers.filter((trainer :any)=> {
-    return this.users.find((user:any) => user.userid== trainer.user_Id);
-  
-  }));
+  this. combinedArray = this.users.filter((x: { roleId: number; }) => x.roleId == 3).map((user:any) => {
+    const trainer = this.trainers.find((trainer:any) => trainer.user_Id === user.userid);
+    return { ...user, ...trainer };
+  });
   console.log(this.combinedArray)
   this.currentDate = new Date(Date.now()).toISOString().slice(0,10)
 
