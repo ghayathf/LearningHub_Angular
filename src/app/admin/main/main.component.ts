@@ -52,8 +52,7 @@ public radarChartOptions: ChartConfiguration<"radar">["options"] = {
       display: true,
       grid: {
         color: 'white',
-        lineWidth: 0.5,
-        
+        lineWidth: 0.5
       },
       ticks: {
         display: false
