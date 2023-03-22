@@ -346,30 +346,28 @@
 									</mat-form-field>
 								</div>
 
-								<!-- Course level -->
-								<div class="col-12">
-									<mat-form-field appearance="fill">
-										<mat-label>Select Course</mat-label>
-										<mat-select formControlName="course_Id" [(ngModel)]="selectedCourse">
-											<mat-option *ngFor="let course of courseService.courses"
-												[value]="course.courseid">
-												{{course.coursename}}
-
-											</mat-option>
-										</mat-select>
-									</mat-form-field>
-								</div>
-								<div class="col-12">
-									<mat-form-field appearance="fill">
-										<mat-label>Select Triner</mat-label>
-										<mat-select formControlName="trainer_Id" [(ngModel)]="selectedTrainer">
-											<mat-option *ngFor="let trainer of combinedArray"
-												[value]="trainer.trainerid">
-												{{ combinedArray.firstname+' '+combinedArray.lastname }}
-											</mat-option>
-										</mat-select>
-									</mat-form-field>
-								</div>
+										<!-- Course level -->
+										<div class="col-12">
+											<mat-form-field appearance="fill">
+												<mat-label>Select Course</mat-label>
+												<mat-select formControlName="course_Id" [(ngModel)]="selectedCourse">
+												  <mat-option *ngFor="let course of courseService.courses" [value]="course.courseid" >
+													{{course.coursename}}
+													
+												  </mat-option>
+												</mat-select>
+											  </mat-form-field>
+										</div>
+										<div class="col-12">
+										<mat-form-field appearance="fill">
+											<mat-label>Select Triner</mat-label>
+											<mat-select formControlName="trainer_Id" [(ngModel)]="selectedTrainer">
+												<mat-option *ngFor="let trainer of combinedArray" [value]="trainer.trainerid" >
+													{{ trainer.email }}
+												  </mat-option>
+											  </mat-select>
+										  </mat-form-field>
+										</div>
 
 
 
@@ -441,73 +439,62 @@
 													<mat-datepicker-toggle matSuffix
 														[for]="picker1"></mat-datepicker-toggle>
 													<mat-datepicker #picker1></mat-datepicker>
-												</mat-form-field>
-											</div>
-											<div class="row g-4">
-												<mat-form-field appearance="fill">
-													<mat-label>End Time</mat-label>
-													<input matInput [matDatepicker]="picker2" formControlName='endtime'
-														name="endtime">
-													<mat-datepicker-toggle matSuffix
-														[for]="picker2"></mat-datepicker-toggle>
-													<mat-datepicker #picker2></mat-datepicker>
-												</mat-form-field>
-											</div>
-											<div class="row g-4">
-												<mat-form-field appearance="fill">
-													<mat-label>Start Date</mat-label>
-													<input matInput [matDatepicker]="picker3"
-														formControlName='startdate' name="startDate">
-													<mat-datepicker-toggle matSuffix
-														[for]="picker3"></mat-datepicker-toggle>
-													<mat-datepicker #picker3></mat-datepicker>
-												</mat-form-field>
-											</div>
-											<div class="row g-4">
-												<mat-form-field appearance="fill">
-													<mat-label>End Date</mat-label>
-													<input matInput [matDatepicker]="picker4" formControlName='enddate'
-														name="startDate">
-													<mat-datepicker-toggle matSuffix
-														[for]="picker4"></mat-datepicker-toggle>
-													<mat-datepicker #picker4></mat-datepicker>
-												</mat-form-field>
-											</div>
-											<div class="col-12">
-												<mat-form-field class="example-full-width">
-													<mat-label>Meeting Url</mat-label>
-													<input type="text" matInput formControlName='meetingurl'>
-													<mat-error
-														*ngIf="UpdateForm.controls['meetingurl'].hasError('required')">
-														Meeting Url is <strong>required</strong>
-													</mat-error>
-												</mat-form-field>
-											</div>
-											<div class="col-12">
-												<mat-form-field appearance="fill">
-													<mat-label>Select Course </mat-label>
-													<mat-select formControlName="course_Id"
-														[(ngModel)]="selectedUpdatedCourse">
-														<mat-option *ngFor="let course of courseService.courses"
-															[value]="course.courseid">
-															{{course.coursename}}
-
-														</mat-option>
-													</mat-select>
-												</mat-form-field>
-											</div>
-											<div class="col-12">
-												<mat-form-field appearance="fill">
-													<mat-label>Select Trainer </mat-label>
-													<mat-select formControlName="trainer_Id"
-														[(ngModel)]="selectedUpdatedTrainer">
-														<mat-option *ngFor="let trainer of combinedArray"
-															[value]="trainer.trainerid">
-															{{ combinedArray.firstname }}
-														</mat-option>
-													</mat-select>
-												</mat-form-field>
-											</div>
+												  </mat-form-field>
+												</div>
+												<div class="row g-4">
+													<mat-form-field appearance="fill" >
+														<mat-label>End Time</mat-label>
+														<input matInput [matDatepicker]="picker2" formControlName='endtime' name="endtime">
+														<mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+														<mat-datepicker #picker2></mat-datepicker>
+													  </mat-form-field>
+													</div>
+													<div class="row g-4">
+														<mat-form-field appearance="fill" >
+															<mat-label>Start Date</mat-label>
+															<input matInput [matDatepicker]="picker3" formControlName='startdate' name="startDate">
+															<mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+															<mat-datepicker #picker3></mat-datepicker>
+														  </mat-form-field>
+														</div>
+														<div class="row g-4">
+															<mat-form-field appearance="fill" >
+																<mat-label>End Date</mat-label>
+																<input matInput [matDatepicker]="picker4" formControlName='enddate' name="startDate">
+																<mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+																<mat-datepicker #picker4></mat-datepicker>
+															  </mat-form-field>
+															</div>
+															<div class="col-12">
+																<mat-form-field class="example-full-width">
+											  <mat-label>Meeting Url</mat-label>
+											  <input type="text" matInput formControlName='meetingurl'>
+											  <mat-error *ngIf="UpdateForm.controls['meetingurl'].hasError('required')">
+												Meeting Url is <strong>required</strong>
+											  </mat-error>
+											</mat-form-field>
+															</div>
+															<div class="col-12">
+																<mat-form-field appearance="fill">
+																	<mat-label>Select Course </mat-label>
+																	<mat-select formControlName="course_Id" [(ngModel)]="selectedUpdatedCourse">
+																	  <mat-option *ngFor="let course of courseService.courses" [value]="course.courseid" >
+																		{{course.coursename}}
+																		
+																	  </mat-option>
+																	</mat-select>
+																  </mat-form-field>
+															</div>
+															<div class="col-12">
+																<mat-form-field appearance="fill">
+																	<mat-label>Select Trainer </mat-label>
+																	<mat-select formControlName="trainer_Id" [(ngModel)]="selectedUpdatedTrainer">
+																		<mat-option *ngFor="let trainer of combinedArray" [value]="trainer.trainerid" >
+																			{{ trainer.email }}
+																		  </mat-option>
+																	  </mat-select>
+																  </mat-form-field>
+															</div>
 
 										</form>
 									</div>

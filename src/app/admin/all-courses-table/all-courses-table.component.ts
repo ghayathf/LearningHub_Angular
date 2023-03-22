@@ -70,34 +70,56 @@ export class AllCoursesTableComponent {
     await this.courseService.deleteCourse(this.selectedItem)
     this.courseService.GetAllCourses()
   }
-  oldImage: any;
+  course:any
+  selectedUpdatedCategory:any
+  selectedUpdatedLevel:any
+ currentImg:any
   async openUpdateDialog(courseid: number) {
     await this.courseService.GetCourseById(courseid);
-    this.oldImage = this.courseService.course.courseimage;
+   
     await this.UpdateCourseForm.patchValue(this.courseService.course);
 
     const dialogConfig = new MatDialogConfig();
     dialogConfig.maxWidth = '500px';
     dialogConfig.maxHeight = '90vh';
-
+    this.course=this.courseService.GetCourseById(courseid) 
+    this.selectedUpdatedCategory=this.course.category_Id
+    this.selectedUpdatedLevel=this.course.courselevel
+    this.currentImg=this.course.courseimage
     this.dialog.open(this.Update, dialogConfig);
   }
-  selectedUpdatedCategory: any
-  selectedUpdatedLevel: any
+  
   async UpdateCourse() {
-
+    if(this.selectedUpdatedCategory!=null)
     this.UpdateCourseForm.patchValue({
       category_Id: this.selectedUpdatedCategory
     });
+    else{
+      this.selectedUpdatedCategory=this.course.category_Id
+    this.UpdateCourseForm.patchValue({
+      category_Id: this.selectedUpdatedCategory
+    });}
+
+    if(this.selectedUpdatedLevel!=null)
     this.UpdateCourseForm.patchValue({
       courselevel: this.selectedUpdatedLevel
     });
-    if (this.UpdateCourseForm.controls['courseimage'] == null) {
-      this.UpdateCourseForm.controls['courseimage'] = this.oldImage;
-
-
+    else{
+      this.selectedUpdatedLevel=this.course.courselevel
+      this.UpdateCourseForm.patchValue({
+        courselevel: this.selectedUpdatedLevel
+      });
     }
-
+    if(this.selectedImg!=null)
+    this.UpdateCourseForm.patchValue({
+      courseimage: this.selectedImg
+    });
+    else
+    { this.selectedImg=this.currentImg
+      this.UpdateCourseForm.patchValue({
+        courseimage: this.selectedImg
+      });
+    }
     await this.courseService.UpdateCourse(this.UpdateCourseForm.value);
 
 
@@ -147,7 +169,7 @@ export class AllCoursesTableComponent {
   print(category: string) {
     console.log(category)
   }
-
+ selectedImg:any
   UploadImage(input: any) {
     if (input.files[0] != null) {
       let uplodedFile = input.files[0]; // image fille
@@ -155,6 +177,7 @@ export class AllCoursesTableComponent {
       formdata.append('file', uplodedFile);
       this.courseService.UploadImage(formdata);
     }
+    this.selectedImg=input
   }
   Levels = Levels;
 }

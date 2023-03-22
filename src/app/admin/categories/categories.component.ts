@@ -51,16 +51,16 @@ export class CategoriesComponent {
     await this.categoryService.DeleteCategory(this.selectedItem)
     this.categoryService.GetAllCategories()
   }
-categoryImage:any
+categoryImage:any  categoryImg?:string
   async openUpdateDialog(categoryid: number) {
     await this.categoryService.GetCategoryById(categoryid);
     this.categoryImage = this.categoryService.category.categoryimage
     await this.UpdateCategoryForm.patchValue(this.categoryService.category);
-
+   
     const dialogConfig = new MatDialogConfig();
     dialogConfig.maxWidth = '500px';
     dialogConfig.maxHeight = '90vh';
-
+    this.categoryImg=this.categoryService.category.categoryimage
     this.dialog.open(this.Update, dialogConfig);
   }
   async UpdateCategory() {
@@ -89,5 +89,7 @@ currentImage:any
     }
     
 
+ 
   }
+  
 }

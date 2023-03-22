@@ -30,25 +30,24 @@ export class AllSectionsComponent {
   constructor(public sectionService: SectionService, private router: Router, public dialog: MatDialog,
     public spinner: NgxSpinnerService, private formBuilder: FormBuilder, public trainerService: TrainerService, public courseService: CourseService, public userService: UserService, private datePipe: DatePipe, public traineeServie: RegisterService, public traineeSection: TraineeSectionService) { }
 
-  users: any = []
-  trainers: any = []
-  combinedArray: any = []
-  UserTrainer?: any
-  currentDate: any
-  ngOnInit() {
-    this.traineeServie.GetAllAcceptedTrainee();
-    this.sectionService.GetAllSections()
-    this.userService.getAllUsers()
-    this.trainerService.GetAllTrainers()
-    this.courseService.GetAllCourses()
-    this.trainers = this.trainerService.trainers
-    this.users = this.userService.users
-    this.combinedArray = this.users.filter((x: { roleId: number; }) => x.roleId == 3).concat(this.trainers.filter((trainer: any) => {
-      return this.users.find((user: any) => user.userid == trainer.user_Id);
-
-    }));
-    this.currentDate = new Date(Date.now()).toISOString().slice(0, 10)
-    console.log(this.traineeServie.AcceptedTrainee);
+users:any=[]
+trainers:any=[]
+combinedArray:any=[]
+UserTrainer? :any
+  currentDate:any
+  async ngOnInit() {
+  this.sectionService.GetAllSections()
+  await this.userService.getAllUsers()
+  await this.trainerService.GetAllTrainers()
+  this.courseService.GetAllCourses()
+  this. trainers= this.trainerService.trainers
+  this.users=this.userService.users
+  this. combinedArray = this.users.filter((x: { roleId: number; }) => x.roleId == 3).map((user:any) => {
+    const trainer = this.trainers.find((trainer:any) => trainer.user_Id === user.userid);
+    return { ...user, ...trainer };
+  });
+  console.log(this.combinedArray)
+  this.currentDate = new Date(Date.now()).toISOString().slice(0,10)
 
   }
   GenerateCertificate(id: number) {
