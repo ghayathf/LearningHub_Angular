@@ -47,8 +47,8 @@ export class AllSectionsComponent {
       return this.users.find((user: any) => user.userid == trainer.user_Id);
 
     }));
-    console.log(this.combinedArray)
     this.currentDate = new Date(Date.now()).toISOString().slice(0, 10)
+    console.log(this.traineeServie.AcceptedTrainee);
 
   }
   GenerateCertificate(id: number) {
