@@ -180,8 +180,7 @@ async openUpdateDialog(sectionid: number) {
 
   this.dialog.open(this.Update, dialogConfig);
 }
-selectedUpdatedCourse:any
-selectedUpdatedTrainer:any
+
 async UpdateSectionForm() {
   this.UpdateForm.patchValue({
     course_Id: this.selectedUpdatedCourse
@@ -230,7 +229,7 @@ async openDetailsDialog(sectionid: number)
     XLSX.writeFile(wb, this.fileName);
   }
   Zero: any = 0;
-
+  selectdImportId:any
   async InsertData() {
     for (let i = 0; i < this.ExcelData.length; i++) {
       const newTrainee = {
