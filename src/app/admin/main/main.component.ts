@@ -29,9 +29,12 @@ this.avgs = this.courseService.avgs
 this.x = this.avgs.map(function(elem: { coursename: any; }){return elem.coursename })
 this.post = this.avgs.map(function(elem: { avgPostExamSolution: any; }){return elem.avgPostExamSolution })
 this.pre = this.avgs.map(function(elem: { avgPreExamSolution: any; }){return elem.avgPreExamSolution })
-this.lineChartData.labels = this.x;
-this.lineChartData.datasets[0].data = this.pre
-this.lineChartData.datasets[1].data = this.post
+// this.lineChartData.labels = this.x;
+// this.lineChartData.datasets[0].data = this.pre
+// this.lineChartData.datasets[1].data = this.post
+this.radarChartLabels=this.x;
+this.radarChartDatasets[0].data=this.pre;
+this.radarChartDatasets[1].data=this.post;
 this.categoryService.GetAllCategories()
 this.cats = this.categoryService.categories
 this.cName = this.cats.map(function(elem: { categoryname: any; }){return elem.categoryname })
@@ -51,33 +54,43 @@ public pieChartDatasets = [ {
 } ];
 public pieChartLegend = true;
 public pieChartPlugins = [];
+// title = 'ng2-charts-demo';
+
+//   public lineChartData: ChartConfiguration<'line'>['data'] = {
+//     labels:[],
+//     datasets: [
+//       {
+//         data: [],
+//         label: 'Average Pre exam',
+//         fill: true,
+//         tension: 0.5,
+//         borderColor: '#fff',
+//         backgroundColor:'transparent'
+//       },
+//       {
+//         data: [],
+//         label: 'Average Post Exam',
+//         fill: true,
+//         tension: 0.5,
+//         borderColor: 'red',
+//         backgroundColor:'transparent'
+//       }
+//     ]
+//   };
+//   public lineChartOptions: ChartOptions<'line'> = {
+//     responsive: false
+//   };
+//   public lineChartLegend = true;
 title = 'ng2-charts-demo';
 
-  public lineChartData: ChartConfiguration<'line'>['data'] = {
-    labels:[],
-    datasets: [
-      {
-        data: [],
-        label: 'Average Pre exam',
-        fill: true,
-        tension: 0.5,
-        borderColor: '#fff',
-        backgroundColor:'transparent'
-      },
-      {
-        data: [],
-        label: 'Average Post Exam',
-        fill: true,
-        tension: 0.5,
-        borderColor: 'red',
-        backgroundColor:'transparent'
-      }
-    ]
+  public radarChartOptions: ChartConfiguration<'radar'>['options'] = {
+    responsive: false,
   };
-  public lineChartOptions: ChartOptions<'line'> = {
-    responsive: false
-  };
-  public lineChartLegend = true;
+  public radarChartLabels: string[] = [];
 
+  public radarChartDatasets: ChartConfiguration<'radar'>['data']['datasets'] = [
+    { data: [], label: 'AVG Pre-Exam' },
+    { data: [], label: 'AVG Post-Exam' }
+  ];
 
 }
