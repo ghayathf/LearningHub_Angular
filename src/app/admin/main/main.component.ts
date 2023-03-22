@@ -3,6 +3,8 @@ import { TrainerService } from 'src/app/trainer.service';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ChartConfiguration, ChartOptions } from 'chart.js';
+import { CourseService } from 'src/app/course.service';
+import { CategoryService } from 'src/app/category.service';
 
 @Component({
   selector: 'app-main',
@@ -10,11 +12,32 @@ import { ChartConfiguration, ChartOptions } from 'chart.js';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent {
-constructor(public trainerService:TrainerService) {
+constructor(public trainerService:TrainerService,public courseService:CourseService,public categoryService:CategoryService) {
 
 }
+avgs:any =[]
+x :any = 0
+post:any = 0
+pre:any = 0
+cats:any=[]
+cName:any
+Ccount:any
 ngOnInit(){
 this.trainerService.GetAllTrainers()
+this.courseService.charts()
+this.avgs = this.courseService.avgs
+this.x = this.avgs.map(function(elem: { coursename: any; }){return elem.coursename })
+this.post = this.avgs.map(function(elem: { avgPostExamSolution: any; }){return elem.avgPostExamSolution })
+this.pre = this.avgs.map(function(elem: { avgPreExamSolution: any; }){return elem.avgPreExamSolution })
+this.lineChartData.labels = this.x;
+this.lineChartData.datasets[0].data = this.pre
+this.lineChartData.datasets[1].data = this.post
+this.categoryService.GetAllCategories()
+this.cats = this.categoryService.categories
+this.cName = this.cats.map(function(elem: { categoryname: any; }){return elem.categoryname })
+this.pieChartLabels=this.cName
+this.Ccount = this.cats.map(function(elem: { finalCourses: any; }) { return elem.finalCourses.length; });
+  this.pieChartDatasets[0].data = this.Ccount;
 }
 title2 = 'ng2-charts-demo';
 
@@ -24,30 +47,30 @@ public pieChartOptions: ChartOptions<'pie'> = {
 };
 public pieChartLabels = [ [ 'Download', 'Sales' ], [ 'In', 'Store', 'Sales' ], 'Mail Sales' ];
 public pieChartDatasets = [ {
-  data: [ 300, 500, 100 ]
+  data: []
 } ];
 public pieChartLegend = true;
 public pieChartPlugins = [];
 title = 'ng2-charts-demo';
 
   public lineChartData: ChartConfiguration<'line'>['data'] = {
-    labels: [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July'
-    ],
+    labels:[],
     datasets: [
       {
-        data: [ 65, 59, 80, 81, 56, 55, 40 ],
-        label: 'Series A',
+        data: [],
+        label: 'Average Pre exam',
         fill: true,
         tension: 0.5,
         borderColor: '#fff',
-        backgroundColor: 'rgba(255,0,0,0.3)'
+        backgroundColor:'transparent'
+      },
+      {
+        data: [],
+        label: 'Average Post Exam',
+        fill: true,
+        tension: 0.5,
+        borderColor: 'red',
+        backgroundColor:'transparent'
       }
     ]
   };

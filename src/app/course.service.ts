@@ -133,18 +133,41 @@ export class CourseService {
   ImgaeName = "";
 
   UploadImage(imageFile: any) {
+    this.spinner.show()
+    return new Promise<void>((resolve, reject) => {
+
     this.http.post("https://localhost:44391/api/Courses/UploadImage", imageFile).subscribe(
       {
         next: (res: any) => {
+          this.spinner.hide()
           this.ImgaeName = res.courseimage;
+          resolve()
         },
         error: () => { }
       }
-    )
+    )})
   }
+  avgs:any =[]
+  charts(){
+    this.spinner.show()
+    return new Promise<void>((resolve, reject) => {
+    this.http.get("https://localhost:44391/api/Courses/CoursesAvgs").subscribe(
+      {
+        next:(res)=>{
+          this.spinner.hide()
+          this.avgs = res;
+          resolve()
+        },
+        error:(err)=>{
+          this.spinner.hide()
+          console.log(err);
 
+        }
+      }
+    )})
+  }
 }
 enum Levels
  { Beginner = 1,
-  Intermediate = 2, 
+  Intermediate = 2,
   Advanced = 3, }

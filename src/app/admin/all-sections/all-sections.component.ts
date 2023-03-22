@@ -40,10 +40,19 @@ ngOnInit() {
   this.users=this.userService.users
   this. combinedArray = this.users.filter((x: { roleId: number; }) => x.roleId == 3).concat(this.trainers.filter((trainer :any)=> {
     return this.users.find((user:any) => user.userid== trainer.user_Id);
-  
+
   }));
   console.log(this.combinedArray)
   this.currentDate = new Date(Date.now()).toISOString().slice(0,10)
+
+  const combinedArray = this.users.filter((user: { userid: number; }) => this.trainers.some((trainer: { user_Id: number; }) => trainer.user_Id === user.userid))
+    .map((user: { userid: number; }) => {
+      const trainer = this.trainers.find((trainer: { user_Id: number; }) => trainer.user_Id === user.userid);
+      return {...user, ...trainer};
+    });
+
+
+  console.log(combinedArray);
 
 }
 GenerateCertificate(id:number){
@@ -52,7 +61,7 @@ this.sectionService.GenerateCertificate(1,id)
 sliceDate(d:any){
   return d.slice(0,10)
 
-  
+
 }
 
 OpenDialog() {
@@ -82,8 +91,8 @@ UpdateForm =new FormGroup(
     enddate : new FormControl('',Validators.required),
     meetingurl : new FormControl('',Validators.required),
     sectioncapacity: new FormControl('',Validators.required),
-    course_Id:new FormControl('',Validators.required),
-    trainer_Id:new FormControl('',Validators.required)
+    course_Id:new FormControl('',),
+    trainer_Id:new FormControl('',)
   }
 )
 
@@ -109,18 +118,24 @@ async DeleteSection(){
   await this.sectionService.DeleteSection(this.selectedItem)
   this.sectionService.GetAllSections()
 }
+CourseId:any
+courseName:any
+selectedUpdatedCourse:any
+selectedUpdatedTrainer:any
 async openUpdateDialog(sectionid: number) {
   await this.sectionService.GetSectionById(sectionid);
+  this.selectedUpdatedCourse = this.sectionService.section.course_Id
   await this.UpdateForm.patchValue(this.sectionService.section);
-
+  this.CourseId = this.sectionService.section.course_Id
+  await this.courseService.GetCourseById(this.CourseId);
+  this.courseName = this.courseService.course.coursename
   const dialogConfig = new MatDialogConfig();
   dialogConfig.maxWidth = '500px';
   dialogConfig.maxHeight = '90vh';
 
   this.dialog.open(this.Update, dialogConfig);
 }
-selectedUpdatedCourse:any
-selectedUpdatedTrainer:any
+
 async UpdateSectionForm() {
   this.UpdateForm.patchValue({
     course_Id: this.selectedUpdatedCourse

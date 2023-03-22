@@ -311,10 +311,10 @@
 										<div class="col-12">
 											<mat-form-field appearance="fill">
 												<mat-label>Select Course</mat-label>
-												<mat-select formControlName="course_Id" [(ngModel)]="selectedCourse">
-												  <mat-option *ngFor="let course of courseService.courses" [value]="course.courseid" >
+												<mat-select formControlName="course_Id" [(ngModel)]="selectedCourse" >
+												  <mat-option *ngFor="let course of courseService.courses" [value]="course.courseid">
 													{{course.coursename}}
-													
+
 												  </mat-option>
 												</mat-select>
 											  </mat-form-field>
@@ -324,7 +324,7 @@
 											<mat-label>Select Triner</mat-label>
 											<mat-select formControlName="trainer_Id" [(ngModel)]="selectedTrainer">
 												<mat-option *ngFor="let trainer of combinedArray" [value]="trainer.trainerid">
-													{{ combinedArray.firstname+' '+combinedArray.lastname }}
+													{{ combinedArray.firstname }}
 												  </mat-option>
 											  </mat-select>
 										  </mat-form-field>
@@ -434,11 +434,10 @@
 															</div>
 															<div class="col-12">
 																<mat-form-field appearance="fill">
-																	<mat-label>Select Course </mat-label>
-																	<mat-select formControlName="course_Id" [(ngModel)]="selectedUpdatedCourse">
+																	<mat-label > Course Name  </mat-label>
+																	<mat-select [value]="CourseId" formControlName="course_Id" [(ngModel)]="selectedUpdatedCourse">
 																	  <mat-option *ngFor="let course of courseService.courses" [value]="course.courseid" >
 																		{{course.coursename}}
-																		
 																	  </mat-option>
 																	</mat-select>
 																  </mat-form-field>
