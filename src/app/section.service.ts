@@ -33,7 +33,11 @@ export class SectionService {
           this.toaster.error("Error");}
       }
     )
-  })}
+  })
+
+
+
+}
   DeleteSection(sectionId: number) {
 
     return new Promise<void>((resolve, reject) => {

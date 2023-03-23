@@ -51,7 +51,8 @@ export class CategoriesComponent {
     await this.categoryService.DeleteCategory(this.selectedItem)
     this.categoryService.GetAllCategories()
   }
-categoryImage:any  categoryImg?:string
+categoryImage:any
+ categoryImg?:string
   async openUpdateDialog(categoryid: number) {
     await this.categoryService.GetCategoryById(categoryid);
     this.categoryImage = this.categoryService.category.categoryimage
@@ -87,9 +88,6 @@ currentImage:any
       formdata.append('file', uplodedFile);
       this.categoryService.UploadImage(formdata);
     }
-    
-
- 
   }
   
 }

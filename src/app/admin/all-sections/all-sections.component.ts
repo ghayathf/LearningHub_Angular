@@ -30,24 +30,24 @@ export class AllSectionsComponent {
   constructor(public sectionService: SectionService, private router: Router, public dialog: MatDialog,
     public spinner: NgxSpinnerService, private formBuilder: FormBuilder, public trainerService: TrainerService, public courseService: CourseService, public userService: UserService, private datePipe: DatePipe, public traineeServie: RegisterService, public traineeSection: TraineeSectionService) { }
 
-users:any=[]
-trainers:any=[]
-combinedArray:any=[]
-UserTrainer? :any
-  currentDate:any
+  users: any = []
+  trainers: any = []
+  combinedArray: any = []
+  UserTrainer?: any
+  currentDate: any
   async ngOnInit() {
-  this.sectionService.GetAllSections()
-  await this.userService.getAllUsers()
-  await this.trainerService.GetAllTrainers()
-  this.courseService.GetAllCourses()
-  this. trainers= this.trainerService.trainers
-  this.users=this.userService.users
-  this. combinedArray = this.users.filter((x: { roleId: number; }) => x.roleId == 3).map((user:any) => {
-    const trainer = this.trainers.find((trainer:any) => trainer.user_Id === user.userid);
-    return { ...user, ...trainer };
-  });
-  console.log(this.combinedArray)
-  this.currentDate = new Date(Date.now()).toISOString().slice(0,10)
+    this.sectionService.GetAllSections()
+    await this.userService.getAllUsers()
+    await this.trainerService.GetAllTrainers()
+    this.courseService.GetAllCourses()
+    this.trainers = this.trainerService.trainers
+    this.users = this.userService.users
+    this.combinedArray = this.users.filter((x: { roleId: number; }) => x.roleId == 3).map((user: any) => {
+      const trainer = this.trainers.find((trainer: any) => trainer.user_Id === user.userid);
+      return { ...user, ...trainer };
+    });
+    console.log(this.combinedArray)
+    this.currentDate = new Date(Date.now()).toISOString().slice(0, 10)
 
   }
   GenerateCertificate(id: number) {
@@ -93,8 +93,8 @@ UserTrainer? :any
       enddate: new FormControl('', Validators.required),
       meetingurl: new FormControl('', Validators.required),
       sectioncapacity: new FormControl('', Validators.required),
-      course_Id: new FormControl('', Validators.required),
-      trainer_Id: new FormControl('', Validators.required)
+      course_Id: new FormControl(''),
+      trainer_Id: new FormControl('')
     }
   )
 
@@ -160,25 +160,64 @@ UserTrainer? :any
     await this.sectionService.DeleteSection(this.selectedItem)
     this.sectionService.GetAllSections()
   }
+
+  selectedUpdatedCourse: any
+  selectedUpdatedTrainer: any
+  section?: any
+  courseName?: any
+  trainerEmail?: any
+  time1:any=this.UpdateForm.controls['starttime']
+  time2:any=this.UpdateForm.controls['endtime']
+  dateFormat:string="2023-03-30";
+  datetimeStart?:Date
+  datetimeEnd?:Date
+ dateTimeString1:any = `${this.dateFormat}Z${this.time1}:00`;
+ dateTimeString2:any = `${this.dateFormat}Z${this.time2}:00`;
   async openUpdateDialog(sectionid: number) {
     await this.sectionService.GetSectionById(sectionid);
+    await this.courseService.GetCourseById(this.sectionService.section.course_Id)
+    await this.trainerService.GetTrainerById(this.sectionService.section.trainee_Id)
     await this.UpdateForm.patchValue(this.sectionService.section);
-
+    this.section = this.sectionService.section
+    this.selectedUpdatedCourse = this.sectionService.section.course_Id
+    this.selectedUpdatedTrainer = this.sectionService.section.trainer_Id
+    this.courseName = this.courseService.course.coursename
+    for (let i = 0; i < this.combinedArray.length; i++) {
+      if (this.combinedArray[i].trainer_Id == this.selectedUpdatedTrainer) {
+        this.trainerEmail = this.combinedArray[i].email;
+      }
+    }
     const dialogConfig = new MatDialogConfig();
     dialogConfig.maxWidth = '500px';
     dialogConfig.maxHeight = '90vh';
-
+    console.log(this.datetimeStart)
+    console.log(this.UpdateForm.controls['starttime'])
     this.dialog.open(this.Update, dialogConfig);
   }
-  selectedUpdatedCourse: any
-  selectedUpdatedTrainer: any
+ 
   async UpdateSectionForm() {
+    this.datetimeStart=new Date(this.dateTimeString1)
+    if (Object.prototype.toString.call(this.datetimeEnd) === "[object Date]" && !isNaN(this.datetimeStart.getTime())){
+    this.UpdateForm.patchValue({
+      starttime: this.datetimeStart.toLocaleTimeString()
+    });
+    }
+    this.datetimeEnd=new Date(this.dateTimeString2)
+    if (Object.prototype.toString.call(this.datetimeEnd) === "[object Date]" && !isNaN(this.datetimeEnd.getTime())) {
+      this.UpdateForm.patchValue({
+        endtime: this.datetimeEnd.toLocaleTimeString()
+      });
+    }
     this.UpdateForm.patchValue({
       course_Id: this.selectedUpdatedCourse
     });
     this.UpdateForm.patchValue({
       trainer_Id: this.selectedUpdatedTrainer
     });
+    this.UpdateForm.patchValue({
+     
+    });
+    
     await this.sectionService.UpdateSection(this.UpdateForm.value);
     this.sectionService.GetAllSections();
   }
@@ -235,4 +274,5 @@ UserTrainer? :any
       await this.traineeSection.CreateTraineeSection(this.trainees[j]);
     }
   }
+  
 }

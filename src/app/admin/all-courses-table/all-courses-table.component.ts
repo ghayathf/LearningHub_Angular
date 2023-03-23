@@ -43,14 +43,8 @@ export class AllCoursesTableComponent {
       coursename: new FormControl('', Validators.required),
       coursedescription: new FormControl('', Validators.required),
       courseimage: new FormControl('', Validators.required),
-      courselevel: new FormControl('', [
-        Validators.required,
-        Validators.pattern(/^\d+$/),
-      ]),
-      category_Id: new FormControl('', [
-        Validators.required,
-        Validators.pattern(/^\d+$/),
-      ]),
+      courselevel: new FormControl(''),
+      category_Id: new FormControl(''),
     })
 
   ngOnInit() {
@@ -74,6 +68,10 @@ export class AllCoursesTableComponent {
   selectedUpdatedCategory:any
   selectedUpdatedLevel:any
  currentImg:any
+ courseLevel?:any
+ courseCategory?:any
+ category?:any
+ categoryName?:any
   async openUpdateDialog(courseid: number) {
     await this.courseService.GetCourseById(courseid);
    
@@ -82,9 +80,17 @@ export class AllCoursesTableComponent {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.maxWidth = '500px';
     dialogConfig.maxHeight = '90vh';
-    this.course=this.courseService.GetCourseById(courseid) 
+    this.course=this.courseService.course
     this.selectedUpdatedCategory=this.course.category_Id
     this.selectedUpdatedLevel=this.course.courselevel
+    if(this.course.courselevel==1)
+    this.courseLevel=Levels.Beginner
+    else if(this.course.courselevel==2)
+    this.courseLevel=Levels[2]
+    else
+    this.courseLevel=Levels[3]
+    this.category=this.categoryService.GetCategoryById(this.course.category_Id)
+    this.CourseName=this.category.categoryname
     this.currentImg=this.course.courseimage
     this.dialog.open(this.Update, dialogConfig);
   }
