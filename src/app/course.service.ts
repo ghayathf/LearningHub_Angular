@@ -102,9 +102,16 @@ export class CourseService {
     })
 
   }
-
+  updatedImg?:any
   async UpdateCourse(Course: any) {
-    Course.courseimage = this.ImgaeName;
+    await this.GetCourseById(Course.courseid)
+    this.updatedImg=this.course.courseimage
+   
+    if(this.ImgaeName!="")
+    this.course.courseimage = this.ImgaeName;
+    if(this.updatedImg!=null && this.ImgaeName=="")
+    Course.courseimage=this.updatedImg;
+    
     return new Promise<void>((resolve, reject) => {
       this.spinner.show();
       this.http.put("https://localhost:44391/api/Courses/UpdateCourse", Course).subscribe(

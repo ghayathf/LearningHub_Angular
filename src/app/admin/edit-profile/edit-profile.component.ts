@@ -30,6 +30,7 @@ export class EditProfileComponent {
         Validators.required,
         Validators.pattern(/^\d+$/),
       ]),
+      imagename:new FormControl('')
     }
   )
   /**
@@ -44,6 +45,7 @@ export class EditProfileComponent {
     this.loggedUser = this.auth.gh
     await this.userService.getUserById(this.loggedUser)
     await this.CreateUserForm.patchValue(this.userService.user);
+    
   }
   async UpdateInformation(){
     this.loggedUser = this.auth.gh
@@ -52,6 +54,16 @@ export class EditProfileComponent {
 
     await this.userService.UpdateUser(this.CreateUserForm.value)
   }
+
+  UploadImage(input: any) {
+    if (input.files[0] != null) {
+      let uplodedFile = input.files[0]; // image fille
+      let formdata = new FormData();
+      formdata.append('file', uplodedFile);
+      this.userService.UploadImage(formdata);
+    }
+  }
+  
 
 }
 

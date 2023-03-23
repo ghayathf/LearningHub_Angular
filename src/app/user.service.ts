@@ -90,7 +90,13 @@ CreateUser(user: any): Promise<any> {
   });
 }
 UpdateUser(user: any): Promise<any> {
+this.getUserById(user.userid)
+  if(this.ImgaeName!=null)
+user.imagename=this.ImgaeName
+ if(this.user.imagename!=null)
+user.imagename=this.user.imagename
 
+console.log(user.imagename)
   return new Promise<void>((resolve, reject) => {
     this.spinner.show();
     this.http.put("https://localhost:44391/api/User/UpdateUser", user).subscribe(
@@ -111,4 +117,20 @@ UpdateUser(user: any): Promise<any> {
   }
   );
 }
+ImgaeName = "";
+  UploadImage(imageFile: any) {
+    this.spinner.show()
+    return new Promise<void>((resolve, reject) => {
+
+    this.http.post("https://localhost:44391/api/User/UploadImage", imageFile).subscribe(
+      {
+        next: (res: any) => {
+          this.spinner.hide()
+          this.ImgaeName = res.imagename;
+          resolve()
+        },
+        error: () => { }
+      }
+    )})
+  }
 }
