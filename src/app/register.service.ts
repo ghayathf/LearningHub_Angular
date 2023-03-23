@@ -144,6 +144,7 @@ export class RegisterService {
 
   User: any;
   GetUserById(userid: number) {
+    return new Promise<void>((resolve, reject) => {
     this.http.get("https://localhost:44391/api/User/GetUserByID/" + userid).subscribe({
       next: (res) => {
         this.User = res;
@@ -152,7 +153,7 @@ export class RegisterService {
         console.log(err);
 
       }
-    })
+    })})
   }
   user2: any;
   async UpdateRequest(Request: any) {
@@ -205,6 +206,27 @@ export class RegisterService {
     )
 
   }
+
+  Registers: any = []
+
+  async getAllRegisterd() {
+    this.spinner.show()
+    this.http.get("https://localhost:44391/api/User/GetAllUsers").subscribe(
+      {
+        next: (res) => {
+          this.Registers = res
+          this.spinner.hide();
+
+        },
+        error: (err) => {
+          this.spinner.hide()
+          console.log(err);
+        }
+      }
+    )
+  }
+
+
 
 
 

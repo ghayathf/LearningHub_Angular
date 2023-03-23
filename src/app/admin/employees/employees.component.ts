@@ -89,14 +89,17 @@ export class EmployeesComponent {
     XLSX.writeFile(wb, this.fileName);
   }
   hideActionColumn?: boolean = false;
-  async MakePDF() {
+  MakePDF() {
     let pdf = new jsPDF();
-    this.hideActionColumn = true;
-    setTimeout(async () => {
-      await autoTable(pdf, { html: "#excel-table" });
-      this.hideActionColumn = false;
-      await pdf.save("emp.pdf");
-    }, 1000);
+
+
+    // pdf.addImage(imgData, 'JPEG', 15, 20, 30, 30)
+    //  pdf.text('Paranyan loves jsPDF', 35, 25)
+
+    autoTable(pdf, { html: "#excel-table" });
+
+    pdf.save("emp.pdf");
+
   }
 
 }

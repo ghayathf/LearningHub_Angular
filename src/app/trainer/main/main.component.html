@@ -1,1 +1,140 @@
-<p>main works!</p>
+<body>
+<app-trainer-header></app-trainer-header>
+<main>
+  <app-trainer-banner></app-trainer-banner>
+  <section class="pt-0">
+    <div class="container">
+      <div class="row">
+        <!-- Left sidebar START -->
+        <div class="col-xl-3 ">
+        <app-trainer-side-bar></app-trainer-side-bar>
+        <!-- Left sidebar END -->
+        </div>
+        <!-- Main content START -->
+        <div class="col-xl-9">
+
+          <!-- Counter boxes START -->
+          <div class="row g-4">
+            <!-- Counter item -->
+            <div class="col-sm-6 col-lg-4">
+              <div class="d-flex justify-content-center align-items-center p-4 bg-warning bg-opacity-15 rounded-3">
+                <span class="display-6 text-warning mb-0"><i class="fas fa-tv fa-fw"></i></span>
+                <div class="ms-4">
+                  <div class="d-flex">
+                    <h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="25"	data-purecounter-delay="200">0</h5>
+                  </div>
+                  <span class="mb-0 h6 fw-light">Total Courses</span>
+                </div>
+              </div>
+            </div>
+            <!-- Counter item -->
+            <div class="col-sm-6 col-lg-4">
+              <div class="d-flex justify-content-center align-items-center p-4 bg-purple bg-opacity-10 rounded-3">
+                <span class="display-6 text-purple mb-0"><i class="fas fa-user-graduate fa-fw"></i></span>
+                <div class="ms-4">
+                  <div class="d-flex">
+                    <h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="25"	data-purecounter-delay="200">0</h5>
+                    <span class="mb-0 h5">K+</span>
+                  </div>
+                  <span class="mb-0 h6 fw-light">Total Students</span>
+                </div>
+              </div>
+            </div>
+            <!-- Counter item -->
+            <div class="col-sm-6 col-lg-4">
+              <div class="d-flex justify-content-center align-items-center p-4 bg-info bg-opacity-10 rounded-3">
+                <span class="display-6 text-info mb-0"><i class="fas fa-gem fa-fw"></i></span>
+                <div class="ms-4">
+                  <div class="d-flex">
+                    <h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="12" data-purecounter-delay="300">0</h5>
+                    <span class="mb-0 h5">K</span>
+                  </div>
+                  <span class="mb-0 h6 fw-light">Enrolled Students</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Counter boxes END -->
+
+          <!-- Chart START -->
+
+          <!-- Chart END -->
+
+          <!-- Course List table START -->
+          <div class="row">
+            <div class="col-12">
+              <div class="card border bg-transparent rounded-3 mt-5">
+                <!-- Card header START -->
+                <div class="card-header bg-transparent border-bottom">
+                  <div class="d-sm-flex justify-content-sm-between align-items-center">
+                    <h3 class="mb-2 mb-sm-0">Your Sections</h3>
+                  </div>
+                </div>
+                <!-- Card header END -->
+
+                <!-- Card body START -->
+                <div class="card-body">
+                  <div class="table-responsive border-0 rounded-3">
+                    <!-- Table START -->
+                    <table class="table table-dark-gray align-middle p-4 mb-0">
+                      <!-- Table head -->
+                      <thead>
+                        <tr>
+                          <th scope="col" class="border-0 rounded-start">Course Name</th>
+                          <th scope="col" class="border-0">Section Capacity</th>
+                          <th scope="col" class="border-0">Start Time</th>
+                          <th scope="col" class="border-0">Period</th>
+                          <th scope="col" class="border-0 rounded-end">Action</th>
+                        </tr>
+                      </thead>
+                      <!-- Table body START -->
+                      <tbody>
+                        <!-- Table item -->
+                        <tr *ngFor="let item of combinedArray" >
+                          <!-- Course item -->
+                          <td >
+                            <div class="d-flex align-items-center">
+                              <!-- Image -->
+                              <div class="w-60px">
+                                <img src="../../../assets/HomeAssets/images/{{item.courseimage}}" class="rounded" alt="">
+                              </div>
+                              <!-- Title -->
+                              <h4 class="mb-0 ms-2 table-responsive-title">
+                                <a href="#">{{ item.coursename }}</a>
+                              </h4>
+                            </div>
+                          </td>
+                          <!-- Selling item -->
+                          <td>{{ item.sectioncapacity }}</td>
+                          <!-- Amount item -->
+                          <td>{{ item.starttime.slice(0,10) }}</td>
+                          <!-- Period item -->
+                          <td>
+                            <span class="badge bg-primary bg-opacity-10 text-primary">{{ getDaysDifference(item.startdate, item.enddate) }} days</span>
+                          </td>
+                          <!-- Action item -->
+                          <td>
+                            <button class="btn btn-sm btn-success-soft btn-round mb-0" (click)="goingDialog(item.sectionid,item.course_Id)"><i class="fas fa-share" aria-hidden="true"></i></button>
+                          </td>
+                        </tr>
+                      </tbody>
+                      <!-- Table body END -->
+                    </table>
+                    <!-- Table END -->
+                  </div>
+
+                  <!-- Pagination -->
+
+                </div>
+                <!-- Card body START -->
+              </div>
+            </div>
+          </div>
+          <!-- Course List table END -->
+        </div>
+        <!-- Main content END -->
+      </div><!-- Row END -->
+    </div>
+  </section>
+</main>
+</body>

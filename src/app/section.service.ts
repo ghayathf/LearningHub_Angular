@@ -13,12 +13,16 @@ export class SectionService {
 
   sections: any = []
   GetAllSections() {
+    this.spinner.show()
+    return new Promise<void>((resolve, reject) => {
     this.http.get("https://localhost:44391/api/Section/GetAllSections").subscribe(
-      (res) => { this.sections = res },
+      (res) => { this.sections = res
+      this.spinner.hide()
+    resolve(); },
       (err) => {
         console.log(err);
       }
-    )
+    )})
   }
   CreateSection(newSection:any){
     return new Promise<void>((resolve, reject) => {

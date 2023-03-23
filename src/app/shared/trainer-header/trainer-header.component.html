@@ -1,15 +1,15 @@
 
-  <nav class="navbar top-bar navbar-light border-bottom py-0 py-xl-3">
+<header class="navbar-light navbar-expand-lg" style="height: 70px;">
+	<!-- Logo Nav START -->
+
+  <nav class="top-bar navbar-light py-0 py-xl-3">
     <div class="container-fluid p-0">
       <div class="d-flex align-items-center w-100">
 
         <!-- Logo START -->
-        <div class="d-flex align-items-center d-xl-none">
           <a class="navbar-brand" href="index.html">
-            <img class="light-mode-item navbar-brand-item h-30px" src="../../../assets/HomeAssets/images/logo-mobile.svg" alt="">
-            <img class="dark-mode-item navbar-brand-item h-30px" src="../../../assets/HomeAssets/images/logo-mobile-light.svg" alt="">
+            <img class="dark-mode-item navbar-brand-item h-30px" src="../../../assets/HomeAssets/images/logo-light.svg" alt="">
           </a>
-        </div>
         <!-- Logo END -->
 
         <!-- Toggler for sidebar START -->
@@ -163,7 +163,9 @@
                 <li> <hr class="dropdown-divider"></li>
                 <!-- Links -->
                 <li><a class="dropdown-item" routerLink="/Admin/EditProfile"><i class="bi bi-person fa-fw me-2"></i>Edit Profile</a></li>
+                <li><a class="dropdown-item bg-success-soft-hover" href="" routerLink="/Trainer/"><i class="bi bi-power fa-fw me-2" ></i>Dashboard</a></li>
                 <li><a class="dropdown-item bg-danger-soft-hover" href="" (click)="logout()"><i class="bi bi-power fa-fw me-2" ></i>Sign Out</a></li>
+
                 <li> <hr class="dropdown-divider"></li>
 
                 <!-- Dark mode options START -->
@@ -179,3 +181,8 @@
       </div>
     </div>
   </nav>
+
+	<!-- Logo Nav END -->
+</header>
+
+

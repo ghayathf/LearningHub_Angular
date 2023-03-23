@@ -36,10 +36,10 @@ export class AuthService {
             this.router.navigate(["Admin/"]);
           }
           if (data.RoleId == 2){
-            this.router.navigate([""]);
+            this.router.navigate(["Trainee/"]);
           }
           if (data.RoleId == 3){
-            this.router.navigate([""]);
+            this.router.navigate(["Trainer/"]);
           }
 
           resolve()

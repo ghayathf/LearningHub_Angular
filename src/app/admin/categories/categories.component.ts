@@ -57,7 +57,7 @@ categoryImage:any
     await this.categoryService.GetCategoryById(categoryid);
     this.categoryImage = this.categoryService.category.categoryimage
     await this.UpdateCategoryForm.patchValue(this.categoryService.category);
-   
+
     const dialogConfig = new MatDialogConfig();
     dialogConfig.maxWidth = '500px';
     dialogConfig.maxHeight = '90vh';
@@ -89,5 +89,5 @@ currentImage:any
       this.categoryService.UploadImage(formdata);
     }
   }
-  
+
 }

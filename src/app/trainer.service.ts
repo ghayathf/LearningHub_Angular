@@ -20,7 +20,7 @@ export class TrainerService {
         next:async (res)=>{
           this.spinner.hide()
           await this.getAllUsersTrainers()
-    this.filterUsers()
+          this.filterUsers()
           this.trainers=res
 
   resolve()},
