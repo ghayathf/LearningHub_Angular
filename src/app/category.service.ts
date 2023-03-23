@@ -89,9 +89,16 @@ export class CategoryService {
       )
     })
   }
-
+updatedCategory?:any
+updatedImg?:string=''
   async UpdateCategory(Category: any) {
+   await this.GetCategoryById(Category.categoryid)
+    this.updatedImg=this.category.categoryimage
+    console.log(this.category.categoryimage)
+    if(this.ImgaeName!="")
     Category.categoryimage = this.ImgaeName;
+    if(this.updatedImg!=null && this.ImgaeName=="")
+    Category.categoryimage=this.updatedImg;
     return new Promise<void>((resolve, reject) => {
       this.spinner.show();
       this.http.put("https://localhost:44391/api/Categories/UpdateCategory", Category).subscribe(
@@ -100,7 +107,9 @@ export class CategoryService {
             this.spinner.hide();
             this.toaster.success("Category Update Successfully");
             resolve();
+            debugger
           },
+
           error: () => {
             this.spinner.hide();
             this.toaster.error("Try again");

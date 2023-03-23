@@ -36,10 +36,10 @@ export class AuthService {
             this.router.navigate(["Admin/"]);
           }
           if (data.RoleId == 2){
-            this.router.navigate([""]);
+            this.router.navigate(["Trainee/"]);
           }
           if (data.RoleId == 3){
-            this.router.navigate([""]);
+            this.router.navigate(["Trainer/"]);
           }
 
           resolve()
@@ -53,12 +53,10 @@ export class AuthService {
       }
     )})
   }
-  
+
   //not ready
-  async logout() {
-    await localStorage.removeItem('token');
-    await localStorage.removeItem('user');
-    await localStorage.clear();
-    await this.router.navigate(['']);
+   logout() {
+     localStorage.clear();
+     this.router.navigate(['']);
   }
 }

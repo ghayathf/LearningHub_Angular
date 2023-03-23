@@ -30,39 +30,26 @@ export class AllSectionsComponent {
   constructor(public sectionService: SectionService, private router: Router, public dialog: MatDialog,
     public spinner: NgxSpinnerService, private formBuilder: FormBuilder, public trainerService: TrainerService, public courseService: CourseService, public userService: UserService, private datePipe: DatePipe, public traineeServie: RegisterService, public traineeSection: TraineeSectionService) { }
 
-  users: any = []
-  trainers: any = []
-  combinedArray: any = []
-  UserTrainer?: any
-  currentDate: any
-  ngOnInit() {
-    this.traineeServie.GetAllAcceptedTrainee();
-    this.sectionService.GetAllSections()
-    this.userService.getAllUsers()
-    this.trainerService.GetAllTrainers()
-    this.courseService.GetAllCourses()
-    this.trainers = this.trainerService.trainers
-    this.users = this.userService.users
-    this.combinedArray = this.users.filter((x: { roleId: number; }) => x.roleId == 3).concat(this.trainers.filter((trainer: any) => {
-      return this.users.find((user: any) => user.userid == trainer.user_Id);
+users:any=[]
+trainers:any=[]
+combinedArray:any=[]
+UserTrainer? :any
+  currentDate:any
+  async ngOnInit() {
+  this.sectionService.GetAllSections()
+  await this.userService.getAllUsers()
+  await this.trainerService.GetAllTrainers()
+  this.courseService.GetAllCourses()
+  this. trainers= this.trainerService.trainers
+  this.users=this.userService.users
+  this. combinedArray = this.users.filter((x: { roleId: number; }) => x.roleId == 3).map((user:any) => {
+    const trainer = this.trainers.find((trainer:any) => trainer.user_Id === user.userid);
+    return { ...user, ...trainer };
+  });
+  console.log(this.combinedArray)
+  this.currentDate = new Date(Date.now()).toISOString().slice(0,10)
 
-    }));
-    console.log(this.combinedArray)
-    this.currentDate = new Date(Date.now()).toISOString().slice(0, 10)
-
-    const combinedArray = this.users.filter((user: { userid: number; }) => this.trainers.some((trainer: { user_Id: number; }) => trainer.user_Id === user.userid))
-    .map((user: { userid: number; }) => {
-      const trainer = this.trainers.find((trainer: { user_Id: number; }) => trainer.user_Id === user.userid);
-      return {...user, ...trainer};
-    });
-
-
-  console.log(combinedArray);
-
-}
-OpenImportDialog(id:number){
-this.dialog.open(this.Import)
-}
+  }
   GenerateCertificate(id: number) {
     this.sectionService.GenerateCertificate(1, id)
   }
@@ -70,39 +57,46 @@ this.dialog.open(this.Import)
     return d.slice(0, 10)
 
 
-}
-
-OpenDialog() {
-  const dialogConfig = new MatDialogConfig();
-dialogConfig.maxWidth = '500px';
-dialogConfig.maxHeight = '90vh';
-  this.dialog.open(this.Create,dialogConfig)
-}
-CreateForm =new FormGroup(
-  {
-    starttime : new FormControl('',Validators.required),
-    endtime : new FormControl('',Validators.required),
-    startdate : new FormControl('',Validators.required),
-    enddate : new FormControl('',Validators.required),
-    meetingurl : new FormControl('',Validators.required),
-    sectioncapacity: new FormControl('',Validators.required),
-    course_Id:new FormControl('',Validators.required),
-    trainer_Id:new FormControl('',Validators.required)
   }
-)
-UpdateForm =new FormGroup(
-  {
-    sectionid:new FormControl('',Validators.required),
-    starttime : new FormControl('',Validators.required),
-    endtime : new FormControl('',Validators.required),
-    startdate : new FormControl('',Validators.required),
-    enddate : new FormControl('',Validators.required),
-    meetingurl : new FormControl('',Validators.required),
-    sectioncapacity: new FormControl('',Validators.required),
-    course_Id:new FormControl('',Validators.required),
-    trainer_Id:new FormControl('',Validators.required)
+  selectdImportId: any;
+  OpenImportDialog(sectionid: number) {
+    this.selectdImportId = sectionid;
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.maxWidth = '500px';
+    dialogConfig.maxHeight = '90vh';
+    this.dialog.open(this.Import, dialogConfig);
   }
-)
+  OpenDialog() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.maxWidth = '500px';
+    dialogConfig.maxHeight = '90vh';
+    this.dialog.open(this.Create, dialogConfig)
+  }
+  CreateForm = new FormGroup(
+    {
+      starttime: new FormControl('', Validators.required),
+      endtime: new FormControl('', Validators.required),
+      startdate: new FormControl('', Validators.required),
+      enddate: new FormControl('', Validators.required),
+      meetingurl: new FormControl('', Validators.required),
+      sectioncapacity: new FormControl('', Validators.required),
+      course_Id: new FormControl('', Validators.required),
+      trainer_Id: new FormControl('', Validators.required)
+    }
+  )
+  UpdateForm = new FormGroup(
+    {
+      sectionid: new FormControl('', Validators.required),
+      starttime: new FormControl('', Validators.required),
+      endtime: new FormControl('', Validators.required),
+      startdate: new FormControl('', Validators.required),
+      enddate: new FormControl('', Validators.required),
+      meetingurl: new FormControl('', Validators.required),
+      sectioncapacity: new FormControl('', Validators.required),
+      course_Id: new FormControl('', Validators.required),
+      trainer_Id: new FormControl('', Validators.required)
+    }
+  )
 
 
   // CreateTraineeSection = new FormGroup({
@@ -166,36 +160,30 @@ UpdateForm =new FormGroup(
     await this.sectionService.DeleteSection(this.selectedItem)
     this.sectionService.GetAllSections()
   }
-  CourseId:any
-courseName:any
-selectedUpdatedCourse:any
-selectedUpdatedTrainer:any
-async openUpdateDialog(sectionid: number) {
+  selectedUpdatedCourse: any
+  selectedUpdatedTrainer: any
+  async openUpdateDialog(sectionid: number) {
     await this.sectionService.GetSectionById(sectionid);
-    this.selectedUpdatedCourse = this.sectionService.section.course_Id
-  await this.UpdateForm.patchValue(this.sectionService.section);
-  this.CourseId = this.sectionService.section.course_Id
-  await this.courseService.GetCourseById(this.CourseId);
-  this.courseName = this.courseService.course.coursename
+    await this.UpdateForm.patchValue(this.sectionService.section);
+
     const dialogConfig = new MatDialogConfig();
     dialogConfig.maxWidth = '500px';
     dialogConfig.maxHeight = '90vh';
 
-  this.dialog.open(this.Update, dialogConfig);
-}
+    this.dialog.open(this.Update, dialogConfig);
+  }
 
-async UpdateSectionForm() {
-  this.UpdateForm.patchValue({
-    course_Id: this.selectedUpdatedCourse
-  });
-  this.UpdateForm.patchValue({
-    trainer_Id: this.selectedUpdatedTrainer
-  });
-  await this.sectionService.UpdateSection(this.UpdateForm.value);
-  this.sectionService.GetAllSections();
-}
-async openDetailsDialog(sectionid: number)
-{
+  async UpdateSectionForm() {
+    this.UpdateForm.patchValue({
+      course_Id: this.selectedUpdatedCourse
+    });
+    this.UpdateForm.patchValue({
+      trainer_Id: this.selectedUpdatedTrainer
+    });
+    await this.sectionService.UpdateSection(this.UpdateForm.value);
+    this.sectionService.GetAllSections();
+  }
+  async openDetailsDialog(sectionid: number) {
 
     await this.sectionService.GetSectionById(sectionid);
     const dialogConfig = new MatDialogConfig();
@@ -232,7 +220,7 @@ async openDetailsDialog(sectionid: number)
     XLSX.writeFile(wb, this.fileName);
   }
   Zero: any = 0;
-  selectdImportId:any
+
   async InsertData() {
     for (let i = 0; i < this.ExcelData.length; i++) {
       const newTrainee = {
@@ -248,7 +236,4 @@ async openDetailsDialog(sectionid: number)
       await this.traineeSection.CreateTraineeSection(this.trainees[j]);
     }
   }
-
-
-
 }
