@@ -67,7 +67,7 @@
                 <!-- Card header START -->
                 <div class="card-header bg-transparent border-bottom">
                   <div class="d-sm-flex justify-content-sm-between align-items-center">
-                    <h3 class="mb-2 mb-sm-0">Most Selling Courses</h3>
+                    <h3 class="mb-2 mb-sm-0">Your Sections</h3>
                   </div>
                 </div>
                 <!-- Card header END -->
@@ -81,37 +81,36 @@
                       <thead>
                         <tr>
                           <th scope="col" class="border-0 rounded-start">Course Name</th>
-                          <th scope="col" class="border-0">Selling</th>
-                          <th scope="col" class="border-0">Amount</th>
+                          <th scope="col" class="border-0">Section Capacity</th>
+                          <th scope="col" class="border-0">Start Time</th>
                           <th scope="col" class="border-0">Period</th>
                           <th scope="col" class="border-0 rounded-end">Action</th>
                         </tr>
                       </thead>
                       <!-- Table body START -->
                       <tbody>
-
                         <!-- Table item -->
-                        <tr>
+                        <tr *ngFor="let item of combinedArray" >
                           <!-- Course item -->
-                          <td>
+                          <td >
                             <div class="d-flex align-items-center">
                               <!-- Image -->
                               <div class="w-60px">
-                                <img src="assets/images/courses/4by3/02.jpg" class="rounded" alt="">
+                                <img src="../../../assets/HomeAssets/images/{{item.courseimage}}" class="rounded" alt="">
                               </div>
                               <!-- Title -->
-                              <h6 class="mb-0 ms-2 table-responsive-title">
-                                <a href="#">Graphic Design Masterclass</a>
-                              </h6>
+                              <h4 class="mb-0 ms-2 table-responsive-title">
+                                <a href="#">{{ item.coursename }}</a>
+                              </h4>
                             </div>
                           </td>
                           <!-- Selling item -->
-                          <td>21</td>
+                          <td>{{ item.sectioncapacity }}</td>
                           <!-- Amount item -->
-                          <td>$85,478</td>
+                          <td>{{ item.starttime.slice(0,10) }}</td>
                           <!-- Period item -->
                           <td>
-                            <span class="badge bg-primary bg-opacity-10 text-primary">4 months</span>
+                            <span class="badge bg-primary bg-opacity-10 text-primary">{{ getDaysDifference(item.startdate, item.enddate) }} days</span>
                           </td>
                           <!-- Action item -->
                           <td>
@@ -119,8 +118,6 @@
                             <button class="btn btn-sm btn-danger-soft btn-round mb-0"><i class="fas fa-fw fa-times"></i></button>
                           </td>
                         </tr>
-
-
                       </tbody>
                       <!-- Table body END -->
                     </table>
