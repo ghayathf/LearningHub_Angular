@@ -21,7 +21,7 @@ import { TrainerHeaderComponent } from './trainer-header/trainer-header.componen
 import { TrainerSideBarComponent } from './trainer-side-bar/trainer-side-bar.component';
 import { TrainerBannerComponent } from './trainer-banner/trainer-banner.component';
 
-
+ 
 @NgModule({
   declarations: [
     HomeHeaderComponent,

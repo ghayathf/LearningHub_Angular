@@ -55,5 +55,9 @@ this.obj=this.courseService.courses
 return this.obj.coursename
 
 }
+goingDialog(secId:number,courseid:number){
+  this.courseService.selectedSectionId = secId
+  this.courseService.selectedCourseId = courseid
+}
 
 }

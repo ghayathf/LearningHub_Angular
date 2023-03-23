@@ -30,6 +30,8 @@ export class CourseService {
       )
     })
   }
+  selectedSectionId:any
+  selectedCourseId:any
   category: any
   ngOnInit(): void {
     // this.category = this.categoryService.GetSelectedCategory();
