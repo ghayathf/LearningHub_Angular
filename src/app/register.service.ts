@@ -206,6 +206,27 @@ export class RegisterService {
 
   }
 
+  Registers: any = []
+
+  async getAllRegisterd() {
+    this.spinner.show()
+    this.http.get("https://localhost:44391/api/User/GetAllUsers").subscribe(
+      {
+        next: (res) => {
+          this.Registers = res
+          this.spinner.hide();
+
+        },
+        error: (err) => {
+          this.spinner.hide()
+          console.log(err);
+        }
+      }
+    )
+  }
+
+
+
 
 
 }

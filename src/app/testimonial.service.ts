@@ -13,20 +13,45 @@ export class TestimonialService {
 
   testimonials: any = []
   GetAllTestimonilas() {
-    this.spinner.show();
-    this.http.get("https://localhost:44391/api/Testimonial/GetAllTestimonials").subscribe(
-      (res) => {
-        this.testimonials = res
-        this.spinner.hide();
+    return new Promise<void>((resolve, reject) => {
+      this.spinner.show();
+      this.http.get("https://localhost:44391/api/Testimonial/GetAllTestimonials").subscribe(
+        (res) => {
+          this.testimonials = res
+          this.spinner.hide();
+          resolve();
+        },
+        (err) => {
+          console.log(err);
+          this.spinner.hide();
 
-      },
-      (err) => {
-        console.log(err);
-        this.spinner.hide();
-
-      })
+        })
+    })
 
   }
+
+  Acceptedtestimonials: any = []
+  GetAllAcceptedTestimonilas() {
+    return new Promise<void>((resolve, reject) => {
+      this.spinner.show();
+      this.http.get("https://localhost:44391/api/Testimonial/GetAllAcceptedTestimonial").subscribe(
+        (res) => {
+          this.testimonials = res
+          this.spinner.hide();
+          resolve();
+        },
+        (err) => {
+          console.log(err);
+          this.spinner.hide();
+
+        })
+    })
+
+  }
+
+
+
+
 
   DeleteMessage(messageId: number) {
     this.spinner.show();
@@ -65,7 +90,7 @@ export class TestimonialService {
         }
       )
     }
-  )
-}
+    )
+  }
 
 }

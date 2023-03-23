@@ -677,14 +677,15 @@
               <div class="bg-body shadow text-center p-4 rounded-3">
                 <!-- Avatar -->
                 <div class="avatar avatar-xl mb-3">
-                  <img class="avatar-img rounded-circle" src="../../../assets/HomeAssets/images/avatar/03.jpg"
+                  <img class="avatar-img rounded-circle"
+                    src="../../../assets/HomeAssets/images/{{testiomonialService.testimonials[0]?.imagename}}"
                     alt="avatar">
                 </div>
                 <!-- Content -->
                 <blockquote>
                   <p>
                     <span class="me-1 small"><i class="fas fa-quote-left"></i></span>
-                    At weddings believed laughing although the Moonlight newspaper up its enjoyment agreeable depending.
+                    {{testiomonialService.testimonials[0]?.testimonialmessage}}
                     <span class="ms-1 small"><i class="fas fa-quote-right"></i></span>
                   </p>
                 </blockquote>
@@ -697,7 +698,7 @@
                   <li class="list-inline-item me-0 small"><i class="fas fa-star-half-alt text-warning"></i></li>
                 </ul>
                 <!-- Info -->
-                <h6 class="mb-0">Dennis Barrett</h6>
+                <h6 class="mb-0">{{testiomonialService.testimonials[0]?.firstname}}</h6>
               </div>
             </div>
           </div> <!-- Row END -->
