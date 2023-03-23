@@ -508,15 +508,15 @@
               <div class="bg-body shadow text-center p-4 rounded-3 position-relative mb-5 mb-md-0">
                 <!-- Avatar -->
                 <div class="avatar avatar-xl mb-3">
-                  <img class="avatar-img rounded-circle" src="../../../assets/HomeAssets/images/avatar/01.jpg"
+                  <img class="avatar-img rounded-circle"
+                    src="../../../assets/HomeAssets/images/{{testiomonialService.testimonials[0]?.imagename}}"
                     alt="avatar">
                 </div>
                 <!-- Content -->
                 <blockquote>
                   <p>
                     <span class="me-1 small"><i class="fas fa-quote-left"></i></span>
-                    Moonlight newspaper up its enjoyment agreeable depending. Timed voice share led him to widen noisy
-                    young. At weddings believed laughing
+                    {{testiomonialService.testimonials[1]?.testimonialmessage}}
                     <span class="ms-1 small"><i class="fas fa-quote-right"></i></span>
                   </p>
                 </blockquote>
@@ -529,7 +529,8 @@
                   <li class="list-inline-item me-0 small"><i class="fas fa-star-half-alt text-warning"></i></li>
                 </ul>
                 <!-- Info -->
-                <h6 class="mb-0">Carolyn Ortiz</h6>
+                <h6 class="mb-0">{{testiomonialService.testimonials[1]?.firstname}}
+                  {{testiomonialService.testimonials[1]?.lastname}}</h6>
               </div>
             </div>
 
@@ -541,18 +542,19 @@
                   <i class="bi bi-shield-fill-check text-dark"></i>
                 </div>
                 <!-- Title -->
-                <h6 class="mb-3">100+ Verified Mentors</h6>
+                <h6 class="mb-3">{{testiomonialService.testimonials.length}} + Verified Mentors</h6>
                 <!-- Mentor Item -->
                 <div class="d-flex align-items-center mb-3">
                   <!-- Avatar -->
                   <div class="avatar avatar-sm">
-                    <img class="avatar-img rounded-1" src="../../../assets/HomeAssets/images/avatar/09.jpg"
+                    <img class="avatar-img rounded-1"
+                      src="../../../assets/HomeAssets/images/{{testiomonialService.testimonials[2]?.imagename}}"
                       alt="avatar">
                   </div>
                   <!-- Info -->
                   <div class="ms-2">
-                    <h6 class="mb-0">Lori Stevens</h6>
-                    <p class="mb-0 small">Tutor of physic</p>
+                    <h6 class="mb-0">{{testiomonialService.testimonials[2]?.firstname}}</h6>
+
                   </div>
                 </div>
 
@@ -560,13 +562,14 @@
                 <div class="d-flex align-items-center mb-3">
                   <!-- Avatar -->
                   <div class="avatar avatar-sm">
-                    <img class="avatar-img rounded-1" src="../../../assets/HomeAssets/images/avatar/04.jpg"
+                    <img class="avatar-img rounded-1"
+                      src="../../../assets/HomeAssets/images/{{testiomonialService.testimonials[3]?.imagename}}"
                       alt="avatar">
                   </div>
                   <!-- Info -->
                   <div class="ms-2">
-                    <h6 class="mb-0">Billy Vasquez</h6>
-                    <p class="mb-0 small">Tutor of chemistry</p>
+                    <h6 class="mb-0">{{testiomonialService.testimonials[3]?.firstname}}</h6>
+
                   </div>
                 </div>
 
@@ -574,13 +577,15 @@
                 <div class="d-flex align-items-center">
                   <!-- Avatar -->
                   <div class="avatar avatar-sm">
-                    <img class="avatar-img rounded-1" src="../../../assets/HomeAssets/images/avatar/02.jpg"
+                    <img class="avatar-img rounded-1"
+                      src="../../../assets/HomeAssets/images/{{testiomonialService.testimonials[1]?.imagename}}"
                       alt="avatar">
                   </div>
                   <!-- Info -->
                   <div class="ms-2">
-                    <h6 class="mb-0">Larry Lawson</h6>
-                    <p class="mb-0 small">Tutor of technology</p>
+                    <h6 class="mb-0">{{testiomonialService.testimonials[1]?.firstname}}
+                    </h6>
+
                   </div>
                 </div>
               </div>
@@ -698,7 +703,8 @@
                   <li class="list-inline-item me-0 small"><i class="fas fa-star-half-alt text-warning"></i></li>
                 </ul>
                 <!-- Info -->
-                <h6 class="mb-0">{{testiomonialService.testimonials[0]?.firstname}}</h6>
+                <h6 class="mb-0">{{testiomonialService.testimonials[0]?.firstname}}
+                  {{testiomonialService.testimonials[0]?.lastname}}</h6>
               </div>
             </div>
           </div> <!-- Row END -->
