@@ -184,11 +184,11 @@ categoryName?:any
     this.selectedImg=input
   }
   Levels = Levels;
-  async getCategoryName(category_Id: any) {
-    await this.categoryService.GetCategoryById(category_Id);
-    const category = this.categoryService.categories;
-    return category ? category.categoryname : '';
-  }
+  // async getCategoryName(category_Id: number) {
+  //   await this.categoryService.GetCategoryById(category_Id);
+  //   const category = this.categoryService.categories;
+  //   return category ? category.categoryname : '';
+  // }
 }
 enum Levels {
   Beginner = 1,
