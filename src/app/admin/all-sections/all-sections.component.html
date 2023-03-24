@@ -285,29 +285,19 @@
 								<!-- Basic information START -->
 
 								<!-- Course title -->
-								<div class="row g-4">
-									<mat-form-field appearance="fill">
-										<mat-label>Start Time</mat-label>
-										<input matInput [matDatepicker]="picker1" formControlName='starttime'
-											name="starttime">
-										<mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-										<mat-datepicker #picker1></mat-datepicker>
-									</mat-form-field>
-								</div>
+								<div class="row mb-3">
+                  <label for="start-time" class="col-sm-3 col-form-label">Start Time</label>
+                  <div class="col-sm-9">
+                    <input type="time" id="start-time" name="start-time" class="form-control form-control-lg" formControlName="starttime" step="60">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="end-time" class="col-sm-3 col-form-label">End Time</label>
+                  <div class="col-sm-9">
+                    <input type="time" id="end-time" name="end-time" class="form-control form-control-lg" formControlName="endtime" step="60">
+                  </div>
+                </div>
 
-
-
-
-								<!-- Short description -->
-								<div class="row g-4">
-									<mat-form-field appearance="fill">
-										<mat-label>End Time</mat-label>
-										<input matInput [matDatepicker]="picker2" formControlName='endtime'
-											name="endtime">
-										<mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-										<mat-datepicker #picker2></mat-datepicker>
-									</mat-form-field>
-								</div>
 								<div class="row g-4">
 									<mat-form-field appearance="fill">
 										<mat-label>Start Date</mat-label>
@@ -353,7 +343,7 @@
 												<mat-select formControlName="course_Id" [(ngModel)]="selectedCourse">
 												  <mat-option *ngFor="let course of courseService.courses" [value]="course.courseid" >
 													{{course.coursename}}
-													
+
 												  </mat-option>
 												</mat-select>
 											  </mat-form-field>
@@ -431,16 +421,19 @@
 									<!-- Course title -->
 									<div class="col-12">
 										<form [formGroup]="UpdateForm" class="example-form">
-											<div class="row g-4">
-												
-													<label>Start Time</label>
-													<input type="time" id="start-time" name="start-time" formControlNaame="starttime">
-												
-												</div>
-												<div class="row g-4">
-													<label>End Time</label>
-													<input type="time" id="start-time" name="end-time"  formControlName="endtime">
-													</div>
+											<div class="row mb-3">
+                        <label for="start-time" class="col-sm-3 col-form-label">Start Time</label>
+                        <div class="col-sm-9">
+                          <input type="time" id="start-time" name="start-time" class="form-control form-control-lg" formControlName="starttime" step="60">
+                        </div>
+                      </div>
+                      <div class="row mb-3">
+                        <label for="end-time" class="col-sm-3 col-form-label">End Time</label>
+                        <div class="col-sm-9">
+                          <input type="time" id="end-time" name="end-time" class="form-control form-control-lg" formControlName="endtime" step="60">
+                        </div>
+                      </div>
+
 													<div class="row g-4">
 														<mat-form-field appearance="fill" >
 															<mat-label>Start Date</mat-label>
@@ -481,7 +474,7 @@
 																	<mat-select formControlName="course_Id" [(ngModel)]="selectedUpdatedCourse">
 																	  <mat-option *ngFor="let course of courseService.courses" [value]="course.courseid" >
 																		{{course.coursename}}
-																		
+
 																	  </mat-option>
 																	</mat-select>
 																  </mat-form-field>
@@ -507,7 +500,7 @@
 									<!-- Step 1 button -->
 									<div class="d-flex justify-content-end mt-3">
 										<button mat-dialog-close class="btn btn-primary next-btn mb-0"
-											[disabled]="UpdateForm.invalid"
+
 											(click)="UpdateSectionForm()">Update</button>
 									</div>
 								</div>

@@ -45,7 +45,7 @@ export class EditProfileComponent {
     this.loggedUser = this.auth.gh
     await this.userService.getUserById(this.loggedUser)
     await this.CreateUserForm.patchValue(this.userService.user);
-    
+
   }
   async UpdateInformation(){
     this.loggedUser = this.auth.gh
@@ -63,7 +63,7 @@ export class EditProfileComponent {
       this.userService.UploadImage(formdata);
     }
   }
-  
+
 
 }
 

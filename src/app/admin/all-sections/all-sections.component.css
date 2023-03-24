@@ -1,0 +1,11 @@
+input[type="time"] {
+  color: #495057; /* text color */
+  background-color: #fff; /* background color */
+  border-color: #ced4da; /* border color */
+}
+
+input[type="time"]:focus {
+  outline-color: #66afe9; /* focus color */
+  border-color: #66afe9; /* focus border color */
+  box-shadow: none; /* remove shadow on focus */
+}
