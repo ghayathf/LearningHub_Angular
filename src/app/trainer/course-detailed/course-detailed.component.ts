@@ -3,6 +3,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { CourseService } from 'src/app/course.service';
 import { MaterialService } from 'src/app/material.service';
+import { TraineeSectionService } from 'src/app/trainee-section.service';
+import { TrainerService } from 'src/app/trainer.service';
+import { UserService } from 'src/app/user.service';
 
 @Component({
   selector: 'app-course-detailed',
@@ -12,7 +15,8 @@ import { MaterialService } from 'src/app/material.service';
 export class CourseDetailedComponent {
   @ViewChild('CreateForm') Create: any
   @ViewChild('DeleteForm') Delete: any
-  constructor(public materialService: MaterialService, public courseService: CourseService, public dialog: MatDialog) { }
+  constructor(public materialService: MaterialService, public courseService: CourseService, public dialog: MatDialog,public traineeSectionService:TraineeSectionService,
+    public userService:UserService) { }
 
   CreateMaterialForm = new FormGroup(
     {
@@ -31,13 +35,45 @@ export class CourseDetailedComponent {
   selectdSectionId: any;
   selectedCourseId: any;
   materials: any;
+  traineeSection:any = []
+  trainee:any = []
+  users :any = []
+  combinedArray: any = []
   async ngOnInit() {
     this.selectdSectionId = this.courseService.selectedSectionId;
     this.selectedCourseId = this.courseService.selectedCourseId;
 
     await this.materialService.GetAllMaterial();
     this.materials = this.materialService.materials.filter((x: { section_Id: any; }) => x.section_Id == this.selectdSectionId)
+    await this.traineeSectionService.GetAllTraineeSection()
+    this.traineeSection = this.traineeSectionService.TraineeSections.filter((x: { section_id: any; })=>x.section_id === this.selectdSectionId)
+    await this.traineeSectionService.GetAllTrainees()
+    this.trainee = this.traineeSectionService.allTrainees
+    this.trainee = this.trainee.filter((t: { traineeid: any; }) => {
+      return this.traineeSection.filter((ts: { trainee_Id: any; }) => ts.trainee_Id === t.traineeid);
+    });
+    await this.userService.getAllUsers()
+    this.users = this.userService.users
+    this.users = this.users.filter((u: { userid: any; }) => {
+      return this.trainee.some((ts: { user_Id: any; }) => ts.user_Id === u.userid);
+    });
 
+    this.combinedArray = this.users.filter((x: { roleId: number; }) => x.roleId == 2).map((user: any) => {
+      const trainee = this.trainee.find((trainee: any) => trainee.user_Id === user.userid);
+      return { ...user, ...trainee };
+    });
+    console.log(this.combinedArray)
+
+
+
+  }
+  markAbsent(id: string) {
+
+    const index = this.traineeSection.findIndex((item: { trainee_Id: string; }) => item.trainee_Id === id);
+
+    /* if (index !== -1) {
+      this.combinedArray[index].isAbsent = checked;
+    } */
   }
   async CreateMaterial() {
     this.CreateMaterialForm.controls['dateuploaded'].setValue(this.currentDate);
@@ -46,6 +82,7 @@ export class CourseDetailedComponent {
     await this.materialService.CreateMaterial(this.CreateMaterialForm.value)
     await this.materialService.GetAllMaterial();
     this.materials = this.materialService.materials.filter((x: { section_Id: any; }) => x.section_Id == this.selectdSectionId)
+
   }
 
   selectedFile: any
