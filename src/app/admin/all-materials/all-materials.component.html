@@ -2,11 +2,11 @@
 
 <!-- Page content START -->
 <div class="page-content">
-  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="wheat" type="square-jelly-box" [fullScreen]="true">
-    <p style="color: wheat"> Waiting... </p>
-  </ngx-spinner>
+    <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="wheat" type="square-jelly-box" [fullScreen]="true">
+        <p style="color: wheat"> Waiting... </p>
+    </ngx-spinner>
     <!-- Top bar START -->
-<app-admin-header></app-admin-header>
+    <app-admin-header></app-admin-header>
     <!-- Top bar END -->
 
     <!-- Page main content START -->
@@ -16,7 +16,7 @@
         <div class="row mb-3">
             <div class="col-12 d-sm-flex justify-content-between align-items-center">
                 <h1 class="h3 mb-2 mb-sm-0">Materials</h1>
-                <a class="btn btn-sm btn-primary mb-0" (click)="OpenDialog()">Create a material</a>
+                <!-- <a class="btn btn-sm btn-primary mb-0" (click)="OpenDialog()">Create a material</a> -->
             </div>
         </div>
 
@@ -67,37 +67,27 @@
                         </form>
                     </div> -->
                     <form class="rounded position-relative">
-                      <mat-form-field appearance="fill" style="width: 25%; margin-right: 2rem;">
-                        <mat-label>Date From</mat-label>
-                        <input matInput [matDatepicker]="picker1" [(ngModel)]="startDate" name="startDate">
-                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                        <mat-datepicker #picker1></mat-datepicker>
-                      </mat-form-field>
+                        <mat-form-field appearance="fill" style="width: 25%; margin-right: 2rem;">
+                            <mat-label>Date From</mat-label>
+                            <input matInput [matDatepicker]="picker1" [(ngModel)]="startDate" name="startDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker>
+                        </mat-form-field>
 
-                      <mat-form-field appearance="fill" style="width: 25%;">
-                        <mat-label>Date To</mat-label>
-                        <input matInput [matDatepicker]="picker2" [(ngModel)]="endDate" name="endDate">
-                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                        <mat-datepicker #picker2></mat-datepicker>
-                      </mat-form-field>
+                        <mat-form-field appearance="fill" style="width: 25%;">
+                            <mat-label>Date To</mat-label>
+                            <input matInput [matDatepicker]="picker2" [(ngModel)]="endDate" name="endDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                            <mat-datepicker #picker2></mat-datepicker>
+                        </mat-form-field>
 
-                      <button mat-raised-button color="primary" style="margin-left: 2rem;" (click)="searchBetweenInterval()" class="btn btn-info">Search</button>
+                        <button mat-raised-button color="primary" style="margin-left: 2rem;"
+                            (click)="searchBetweenInterval()" class="btn btn-info">Search</button>
                     </form>
 
 
                     <!-- Select option -->
-                    <div class="col-md-3">
-                        <!-- Short by filter -->
-                        <form>
-                            <select class="form-select js-choice border-0 z-index-9" aria-label=".form-select-sm">
-                                <option value="">Sort by</option>
-                                <option>Newest</option>
-                                <option>Oldest</option>
-                                <option>Accepted</option>
-                                <option>Rejected</option>
-                            </select>
-                        </form>
-                    </div>
+
                 </div>
                 <!-- Search and select END -->
             </div>
@@ -105,6 +95,7 @@
 
             <!-- Card body START -->
             <div class="card-body">
+             
                 <!-- Course table START -->
                 <div class="table-responsive border-0 rounded-3">
                     <!-- Table START -->
@@ -137,28 +128,29 @@
                                     </div>
                                 </td>
                                 <td>
-                                  <div class="d-flex align-items-center mb-3">
+                                    <div class="d-flex align-items-center mb-3">
 
-                                      <!-- Info -->
-                                      <div class="ms-2">
-                                          <h4 class="mb-0 fw-light">{{ item.dateuploaded | slice:0:10  }}</h4>
-                                      </div>
-                                  </div>
-                              </td>
-                              <td>
-                                <div class="d-flex align-items-center mb-3">
-
-                                    <!-- Info -->
-                                    <div class="ms-2">
-                                        <h4 class="mb-0 fw-light">{{ item.section_Id }}</h4>
+                                        <!-- Info -->
+                                        <div class="ms-2">
+                                            <h4 class="mb-0 fw-light">{{ item.dateuploaded | slice:0:10 }}</h4>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center mb-3">
+
+                                        <!-- Info -->
+                                        <div class="ms-2">
+                                            <h4 class="mb-0 fw-light">{{ item.section_Id }}</h4>
+                                        </div>
+                                    </div>
+                                </td>
 
 
 
                                 <td>
-                                    <button class="btn btn-sm btn-danger-soft mb-0" (click)="openDeleteDialog(item.materialid)">Delete</button>
+                                    <button class="btn btn-sm btn-danger-soft mb-0"
+                                        (click)="openDeleteDialog(item.materialid)">Delete</button>
                                 </td>
                             </tr>
 
@@ -205,38 +197,38 @@
 <!-- Page content END -->
 
 <ng-template #DeleteForm>
-  <h2 mat-dialog-content>Would you like to Delete this course ?</h2>
-  <div mat-dialog-actions>
-  <input type="button" mat-dialog-close class="btn btn-success" value="Yes" (click)="DeleteMaterial()">
-  <input type="button" mat-dialog-close class="btn btn-error" value="No">
-</div>
+    <h2 mat-dialog-content>Would you like to Delete this course ?</h2>
+    <div mat-dialog-actions>
+        <input type="button" mat-dialog-close class="btn btn-success" value="Yes" (click)="DeleteMaterial()">
+        <input type="button" mat-dialog-close class="btn btn-error" value="No">
+    </div>
 </ng-template>
 
 <ng-template #CreateForm>
-  <form [formGroup]="CreateMaterialForm" class="example-form">
-  <!-- <input type="file" #file (change)="UploadImage(file)"> -->
-  <div>
-    <mat-form-field class="example-full-width">
-      <mat-label>Section Id</mat-label>
-      <input type="number" matInput formControlName="section_Id">
+    <form [formGroup]="CreateMaterialForm" class="example-form">
+        <!-- <input type="file" #file (change)="UploadImage(file)"> -->
+        <div>
+            <mat-form-field class="example-full-width">
+                <mat-label>Section Id</mat-label>
+                <input type="number" matInput formControlName="section_Id">
 
-      <mat-error *ngIf="CreateMaterialForm.controls['section_Id'].hasError('required')">
-        CategoryId is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field class="example-full-width">
-      <mat-label>Material Name</mat-label>
-      <input type="text" matInput formControlName="materialname">
+                <mat-error *ngIf="CreateMaterialForm.controls['section_Id'].hasError('required')">
+                    CategoryId is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class="example-full-width">
+                <mat-label>Material Name</mat-label>
+                <input type="text" matInput formControlName="materialname">
 
-      <mat-error *ngIf="CreateMaterialForm.controls['materialname'].hasError('required')">
-        price is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
-  </div>
-  <div>
-   <!--  <mat-form-field class="example-full-width">
+                <mat-error *ngIf="CreateMaterialForm.controls['materialname'].hasError('required')">
+                    price is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div>
+            <!--  <mat-form-field class="example-full-width">
       <mat-label>start_Date</mat-label>
       <input type="date" matInput formControlName="dateuploaded" >
 
@@ -246,19 +238,20 @@
     </mat-form-field> -->
 
 
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Choose a date</mat-label>
-      <input matInput [matDatepicker]="picker" formControlName="dateuploaded">
-      <mat-hint>MM/DD/YYYY</mat-hint>
-      <mat-datepicker-toggle matIconSuffix [for]="picker">
-        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-      </mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-  </div>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Choose a date</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="dateuploaded">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker">
+                    <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
 
-    <div><input type="button" [disabled]="CreateMaterialForm.invalid" mat-dialog-close value="create" (click)="CreateMaterial()"></div>
-  </form>
+        <div><input type="button" [disabled]="CreateMaterialForm.invalid" mat-dialog-close value="create"
+                (click)="CreateMaterial()"></div>
+    </form>
 
 
 
@@ -267,56 +260,57 @@
 </ng-template>
 
 <ng-template #Search>
-  <div class="card-body">
-    <!-- Course table START -->
-    <div class="table-responsive border-0 rounded-3">
-  <table class="table table-dark-gray align-middle p-4 mb-0 table-hover" style="background-color: #3e3e40;">
-    <!-- Table head -->
-    <thead>
-        <tr>
-            <th scope="col" class="border-0">Material Name</th>
-            <th scope="col" class="border-0 rounded-end">Date Uploaded</th>
-            <th scope="col" class="border-0 rounded-end">Section ID</th>
-            <th scope="col" class="border-0 rounded-end">Action</th>
-        </tr>
-    </thead>
-    <!-- Table body START -->
-    <tbody>
-        <!-- Table row -->
-        <tr *ngFor="let item of materialService.searchedMat">
+    <div class="card-body">
+        <!-- Course table START -->
+        <div class="table-responsive border-0 rounded-3">
+            <table class="table table-dark-gray align-middle p-4 mb-0 table-hover" style="background-color: #3e3e40;">
+                <!-- Table head -->
+                <thead>
+                    <tr>
+                        <th scope="col" class="border-0">Material Name</th>
+                        <th scope="col" class="border-0 rounded-end">Date Uploaded</th>
+                        <th scope="col" class="border-0 rounded-end">Section ID</th>
+                        <th scope="col" class="border-0 rounded-end">Action</th>
+                    </tr>
+                </thead>
+                <!-- Table body START -->
+                <tbody>
+                    <!-- Table row -->
+                    <tr *ngFor="let item of materialService.searchedMat">
 
-            <!-- Table data -->
-            <td>
-                <div class="d-flex align-items-center mb-3">
-                    <!-- Info -->
-                    <div class="ms-2">
-                        <h4 class="mb-0 fw-light">{{ item.materialname }}</h4>
-                    </div>
-                </div>
-            </td>
-            <td>
-              <div class="d-flex align-items-center mb-3">
-                  <!-- Info -->
-                  <div class="ms-2">
-                      <h4 class="mb-0 fw-light">{{ item.dateuploaded  }}</h4>
-                  </div>
-              </div>
-          </td>
-          <td>
-            <div class="d-flex align-items-center mb-3">
-                <!-- Info -->
-                <div class="ms-2">
-                    <h4 class="mb-0 fw-light">{{ item.section_Id }}</h4>
-                </div>
-            </div>
-        </td>
-            <td>
-                <button class="btn btn-sm btn-danger-soft mb-0" (click)="openDeleteDialog(item.materialid)">Delete</button>
-            </td>
-        </tr>
-    </tbody>
-    <!-- Table body END -->
-</table>
+                        <!-- Table data -->
+                        <td>
+                            <div class="d-flex align-items-center mb-3">
+                                <!-- Info -->
+                                <div class="ms-2">
+                                    <h4 class="mb-0 fw-light">{{ item.materialname }}</h4>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center mb-3">
+                                <!-- Info -->
+                                <div class="ms-2">
+                                    <h4 class="mb-0 fw-light">{{ item.dateuploaded }}</h4>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center mb-3">
+                                <!-- Info -->
+                                <div class="ms-2">
+                                    <h4 class="mb-0 fw-light">{{ item.section_Id }}</h4>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-danger-soft mb-0"
+                                (click)="openDeleteDialog(item.materialid)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+                <!-- Table body END -->
+            </table>
+        </div>
     </div>
-  </div>
 </ng-template>
