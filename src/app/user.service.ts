@@ -93,7 +93,7 @@ UpdateUser(user: any): Promise<any> {
 this.getUserById(user.userid)
   if(this.ImgaeName!=null)
 user.imagename=this.ImgaeName
- if(this.user.imagename!=null)
+ else(this.user.imagename!=null)
 user.imagename=this.user.imagename
 
 console.log(user.imagename)
