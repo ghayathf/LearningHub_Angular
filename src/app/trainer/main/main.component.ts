@@ -37,7 +37,6 @@ export class MainComponent {
       const coursee = this.courseService.courses.find((coursee: any) => coursee.courseid === s.course_Id);
       return { ...s, ...coursee };
     });
-    console.log(this.combinedArray);
   }
 
   getDaysDifference(startdate: string, enddate: string): number {

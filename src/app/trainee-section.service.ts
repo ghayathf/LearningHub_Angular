@@ -35,6 +35,41 @@ export class TraineeSectionService {
     })
 
   }
+  TraineeSections:any = []
+  GetAllTraineeSection(){
+    this.spinner.show();
+    return new Promise<void>((resolve, reject) => {
+      this.http.get("https://localhost:44391/api/TraineeSection/GetAllTraineeSections").subscribe({
+        next: (res) => {
+          this.TraineeSections = res;
+          this.spinner.hide();
+          resolve();
 
-  //https://localhost:44391/api/TraineeSection/CreateTraineeSection
+        },
+        error: (err) => {
+          this.spinner.hide();
+          this.toaster.error("Error Try Again");
+          console.log(err);
+        }
+      })
+    })
+  }
+  allTrainees:any = []
+  GetAllTrainees(){
+    this.spinner.show();
+    return new Promise<void>((resolve, reject) => {
+      this.http.get("https://localhost:44391/api/Trainee/gatAllTrainees").subscribe({
+        next: (res) => {
+          this.allTrainees = res;
+          this.spinner.hide();
+          resolve();
+        },
+        error: (err) => {
+          this.spinner.hide();
+          this.toaster.error("Error Try Again");
+          console.log(err);
+        }
+      })
+    })
+  }
 }
