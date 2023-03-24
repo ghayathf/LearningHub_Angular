@@ -195,13 +195,7 @@
             <!-- Button -->
             <a href="#" class="btn btn-lg btn-danger-soft me-2 mb-4 mb-sm-0">Get Started</a>
             <!-- Video button -->
-            <div class="d-flex align-items-center justify-content-center py-2 ms-0 ms-sm-4">
-              <a data-glightbox data-gallery="office-tour" href="https://www.youtube.com/embed/tXHviS-4ygo"
-                class="btn btn-round btn-primary-shadow mb-0 overflow-visible me-7">
-                <i class="fas fa-play"></i>
-                <h6 class="mb-0 ms-3 fw-normal position-absolute start-100 top-50 translate-middle-y">Watch video</h6>
-              </a>
-            </div>
+            
           </div>
         </div>
         <!-- Left content END -->
@@ -296,19 +290,19 @@
             <ul class="avatar-group mb-0">
               <li class="avatar avatar-sm">
                 <img class="avatar-img rounded-circle border-white"
-                  src="../../../assets/HomeAssets/images/{{userService.users[0].imagename}}" alt="avatar">
+                src="../../../assets/HomeAssets/images/{{testiomonialService.testimonials[0]?.imagename}}" alt="avatar">
               </li>
               <li class="avatar avatar-sm">
                 <img class="avatar-img rounded-circle border-white"
-                  src="../../../assets/HomeAssets/images/{{userService.users[1].imagename}}" alt="avatar">
+                src="../../../assets/HomeAssets/images/{{testiomonialService.testimonials[1]?.imagename}}" alt="avatar">
               </li>
               <li class="avatar avatar-sm">
                 <img class="avatar-img rounded-circle border-white"
-                  src="../../../assets/HomeAssets/images/{{userService.users[2].imagename}}" alt="avatar">
+                src="../../../assets/HomeAssets/images/{{testiomonialService.testimonials[2]?.imagename}}" alt="avatar">
               </li>
               <li class="avatar avatar-sm">
                 <img class="avatar-img rounded-circle border-white"
-                  src="../../../assets/HomeAssets/images/{{userService.users[3].imagename}}" alt="avatar">
+                src="../../../assets/HomeAssets/images/{{testiomonialService.testimonials[3]?.imagename}}" alt="avatar">
               </li>
               <li class="avatar avatar-sm">
                 <div class="avatar-img rounded-circle border-white bg-primary">
@@ -345,7 +339,7 @@
                   data-purecounter-delay="200">{{courseService.courses.length}}</h5>
                 <span class="mb-0 h5" *ngIf="courseService.courses.length > 999">K</span>
               </div>
-              <p class="mb-0">Online Courses</p>
+              <p class="mb-0">Online Lectures</p>
             </div>
           </div>
         </div>
@@ -357,9 +351,9 @@
               <div class="d-flex">
                 <h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="200"
                   data-purecounter-delay="200">0</h5>
-                <span class="mb-0 h5">+</span>
+                <span class="mb-0 h5">{{this.AllTrainers.length}}+</span>
               </div>
-              <p class="mb-0">Expert Tutors</p>
+              <p class="mb-0">Expert Trainers</p>
             </div>
           </div>
         </div>
@@ -373,7 +367,7 @@
                   data-purecounter-delay="200">{{userService.Trainee.length}}</h5>
                 <span class="mb-0 h5" *ngIf="userService.Trainee.length > 999">K+</span>
               </div>
-              <p class="mb-0">Online Students</p>
+              <p class="mb-0">Online Trainees</p>
             </div>
           </div>
         </div>
@@ -385,7 +379,7 @@
               <div class="d-flex">
                 <h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="6"
                   data-purecounter-delay="300">0</h5>
-                <span class="mb-0 h5">K+</span>
+                <span class="mb-0 h5">{{this.AllCourses.length}}K+</span>
               </div>
               <p class="mb-0">Certified Courses</p>
             </div>

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/auth.service';
+import { TestimonialService } from 'src/app/testimonial.service';
 import { RegisterService } from 'src/app/register.service';
 
 @Component({
@@ -9,9 +10,15 @@ import { RegisterService } from 'src/app/register.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  
+  constructor(public auth:AuthService,public testimonialService:TestimonialService) {
 
   constructor(public auth: AuthService, public userService: RegisterService) {
 
+  }
+  async ngOnInit()
+  {
+    await this.testimonialService.GetAllAcceptedTestimonilas();
   }
   ngOnInit() {
     this.userService.getAllUsers();

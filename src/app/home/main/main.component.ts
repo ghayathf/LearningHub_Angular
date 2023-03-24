@@ -4,8 +4,10 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { CategoryService } from 'src/app/category.service';
 import { CourseService } from 'src/app/course.service';
 import { RegisterService } from 'src/app/register.service';
+import { SectionService } from 'src/app/section.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { TestimonialService } from 'src/app/testimonial.service';
+import { TrainerService } from 'src/app/trainer.service';
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -16,9 +18,22 @@ export class MainComponent {
   name: string = ""
   details: string = ""
   cats: any = []
+  constructor(private router: Router, private spinner: NgxSpinnerService, public categoryService: CategoryService, public courseService: CourseService, public testiomonialService: TestimonialService,private sectionService:SectionService,private traineeService:TrainerService,private trainerService:TrainerService,private registerService:RegisterService) {
   constructor(private router: Router, private spinner: NgxSpinnerService, public categoryService: CategoryService, public courseService: CourseService, public testiomonialService: TestimonialService, public userService: RegisterService) {
   }
+  AllCourses:any
+  AllTrainees:any
+  AllTrainers:any
+  AllSections:any
   async ngOnInit() {
+    await this.courseService.GetAllCourses();
+    this.AllCourses=this.courseService.courses;
+    await this.traineeService.GetAllTrainers();
+    this.AllTrainers=this.trainerService.trainers;
+    await this.registerService.GetAllAcceptedTrainee();
+    this.AllTrainees=this.registerService.AcceptedTrainee;
+    await this.sectionService.GetAllSections()
+    this.AllSections = this.sectionService.sections;
     await this.userService.getAllUsers();
     /** spinner starts on init */
     await this.testiomonialService.GetAllAcceptedTestimonilas();
