@@ -113,6 +113,8 @@ export class CourseDetailedComponent {
     const filePath = "../../../assets/HomeAssets/Materials/" + this.material;
 
     const response = await fetch(filePath);
+    const lastDotIndex = filePath.lastIndexOf(".");
+    const slicedStr = filePath.slice(lastDotIndex + 1);
     const blob = await response.blob();
 
     // Create a URL for the Blob using createObjectURL
@@ -121,7 +123,7 @@ export class CourseDetailedComponent {
     // Create an anchor tag and trigger the download by simulating a click
     const a = document.createElement('a');
     a.href = url;
-    a.download = this.materialService.Material.materialname + '.pdf';
+    a.download = this.materialService.Material.materialname + '.'+ slicedStr;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
