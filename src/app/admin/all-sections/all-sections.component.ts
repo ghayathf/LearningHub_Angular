@@ -5,7 +5,7 @@ import { SectionService } from 'src/app/section.service';
 import { MatDatepicker, MatDatepickerActions } from '@angular/material/datepicker';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { DatePipe } from '@angular/common';
+import { DatePipe, Time } from '@angular/common';
 import { TrainerService } from 'src/app/trainer.service';
 import { CourseService } from 'src/app/course.service';
 import { UserService } from 'src/app/user.service';
@@ -27,6 +27,7 @@ export class AllSectionsComponent {
   @ViewChild('DeleteForm') Delete: any
   @ViewChild('DetailsForm') Details: any
   @ViewChild('ImportForm') Import: any
+
   constructor(public sectionService: SectionService, private router: Router, public dialog: MatDialog,
     public spinner: NgxSpinnerService, private formBuilder: FormBuilder, public trainerService: TrainerService, public courseService: CourseService, public userService: UserService, private datePipe: DatePipe, public traineeServie: RegisterService, public traineeSection: TraineeSectionService) { }
 
@@ -166,13 +167,11 @@ export class AllSectionsComponent {
   section?: any
   courseName?: any
   trainerEmail?: any
-  time1:any=this.UpdateForm.controls['starttime']
-  time2:any=this.UpdateForm.controls['endtime']
+  time1?:Time
+  time2?:Time
   dateFormat:string="2023-03-30";
   datetimeStart?:Date
   datetimeEnd?:Date
- dateTimeString1:any = `${this.dateFormat}Z${this.time1}:00`;
- dateTimeString2:any = `${this.dateFormat}Z${this.time2}:00`;
   async openUpdateDialog(sectionid: number) {
     await this.sectionService.GetSectionById(sectionid);
     await this.courseService.GetCourseById(this.sectionService.section.course_Id)
@@ -187,25 +186,38 @@ export class AllSectionsComponent {
         this.trainerEmail = this.combinedArray[i].email;
       }
     }
+    this.time1 = this.sectionService.section.starttime
+    this.time2 = this.sectionService.section.endtime
     const dialogConfig = new MatDialogConfig();
     dialogConfig.maxWidth = '500px';
     dialogConfig.maxHeight = '90vh';
-    console.log(this.datetimeStart)
-    console.log(this.UpdateForm.controls['starttime'])
     this.dialog.open(this.Update, dialogConfig);
+
   }
- 
+
   async UpdateSectionForm() {
-    this.datetimeStart=new Date(this.dateTimeString1)
-    if (Object.prototype.toString.call(this.datetimeEnd) === "[object Date]" && !isNaN(this.datetimeStart.getTime())){
-    this.UpdateForm.patchValue({
-      starttime: this.datetimeStart.toLocaleTimeString()
-    });
-    }
-    this.datetimeEnd=new Date(this.dateTimeString2)
-    if (Object.prototype.toString.call(this.datetimeEnd) === "[object Date]" && !isNaN(this.datetimeEnd.getTime())) {
+    const hours = this.time1?.hours;
+    const minutes = this.time1?.minutes;
+    if (hours !== undefined && minutes !== undefined) {
+      const date = new Date();
+      date.setHours(hours);
+      date.setMinutes(minutes);
+      const isoString = date.toISOString();
+
       this.UpdateForm.patchValue({
-        endtime: this.datetimeEnd.toLocaleTimeString()
+        starttime: isoString
+      });
+    }
+    const hourss = this.time2?.hours;
+    const minutess = this.time2?.minutes;
+    if (hourss !== undefined && minutess !== undefined) {
+      const date = new Date();
+      date.setHours(hourss);
+      date.setMinutes(minutess);
+      const isoString = date.toISOString();
+
+      this.UpdateForm.patchValue({
+        endtime: isoString
       });
     }
     this.UpdateForm.patchValue({
@@ -214,10 +226,7 @@ export class AllSectionsComponent {
     this.UpdateForm.patchValue({
       trainer_Id: this.selectedUpdatedTrainer
     });
-    this.UpdateForm.patchValue({
-     
-    });
-    
+
     await this.sectionService.UpdateSection(this.UpdateForm.value);
     this.sectionService.GetAllSections();
   }
@@ -274,5 +283,5 @@ export class AllSectionsComponent {
       await this.traineeSection.CreateTraineeSection(this.trainees[j]);
     }
   }
-  
+
 }
