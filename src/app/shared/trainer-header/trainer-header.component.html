@@ -8,7 +8,7 @@
 
         <!-- Logo START -->
           <a class="navbar-brand" href="index.html">
-            <img class="dark-mode-item navbar-brand-item h-30px" src="../../../assets/HomeAssets/images/logo-light.svg" alt="">
+            <img class="light-mode-item navbar-brand-item h-30px" src="../../../assets/HomeAssets/images/logo.svg" alt="">
           </a>
         <!-- Logo END -->
 
@@ -142,7 +142,7 @@
             <li class="nav-item ms-2 ms-md-3 "ngbDropdown>
               <!-- Avatar -->
               <a dropdownMenuButton class="avatar avatar-sm p-0" id="profileDropdown" role="button" data-bs-auto-close="outside" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="true">
-                <img ngbDropdownToggle class="avatar-img rounded-circle" src="../../../assets/HomeAssets/images/avatar/01.jpg" alt="avatar">
+                <img ngbDropdownToggle class="avatar-img rounded-circle" src="../../../assets/HomeAssets/images/{{this.userService.User?.imagename}}" alt="avatar">
               </a>
 
               <!-- Profile dropdown START -->
@@ -152,7 +152,7 @@
                   <div class="d-flex align-items-center">
                     <!-- Avatar -->
                     <div class="avatar me-3 mb-3">
-                      <img class="avatar-img rounded-circle shadow" src="../../../assets/HomeAssets/images/avatar/01.jpg" alt="avatar">
+                      <img class="avatar-img rounded-circle shadow" src="../../../assets/HomeAssets/images/{{this.userService.User?.imagename}}" alt="avatar">
                     </div>
                     <div>
                       <a class="h6 mt-2 mt-sm-0" href="#">{{ this.userService.User?.firstname }} {{ this.userService.User?.lastname }}</a>
@@ -162,8 +162,11 @@
                 </li>
                 <li> <hr class="dropdown-divider"></li>
                 <!-- Links -->
-                <li><a class="dropdown-item" routerLink="/Admin/EditProfile"><i class="bi bi-person fa-fw me-2"></i>Edit Profile</a></li>
-                <li><a class="dropdown-item bg-danger-soft-hover" (click)="logout()"><i class="bi bi-power fa-fw me-2" ></i>Sign Out</a></li>
+                <li><a class="dropdown-item bg-success-soft-hover" href="" routerLink="/Trainer/"><i class="bi bi-power fa-fw me-2" ></i>Dashboard</a></li>
+                <li><a class="dropdown-item" routerLink="/Trainer/EditTrainerProfile"><i class="bi bi-person fa-fw me-2"></i>Edit Profile</a></li>
+
+                <li><a class="dropdown-item bg-danger-soft-hover" href="" (click)="logout()"><i class="bi bi-power fa-fw me-2" ></i>Sign Out</a></li>
+
                 <li> <hr class="dropdown-divider"></li>
 
                 <!-- Dark mode options START -->

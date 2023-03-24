@@ -13,10 +13,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { EnumValuesPipe } from '../enum-values.pipe';
+import { CourseDetailedComponent } from './course-detailed/course-detailed.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
-    MainComponent
+    MainComponent,
+    CourseDetailedComponent,
+    EditProfileComponent
   ],
   imports: [
     CommonModule,

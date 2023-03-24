@@ -5,7 +5,7 @@ import { SectionService } from 'src/app/section.service';
 import { MatDatepicker, MatDatepickerActions } from '@angular/material/datepicker';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { DatePipe } from '@angular/common';
+import { DatePipe, Time } from '@angular/common';
 import { TrainerService } from 'src/app/trainer.service';
 import { CourseService } from 'src/app/course.service';
 import { UserService } from 'src/app/user.service';
@@ -27,27 +27,28 @@ export class AllSectionsComponent {
   @ViewChild('DeleteForm') Delete: any
   @ViewChild('DetailsForm') Details: any
   @ViewChild('ImportForm') Import: any
+
   constructor(public sectionService: SectionService, private router: Router, public dialog: MatDialog,
     public spinner: NgxSpinnerService, private formBuilder: FormBuilder, public trainerService: TrainerService, public courseService: CourseService, public userService: UserService, private datePipe: DatePipe, public traineeServie: RegisterService, public traineeSection: TraineeSectionService) { }
 
-users:any=[]
-trainers:any=[]
-combinedArray:any=[]
-UserTrainer? :any
-  currentDate:any
+  users: any = []
+  trainers: any = []
+  combinedArray: any = []
+  UserTrainer?: any
+  currentDate: any
   async ngOnInit() {
-  this.sectionService.GetAllSections()
-  await this.userService.getAllUsers()
-  await this.trainerService.GetAllTrainers()
-  this.courseService.GetAllCourses()
-  this. trainers= this.trainerService.trainers
-  this.users=this.userService.users
-  this. combinedArray = this.users.filter((x: { roleId: number; }) => x.roleId == 3).map((user:any) => {
-    const trainer = this.trainers.find((trainer:any) => trainer.user_Id === user.userid);
-    return { ...user, ...trainer };
-  });
-  console.log(this.combinedArray)
-  this.currentDate = new Date(Date.now()).toISOString().slice(0,10)
+    this.sectionService.GetAllSections()
+    await this.userService.getAllUsers()
+    await this.trainerService.GetAllTrainers()
+    this.courseService.GetAllCourses()
+    this.trainers = this.trainerService.trainers
+    this.users = this.userService.users
+    this.combinedArray = this.users.filter((x: { roleId: number; }) => x.roleId == 3).map((user: any) => {
+      const trainer = this.trainers.find((trainer: any) => trainer.user_Id === user.userid);
+      return { ...user, ...trainer };
+    });
+    console.log(this.combinedArray)
+    this.currentDate = new Date(Date.now()).toISOString().slice(0, 10)
 
   }
   GenerateCertificate(id: number) {
@@ -93,8 +94,8 @@ UserTrainer? :any
       enddate: new FormControl('', Validators.required),
       meetingurl: new FormControl('', Validators.required),
       sectioncapacity: new FormControl('', Validators.required),
-      course_Id: new FormControl('', Validators.required),
-      trainer_Id: new FormControl('', Validators.required)
+      course_Id: new FormControl(''),
+      trainer_Id: new FormControl('')
     }
   )
 
@@ -160,26 +161,72 @@ UserTrainer? :any
     await this.sectionService.DeleteSection(this.selectedItem)
     this.sectionService.GetAllSections()
   }
+
   selectedUpdatedCourse: any
   selectedUpdatedTrainer: any
+  section?: any
+  courseName?: any
+  trainerEmail?: any
+  time1?:Time
+  time2?:Time
+  dateFormat:string="2023-03-30";
+  datetimeStart?:Date
+  datetimeEnd?:Date
   async openUpdateDialog(sectionid: number) {
     await this.sectionService.GetSectionById(sectionid);
+    await this.courseService.GetCourseById(this.sectionService.section.course_Id)
+    await this.trainerService.GetTrainerById(this.sectionService.section.trainee_Id)
     await this.UpdateForm.patchValue(this.sectionService.section);
-
+    this.section = this.sectionService.section
+    this.selectedUpdatedCourse = this.sectionService.section.course_Id
+    this.selectedUpdatedTrainer = this.sectionService.section.trainer_Id
+    this.courseName = this.courseService.course.coursename
+    for (let i = 0; i < this.combinedArray.length; i++) {
+      if (this.combinedArray[i].trainer_Id == this.selectedUpdatedTrainer) {
+        this.trainerEmail = this.combinedArray[i].email;
+      }
+    }
+    this.time1 = this.sectionService.section.starttime
+    this.time2 = this.sectionService.section.endtime
     const dialogConfig = new MatDialogConfig();
     dialogConfig.maxWidth = '500px';
     dialogConfig.maxHeight = '90vh';
-
     this.dialog.open(this.Update, dialogConfig);
+
   }
 
   async UpdateSectionForm() {
+    const hours = this.time1?.hours;
+    const minutes = this.time1?.minutes;
+    if (hours !== undefined && minutes !== undefined) {
+      const date = new Date();
+      date.setHours(hours);
+      date.setMinutes(minutes);
+      const isoString = date.toISOString();
+
+      this.UpdateForm.patchValue({
+        starttime: isoString
+      });
+    }
+    const hourss = this.time2?.hours;
+    const minutess = this.time2?.minutes;
+    if (hourss !== undefined && minutess !== undefined) {
+      const date = new Date();
+      date.setHours(hourss);
+      date.setMinutes(minutess);
+      const isoString = date.toISOString();
+
+      this.UpdateForm.patchValue({
+        endtime: isoString
+      });
+    }
     this.UpdateForm.patchValue({
       course_Id: this.selectedUpdatedCourse
     });
     this.UpdateForm.patchValue({
       trainer_Id: this.selectedUpdatedTrainer
     });
+
     await this.sectionService.UpdateSection(this.UpdateForm.value);
     this.sectionService.GetAllSections();
   }
@@ -236,4 +283,5 @@ UserTrainer? :any
       await this.traineeSection.CreateTraineeSection(this.trainees[j]);
     }
   }
+
 }

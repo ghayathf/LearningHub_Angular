@@ -26,13 +26,15 @@
 									<label class="position-relative me-4" for="uploadfile-1" title="Replace this pic">
 										<!-- Avatar place holder -->
 										<span class="avatar avatar-xl ">
-											<img id="uploadfile-1-preview" class="avatar-img rounded-circle border border-white border-3 shadow" src="../../../assets/HomeAssets/images/avatar/07.jpg" alt="">
+											<img id="uploadfile-1-preview" class="avatar-img rounded-circle border border-white border-3 shadow" src="../../../assets/HomeAssets/images/{{userService.user.imagename}}" alt="">
 										</span>
 										<!-- Remove btn -->
-										<button type="button" class="uploadremove"><i class="bi bi-x text-white"></i></button>
+									<!--<input type="file" class="uploadremove"><i class="bi bi-x text-white"  accept="image/gif, image/jpeg, image/png"
+                    (change)="UploadImage(file)" #file ></i>-->
+
 									</label>
 									<!-- Upload button -->
-									<input id="uploadfile-1" class="form-control d-none" type="file">
+									<input id="uploadfile-1" class="form-control d-none" type="file"(change)="UploadImage(file)" #file>
 								</div>
 							</div>
               <form [formGroup]="CreateUserForm" class="row g-4">

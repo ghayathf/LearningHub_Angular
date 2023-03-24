@@ -10,6 +10,7 @@ import { ContactusComponent } from './contactus/contactus.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { MainComponent } from './main/main.component';
+import { RegisterdUserComponent } from './registerd-user/registerd-user.component';
 import { TestimonialComponent } from './testimonial/testimonial.component';
 import { TraineeRequestsComponent } from './trainee-requests/trainee-requests.component';
 
@@ -54,7 +55,12 @@ const routes: Routes = [
   {
     path: "Testimonial",
     component: TestimonialComponent
+  },
+  {
+    path: "registerd",
+    component: RegisterdUserComponent
   }
+
 ];
 
 @NgModule({

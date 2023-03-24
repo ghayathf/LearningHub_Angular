@@ -1,0 +1,139 @@
+<app-trainer-header></app-trainer-header>
+<section class="pt-0">
+	<div>
+    <div class="row ">
+      <app-trainer-banner></app-trainer-banner>
+     </div>
+		<div class="row " style="margin-left: 100px;">
+
+      <div class="col-xl-2 ">
+
+			<!-- Left sidebar START -->
+<app-trainer-side-bar></app-trainer-side-bar>
+			<!-- Left sidebar END -->
+      </div>
+      <div class="col-xl-9">
+
+        <!-- Counter boxes START -->
+        <div class="row g-4">
+			<!-- Main content START -->
+				<!-- Edit profile START -->
+				<div class="card bg-transparent border rounded-3" style="width: 70%; margin-left: 100px;">
+					<!-- Card header -->
+					<div class="card-header bg-transparent border-bottom ">
+						<h1 class="card-header-title mb-0 ">Edit Profile</h1>
+					</div>
+					<!-- Card body START -->
+					<div class="card-body">
+						<!-- Form -->
+
+
+							<!-- Profile picture -->
+							<div class="col-12 justify-content-center align-items-center">
+								<div class="d-flex align-items-center justify-content-center">
+									<label class="position-relative me-4" for="uploadfile-1" title="Replace this pic">
+										<!-- Avatar place holder -->
+										<span class="avatar avatar-xl ">
+											<img id="uploadfile-1-preview" class="avatar-img rounded-circle border border-white border-3 shadow" src="../../../assets/HomeAssets/images/{{userService.user.imagename}}" alt="">
+										</span>
+										<!-- Remove btn -->
+									<!--<input type="file" class="uploadremove"><i class="bi bi-x text-white"  accept="image/gif, image/jpeg, image/png"
+                    (change)="UploadImage(file)" #file ></i>-->
+
+									</label>
+									<!-- Upload button -->
+									<input id="uploadfile-1" class="form-control d-none" type="file"(change)="UploadImage(file)" #file>
+								</div>
+							</div>
+              <form [formGroup]="UpdateProfileForm" class="row g-4">
+                <div class="row g-4 justify-content-center">
+							<!-- Full name -->
+								<mat-form-field class="example-full-width col-4">
+                  <mat-label>User name</mat-label>
+                  <input type="text" matInput formControlName="username">
+
+                  <mat-error
+                    *ngIf="UpdateProfileForm.controls['username'].hasError('required')">
+                    User name is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+
+							<!-- Password -->
+								<mat-form-field class="example-full-width col-4">
+                  <mat-label>password</mat-label>
+                  <input type="password" matInput formControlName="userpassword">
+
+                  <mat-error
+                    *ngIf="UpdateProfileForm.controls['userpassword'].hasError('required')">
+                    password is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+                </div>
+                  <div class="row g-4 justify-content-center">
+							<!-- Email id -->
+								<mat-form-field class="example-full-width  col-4">
+                  <mat-label>email</mat-label>
+                  <input type="text" matInput formControlName="email">
+
+                  <mat-error
+                    *ngIf="UpdateProfileForm.controls['email'].hasError('required')">
+                    email is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+
+							<!-- Phone number -->
+								<mat-form-field class="example-full-width  col-4">
+                  <mat-label>Phone Number</mat-label>
+                  <input type="text" matInput formControlName="phonenumber">
+
+                  <mat-error
+                    *ngIf="UpdateProfileForm.controls['phonenumber'].hasError('required')">
+                    Phone Number is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+                  </div>
+                  <div class="row g-4 justify-content-center">
+							<!-- firstname -->
+								<mat-form-field class="example-full-width  col-4">
+                  <mat-label>first name</mat-label>
+                  <input type="text" matInput formControlName="firstname">
+
+                  <mat-error
+                    *ngIf="UpdateProfileForm.controls['firstname'].hasError('required')">
+                    first name is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+
+							<!-- About me -->
+								<mat-form-field class="example-full-width  col-4">
+                  <mat-label>last name</mat-label>
+                  <input type="text" matInput formControlName="lastname" style="color:#2a2c31">
+
+                  <mat-error
+                    *ngIf="UpdateProfileForm.controls['lastname'].hasError('required')">
+                    last name is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+                  </div>
+							<!-- Education -->
+
+
+							<!-- Save button -->
+							<div class="d-sm-flex justify-content-center">
+                <button mat-dialog-close class="btn btn-primary next-btn mb-0"
+
+											(click)="UpdateInformation()">Update</button>
+							</div>
+						</form>
+					</div>
+					<!-- Card body END -->
+				</div>
+				<!-- Edit profile END -->
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+
+
+

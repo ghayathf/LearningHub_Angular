@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { TrainerService } from 'src/app/trainer.service';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ChartConfiguration, ChartOptions } from 'chart.js';
+import { ChartConfiguration, ChartOptions, Colors } from 'chart.js';
 import { CourseService } from 'src/app/course.service';
 import { CategoryService } from 'src/app/category.service';
 
@@ -40,7 +40,30 @@ this.Ccount = this.cats.map(function(elem: { finalCourses: any; }) { return elem
   this.pieChartDatasets[0].data = this.Ccount;
 }
 title2 = 'ng2-charts-demo';
+public radarChartOptions: ChartConfiguration<"radar">["options"] = {
+  responsive: true,
+  scales: {
+    r: {
+      suggestedMin: 0,
+      suggestedMax: 0,
+      display: true,
+      grid: {
+        color: 'white',
+        lineWidth: 0.5
+      },
+      ticks: {
+        display: false
+      }
+    }
+  }
 
+};
+public radarChartLabels: string[] = [];
+
+public radarChartDatasets: ChartConfiguration<'radar'>['data']['datasets'] = [
+  { data: [], label: 'AVG Pre-Exam' },
+  { data: [], label: 'AVG Post-Exam' }
+];
 // Pie
 public pieChartOptions: ChartOptions<'pie'> = {
   responsive: false,

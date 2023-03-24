@@ -270,9 +270,9 @@
 
 
 											<mat-form-field appearance="fill">
-												<mat-label>Course Level</mat-label>
+												<mat-label>{{courseLevel}}</mat-label>
 												<mat-select formControlName="courselevel"
-													[(ngModel)]="selectedUpdatedLevel">
+													[(ngModel)]="selectedUpdatedLevel" [value]="selectedUpdatedLevel">
 													<mat-option *ngFor="let level of Levels| enumValues"
 														[value]="level.index">
 														{{level.name}}
@@ -284,7 +284,7 @@
 
 
 											<mat-form-field appearance="fill">
-												<mat-label>Category</mat-label>
+												<mat-label>{{categoryName}}</mat-label>
 												<mat-select formControlName="category_Id"
 													[(ngModel)]="selectedUpdatedCategory">
 													<mat-option *ngFor="let cate of categoryService.categories"
@@ -294,10 +294,6 @@
 													</mat-option>
 												</mat-select>
 											</mat-form-field>
-
-
-
-
 
 											<div class="col-12">
 												<div

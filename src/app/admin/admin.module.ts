@@ -22,6 +22,7 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TestimonialComponent } from './testimonial/testimonial.component';
 import { EnumValuesPipe } from '../enum-values.pipe';
+import { RegisterdUserComponent } from './registerd-user/registerd-user.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { EnumValuesPipe } from '../enum-values.pipe';
     AllSectionsComponent,
     EditProfileComponent,
         TestimonialComponent,
+        RegisterdUserComponent,
   ],
   imports: [
     CommonModule,

@@ -89,8 +89,14 @@ CreateUser(user: any): Promise<any> {
     )
   });
 }
-UpdateUser(user: any): Promise<any> {
+async UpdateUser(user: any): Promise<any> {
+await this.getUserById(user.userid)
+  if(this.ImgaeName!=null)
+user.imagename=this.ImgaeName
+else
+user.imagename=this.user.imagename
 
+console.log(user.imagename)
   return new Promise<void>((resolve, reject) => {
     this.spinner.show();
     this.http.put("https://localhost:44391/api/User/UpdateUser", user).subscribe(
@@ -100,6 +106,7 @@ UpdateUser(user: any): Promise<any> {
           this.spinner.hide();
           this.toaster.success("User Account Updated Successfuly");
           resolve();
+          debugger
         },
         error: (err) => {
           console.log(err);
@@ -111,4 +118,20 @@ UpdateUser(user: any): Promise<any> {
   }
   );
 }
+ImgaeName :any;
+  UploadImage(imageFile: any) {
+    this.spinner.show()
+    return new Promise<void>((resolve, reject) => {
+
+    this.http.post("https://localhost:44391/api/User/UploadImage", imageFile).subscribe(
+      {
+        next: (res: any) => {
+          this.spinner.hide()
+          this.ImgaeName = res.imagename;
+          resolve()
+        },
+        error: () => { }
+      }
+    )})
+  }
 }
