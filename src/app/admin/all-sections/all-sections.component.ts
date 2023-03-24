@@ -13,14 +13,13 @@ import * as XLSX from 'xlsx';
 import { RegisterService } from 'src/app/register.service';
 import { TraineeSectionService } from 'src/app/trainee-section.service';
 
-
-
 @Component({
   selector: 'app-all-sections',
   templateUrl: './all-sections.component.html',
   styleUrls: ['./all-sections.component.css'],
   providers: [DatePipe]
 })
+
 export class AllSectionsComponent {
   @ViewChild('CreateSection') Create: any
   @ViewChild('UpdateSection') Update: any
@@ -100,43 +99,7 @@ export class AllSectionsComponent {
   )
 
 
-  // CreateTraineeSection = new FormGroup({
-  //   trainee_Id: new FormControl('', [
-  //     Validators.required,
-  //     Validators.pattern(/^\d+$/),
-  //   ]),
-  //   section_id: new FormControl('', [
-  //     Validators.required,
-  //     Validators.pattern(/^\d+$/),
-  //   ]),
-  //   totalmark: new FormControl('', [
-  //     Validators.required,
-  //     Validators.pattern(/^\d+$/),
-  //   ]),
-  //   totalattendance: new FormControl('', [
-  //     Validators.required,
-  //     Validators.pattern(/^\d+$/),
-  //   ]),
-  //   t_S_Status: new FormControl('', [
-  //     Validators.required,
-  //     Validators.pattern(/^\d+$/),
-  //   ]),
-  // })
-
-  // trainees: any[] = [
-  //   {
-  //     trainee_Id: 0,
-  //     section_id: 0,
-  //     totalmark: 0,
-  //     t_S_Status: 0
-  //   }
-  // ];
-
   trainees: any[] = [];
-
-
-
-
 
 
   selectedCourse: any

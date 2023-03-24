@@ -1,11 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CourseService } from 'src/app/course.service';
 import { MaterialService } from 'src/app/material.service';
 import { TraineeSectionService } from 'src/app/trainee-section.service';
 import { TrainerService } from 'src/app/trainer.service';
 import { UserService } from 'src/app/user.service';
+import { TaskService } from 'src/app/task.service';
 
 @Component({
   selector: 'app-course-detailed',
@@ -14,9 +15,11 @@ import { UserService } from 'src/app/user.service';
 })
 export class CourseDetailedComponent {
   @ViewChild('CreateForm') Create: any
+  @ViewChild('UpdateForm') Update: any
+
   @ViewChild('DeleteForm') Delete: any
-  constructor(public materialService: MaterialService, public courseService: CourseService, public dialog: MatDialog,public traineeSectionService:TraineeSectionService,
-    public userService:UserService) { }
+  constructor(public materialService: MaterialService, public courseService: CourseService, public dialog: MatDialog, public traineeSectionService: TraineeSectionService,
+    public userService: UserService, public taskService: TaskService) { }
 
   CreateMaterialForm = new FormGroup(
     {
@@ -27,6 +30,48 @@ export class CourseDetailedComponent {
     }
   )
 
+  UpdateMaterialForm = new FormGroup(
+    {
+      materialid: new FormControl(''),
+      dateuploaded: new FormControl(''),
+      materialname: new FormControl('', Validators.required),
+      section_Id: new FormControl(''),
+      filepath: new FormControl('')
+    }
+  )
+
+
+
+  CreateTaskForm = new FormGroup(
+    {
+      tasktype: new FormControl('', Validators.required),
+      starttime: new FormControl('', Validators.required),
+      endtime: new FormControl('', Validators.required),
+      weight: new FormControl('', Validators.required),
+      taskstatus: new FormControl('', Validators.required),
+      taskfile: new FormControl('', Validators.required),
+      tasknote: new FormControl('', Validators.required),
+      sectionidd: new FormControl('', Validators.required)
+
+    }
+  )
+
+  MaterialFile: any
+  categoryImg?: string
+  async openUpdateDialog(materialId: number) {
+    await this.materialService.GetMaterialById(materialId);
+    this.MaterialFile = this.materialService.Material.filepath;
+    await this.UpdateMaterialForm.patchValue(this.materialService.Material);
+
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.maxWidth = '500px';
+    dialogConfig.maxHeight = '90vh';
+    this.categoryImg = this.materialService.Material.filePath;
+    this.dialog.open(this.Update, dialogConfig);
+  }
+
+  tasks: any;
+
   currentDate?: any
   OpenDialog() {
     this.currentDate = new Date(Date.now());
@@ -35,9 +80,9 @@ export class CourseDetailedComponent {
   selectdSectionId: any;
   selectedCourseId: any;
   materials: any;
-  traineeSection:any = []
-  trainee:any = []
-  users :any = []
+  traineeSection: any = []
+  trainee: any = []
+  users: any = []
   combinedArray: any = []
   async ngOnInit() {
     this.selectdSectionId = this.courseService.selectedSectionId;
@@ -46,7 +91,7 @@ export class CourseDetailedComponent {
     await this.materialService.GetAllMaterial();
     this.materials = this.materialService.materials.filter((x: { section_Id: any; }) => x.section_Id == this.selectdSectionId)
     await this.traineeSectionService.GetAllTraineeSection()
-    this.traineeSection = this.traineeSectionService.TraineeSections.filter((x: { section_id: any; })=>x.section_id === this.selectdSectionId)
+    this.traineeSection = this.traineeSectionService.TraineeSections.filter((x: { section_id: any; }) => x.section_id === this.selectdSectionId)
     await this.traineeSectionService.GetAllTrainees()
     this.trainee = this.traineeSectionService.allTrainees
     this.trainee = this.trainee.filter((t: { traineeid: any; }) => {
@@ -66,6 +111,12 @@ export class CourseDetailedComponent {
 
 
 
+    await this.taskService.GetAllTasks();
+    this.tasks = this.taskService.tasks.filter((x: { sectionidd: any; }) => x.sectionidd == this.selectdSectionId)
+
+
+
+
   }
   markAbsent(id: string) {
 //hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee ghayath w raneem
@@ -80,6 +131,12 @@ export class CourseDetailedComponent {
     this.CreateMaterialForm.controls['section_Id'].setValue(this.selectdSectionId);
 
     await this.materialService.CreateMaterial(this.CreateMaterialForm.value)
+    await this.materialService.GetAllMaterial();
+    this.materials = this.materialService.materials.filter((x: { section_Id: any; }) => x.section_Id == this.selectdSectionId)
+
+  }
+  async UpdateMaterial() {
+    await this.materialService.UpdateMaterial(this.UpdateMaterialForm.value);
     await this.materialService.GetAllMaterial();
     this.materials = this.materialService.materials.filter((x: { section_Id: any; }) => x.section_Id == this.selectdSectionId)
 
@@ -113,6 +170,8 @@ export class CourseDetailedComponent {
     const filePath = "../../../assets/HomeAssets/Materials/" + this.material;
 
     const response = await fetch(filePath);
+    const lastDotIndex = filePath.lastIndexOf(".");
+    const slicedStr = filePath.slice(lastDotIndex + 1);
     const blob = await response.blob();
 
     // Create a URL for the Blob using createObjectURL
@@ -121,7 +180,7 @@ export class CourseDetailedComponent {
     // Create an anchor tag and trigger the download by simulating a click
     const a = document.createElement('a');
     a.href = url;
-    a.download = this.materialService.Material.materialname + '.pdf';
+    a.download = this.materialService.Material.materialname + '.' + slicedStr;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -130,5 +189,6 @@ export class CourseDetailedComponent {
     URL.revokeObjectURL(url);
 
   }
+
 
 }
