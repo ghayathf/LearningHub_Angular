@@ -7,7 +7,7 @@ import { Dialog } from '@angular/cdk/dialog';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { CategoryService } from 'src/app/category.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { Object } from 'core-js';
+
 
 
 import { EnumValuesPipe } from '../../enum-values.pipe';
