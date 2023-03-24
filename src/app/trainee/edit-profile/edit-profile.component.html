@@ -1,16 +1,23 @@
-<app-admin-side-bar></app-admin-side-bar>
-<section class="pt-0">
-<app-admin-header></app-admin-header>
+<app-trainee-header></app-trainee-header>
+<section class="pt-0 ">
 	<div>
-		<div class="row mt-4" style="margin-left: 200px;">
+<div class="row ">
+ <app-trainee-banner></app-trainee-banner>
+</div>
+		<div class="row " style="margin-left: 100px;">
 
+      <div class="col-md-2 ">
 			<!-- Left sidebar START -->
-
+<app-trainee-side-bar></app-trainee-side-bar>
 			<!-- Left sidebar END -->
+      </div>
+      <div class="col-xl-9">
 
+        <!-- Counter boxes START -->
+        <div class="row g-4">
 			<!-- Main content START -->
 				<!-- Edit profile START -->
-				<div class="card bg-transparent border rounded-3" style="width: 70%; margin-left: 250px;">
+				<div class="card bg-transparent border rounded-3" style="width: 70%; margin-left: 100px;">
 					<!-- Card header -->
 					<div class="card-header bg-transparent border-bottom ">
 						<h1 class="card-header-title mb-0 ">Edit Profile</h1>
@@ -37,7 +44,7 @@
 									<input id="uploadfile-1" class="form-control d-none" type="file"(change)="UploadImage(file)" #file>
 								</div>
 							</div>
-              <form [formGroup]="CreateUserForm" class="row g-4">
+              <form [formGroup]="UpdateProfileForm" class="row g-4">
                 <div class="row g-4 justify-content-center">
 							<!-- Full name -->
 								<mat-form-field class="example-full-width col-4">
@@ -45,7 +52,7 @@
                   <input type="text" matInput formControlName="username">
 
                   <mat-error
-                    *ngIf="CreateUserForm.controls['username'].hasError('required')">
+                    *ngIf="UpdateProfileForm.controls['username'].hasError('required')">
                     User name is <strong>required</strong>
                   </mat-error>
                 </mat-form-field>
@@ -56,7 +63,7 @@
                   <input type="password" matInput formControlName="userpassword">
 
                   <mat-error
-                    *ngIf="CreateUserForm.controls['userpassword'].hasError('required')">
+                    *ngIf="UpdateProfileForm.controls['userpassword'].hasError('required')">
                     password is <strong>required</strong>
                   </mat-error>
                 </mat-form-field>
@@ -68,7 +75,7 @@
                   <input type="text" matInput formControlName="email">
 
                   <mat-error
-                    *ngIf="CreateUserForm.controls['email'].hasError('required')">
+                    *ngIf="UpdateProfileForm.controls['email'].hasError('required')">
                     email is <strong>required</strong>
                   </mat-error>
                 </mat-form-field>
@@ -79,7 +86,7 @@
                   <input type="text" matInput formControlName="phonenumber">
 
                   <mat-error
-                    *ngIf="CreateUserForm.controls['phonenumber'].hasError('required')">
+                    *ngIf="UpdateProfileForm.controls['phonenumber'].hasError('required')">
                     Phone Number is <strong>required</strong>
                   </mat-error>
                 </mat-form-field>
@@ -91,7 +98,7 @@
                   <input type="text" matInput formControlName="firstname">
 
                   <mat-error
-                    *ngIf="CreateUserForm.controls['firstname'].hasError('required')">
+                    *ngIf="UpdateProfileForm.controls['firstname'].hasError('required')">
                     first name is <strong>required</strong>
                   </mat-error>
                 </mat-form-field>
@@ -102,7 +109,7 @@
                   <input type="text" matInput formControlName="lastname" style="color:#2a2c31">
 
                   <mat-error
-                    *ngIf="CreateUserForm.controls['lastname'].hasError('required')">
+                    *ngIf="UpdateProfileForm.controls['lastname'].hasError('required')">
                     last name is <strong>required</strong>
                   </mat-error>
                 </mat-form-field>
@@ -121,7 +128,11 @@
 					<!-- Card body END -->
 				</div>
 				<!-- Edit profile END -->
-
+        </div></div>
       </div>
     </div>
   </section>
+
+
+
+

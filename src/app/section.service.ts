@@ -32,6 +32,7 @@ export class SectionService {
         next:()=>{this.spinner.hide()
           this.toaster.success("Section Created Successfuly");
           resolve();
+          debugger
          },
         error:()=>{  this.spinner.hide();
           this.toaster.error("Error");}
@@ -80,6 +81,7 @@ export class SectionService {
     )})
   }
   async UpdateSection(section: any) {
+
     return new Promise<void>((resolve, reject) => {
       this.spinner.show();
       this.http.put("https://localhost:44391/api/Section/UpdateSection", section).subscribe(
@@ -88,14 +90,12 @@ export class SectionService {
             this.spinner.hide();
             this.toaster.success("Section Updated Successfully");
             resolve();
+
           },
           error: () => {
             this.spinner.hide();
             this.toaster.error("Try again");
-
           }
-
-
         }
       )
     })

@@ -89,11 +89,11 @@ CreateUser(user: any): Promise<any> {
     )
   });
 }
-UpdateUser(user: any): Promise<any> {
-this.getUserById(user.userid)
+async UpdateUser(user: any): Promise<any> {
+await this.getUserById(user.userid)
   if(this.ImgaeName!=null)
 user.imagename=this.ImgaeName
- if(this.user.imagename!=null)
+else
 user.imagename=this.user.imagename
 
 console.log(user.imagename)
@@ -106,6 +106,7 @@ console.log(user.imagename)
           this.spinner.hide();
           this.toaster.success("User Account Updated Successfuly");
           resolve();
+          debugger
         },
         error: (err) => {
           console.log(err);
@@ -117,7 +118,7 @@ console.log(user.imagename)
   }
   );
 }
-ImgaeName = "";
+ImgaeName :any;
   UploadImage(imageFile: any) {
     this.spinner.show()
     return new Promise<void>((resolve, reject) => {

@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
+import { UserService } from 'src/app/user.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthGuard } from 'src/app/auth.guard';
-import { UserService } from 'src/app/user.service';
+import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-edit-profile',
@@ -13,8 +13,7 @@ import { UserService } from 'src/app/user.service';
   styleUrls: ['./edit-profile.component.css']
 })
 export class EditProfileComponent {
-
-  CreateUserForm = new FormGroup(
+  UpdateProfileForm = new FormGroup(
     {
       userid : new FormControl('', [
         Validators.required,
@@ -44,15 +43,15 @@ export class EditProfileComponent {
   async ngOnInit(){
     this.loggedUser = this.auth.gh
     await this.userService.getUserById(this.loggedUser)
-    await this.CreateUserForm.patchValue(this.userService.user);
+    await this.UpdateProfileForm.patchValue(this.userService.user);
 
   }
   async UpdateInformation(){
     this.loggedUser = this.auth.gh
-    await this.CreateUserForm.controls['userid'].setValue(this.loggedUser)
-    await this.CreateUserForm.controls['roleId'].setValue(this.role)
+    await this.UpdateProfileForm.controls['userid'].setValue(this.loggedUser)
+    await this.UpdateProfileForm.controls['roleId'].setValue(this.role)
 
-    await this.userService.UpdateUser(this.CreateUserForm.value)
+    await this.userService.UpdateUser(this.UpdateProfileForm.value)
   }
 
   UploadImage(input: any) {
@@ -64,6 +63,4 @@ export class EditProfileComponent {
     }
   }
 
-
 }
-

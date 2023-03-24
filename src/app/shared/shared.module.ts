@@ -20,8 +20,11 @@ import { NgChartsModule } from 'ng2-charts';
 import { TrainerHeaderComponent } from './trainer-header/trainer-header.component';
 import { TrainerSideBarComponent } from './trainer-side-bar/trainer-side-bar.component';
 import { TrainerBannerComponent } from './trainer-banner/trainer-banner.component';
+import { TraineeHeaderComponent } from './trainee-header/trainee-header.component';
+import { TraineeSideBarComponent } from './trainee-side-bar/trainee-side-bar.component';
+import { TraineeBannerComponent } from './trainee-banner/trainee-banner.component';
 
- 
+
 @NgModule({
   declarations: [
     HomeHeaderComponent,
@@ -31,6 +34,9 @@ import { TrainerBannerComponent } from './trainer-banner/trainer-banner.componen
     TrainerHeaderComponent,
     TrainerSideBarComponent,
     TrainerBannerComponent,
+    TraineeHeaderComponent,
+    TraineeSideBarComponent,
+    TraineeBannerComponent,
   ],
   imports: [
     CommonModule,
@@ -68,6 +74,9 @@ import { TrainerBannerComponent } from './trainer-banner/trainer-banner.componen
     TrainerHeaderComponent,
     TrainerSideBarComponent,
     TrainerBannerComponent,
+    TraineeHeaderComponent,
+    TraineeSideBarComponent,
+    TraineeBannerComponent,
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
