@@ -195,7 +195,7 @@
             <!-- Button -->
             <a href="#" class="btn btn-lg btn-danger-soft me-2 mb-4 mb-sm-0">Get Started</a>
             <!-- Video button -->
-            
+
           </div>
         </div>
         <!-- Left content END -->
@@ -290,19 +290,23 @@
             <ul class="avatar-group mb-0">
               <li class="avatar avatar-sm">
                 <img class="avatar-img rounded-circle border-white"
-                src="../../../assets/HomeAssets/images/{{testiomonialService.testimonials[0]?.imagename}}" alt="avatar">
+                  src="../../../assets/HomeAssets/images/{{testiomonialService.testimonials[0]?.imagename}}"
+                  alt="avatar">
               </li>
               <li class="avatar avatar-sm">
                 <img class="avatar-img rounded-circle border-white"
-                src="../../../assets/HomeAssets/images/{{testiomonialService.testimonials[1]?.imagename}}" alt="avatar">
+                  src="../../../assets/HomeAssets/images/{{testiomonialService.testimonials[1]?.imagename}}"
+                  alt="avatar">
               </li>
               <li class="avatar avatar-sm">
                 <img class="avatar-img rounded-circle border-white"
-                src="../../../assets/HomeAssets/images/{{testiomonialService.testimonials[2]?.imagename}}" alt="avatar">
+                  src="../../../assets/HomeAssets/images/{{testiomonialService.testimonials[2]?.imagename}}"
+                  alt="avatar">
               </li>
               <li class="avatar avatar-sm">
                 <img class="avatar-img rounded-circle border-white"
-                src="../../../assets/HomeAssets/images/{{testiomonialService.testimonials[3]?.imagename}}" alt="avatar">
+                  src="../../../assets/HomeAssets/images/{{testiomonialService.testimonials[3]?.imagename}}"
+                  alt="avatar">
               </li>
               <li class="avatar avatar-sm">
                 <div class="avatar-img rounded-circle border-white bg-primary">
@@ -336,8 +340,8 @@
             <div class="ms-4 h6 fw-normal mb-0">
               <div class="d-flex">
                 <h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="10"
-                  data-purecounter-delay="200">{{courseService.courses.length}}</h5>
-                <span class="mb-0 h5" *ngIf="courseService.courses.length > 999">K</span>
+                  data-purecounter-delay="200">0</h5>
+                <span class="mb-0 h5">{{this.AllSections.length}}K</span>
               </div>
               <p class="mb-0">Online Lectures</p>
             </div>
@@ -364,8 +368,8 @@
             <div class="ms-4 h6 fw-normal mb-0">
               <div class="d-flex">
                 <h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="60"
-                  data-purecounter-delay="200">{{userService.Trainee.length}}</h5>
-                <span class="mb-0 h5" *ngIf="userService.Trainee.length > 999">K+</span>
+                  data-purecounter-delay="200">0</h5>
+                <span class="mb-0 h5">{{this.AllTrainees.length}}K+</span>
               </div>
               <p class="mb-0">Online Trainees</p>
             </div>

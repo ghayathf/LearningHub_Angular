@@ -142,9 +142,6 @@ export class CourseDetailedComponent {
 
   }
 
-
-
-
   selectedFile: any
   UploaMaterial(input: any) {
     if (input.files[0] != null) {

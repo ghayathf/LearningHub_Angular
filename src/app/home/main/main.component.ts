@@ -19,7 +19,6 @@ export class MainComponent {
   details: string = ""
   cats: any = []
   constructor(private router: Router, private spinner: NgxSpinnerService, public categoryService: CategoryService, public courseService: CourseService, public testiomonialService: TestimonialService,private sectionService:SectionService,private traineeService:TrainerService,private trainerService:TrainerService,private registerService:RegisterService) {
-  constructor(private router: Router, private spinner: NgxSpinnerService, public categoryService: CategoryService, public courseService: CourseService, public testiomonialService: TestimonialService, public userService: RegisterService) {
   }
   AllCourses:any
   AllTrainees:any
@@ -34,11 +33,8 @@ export class MainComponent {
     this.AllTrainees=this.registerService.AcceptedTrainee;
     await this.sectionService.GetAllSections()
     this.AllSections = this.sectionService.sections;
-    await this.userService.getAllUsers();
-    /** spinner starts on init */
     await this.testiomonialService.GetAllAcceptedTestimonilas();
     console.log(this.testiomonialService.Acceptedtestimonials);
-    this.userService.GetAllTrainee();
 
     this.spinner.show();
 
@@ -55,7 +51,6 @@ export class MainComponent {
         "<img src='https://media.giphy.com/media/o8igknyuKs6aY/giphy.gif' />",
     });
     this.categoryService.GetAllCategories()
-    this.courseService.GetAllCourses();
   }
   GetValues(categoryid: any) {
     this.courseService.GetCoursesByCategoryId(categoryid)
