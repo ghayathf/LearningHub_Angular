@@ -7,6 +7,7 @@ import { Dialog } from '@angular/cdk/dialog';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { CategoryService } from 'src/app/category.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Object } from 'core-js';
 
 
 import { EnumValuesPipe } from '../../enum-values.pipe';
@@ -50,6 +51,7 @@ export class AllCoursesTableComponent {
   ngOnInit() {
     this.courseService.GetAllCourses()
     this.categoryService.GetAllCategories()
+    
   }
   GetCourseById(courseid: number) {
     this.courseService.GetCourseById(courseid)
@@ -64,17 +66,16 @@ export class AllCoursesTableComponent {
     await this.courseService.deleteCourse(this.selectedItem)
     this.courseService.GetAllCourses()
   }
-  course:any
-  selectedUpdatedCategory:any
-  selectedUpdatedLevel:any
- currentImg:any
- courseLevel?:any
- courseCategory?:any
- category?:any
- categoryName?:any
+course:any
+selectedUpdatedCategory:any
+selectedUpdatedLevel:any
+currentImg:any
+courseLevel?:any
+courseCategory?:any
+category?:any
+categoryName?:any
   async openUpdateDialog(courseid: number) {
     await this.courseService.GetCourseById(courseid);
-   
     await this.UpdateCourseForm.patchValue(this.courseService.course);
 
     const dialogConfig = new MatDialogConfig();
@@ -127,8 +128,6 @@ export class AllCoursesTableComponent {
       });
     }
     await this.courseService.UpdateCourse(this.UpdateCourseForm.value);
-
-
     this.courseService.GetAllCourses();
     window.location.reload()
   }
@@ -136,11 +135,10 @@ export class AllCoursesTableComponent {
     await this.courseService.GetCourseById(courseid);
     this.dialog.open(this.Details);
   }
-
   OpenCreateDialog() {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.maxWidth = '500px';
-    dialogConfig.maxHeight = '90vh';
+    dialogConfig.maxWidth = '800px';
+    dialogConfig.maxHeight = '80vh';
     this.dialog.open(this.Create, dialogConfig)
   }
   selectedCategory: any
@@ -186,6 +184,11 @@ export class AllCoursesTableComponent {
     this.selectedImg=input
   }
   Levels = Levels;
+  async getCategoryName(category_Id: any) {
+    await this.categoryService.GetCategoryById(category_Id);
+    const category = this.categoryService.categories;
+    return category ? category.categoryname : '';
+  }
 }
 enum Levels {
   Beginner = 1,

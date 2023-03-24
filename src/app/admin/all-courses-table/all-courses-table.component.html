@@ -15,7 +15,7 @@
 			<div class="col-12 d-sm-flex justify-content-between align-items-center">
 				<h1 class="h3 mb-2 mb-sm-0">Courses</h1>
 				<!-- <a routerLink="/Admin/CreateCourse" class="btn btn-sm btn-primary mb-0">Create a Course</a> -->
-				<a (click)="OpenCreateDialog()" class="btn btn-sm btn-primary mb-0">Create a Course</a>
+				<a (click)="OpenCreateDialog()" class="btn btn-sm btn-primary mb-0" style=" background-color:#1d3b53 ;">Create a Course</a>
 			</div>
 		</div>
 
@@ -32,16 +32,16 @@
 			<!-- Course item -->
 			<div class="col-sm-6 col-lg-4">
 				<div class="text-center p-4 bg-success bg-opacity-10 border border-success rounded-3">
-					<h6>Activated Courses</h6>
-					<h2 class="mb-0 fs-1 text-success">996</h2>
+					<h6>Total Levels</h6>
+					<h2 class="mb-0 fs-1 text-success">3</h2>
 				</div>
 			</div>
 
 			<!-- Course item -->
 			<div class="col-sm-6 col-lg-4">
 				<div class="text-center p-4  bg-warning bg-opacity-15 border border-warning rounded-3">
-					<h6>Pending Courses</h6>
-					<h2 class="mb-0 fs-1 text-warning">200</h2>
+					<h6>Total Categories</h6>
+					<h2 class="mb-0 fs-1 text-warning">{{this.categoryService.categories.length}}</h2>
 				</div>
 			</div>
 		</div>
@@ -70,7 +70,7 @@
 					<!-- Select option -->
 					<div class="col-md-3">
 						<!-- Short by filter -->
-						<form>
+						<!-- <form>
 							<select class="form-select js-choice border-0 z-index-9" aria-label=".form-select-sm">
 								<option value="">Sort by</option>
 								<option>Newest</option>
@@ -78,7 +78,7 @@
 								<option>Accepted</option>
 								<option>Rejected</option>
 							</select>
-						</form>
+						</form> -->
 					</div>
 				</div>
 				<!-- Search and select END -->
@@ -92,12 +92,12 @@
 					<!-- Table START -->
 					<table class="table table-dark-gray align-middle p-4 mb-0 table-hover">
 						<!-- Table head -->
-						<thead>
-							<tr>
-								<th scope="col" class="border-0 rounded-start">Course Name</th>
-								<th scope="col" class="border-0">Category</th>
-								<th scope="col" class="border-0">Level</th>
-								<th scope="col" class="border-0 rounded-end">Action</th>
+						<thead style=" background-color:#1d3b53 ;">
+							<tr >
+								<th scope="col" class="border-0 rounded-start" style=" background-color:#1d3b53 ;">Course Name</th>
+								<th scope="col" class="border-0"style=" background-color:#1d3b53 ;">Category</th>
+								<th scope="col" class="border-0"style=" background-color:#1d3b53 ;">Level</th>
+								<th scope="col" class="border-0 rounded-end"style=" background-color:#1d3b53 ;">Action</th>
 							</tr>
 						</thead>
 
@@ -127,14 +127,14 @@
 
 										<!-- Info -->
 										<div class="ms-2">
-											<h4 class="mb-0 fw-light">{{ item.category_Id }}</h4>
+											<h4 class="mb-0 fw-light">{{ getCategoryName(item.category_Id) }}</h4>
 										</div>
 									</div>
 								</td>
 
 
 								<!-- Table data -->
-								<td> <span class="badge text-bg-primary">{{ item.courselevel }}</span> </td>
+								<td> <span class="badge text-bg-primary">{{Levels[item.courselevel]}}</span> </td>
 
 
 
@@ -162,23 +162,7 @@
 			<!-- Card footer START -->
 			<div class="card-footer bg-transparent pt-0">
 				<!-- Pagination START -->
-				<div class="d-sm-flex justify-content-sm-between align-items-sm-center">
-					<!-- Content -->
-					<p class="mb-0 text-center text-sm-start">Showing 1 to 8 of 20 entries</p>
-					<!-- Pagination -->
-					<nav class="d-flex justify-content-center mb-0" aria-label="navigation">
-						<ul
-							class="pagination pagination-sm pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
-							<li class="page-item mb-0"><a class="page-link" href="#" tabindex="-1"><i
-										class="fas fa-angle-left"></i></a></li>
-							<li class="page-item mb-0"><a class="page-link" href="#">1</a></li>
-							<li class="page-item mb-0 active"><a class="page-link" href="#">2</a></li>
-							<li class="page-item mb-0"><a class="page-link" href="#">3</a></li>
-							<li class="page-item mb-0"><a class="page-link" href="#"><i
-										class="fas fa-angle-right"></i></a></li>
-						</ul>
-					</nav>
-				</div>
+				
 				<!-- Pagination END -->
 			</div>
 			<!-- Card footer END -->
@@ -456,7 +440,7 @@
 		</div>
 	</section>
 
-	<section style="background-color:#2a2c31">
+	<section >
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 mx-auto text-center">
@@ -476,14 +460,10 @@
 
 								<!-- Step 1 content START -->
 
-								<!-- Title -->
-								<h4>Course details</h4>
-
-								<hr> <!-- Divider -->
-
-								<!-- Basic information START -->
-								<div class="row g-4">
+							
 									<!-- Course title -->
+									<div class="row">
+										<div class="col-md-6">
 									<div>
 										<mat-form-field class="example-full-width">
 											<mat-label>CourseName</mat-label>
@@ -494,9 +474,10 @@
 											</mat-error>
 										</mat-form-field>
 									</div>
+									</div>
 
 									<!-- Short description -->
-									<div class="col-12">
+									<div class="col-md-6">
 										<mat-form-field class="example-full-width">
 											<mat-label>course Description</mat-label>
 											<input type="text" matInput formControlName="coursedescription">
@@ -507,11 +488,13 @@
 										</mat-form-field>
 									</div>
 
+									</div>
 
 
 
 
-									<div class="col-md-6">
+
+									
 										<!-- <label class="form-label">Course level</label>
 										<select class="form-select js-choice border-0 z-index-9 bg-transparent" aria-label=".form-select-sm" data-search-enabled="false" data-remove-item-button="true">
 											<option value="">Select course level</option>
@@ -527,6 +510,8 @@
                         course level is <strong>required</strong>
                       </mat-error>
                     </mat-form-field>-->
+					<div class="row">
+						<div class="col-md-6">
 										<mat-form-field appearance="fill">
 											<mat-label>Course Level</mat-label>
 											<mat-select formControlName="courselevel" [(ngModel)]="selectedLevel">
@@ -539,7 +524,7 @@
 										</mat-form-field>
 									</div>
 
-									<div class="col-12">
+									<div class="col-md-6">
 										<!--<mat-form-field class="example-full-width">
                       <mat-label>category_Id</mat-label>
                       <input type="number" matInput formControlName="category_Id">
@@ -558,14 +543,14 @@
 											</mat-select>
 										</mat-form-field>
 									</div>
-
+</div>
 									<div class="col-12">
 										<div
 											class="text-center justify-content-center align-items-center p-4 p-sm-5 border border-2 border-dashed position-relative rounded-3">
 											<!-- Image -->
 											<img src="assets/images/element/gallery.svg" class="h-50px" alt="">
 											<div>
-												<h6 class="my-2">Upload Cayrgory image here, or<a href="#!"
+												<h6 class="my-2">Upload Course image here, or<a href="#!"
 														class="text-primary"> Browse</a></h6>
 												<label style="cursor:pointer;">
 													<span>
@@ -589,7 +574,7 @@
 											[disabled]="CreateCourseForm.invalid" value="Create"
 											(click)="CreateCourse()">Create</button>
 									</div>
-								</div>
+								
 
 							</form>
 						</div>
