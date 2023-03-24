@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/auth.service';
+import { TestimonialService } from 'src/app/testimonial.service';
 
 @Component({
   selector: 'app-login',
@@ -9,8 +10,12 @@ import { AuthService } from 'src/app/auth.service';
 })
 export class LoginComponent {
   
-  constructor(public auth:AuthService) {
+  constructor(public auth:AuthService,public testimonialService:TestimonialService) {
 
+  }
+  async ngOnInit()
+  {
+    await this.testimonialService.GetAllAcceptedTestimonilas();
   }
   LoginformChecking: FormGroup = new FormGroup({
     username: new FormControl('', [Validators.required]),
