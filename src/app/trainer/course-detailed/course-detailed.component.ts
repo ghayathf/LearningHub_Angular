@@ -1,8 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CourseService } from 'src/app/course.service';
 import { MaterialService } from 'src/app/material.service';
+import { TaskService } from 'src/app/task.service';
 
 @Component({
   selector: 'app-course-detailed',
@@ -11,8 +12,10 @@ import { MaterialService } from 'src/app/material.service';
 })
 export class CourseDetailedComponent {
   @ViewChild('CreateForm') Create: any
+  @ViewChild('UpdateForm') Update: any
+
   @ViewChild('DeleteForm') Delete: any
-  constructor(public materialService: MaterialService, public courseService: CourseService, public dialog: MatDialog) { }
+  constructor(public taskService: TaskService, public materialService: MaterialService, public courseService: CourseService, public dialog: MatDialog) { }
 
   CreateMaterialForm = new FormGroup(
     {
@@ -22,6 +25,48 @@ export class CourseDetailedComponent {
       filepath: new FormControl('')
     }
   )
+
+  UpdateMaterialForm = new FormGroup(
+    {
+      materialid: new FormControl(''),
+      dateuploaded: new FormControl(''),
+      materialname: new FormControl('', Validators.required),
+      section_Id: new FormControl(''),
+      filepath: new FormControl('')
+    }
+  )
+
+
+
+  CreateTaskForm = new FormGroup(
+    {
+      tasktype: new FormControl('', Validators.required),
+      starttime: new FormControl('', Validators.required),
+      endtime: new FormControl('', Validators.required),
+      weight: new FormControl('', Validators.required),
+      taskstatus: new FormControl('', Validators.required),
+      taskfile: new FormControl('', Validators.required),
+      tasknote: new FormControl('', Validators.required),
+      sectionidd: new FormControl('', Validators.required)
+
+    }
+  )
+
+  MaterialFile: any
+  categoryImg?: string
+  async openUpdateDialog(materialId: number) {
+    await this.materialService.GetMaterialById(materialId);
+    this.MaterialFile = this.materialService.Material.filepath;
+    await this.UpdateMaterialForm.patchValue(this.materialService.Material);
+
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.maxWidth = '500px';
+    dialogConfig.maxHeight = '90vh';
+    this.categoryImg = this.materialService.Material.filePath;
+    this.dialog.open(this.Update, dialogConfig);
+  }
+
+  tasks: any;
 
   currentDate?: any
   OpenDialog() {
@@ -38,6 +83,12 @@ export class CourseDetailedComponent {
     await this.materialService.GetAllMaterial();
     this.materials = this.materialService.materials.filter((x: { section_Id: any; }) => x.section_Id == this.selectdSectionId)
 
+    await this.taskService.GetAllTasks();
+    this.tasks = this.taskService.tasks.filter((x: { sectionidd: any; }) => x.sectionidd == this.selectdSectionId)
+
+
+
+
   }
   async CreateMaterial() {
     this.CreateMaterialForm.controls['dateuploaded'].setValue(this.currentDate);
@@ -47,6 +98,15 @@ export class CourseDetailedComponent {
     await this.materialService.GetAllMaterial();
     this.materials = this.materialService.materials.filter((x: { section_Id: any; }) => x.section_Id == this.selectdSectionId)
   }
+  async UpdateMaterial() {
+    await this.materialService.UpdateMaterial(this.UpdateMaterialForm.value);
+    await this.materialService.GetAllMaterial();
+    this.materials = this.materialService.materials.filter((x: { section_Id: any; }) => x.section_Id == this.selectdSectionId)
+
+  }
+
+
+
 
   selectedFile: any
   UploaMaterial(input: any) {
@@ -93,5 +153,7 @@ export class CourseDetailedComponent {
     URL.revokeObjectURL(url);
 
   }
+
+
 
 }

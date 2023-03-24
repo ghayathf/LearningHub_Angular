@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CategoryService } from 'src/app/category.service';
 import { CourseService } from 'src/app/course.service';
+import { RegisterService } from 'src/app/register.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { TestimonialService } from 'src/app/testimonial.service';
 @Component({
@@ -15,12 +16,14 @@ export class MainComponent {
   name: string = ""
   details: string = ""
   cats: any = []
-  constructor(private router: Router, private spinner: NgxSpinnerService, public categoryService: CategoryService, public courseService: CourseService, public testiomonialService: TestimonialService) {
+  constructor(private router: Router, private spinner: NgxSpinnerService, public categoryService: CategoryService, public courseService: CourseService, public testiomonialService: TestimonialService, public userService: RegisterService) {
   }
   async ngOnInit() {
+    await this.userService.getAllUsers();
     /** spinner starts on init */
     await this.testiomonialService.GetAllAcceptedTestimonilas();
     console.log(this.testiomonialService.Acceptedtestimonials);
+    this.userService.GetAllTrainee();
 
     this.spinner.show();
 
@@ -37,6 +40,7 @@ export class MainComponent {
         "<img src='https://media.giphy.com/media/o8igknyuKs6aY/giphy.gif' />",
     });
     this.categoryService.GetAllCategories()
+    this.courseService.GetAllCourses();
   }
   GetValues(categoryid: any) {
     this.courseService.GetCoursesByCategoryId(categoryid)
