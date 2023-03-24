@@ -68,7 +68,7 @@ export class CourseDetailedComponent {
 
   }
   markAbsent(id: string) {
-
+//hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee ghayath w raneem
     const index = this.traineeSection.findIndex((item: { trainee_Id: string; }) => item.trainee_Id === id);
 
     /* if (index !== -1) {
