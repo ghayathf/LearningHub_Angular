@@ -18,8 +18,8 @@ export class CourseDetailedComponent {
   @ViewChild('UpdateForm') Update: any
 
   @ViewChild('DeleteForm') Delete: any
-  constructor(public materialService: MaterialService, public courseService: CourseService, public dialog: MatDialog,public traineeSectionService:TraineeSectionService,
-    public userService:UserService,public taskService:TaskService) { }
+  constructor(public materialService: MaterialService, public courseService: CourseService, public dialog: MatDialog, public traineeSectionService: TraineeSectionService,
+    public userService: UserService, public taskService: TaskService) { }
 
   CreateMaterialForm = new FormGroup(
     {
@@ -80,9 +80,9 @@ export class CourseDetailedComponent {
   selectdSectionId: any;
   selectedCourseId: any;
   materials: any;
-  traineeSection:any = []
-  trainee:any = []
-  users :any = []
+  traineeSection: any = []
+  trainee: any = []
+  users: any = []
   combinedArray: any = []
   async ngOnInit() {
     this.selectdSectionId = this.courseService.selectedSectionId;
@@ -91,7 +91,7 @@ export class CourseDetailedComponent {
     await this.materialService.GetAllMaterial();
     this.materials = this.materialService.materials.filter((x: { section_Id: any; }) => x.section_Id == this.selectdSectionId)
     await this.traineeSectionService.GetAllTraineeSection()
-    this.traineeSection = this.traineeSectionService.TraineeSections.filter((x: { section_id: any; })=>x.section_id === this.selectdSectionId)
+    this.traineeSection = this.traineeSectionService.TraineeSections.filter((x: { section_id: any; }) => x.section_id === this.selectdSectionId)
     await this.traineeSectionService.GetAllTrainees()
     this.trainee = this.traineeSectionService.allTrainees
     this.trainee = this.trainee.filter((t: { traineeid: any; }) => {
@@ -170,6 +170,8 @@ export class CourseDetailedComponent {
     const filePath = "../../../assets/HomeAssets/Materials/" + this.material;
 
     const response = await fetch(filePath);
+    const lastDotIndex = filePath.lastIndexOf(".");
+    const slicedStr = filePath.slice(lastDotIndex + 1);
     const blob = await response.blob();
 
     // Create a URL for the Blob using createObjectURL
@@ -178,7 +180,7 @@ export class CourseDetailedComponent {
     // Create an anchor tag and trigger the download by simulating a click
     const a = document.createElement('a');
     a.href = url;
-    a.download = this.materialService.Material.materialname + '.pdf';
+    a.download = this.materialService.Material.materialname + '.' + slicedStr;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -187,7 +189,6 @@ export class CourseDetailedComponent {
     URL.revokeObjectURL(url);
 
   }
-
 
 
 }
