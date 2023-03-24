@@ -132,4 +132,38 @@ export class MaterialService {
       )
     })
   }
+
+  updatedFile?: any
+  async UpdateMaterial(material: any) {
+    await this.GetMaterialById(material.materialid)
+    this.updatedFile = this.Material.filepath;
+
+    if (this.Filepath != "")
+      material.filepath = this.Filepath;
+    else if (this.Material.filePath != "") {
+      material.filepath = this.Material.filePath;
+
+    }
+
+    return new Promise<void>((resolve, reject) => {
+      this.spinner.show();
+      this.http.put("https://localhost:44391/api/Material/UpdateMaterial", material).subscribe(
+        {
+          next: () => {
+            this.spinner.hide();
+            this.toaster.success("Material Updated Successfully");
+            resolve();
+          },
+          error: () => {
+            this.spinner.hide();
+            this.toaster.error("Try again");
+
+          }
+
+
+        }
+      )
+    })
+
+  }
 }

@@ -9,20 +9,18 @@ import { TestimonialService } from 'src/app/testimonial.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  
-  constructor(public auth:AuthService,public testimonialService:TestimonialService) {
+
+  constructor(public auth: AuthService, public testimonialService: TestimonialService) {
 
   }
-  async ngOnInit()
-  {
+  async ngOnInit() {
     await this.testimonialService.GetAllAcceptedTestimonilas();
   }
   LoginformChecking: FormGroup = new FormGroup({
     username: new FormControl('', [Validators.required]),
     userpassword: new FormControl('', [Validators.required, Validators.minLength(3)]),
   })
-  Login()
-  {
+  Login() {
     this.auth.login(this.LoginformChecking.value)
   }
 
