@@ -7,6 +7,7 @@ import { TraineeSectionService } from 'src/app/trainee-section.service';
 import { TrainerService } from 'src/app/trainer.service';
 import { UserService } from 'src/app/user.service';
 import { TaskService } from 'src/app/task.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-course-detailed',
@@ -18,7 +19,10 @@ export class CourseDetailedComponent {
   @ViewChild('UpdateForm') Update: any
   @ViewChild('DeleteForm') Delete: any
   @ViewChild('CreateTaskForm') CreateTaskForm: any
-  
+
+  @ViewChild('DeleteTaskForm') DeleteTask2: any
+  @ViewChild('UpdateTaskForm') UpdateTask: any
+
   constructor(public materialService: MaterialService, public courseService: CourseService, public dialog: MatDialog, public traineeSectionService: TraineeSectionService,
     public userService: UserService, public taskService: TaskService) { }
 
@@ -50,12 +54,29 @@ export class CourseDetailedComponent {
       endtime: new FormControl('', Validators.required),
       weight: new FormControl('', Validators.required),
       taskstatus: new FormControl(''),
-      taskfile: new FormControl('', Validators.required),
+      taskfile: new FormControl(''),
       tasknote: new FormControl('', Validators.required),
       sectionidd: new FormControl('')
 
     }
   )
+
+  UpdateTaskFormm = new FormGroup(
+    {
+      taskid: new FormControl(''),
+      tasktype: new FormControl('', Validators.required),
+      starttime: new FormControl('', Validators.required),
+      endtime: new FormControl('', Validators.required),
+      weight: new FormControl('', Validators.required),
+      taskstatus: new FormControl(''),
+      taskfile: new FormControl(''),
+      tasknote: new FormControl('', Validators.required),
+      sectionidd: new FormControl('')
+
+    }
+  )
+
+
 
   MaterialFile: any
   categoryImg?: string
@@ -106,9 +127,9 @@ export class CourseDetailedComponent {
 
     this.combinedArray = this.users.filter((x: { roleId: number; }) => x.roleId == 2).map((user: any) => {
       const trainee = this.trainee.find((trainee: any) => trainee.user_Id === user.userid);
-      const ts = this.traineeSection.find((ts:any)=>ts.trainee_Id == trainee.traineeid)
+      const ts = this.traineeSection.find((ts: any) => ts.trainee_Id == trainee.traineeid)
       const attendance = true
-      return { ...user, ...trainee , ...ts, attendance};
+      return { ...user, ...trainee, ...ts, attendance };
     });
 
     console.log(this.combinedArray)
@@ -117,28 +138,28 @@ export class CourseDetailedComponent {
     this.tasks = this.taskService.tasks.filter((x: { sectionidd: any; }) => x.sectionidd == this.selectdSectionId)
   }
 
-  absentArr:any[] = []
-  idd:any
+  absentArr: any[] = []
+  idd: any
   async markAbsent(id: number) {
     this.idd = await this.traineeSection.find((item: { trainee_Id: number; }) => item.trainee_Id === id);
     this.absentArr.push(this.idd)
     console.log(this.absentArr);
   }
-  absenceobj:any
-  currDate?:any
+  absenceobj: any
+  currDate?: any
   selectedDate: Date | undefined;
   submitAttendance() {
     console.log(this.combinedArray);
 
     for (let i = 0; i < this.combinedArray.length; i++) {
-      if(this.combinedArray[i].attendance == true){
-      this.traineeSectionService.CreateAbsence(this.combinedArray[i].tsid)
-        }
-    else{
-      this.traineeSectionService.CreateAttendance(this.combinedArray[i].tsid)
+      if (this.combinedArray[i].attendance == true) {
+        this.traineeSectionService.CreateAbsence(this.combinedArray[i].tsid)
+      }
+      else {
+        this.traineeSectionService.CreateAttendance(this.combinedArray[i].tsid)
+      }
     }
   }
-}
 
   async CreateMaterial() {
     this.CreateMaterialForm.controls['dateuploaded'].setValue(this.currentDate);
@@ -204,7 +225,7 @@ export class CourseDetailedComponent {
 
   }
 
-taskfile: any;
+  taskfile: any;
   async downloadTask(id: number) {
 
     await this.taskService.GetTaskById(id);
@@ -246,15 +267,71 @@ taskfile: any;
     const dialogConfig = new MatDialogConfig();
     dialogConfig.maxWidth = '800px';
     dialogConfig.maxHeight = '80vh';
-    this.dialog.open(this.CreateTaskForm,dialogConfig)
+    this.dialog.open(this.CreateTaskForm, dialogConfig)
   }
+  formattedDate: any;
+  formattedDate2: any;
   async CreateTask() {
-    this.CreateTaskFormm.controls['taskstatus'].setValue("0");
+    //this.CreateTaskFormm.controls['taskstatus'].setValue(0);
     this.CreateTaskFormm.controls['sectionidd'].setValue(this.selectdSectionId);
 
+
+    const datePipe = new DatePipe('en-US');
+
+    this.formattedDate = datePipe.transform(this.CreateTaskFormm.controls['starttime'].value, 'yyyy-MM-ddTHH:mm:ss');
+
+    this.formattedDate2 = datePipe.transform(this.CreateTaskFormm.controls['endtime'].value, 'yyyy-MM-ddTHH:mm:ss');
+
+
+    this.CreateTaskFormm.controls['starttime'].setValue(String(this.formattedDate));
+    this.CreateTaskFormm.controls['endtime'].setValue(String(this.formattedDate2));
     await this.taskService.CreateTask(this.CreateTaskFormm.value)
     await this.taskService.GetAllTasks();
     this.tasks = this.taskService.tasks.filter((x: { sectionidd: any; }) => x.sectionidd == this.selectdSectionId)
 
   }
+
+  async DeleteTask() {
+    await this.taskService.deleteTask(this.selectedTask2);
+    await this.taskService.GetAllTasks();
+    this.tasks = this.taskService.tasks.filter((x: { sectionidd: any; }) => x.sectionidd == this.selectdSectionId)
+  }
+
+  selectedTask2 = 0;
+  openDeleteTask(TaskId: number) {
+    this.selectedTask2 = TaskId
+    this.dialog.open(this.DeleteTask2)
+  }
+
+  //Update Task
+  selectedFileTask: any
+  UploaTask(input: any) {
+    if (input.files[0] != null) {
+      let uplodedFile = input.files[0]; // image fille
+      let formdata = new FormData();
+      formdata.append('file', uplodedFile);
+      this.taskService.UploadTask(formdata);
+    }
+    this.selectedFile = input
+  }
+
+
+  async UpdateFileTask() {
+    await this.taskService.UpdateTaskFile(this.UpdateTaskFormm.value);
+    await this.taskService.GetAllTasks();
+    this.tasks = this.taskService.tasks.filter((x: { sectionidd: any; }) => x.sectionidd == this.selectdSectionId)
+
+  }
+  async OpenUpdateTask(taskid: number) {
+
+    await this.taskService.GetTaskById(taskid);
+    await this.UpdateTaskFormm.patchValue(this.taskService.Task);
+
+
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.maxWidth = '800px';
+    dialogConfig.maxHeight = '80vh';
+    this.dialog.open(this.UpdateTask, dialogConfig)
+  }
+
 }
