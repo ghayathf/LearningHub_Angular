@@ -30,4 +30,67 @@ export class TaskService {
     })
   }
 
+  Task: any
+  GetTaskById(id: number) {
+    return new Promise<void>((resolve, reject) => {
+      this.spinner.show()
+      this.http.get("https://localhost:44391/api/Task/GetTaskById/" + id).subscribe(
+        {
+          next: (res) => {
+            this.Task = res
+            this.spinner.hide()
+            resolve()
+          },
+          error: (err) => {
+            console.log(err);
+          }
+        }
+      )
+    })
+  }
+
+  CreateTask(task: any) {
+    task.taskfile = this.TaskFile;
+    return new Promise<void>((resolve, reject) => {
+      this.spinner.show();
+      this.http.post("https://localhost:44391/api/Task/CreateNewTask", task).subscribe(
+        {
+          next: () => {
+            this.spinner.hide();
+            this.toaster.success("Task Created Successfuly");
+            resolve();
+          },
+          error: () => {
+            this.spinner.hide();
+            this.toaster.error("Error");
+            
+          }
+        }
+      )
+    })
+  }
+
+  
+  TaskFile = "";
+
+  UploadTask(Taskkk: any) {
+    this.spinner.show()
+    return new Promise<void>((resolve, reject) => {
+      this.http.post("https://localhost:44391/api/Task/UploadTask", Taskkk).subscribe(
+        {
+          next: (res: any) => {
+            this.spinner.hide()
+            this.TaskFile = res.taskfile;
+            resolve()
+          },
+          error: () => {
+            this.spinner.hide();
+          }
+        }
+
+
+      )
+    })
+  }
+
 }

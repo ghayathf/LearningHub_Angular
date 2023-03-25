@@ -16,8 +16,9 @@ import { TaskService } from 'src/app/task.service';
 export class CourseDetailedComponent {
   @ViewChild('CreateForm') Create: any
   @ViewChild('UpdateForm') Update: any
-
   @ViewChild('DeleteForm') Delete: any
+  @ViewChild('CreateTaskForm') CreateTaskForm: any
+  
   constructor(public materialService: MaterialService, public courseService: CourseService, public dialog: MatDialog, public traineeSectionService: TraineeSectionService,
     public userService: UserService, public taskService: TaskService) { }
 
@@ -42,7 +43,7 @@ export class CourseDetailedComponent {
 
 
 
-  CreateTaskForm = new FormGroup(
+  CreateTaskFormm = new FormGroup(
     {
       tasktype: new FormControl('', Validators.required),
       starttime: new FormControl('', Validators.required),
@@ -109,15 +110,10 @@ export class CourseDetailedComponent {
     });
     console.log(this.combinedArray)
 
-
-
     await this.taskService.GetAllTasks();
     this.tasks = this.taskService.tasks.filter((x: { sectionidd: any; }) => x.sectionidd == this.selectdSectionId)
-
-
-
-
   }
+
   markAbsent(id: string) {
 //hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee ghayath w raneem
     const index = this.traineeSection.findIndex((item: { trainee_Id: string; }) => item.trainee_Id === id);
@@ -190,5 +186,57 @@ export class CourseDetailedComponent {
 
   }
 
+taskfile: any;
+  async downloadTask(id: number) {
 
+    await this.taskService.GetTaskById(id);
+    this.taskfile = this.taskService.Task.taskfile;
+    const filePath = "../../../assets/HomeAssets/Task/" + this.taskfile;
+
+    const response = await fetch(filePath);
+    const lastDotIndex = filePath.lastIndexOf(".");
+    const slicedStr = filePath.slice(lastDotIndex + 1);
+    const blob = await response.blob();
+
+    // Create a URL for the Blob using createObjectURL
+    const url = URL.createObjectURL(blob);
+
+    // Create an anchor tag and trigger the download by simulating a click
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = this.taskService.Task.tasktype + '.' + slicedStr;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
+    // Release the object URL after the download is complete
+    URL.revokeObjectURL(url);
+
+  }
+
+  selectedTask: any
+  UploadTask(input: any) {
+    if (input.files[0] != null) {
+      let uplodedFile = input.files[0]; // image fille
+      let formdata = new FormData();
+      formdata.append('file', uplodedFile);
+      this.taskService.UploadTask(formdata);
+    }
+    this.selectedTask = input
+  }
+  OpenCreateTaskDialog() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.maxWidth = '800px';
+    dialogConfig.maxHeight = '80vh';
+    this.dialog.open(this.CreateTaskForm,dialogConfig)
+  }
+  async CreateTask() {
+    this.CreateTaskFormm.controls['taskstatus'].setValue("0");
+    this.CreateTaskFormm.controls['sectionidd'].setValue(this.selectdSectionId);
+
+    await this.taskService.CreateTask(this.CreateTaskFormm.value)
+    await this.taskService.GetAllTasks();
+    this.tasks = this.taskService.tasks.filter((x: { sectionidd: any; }) => x.sectionidd == this.selectdSectionId)
+
+  }
 }

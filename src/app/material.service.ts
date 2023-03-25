@@ -85,7 +85,7 @@ export class MaterialService {
           error: () => {
             this.spinner.hide();
             this.toaster.error("Error");
-            debugger
+            
           }
         }
       )

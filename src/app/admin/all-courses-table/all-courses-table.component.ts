@@ -79,8 +79,8 @@ categoryName?:any
     await this.UpdateCourseForm.patchValue(this.courseService.course);
 
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.maxWidth = '500px';
-    dialogConfig.maxHeight = '90vh';
+    dialogConfig.maxWidth = '800px';
+    dialogConfig.maxHeight = '80vh';
     this.course=this.courseService.course
     this.selectedUpdatedCategory=this.course.category_Id
     this.selectedUpdatedLevel=this.course.courselevel
@@ -133,7 +133,10 @@ categoryName?:any
   }
   async openDetailsDialog(courseid: number) {
     await this.courseService.GetCourseById(courseid);
-    this.dialog.open(this.Details);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.maxWidth = '800px';
+    dialogConfig.maxHeight = '80vh';
+    this.dialog.open(this.Details,dialogConfig);
   }
   OpenCreateDialog() {
     const dialogConfig = new MatDialogConfig();
@@ -184,11 +187,6 @@ categoryName?:any
     this.selectedImg=input
   }
   Levels = Levels;
-  // async getCategoryName(category_Id: number) {
-  //   await this.categoryService.GetCategoryById(category_Id);
-  //   const category = this.categoryService.categories;
-  //   return category ? category.categoryname : '';
-  // }
 }
 enum Levels {
   Beginner = 1,

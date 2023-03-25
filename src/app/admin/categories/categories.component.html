@@ -33,16 +33,16 @@
             <!-- Course item -->
             <div class="col-sm-6 col-lg-4">
                 <div class="text-center p-4 bg-success bg-opacity-10 border border-success rounded-3">
-                    <h6>Activated Courses</h6>
-                    <h2 class="mb-0 fs-1 text-success">996</h2>
+                    <h6>Total Courses</h6>
+                    <h2 class="mb-0 fs-1 text-success">{{this.courseService.courses.length}}</h2>
                 </div>
             </div>
 
             <!-- Course item -->
             <div class="col-sm-6 col-lg-4">
                 <div class="text-center p-4  bg-warning bg-opacity-15 border border-warning rounded-3">
-                    <h6>Pending Courses</h6>
-                    <h2 class="mb-0 fs-1 text-warning">200</h2>
+                    <h6>Total Sections</h6>
+                    <h2 class="mb-0 fs-1 text-warning">{{this.sectioneService.sections.length}}</h2>
                 </div>
             </div>
         </div>
@@ -56,29 +56,11 @@
                 <!-- Search and select START -->
                 <div class="row g-3 align-items-center justify-content-between">
                     <!-- Search bar -->
-                    <div class="col-md-8">
-                        <form class="rounded position-relative">
-                            <input class="form-control bg-body" type="search" placeholder="Search" aria-label="Search">
-                            <button
-                                class="bg-transparent p-2 position-absolute top-50 end-0 translate-middle-y border-0 text-primary-hover text-reset"
-                                type="submit">
-                                <i class="fas fa-search fs-6 "></i>
-                            </button>
-                        </form>
-                    </div>
+                   
 
                     <!-- Select option -->
                     <div class="col-md-3">
-                        <!-- Short by filter -->
-                        <form>
-                            <select class="form-select js-choice border-0 z-index-9" aria-label=".form-select-sm">
-                                <option value="">Sort by</option>
-                                <option>Newest</option>
-                                <option>Oldest</option>
-                                <option>Accepted</option>
-                                <option>Rejected</option>
-                            </select>
-                        </form>
+                        
                     </div>
                 </div>
                 <!-- Search and select END -->
@@ -116,8 +98,9 @@
                                             <img src="../../../assets/HomeAssets/images/{{item.categoryimage}}"
                                                 class="rounded" alt="">
                                         </div>
+                                        <br><div></div>
                                         <h4 class="table-responsive-title mb-0 ms-2">
-                                            <a href="#" class="stretched-link">{{ item.categoryname }}</a>
+                                            <a  class="stretched-link">{{ item.categoryname }}</a>
                                         </h4>
                                     </div>
                                 </td>
@@ -159,20 +142,7 @@
                 <!-- Pagination START -->
                 <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
                     <!-- Content -->
-                    <p class="mb-0 text-center text-sm-start">Showing 1 to 8 of 20 entries</p>
-                    <!-- Pagination -->
-                    <nav class="d-flex justify-content-center mb-0" aria-label="navigation">
-                        <ul
-                            class="pagination pagination-sm pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
-                            <li class="page-item mb-0"><a class="page-link" href="#" tabindex="-1"><i
-                                        class="fas fa-angle-left"></i></a></li>
-                            <li class="page-item mb-0"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item mb-0 active"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item mb-0"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item mb-0"><a class="page-link" href="#"><i
-                                        class="fas fa-angle-right"></i></a></li>
-                        </ul>
-                    </nav>
+                  
                 </div>
                 <!-- Pagination END -->
             </div>
@@ -208,7 +178,7 @@
         </div>
     </section>
 
-    <section style="background-color:#2a2c31">
+    <section >
         <div class="container">
 
 
@@ -224,13 +194,8 @@
 
                             <!-- Step 1 content START -->
                             <div id="step-1" role="tabpanel" class="content" aria-labelledby="steppertrigger1">
-                                <!-- Title -->
-                                <h4>Update Category </h4>
-
-                                <hr> <!-- Divider -->
-
+                              
                                 <!-- Basic information START -->
-                                <div class="row g-4">
                                     <!-- Course title -->
                                     <div class="col-12">
                                         <form [formGroup]="UpdateCategoryForm" class="example-form">
@@ -250,10 +215,9 @@
                                         <div
                                             class="text-center justify-content-center align-items-center p-4 p-sm-5 border border-2 border-dashed position-relative rounded-3">
                                             <!-- Image -->
-                                            <img src="../../../assets/HomeAssets/images/element/gallery.svg" class="h-50px" alt="">
+                                           
                                             <div>
-                                                <h6 class="my-2">Upload Category image here, or<a href="#!"
-                                                        class="text-primary"> Browse</a></h6>
+                                                <h6 class="my-2">Upload Category image here</h6>
                                                 <label style="cursor:pointer;">
                                                     <span>
 
@@ -278,9 +242,9 @@
                                     <div class="d-flex justify-content-end mt-3">
                                         <button mat-dialog-close class="btn btn-primary next-btn mb-0"
                                             [disabled]="UpdateCategoryForm.invalid"
-                                            (click)="UpdateCategory()">Update</button>
+                                            (click)="UpdateCategory()" style=" background-color:#1d3b53 ;">Update</button>
                                     </div>
-                                </div>
+                            
                                 <!-- Basic information START -->
                             </div>
                             <!-- Step 1 content END -->
@@ -309,7 +273,7 @@
         </div>
     </section>
 
-    <section style="background-color:#2a2c31">
+    <section >
         <div class="container">
             <div class="row">
                 <div class="col-md-8 mx-auto text-center">
@@ -330,12 +294,8 @@
                             <!-- Step 1 content START -->
                             <div id="step-1" role="tabpanel" class="content" aria-labelledby="steppertrigger1">
                                 <!-- Title -->
-                                <h4>Category details</h4>
+                             
 
-                                <hr> <!-- Divider -->
-
-                                <!-- Basic information START -->
-                                <div class="row g-4">
                                     <!-- Course title -->
                                     <div class="col-12">
                                         <form [formGroup]="CreateCategoryForm" class="example-form">
@@ -357,10 +317,9 @@
                                         <div
                                             class="text-center justify-content-center align-items-center p-4 p-sm-5 border border-2 border-dashed position-relative rounded-3">
                                             <!-- Image -->
-                                            <img src="../../../assets/HomeAssets/images/element/gallery.svg" class="h-50px" alt="">
+                                        
                                             <div>
-                                                <h6 class="my-2">Upload Cayrgory image here, or<a href="#!"
-                                                        class="text-primary"> Browse</a></h6>
+                                                <h6 class="my-2">Upload Category image here</h6>
                                                 <label style="cursor:pointer;">
                                                     <span>
 
@@ -376,11 +335,7 @@
                                             </div>
                                         </div>
 
-                                        <!-- Button -->
-                                        <div class="d-sm-flex justify-content-end mt-2">
-                                            <button type="button" class="btn btn-sm btn-danger-soft mb-3">Remove
-                                                image</button>
-                                        </div>
+                                      
                                     </div>
                                     <!-- Upload image END -->
 
@@ -389,9 +344,9 @@
                                     <div class="d-flex justify-content-end mt-3">
                                         <button class="btn btn-primary next-btn mb-0" mat-dialog-close
                                             [disabled]="CreateCategoryForm.invalid"
-                                            (click)="createCategory()">Create</button>
+                                            (click)="createCategory()" style=" background-color:#1d3b53 ;">Create</button>
                                     </div>
-                                </div>
+                                
                                 <!-- Basic information START -->
                             </div>
                             <!-- Step 1 content END -->
