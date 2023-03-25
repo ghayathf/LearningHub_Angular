@@ -8,6 +8,7 @@ import { TrainerService } from 'src/app/trainer.service';
 import { UserService } from 'src/app/user.service';
 import { TaskService } from 'src/app/task.service';
 import { DatePipe } from '@angular/common';
+import { SolutionService } from 'src/app/solution.service';
 
 @Component({
   selector: 'app-course-detailed',
@@ -22,9 +23,11 @@ export class CourseDetailedComponent {
 
   @ViewChild('DeleteTaskForm') DeleteTask2: any
   @ViewChild('UpdateTaskForm') UpdateTask: any
+  @ViewChild('ShowSolution') SolDialog: any
+  @ViewChild('CreateMarkSolution') SolMark:any
 
   constructor(public materialService: MaterialService, public courseService: CourseService, public dialog: MatDialog, public traineeSectionService: TraineeSectionService,
-    public userService: UserService, public taskService: TaskService) { }
+    public userService: UserService, public taskService: TaskService, public soltionService: SolutionService) { }
 
   CreateMaterialForm = new FormGroup(
     {
@@ -34,7 +37,6 @@ export class CourseDetailedComponent {
       filepath: new FormControl('')
     }
   )
-
   UpdateMaterialForm = new FormGroup(
     {
       materialid: new FormControl(''),
@@ -44,9 +46,6 @@ export class CourseDetailedComponent {
       filepath: new FormControl('')
     }
   )
-
-
-
   CreateTaskFormm = new FormGroup(
     {
       tasktype: new FormControl('', Validators.required),
@@ -60,7 +59,6 @@ export class CourseDetailedComponent {
 
     }
   )
-
   UpdateTaskFormm = new FormGroup(
     {
       taskid: new FormControl(''),
@@ -75,7 +73,12 @@ export class CourseDetailedComponent {
 
     }
   )
-
+    MarkForm = new FormGroup(
+    {
+      solutionid: new FormControl(''),
+      solutionmark: new FormControl('', Validators.required)
+    }
+  )
 
 
   MaterialFile: any
@@ -130,6 +133,9 @@ export class CourseDetailedComponent {
       const ts = this.traineeSection.find((ts: any) => ts.trainee_Id == trainee.traineeid)
       const attendance = true
       return { ...user, ...trainee, ...ts, attendance };
+
+
+
     });
 
     console.log(this.combinedArray)
@@ -144,6 +150,8 @@ export class CourseDetailedComponent {
     this.idd = await this.traineeSection.find((item: { trainee_Id: number; }) => item.trainee_Id === id);
     this.absentArr.push(this.idd)
     console.log(this.absentArr);
+
+
   }
   absenceobj: any
   currDate?: any
@@ -333,5 +341,59 @@ export class CourseDetailedComponent {
     dialogConfig.maxHeight = '80vh';
     this.dialog.open(this.UpdateTask, dialogConfig)
   }
+  Sol: any
+  TID:any
+  async OpenTaskSolutionDialog(ID: any) {
+    this.TID=ID;
+    await this.soltionService.GetAllSolution();
+    this.Sol = this.soltionService.Solutions.filter((x: { task_Id: any; }) => x.task_Id == ID)
 
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.maxWidth = '800px';
+    dialogConfig.maxHeight = '80vh';
+    this.dialog.open(this.SolDialog, dialogConfig)
+  }
+
+  soltuionFile: any;
+  async downloadSolution(id:any)
+  {
+      await this.soltionService.GetSolutionById(id);
+      this.soltuionFile = this.soltionService.solutionByIDD.solutionfile;
+      const filePath = "../../../assets/HomeAssets/Solution/" + this.soltuionFile;
+  
+      const response = await fetch(filePath);
+      const lastDotIndex = filePath.lastIndexOf(".");
+      const slicedStr = filePath.slice(lastDotIndex + 1);
+      const blob = await response.blob();
+  
+      // Create a URL for the Blob using createObjectURL
+      const url = URL.createObjectURL(blob);
+  
+      // Create an anchor tag and trigger the download by simulating a click
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = this.taskService.Task.tasktype + '.' + slicedStr;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+  
+      // Release the object URL after the download is complete
+      URL.revokeObjectURL(url);
+  
+  }
+  SolID:any
+  async OpenMarkDialog(ID: any) {
+    this.SolID=ID;
+    await this.soltionService.GetSolutionById(ID);
+
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.maxWidth = '800px';
+    dialogConfig.maxHeight = '80vh';
+    this.dialog.open(this.SolMark,dialogConfig)
+  }
+  async GiveMark()
+  { this.MarkForm.controls['solutionid'].setValue(this.SolID);
+    // await this.soltionService.GiveSolutionMark(this.MarkForm.value);
+    // await this.OpenTaskSolutionDialog(this.TID);
+  }
 }
