@@ -197,13 +197,15 @@
                             </div>
                           </td>
 
-
-
                           <td>
-                            <input type="checkbox" (change)="markAbsent(item.traineeid)">
+                            <div>
+                            <input type="checkbox" [(ngModel)]="item.attendance">
+                            </div>
                           </td>
-                        </tr>
 
+
+                        </tr>
+                        <input type="submit" (click)="submitAttendance()" class="btn btn-info" value="Submit">
 
                       </tbody>
                       <!-- Table body END -->
@@ -306,6 +308,7 @@
 
                   <!-- Content START -->
                   <div class="tab-pane fade" id="course-pills-4" role="tabpanel" aria-labelledby="course-pills-tab-4">
+                    
                     <a (click)="OpenCreateTaskDialog()" class="btn btn-sm btn-primary mb-0" style=" background-color:#1d3b53 ;">Upload Task</a>
 
                     <hr>
@@ -387,7 +390,6 @@
                   <!-- Content START -->
                   <div class="tab-pane fade" id="course-pills-5" role="tabpanel" aria-labelledby="course-pills-tab-5">
                     <a (click)="OpenDialog()" class="btn btn-sm btn-primary mb-0" style=" background-color:#1d3b53 ;">Upload Material</a>
-
                     <hr>
                   <br/>
                     <!-- Course list table START -->
@@ -915,6 +917,149 @@ Steps END -->
                       (click)="UpdateMaterial()">Upload</button>
                   </div>
                 </div>
+
+              </form>
+            </div>
+          </div>
+          <!-- Card body END -->
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- =======================
+Steps END -->
+
+</ng-template>
+
+<ng-template #CreateTaskForm>
+
+
+
+  <section class="py-0 bg-blue h-100px align-items-center d-flex h-200px rounded-0"
+    style="background:url(../../../assets/HomeAssets/images/pattern/04.png) no-repeat center center; background-size:cover;">
+    <!-- Main banner background image -->
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <!-- Title -->
+          <h1 class="text-white">Upload New Task</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 mx-auto text-center">
+          <!-- Content -->
+        </div>
+      </div>
+
+      <div class="card bg-transparent border rounded-3 mb-5">
+        <div id="stepper" class="bs-stepper stepper-outline">
+
+
+          <!-- Card body START -->
+          <div class="card-body">
+            <!-- Step content START -->
+            <div class="bs-stepper-content">
+              <form [formGroup]="CreateTaskFormm">
+
+                <div class="row">
+                  <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Task Name</mat-label>
+                    <input type="text" matInput formControlName="tasktype">
+
+                    <mat-error *ngIf="CreateTaskFormm.controls['tasktype'].hasError('required')">
+                      Name of Task is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+
+</div>
+<div class="col-md-6">
+  <mat-form-field class="example-full-width">
+    <mat-label>Note</mat-label>
+    <input type="text" matInput formControlName="tasknote">
+
+    <mat-error *ngIf="CreateTaskFormm.controls['tasknote'].hasError('required')">
+      Note is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+</div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+   <mat-form-field appearance="fill">
+  <mat-label>Start Date</mat-label>
+  <input matInput [matDatepicker]="picker3" formControlName='starttime'
+    name="startDate">
+  <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+  <mat-datepicker #picker3></mat-datepicker>
+</mat-form-field>
+</div>
+<div class="col-md-6">
+  <mat-form-field appearance="fill">
+ <mat-label>End Date</mat-label>
+ <input matInput [matDatepicker]="picker4" formControlName='endtime'
+   name="EndDate">
+ <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+ <mat-datepicker #picker4></mat-datepicker>
+</mat-form-field>
+</div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <mat-form-field class="example-full-width">
+      <mat-label>Weight</mat-label>
+      <input type="text" matInput formControlName="weight">
+  
+      <mat-error *ngIf="CreateTaskFormm.controls['weight'].hasError('required')">
+        Weight is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    </div>
+   
+    </div>
+
+
+
+
+                  <div class="col-12">
+                    <div
+                      class="text-center justify-content-center align-items-center p-4 p-sm-5 border border-2 border-dashed position-relative rounded-3">
+                      <!-- Image -->
+      
+                      <div>
+                        <h6 class="my-2">Upload Task file here
+                        </h6>
+                        <label style="cursor:pointer;">
+                          <span>
+
+                            <input class="form-control stretched-link" type="file" name="my-image" id="image"
+                              (change)="UploaMaterial(file)" #file />
+                          </span>
+                        </label>
+                        <p class="small mb-0 mt-2"><b>Note:</b> Only JPG, JPEG and PNG.
+                          Our
+                          suggested dimensions are 600px * 450px. Larger image will be
+                          cropped
+                          to 4:3 to fit our thumbnails/previews.</p>
+
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="d-flex justify-content-end mt-3">
+                    <button class="btn btn-primary" mat-dialog-close [disabled]=" CreateTaskFormm.invalid"
+                      value="Create" (click)="CreateMaterial()">Upload</button>
+                  </div>
+                
 
               </form>
             </div>

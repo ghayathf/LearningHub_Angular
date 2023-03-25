@@ -106,22 +106,40 @@ export class CourseDetailedComponent {
 
     this.combinedArray = this.users.filter((x: { roleId: number; }) => x.roleId == 2).map((user: any) => {
       const trainee = this.trainee.find((trainee: any) => trainee.user_Id === user.userid);
-      return { ...user, ...trainee };
+      const ts = this.traineeSection.find((ts:any)=>ts.trainee_Id == trainee.traineeid)
+      const attendance = true
+      return { ...user, ...trainee , ...ts, attendance};
     });
+
     console.log(this.combinedArray)
 
     await this.taskService.GetAllTasks();
     this.tasks = this.taskService.tasks.filter((x: { sectionidd: any; }) => x.sectionidd == this.selectdSectionId)
   }
 
-  markAbsent(id: string) {
-//hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee ghayath w raneem
-    const index = this.traineeSection.findIndex((item: { trainee_Id: string; }) => item.trainee_Id === id);
-
-    /* if (index !== -1) {
-      this.combinedArray[index].isAbsent = checked;
-    } */
+  absentArr:any[] = []
+  idd:any
+  async markAbsent(id: number) {
+    this.idd = await this.traineeSection.find((item: { trainee_Id: number; }) => item.trainee_Id === id);
+    this.absentArr.push(this.idd)
+    console.log(this.absentArr);
   }
+  absenceobj:any
+  currDate?:any
+  selectedDate: Date | undefined;
+  submitAttendance() {
+    console.log(this.combinedArray);
+
+    for (let i = 0; i < this.combinedArray.length; i++) {
+      if(this.combinedArray[i].attendance == true){
+      this.traineeSectionService.CreateAbsence(this.combinedArray[i].tsid)
+        }
+    else{
+      this.traineeSectionService.CreateAttendance(this.combinedArray[i].tsid)
+    }
+  }
+}
+
   async CreateMaterial() {
     this.CreateMaterialForm.controls['dateuploaded'].setValue(this.currentDate);
     this.CreateMaterialForm.controls['section_Id'].setValue(this.selectdSectionId);
