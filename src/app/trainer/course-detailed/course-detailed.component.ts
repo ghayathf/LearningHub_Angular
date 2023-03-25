@@ -394,6 +394,6 @@ export class CourseDetailedComponent {
   async GiveMark()
   { this.MarkForm.controls['solutionid'].setValue(this.SolID);
     await this.soltionService.GiveSolutionMark(this.MarkForm.value);
-    // await this.OpenTaskSolutionDialog(this.TID);
+    await this.OpenTaskSolutionDialog(this.TID);
   }
 }
