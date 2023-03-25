@@ -197,13 +197,15 @@
                             </div>
                           </td>
 
-
-
                           <td>
-                            <input type="checkbox" (change)="markAbsent(item.traineeid)">
+                            <div>
+                            <input type="checkbox" [(ngModel)]="item.attendance">
+                            </div>
                           </td>
-                        </tr>
 
+
+                        </tr>
+                        <input type="submit" (click)="submitAttendance()" class="btn btn-info" value="Submit">
 
                       </tbody>
                       <!-- Table body END -->

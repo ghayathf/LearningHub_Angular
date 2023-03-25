@@ -1,4 +1,6 @@
+import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { STRING_TYPE } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { resolve } from 'chart.js/dist/helpers/helpers.options';
@@ -62,6 +64,58 @@ export class TraineeSectionService {
         next: (res) => {
           this.allTrainees = res;
           this.spinner.hide();
+          resolve();
+        },
+        error: (err) => {
+          this.spinner.hide();
+          this.toaster.error("Error Try Again");
+          console.log(err);
+        }
+      })
+    })
+  }
+  absenceobj:any
+  currDate?:any
+  CreateAbsence(tsid:any){
+    this.currDate = new Date(Date.now())
+    const datePipe = new DatePipe('en-US');
+    const formattedDate = datePipe.transform(this.currDate, 'yyyy-MM-ddTHH:mm:ss');
+    this.absenceobj = {
+      tsid2:tsid,
+      attendancedate:formattedDate
+    }
+    this.absenceobj.attendancedate = String(this.absenceobj.attendancedate)
+    this.spinner.show();
+    return new Promise<void>((resolve, reject) => {
+      this.http.post("https://localhost:44391/api/TakeAttendance/CreateAbsence",this.absenceobj).subscribe({
+        next: () => {
+          this.spinner.hide();
+          this.toaster.success("attendance created successfully");
+          resolve();
+        },
+        error: (err) => {
+          this.spinner.hide();
+          this.toaster.error("Error Try Again");
+          console.log(err);
+        }
+      })
+    })
+  }
+  CreateAttendance(tsid:any){
+    this.currDate = new Date(Date.now())
+    const datePipe = new DatePipe('en-US');
+    const formattedDate = datePipe.transform(this.currDate, 'yyyy-MM-ddTHH:mm:ss');
+    this.absenceobj = {
+      tsid2:tsid,
+      attendancedate:formattedDate
+    }
+    this.absenceobj.attendancedate = String(this.absenceobj.attendancedate)
+    this.spinner.show();
+    return new Promise<void>((resolve, reject) => {
+      this.http.post("https://localhost:44391/api/TakeAttendance/CreateAttendance",this.absenceobj).subscribe({
+        next: () => {
+          this.spinner.hide();
+          this.toaster.success("attendance created successfully");
           resolve();
         },
         error: (err) => {

@@ -25,7 +25,7 @@ export class MainComponent {
   sections: any
   combinedArray: any = []
   newArray: any = []
-
+  sectionsLength:any
   async ngOnInit() {
     this.userId = this.auth.gh
     await this.trainerService.GetAllTrainers()
@@ -37,6 +37,7 @@ export class MainComponent {
       const coursee = this.courseService.courses.find((coursee: any) => coursee.courseid === s.course_Id);
       return { ...s, ...coursee };
     });
+    this.sectionsLength = this.sections.length
   }
 
   getDaysDifference(startdate: string, enddate: string): number {
