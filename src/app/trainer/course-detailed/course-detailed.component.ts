@@ -49,10 +49,10 @@ export class CourseDetailedComponent {
       starttime: new FormControl('', Validators.required),
       endtime: new FormControl('', Validators.required),
       weight: new FormControl('', Validators.required),
-      taskstatus: new FormControl('', Validators.required),
+      taskstatus: new FormControl(''),
       taskfile: new FormControl('', Validators.required),
       tasknote: new FormControl('', Validators.required),
-      sectionidd: new FormControl('', Validators.required)
+      sectionidd: new FormControl('')
 
     }
   )
