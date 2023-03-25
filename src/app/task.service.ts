@@ -50,6 +50,7 @@ export class TaskService {
   }
 
   CreateTask(task: any) {
+    task.taskstatus = 0;
     task.taskfile = this.TaskFile;
     return new Promise<void>((resolve, reject) => {
       this.spinner.show();
@@ -59,18 +60,19 @@ export class TaskService {
             this.spinner.hide();
             this.toaster.success("Task Created Successfuly");
             resolve();
+            debugger
           },
           error: () => {
             this.spinner.hide();
             this.toaster.error("Error");
-            
+            debugger
           }
         }
       )
     })
   }
 
-  
+
   TaskFile = "";
 
   UploadTask(Taskkk: any) {
@@ -92,5 +94,60 @@ export class TaskService {
       )
     })
   }
+
+
+  deleteTask(taskId: number) {
+    return new Promise<void>((resolve, reject) => {
+      this.http.delete("https://localhost:44391/api/Task/DeleteTask/" + taskId).subscribe(
+        {
+          next: () => {
+            this.spinner.hide()
+            this.toaster.success("Deleted Task Successfuly");
+            resolve()
+          },
+          error: () => {
+            this.spinner.hide()
+            this.toaster.success("Error");
+          }
+        }
+      )
+    })
+
+  }
+
+  updatedTask?: any
+  async UpdateTaskFile(task: any) {
+    await this.GetTaskById(task.taskid)
+    this.updatedTask = this.Task.taskfile;
+
+    if (this.TaskFile != "")
+      task.taskfile = this.TaskFile;
+    else if (this.Task.taskfile != "") {
+      task.taskfile = this.Task.taskfile;
+
+    }
+
+    return new Promise<void>((resolve, reject) => {
+      this.spinner.show();
+      this.http.put("https://localhost:44391/api/Task/UpdateTask", task).subscribe(
+        {
+          next: () => {
+            this.spinner.hide();
+            this.toaster.success("Task Updated Successfully");
+            resolve();
+          },
+          error: () => {
+            this.spinner.hide();
+            this.toaster.error("Try again");
+
+          }
+
+
+        }
+      )
+    })
+
+  }
+
 
 }
