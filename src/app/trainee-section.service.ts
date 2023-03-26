@@ -127,7 +127,7 @@ export class TraineeSectionService {
   }
   certificatesFlag:any =true
   certificate:any
-  getAllCertificates(id:any){
+  getAllCertificates(id:number){
     this.spinner.show();
     return new Promise<void>((resolve, reject) => {
       this.http.get("https://localhost:44391/api/Certificate/GetTCertificateById/"+id).subscribe({
