@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CourseService } from 'src/app/course.service';
 import { MaterialService } from 'src/app/material.service';
@@ -9,6 +9,7 @@ import { TaskService } from 'src/app/task.service';
 import { AuthGuard } from 'src/app/auth.guard';
 import { SectionService } from 'src/app/section.service';
 import { Route, Router } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-course-details',
@@ -16,6 +17,7 @@ import { Route, Router } from '@angular/router';
   styleUrls: ['./course-details.component.css']
 })
 export class CourseDetailsComponent {
+  @ViewChild('UpdateTaskForm') UpdateTask: any
 section:any
 taskss:any = []
 mats:any=[]
@@ -108,6 +110,83 @@ async downloadFile(t:any){
   URL.revokeObjectURL(url);}
 openDeleteDialog(t:any){}
 openUpdateDialog(t:any){}
+
+
+taskfile: any;
+async downloadTask(id: number) {
+
+  await this.taskService.GetTaskById(id);
+  this.taskfile = this.taskService.Task.taskfile;
+  const filePath = "../../../assets/HomeAssets/Task/" + this.taskfile;
+
+  const response = await fetch(filePath);
+  const lastDotIndex = filePath.lastIndexOf(".");
+  const slicedStr = filePath.slice(lastDotIndex + 1);
+  const blob = await response.blob();
+
+  // Create a URL for the Blob using createObjectURL
+  const url = URL.createObjectURL(blob);
+
+  // Create an anchor tag and trigger the download by simulating a click
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = this.taskService.Task.tasktype + '.' + slicedStr;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+
+  // Release the object URL after the download is complete
+  URL.revokeObjectURL(url);
+}
+
+
+
+UpdateTaskFormm = new FormGroup(
+  {
+    taskid: new FormControl(''),
+    tasktype: new FormControl('', Validators.required),
+    starttime: new FormControl('', Validators.required),
+    endtime: new FormControl('', Validators.required),
+    weight: new FormControl('', Validators.required),
+    taskstatus: new FormControl(''),
+    taskfile: new FormControl(''),
+    tasknote: new FormControl('', Validators.required),
+    sectionidd: new FormControl('')
+
+  }
+)
+
+async OpenUpdateTask(taskid: number) {
+
+  await this.taskService.GetTaskById(taskid);
+  await this.UpdateTaskFormm.patchValue(this.taskService.Task);
+
+
+  const dialogConfig = new MatDialogConfig();
+  dialogConfig.maxWidth = '800px';
+  dialogConfig.maxHeight = '80vh';
+  this.dialog.open(this.UpdateTask, dialogConfig)
+}
+
+selectedTask:any
+UploadTask(input: any) {
+  if (input.files[0] != null) {
+    let uplodedFile = input.files[0]; // image fille
+    let formdata = new FormData();
+    formdata.append('file', uplodedFile);
+    this.taskService.UploadTask(formdata);
+  }
+  this.selectedTask = input
+}
+
+async UpdateFileTask() {
+  await this.taskService.UpdateTaskFile(this.UpdateTaskFormm.value);
+  await this.taskService.GetAllTasks();
+  this.tasks = this.taskService.tasks.filter((x: { sectionidd: any; }) => x.sectionidd == this.section.sectionid)
+
+}
+
+
 
 }
 enum Levels {
