@@ -65,8 +65,8 @@ export class MainComponent {
     this.lname = this.userService.user.lastname
     this.name = this.fname + " "+ this.lname
     console.log(this.fname);
-    const tss =await this.combinedArray.tsid
-    await this.traineeSectionService.getAllCertificates(tss)
+    const tss =await this.ts.tsid
+    await this.traineeSectionService.getAllCertificates(this.ts.tsid)
   }
    DownloadCertificate(tid:any,StartDate:any,endDate:any,coursename:any,fname:any){
     const doc = new jsPDF('l', 'mm', 'a4');

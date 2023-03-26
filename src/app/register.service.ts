@@ -227,12 +227,14 @@ async AcceptEmail(object:any){
   return new Promise<void>((resolve, reject) => {
   emailjs.send('service_6xav48r', 'template_ge682oo', object,  'y8NEJ_GRB1cDhZfJM')
   .then(
-  (response) => {
+  (response: any) => {
     console.log("SUCCESS!", response.status, response.text);
     resolve();
+    debugger
     },
-    (error) => {
+    (error: any) => {
     console.log("FAILED!", error);
+    debugger
    });
   })
 }

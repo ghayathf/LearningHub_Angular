@@ -125,16 +125,16 @@ export class TraineeSectionService {
       })
     })
   }
-  certificatesFlag:any =true
+  certificatesFlag:any =false
   certificate:any
-  getAllCertificates(id:any){
+  getAllCertificates(id:number){
     this.spinner.show();
     return new Promise<void>((resolve, reject) => {
       this.http.get("https://localhost:44391/api/Certificate/GetTCertificateById/"+id).subscribe({
         next: (res) => {
           this.certificate = res;
           this.spinner.hide();
-          this.certificatesFlag = false
+          this.certificatesFlag = true
           resolve();
         },
         error: (err) => {
