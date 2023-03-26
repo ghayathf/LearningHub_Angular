@@ -359,16 +359,16 @@ export class CourseDetailedComponent {
   {
       await this.soltionService.GetSolutionById(id);
       this.soltuionFile = this.soltionService.solutionByIDD.solutionfile;
-      const filePath = "../../../assets/HomeAssets/Solution/" + this.soltuionFile;
-  
+      const filePath = "../../../assets/HomeAssets/solution/" + this.soltuionFile;
+
       const response = await fetch(filePath);
       const lastDotIndex = filePath.lastIndexOf(".");
       const slicedStr = filePath.slice(lastDotIndex + 1);
       const blob = await response.blob();
-  
+
       // Create a URL for the Blob using createObjectURL
       const url = URL.createObjectURL(blob);
-  
+
       // Create an anchor tag and trigger the download by simulating a click
       const a = document.createElement('a');
       a.href = url;
@@ -376,10 +376,10 @@ export class CourseDetailedComponent {
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
-  
+
       // Release the object URL after the download is complete
       URL.revokeObjectURL(url);
-  
+
   }
   SolID:any
   async OpenMarkDialog(ID: any) {
