@@ -30,7 +30,7 @@ export class TraineeSectionService {
           this.spinner.hide();
           this.toaster.error("Error Try Again");
           console.log(err);
-          
+
 
         }
       })
@@ -115,6 +115,26 @@ export class TraineeSectionService {
         next: () => {
           this.spinner.hide();
           this.toaster.success("attendance created successfully");
+          resolve();
+        },
+        error: (err) => {
+          this.spinner.hide();
+          this.toaster.error("Error Try Again");
+          console.log(err);
+        }
+      })
+    })
+  }
+  certificatesFlag:any =true
+  certificate:any
+  getAllCertificates(id:any){
+    this.spinner.show();
+    return new Promise<void>((resolve, reject) => {
+      this.http.get("https://localhost:44391/api/Certificate/GetTCertificateById/"+id).subscribe({
+        next: (res) => {
+          this.certificate = res;
+          this.spinner.hide();
+          this.certificatesFlag = false
           resolve();
         },
         error: (err) => {
