@@ -125,7 +125,7 @@ export class TraineeSectionService {
       })
     })
   }
-  certificatesFlag:any =true
+  certificatesFlag:any =false
   certificate:any
   getAllCertificates(id:number){
     this.spinner.show();
@@ -134,7 +134,7 @@ export class TraineeSectionService {
         next: (res) => {
           this.certificate = res;
           this.spinner.hide();
-          this.certificatesFlag = false
+          this.certificatesFlag = true
           resolve();
         },
         error: (err) => {

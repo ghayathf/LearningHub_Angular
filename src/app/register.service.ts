@@ -232,12 +232,14 @@ async AcceptEmail(object:any){
   return new Promise<void>((resolve, reject) => {
   emailjs.send('service_6xav48r', 'template_ge682oo', object,  'y8NEJ_GRB1cDhZfJM')
   .then(
-  (response) => {
+  (response: any) => {
     console.log("SUCCESS!", response.status, response.text);
     resolve();
+    debugger
     },
-    (error) => {
+    (error: any) => {
     console.log("FAILED!", error);
+    debugger
    });
   })
 }
@@ -245,11 +247,11 @@ async RejectEmail(object:any){
   return new Promise<void>((resolve, reject) => {
   emailjs.send('service_6xav48r', 'template_tudzrm5', object,  'y8NEJ_GRB1cDhZfJM')
   .then(
-  (response) => {debugger
+  (response:any) => {debugger
     console.log("SUCCESS!", response.status, response.text);
     resolve();
     },
-    (error) => {debugger
+    (error:any) => {debugger
     console.log("FAILED!", error);
    });
   })
