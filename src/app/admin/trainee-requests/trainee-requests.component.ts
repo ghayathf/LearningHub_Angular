@@ -33,7 +33,7 @@ export class TraineeRequestsComponent {
   SelectdUserId = 0;
   async ChangeStatus(requestt: any) {
 
-    this.sendEmail(requestt.user_Id);
+
     await this.TraineeService.UpdateRequest(requestt);
 
     await this.TraineeService.GetAllTraineeUser();
@@ -42,23 +42,7 @@ export class TraineeRequestsComponent {
   }
 
 
-  async sendEmail(id: number) {
-    await this.TraineeService.GetUserById(id);
-    const emailParams = {
-
-      to_email: this.TraineeService.User.email,
-      to_name: this.TraineeService.User.firstname
-    };
-    console.log(emailParams.to_email);
-    console.log(emailParams.to_name);
-    debugger
-
-    EmailJS.send('service_6xav48r', 'template_ge682oo', emailParams, 'dvFAvtYsKpeW3IhUnXlTh').then(
-      (response) => {
-        console.log('SUCCESS!', response.status, response.text);
-      },
-      (error) => { console.log('FAILED...', error); });
-  }
+  
 
 
 

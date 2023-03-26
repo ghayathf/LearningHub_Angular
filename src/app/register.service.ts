@@ -145,15 +145,17 @@ export class RegisterService {
   User: any;
   GetUserById(userid: number) {
     return new Promise<void>((resolve, reject) => {
-    this.http.get("https://localhost:44391/api/User/GetUserByID/" + userid).subscribe({
-      next: (res) => {
-        this.User = res;
-      },
-      error: (err) => {
-        console.log(err);
+      this.http.get("https://localhost:44391/api/User/GetUserByID/" + userid).subscribe({
+        next: (res) => {
+          this.User = res;
+          resolve();
+        },
+        error: (err) => {
+          console.log(err);
 
-      }
-    })})
+        }
+      })
+    })
   }
   user2: any;
   async UpdateRequest(Request: any) {
