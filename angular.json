@@ -97,6 +97,7 @@
               "src/styles.css"
             ],
             "scripts": [
+              "node_modules/emailjs-com/dist/email.min.js"
             ]
           }
         }
