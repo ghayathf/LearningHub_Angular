@@ -24,13 +24,13 @@ export class TraineeSectionService {
           this.spinner.hide();
           this.toaster.success("Trainee Added Successfuly");
           resolve();
-          debugger
+
         },
         error: (err) => {
           this.spinner.hide();
           this.toaster.error("Error Try Again");
           console.log(err);
-          debugger
+          
 
         }
       })
@@ -46,7 +46,6 @@ export class TraineeSectionService {
           this.TraineeSections = res;
           this.spinner.hide();
           resolve();
-
         },
         error: (err) => {
           this.spinner.hide();

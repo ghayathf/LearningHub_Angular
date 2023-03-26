@@ -97,8 +97,8 @@
           <thead>
             <tr>
               <th scope="col" class="border-0 rounded-start">Course Title</th>
-              <th scope="col" class="border-0">Total Lectures</th>
-              <th scope="col" class="border-0">Completed Lecture</th>
+              <th scope="col" class="border-0">Period</th>
+              <th scope="col" class="border-0">Total Attendance</th>
               <th scope="col" class="border-0 rounded-end">Action</th>
             </tr>
           </thead>
@@ -106,17 +106,17 @@
           <!-- Table body START -->
           <tbody>
             <!-- Table item -->
-            <tr>
+            <tr *ngFor="let item of combinedArray">
               <!-- Table data -->
               <td>
                 <div class="d-flex align-items-center">
                   <!-- Image -->
                   <div class="w-100px">
-                    <img src="../../../assets/HomeAssets/images/courses/4by3/08.jpg" class="rounded" alt="">
+                    <img src="../../../assets/HomeAssets/images/{{item.courseimage}}" class="rounded" alt="">
                   </div>
                   <div class="mb-0 ms-2">
                     <!-- Title -->
-                    <h6><a href="#">Building Scalable APIs with GraphQL</a></h6>
+                    <h6><a href="#">{{ item.coursename }}</a></h6>
                     <!-- Info -->
                     <div class="overflow-hidden">
                       <h6 class="mb-0 text-end">85%</h6>
@@ -130,14 +130,14 @@
               </td>
 
               <!-- Table data -->
-              <td>56</td>
+              <td>{{ item.startdate|slice:0:10 }} to {{ item.enddate|slice:0:10 }}</td>
 
               <!-- Table data -->
-              <td>40</td>
+              <td>{{ item.totalattendance }} of {{ item.sectiondays}}</td>
 
               <!-- Table data -->
               <td>
-                <a href="#" class="btn btn-sm btn-primary-soft me-1 mb-1 mb-md-0"><i class="bi bi-play-circle me-1"></i>Continue</a>
+                <a class="btn btn-sm btn-primary-soft me-1 mb-1 mb-md-0" (click)="OpenDetailedCourse(item.sectionid)"><i class="bi bi-play-circle me-1" ></i>View More Details</a>
               </td>
             </tr>
 
