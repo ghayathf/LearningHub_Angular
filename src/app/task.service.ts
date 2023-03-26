@@ -29,6 +29,23 @@ export class TaskService {
       )
     })
   }
+  solutions:any
+  GetAllSolutions() {
+    this.spinner.show()
+    return new Promise<void>((resolve, reject) => {
+      this.http.get("https://localhost:44391/api/Solution/GetAllSolutions").subscribe(
+        (res) => {
+          this.solutions = res
+          this.spinner.hide()
+          resolve();
+        },
+        (err) => {
+          console.log(err);
+          this.spinner.hide();
+        }
+      )
+    })
+  }
 
   Task: any
   GetTaskById(id: number) {

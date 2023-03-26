@@ -62,7 +62,51 @@ export class SolutionService {
             this.spinner.hide()
             this.toaster.error("Try Again");
             console.log(err);
-            debugger
+            
+          }
+        }
+      )
+    })
+  }
+
+  SolutionFile = "";
+  UploadSolution(Sol: any) {
+    this.spinner.show()
+    return new Promise<void>((resolve, reject) => {
+      this.http.post("https://localhost:44391/api/Solution/UploadSolution", Sol).subscribe(
+        {
+          next: (res: any) => {
+            this.spinner.hide()
+            this.SolutionFile = res.solutionfile;
+            resolve()
+          },
+          error: () => {
+            this.spinner.hide();
+          }
+        }
+
+
+      )
+    })
+  }
+
+  CreateSoltuion(Sol: any) {
+    Sol.solutionmark = 0;
+    Sol.solutionfile = this.SolutionFile;
+    return new Promise<void>((resolve, reject) => {
+      this.spinner.show();
+      this.http.post("https://localhost:44391/api/Solution/CreateSolution", Sol).subscribe(
+        {
+          next: () => {
+            this.spinner.hide();
+            this.toaster.success("Solution Uploaded Successfuly");
+            resolve();
+            
+          },
+          error: () => {
+            this.spinner.hide();
+            this.toaster.error("Error");
+            
           }
         }
       )

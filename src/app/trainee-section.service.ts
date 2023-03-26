@@ -24,13 +24,13 @@ export class TraineeSectionService {
           this.spinner.hide();
           this.toaster.success("Trainee Added Successfuly");
           resolve();
-          debugger
+
         },
         error: (err) => {
           this.spinner.hide();
           this.toaster.error("Error Try Again");
           console.log(err);
-          debugger
+
 
         }
       })
@@ -46,7 +46,6 @@ export class TraineeSectionService {
           this.TraineeSections = res;
           this.spinner.hide();
           resolve();
-
         },
         error: (err) => {
           this.spinner.hide();
@@ -116,6 +115,26 @@ export class TraineeSectionService {
         next: () => {
           this.spinner.hide();
           this.toaster.success("attendance created successfully");
+          resolve();
+        },
+        error: (err) => {
+          this.spinner.hide();
+          this.toaster.error("Error Try Again");
+          console.log(err);
+        }
+      })
+    })
+  }
+  certificatesFlag:any =false
+  certificate:any
+  getAllCertificates(id:number){
+    this.spinner.show();
+    return new Promise<void>((resolve, reject) => {
+      this.http.get("https://localhost:44391/api/Certificate/GetTCertificateById/"+id).subscribe({
+        next: (res) => {
+          this.certificate = res;
+          this.spinner.hide();
+          this.certificatesFlag = true
           resolve();
         },
         error: (err) => {

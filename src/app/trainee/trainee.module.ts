@@ -5,12 +5,14 @@ import { TraineeRoutingModule } from './trainee-routing.module';
 import { MainComponent } from './main/main.component';
 import { SharedModule } from '../shared/shared.module';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { CourseDetailsComponent } from './course-details/course-details.component';
 
 
 @NgModule({
   declarations: [
     MainComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    CourseDetailsComponent
   ],
   imports: [
     CommonModule,
