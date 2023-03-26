@@ -188,9 +188,7 @@ export class RegisterService {
   }
 
   AcceptedTrainee: any = [];
-
   GetAllAcceptedTrainee() {
-
     this.spinner.show();
     this.http.get("https://localhost:44391/api/Trainee/GetAllAccepted").subscribe(
       {
@@ -206,11 +204,8 @@ export class RegisterService {
         }
       }
     )
-
   }
-
   Registers: any = []
-
   async getAllRegisterd() {
     this.spinner.show()
     this.http.get("https://localhost:44391/api/User/GetAllUsers").subscribe(
@@ -245,11 +240,11 @@ async RejectEmail(object:any){
   return new Promise<void>((resolve, reject) => {
   emailjs.send('service_6xav48r', 'template_tudzrm5', object,  'y8NEJ_GRB1cDhZfJM')
   .then(
-  (response) => {debugger
+  (response) => {
     console.log("SUCCESS!", response.status, response.text);
     resolve();
     },
-    (error) => {debugger
+    (error) => {
     console.log("FAILED!", error);
    });
   })

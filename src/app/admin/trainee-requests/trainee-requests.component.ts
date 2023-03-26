@@ -35,13 +35,9 @@ export class TraineeRequestsComponent {
   }
   UID:any
   async ChangeStatus(requestt: any) {
+  await this.TraineeService.UpdateRequest(requestt);
+  await this.TraineeService.GetAllTraineeUser();
 
-/*     this.sendEmail(requestt.user_Id);
- */    await this.TraineeService.UpdateRequest(requestt);
-
-    await this.TraineeService.GetAllTraineeUser();
-
-    window.location.reload();
   await this.TraineeService.UpdateRequest(requestt);
   this.UID=requestt.user_Id
   await this.TraineeService.GetUserById(this.UID);
