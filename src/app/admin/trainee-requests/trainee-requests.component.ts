@@ -4,8 +4,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { RegisterService } from 'src/app/register.service';
 
 
-import * as EmailJS from 'emailjs-com';
-
+/* import * as EmailJS from 'emailjs-com';
+ */
 
 
 
@@ -33,8 +33,8 @@ export class TraineeRequestsComponent {
   SelectdUserId = 0;
   async ChangeStatus(requestt: any) {
 
-    this.sendEmail(requestt.user_Id);
-    await this.TraineeService.UpdateRequest(requestt);
+/*     this.sendEmail(requestt.user_Id);
+ */    await this.TraineeService.UpdateRequest(requestt);
 
     await this.TraineeService.GetAllTraineeUser();
 
@@ -42,7 +42,7 @@ export class TraineeRequestsComponent {
   }
 
 
-  async sendEmail(id: number) {
+  /* async sendEmail(id: number) {
     await this.TraineeService.GetUserById(id);
     const emailParams = {
 
@@ -58,7 +58,7 @@ export class TraineeRequestsComponent {
         console.log('SUCCESS!', response.status, response.text);
       },
       (error) => { console.log('FAILED...', error); });
-  }
+  } */
 
 
 
