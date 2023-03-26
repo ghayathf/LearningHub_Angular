@@ -145,7 +145,7 @@
 									<button (click)="openDeleteDialog(item.courseid)"
 										class="btn btn-sm btn-danger-soft mb-0">Delete</button>
 									<button (click)="openUpdateDialog(item.courseid)"
-										class="btn btn-sm btn-info-soft mb-0">Update</button>
+										class="btn btn-sm btn-info-soft mb-0" style="color:#1d3b53">Update</button>
 								</td>
 							</tr>
 
@@ -172,16 +172,6 @@
 	<!-- Page main content END -->
 
 </div>
-<!-- Page content END -->
-
-<!-- <ng-template #DeleteForm>
-	<h2 mat-dialog-content>Would you like to Delete this C ?</h2>
-	<div mat-dialog-actions>
-		<input type="button" mat-dialog-close class="btn btn-success" value="Yes" (click)="DeleteCategory()">
-		<input type="button" mat-dialog-close class="btn btn-error" value="No">
-	</div>
-</ng-template> -->
-
 
 <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="wheat" type="square-jelly-box" [fullScreen]="true">
 	<p style="color: wheat"> Waiting... </p>
@@ -201,7 +191,7 @@
 		</div>
 	</section>
 
-	<section style="background-color:#2a2c31">
+	<section >
 		<div class="container">
 
 
@@ -218,15 +208,12 @@
 							<!-- Step 1 content START -->
 							<div id="step-1" role="tabpanel" class="content" aria-labelledby="steppertrigger1">
 								<!-- Title -->
-								<h4>Update Course </h4>
-
-								<hr> <!-- Divider -->
-
-								<!-- Basic information START -->
-								<div class="row g-4">
+								
 									<!-- Course title -->
-									<div class="col-12">
+									
 										<form [formGroup]="UpdateCourseForm" class="example-form">
+											<div class="row">
+												<div class="col-md-6">
 											<mat-form-field class="example-full-width">
 												<mat-label>Course name</mat-label>
 												<input type="text" matInput formControlName="coursename">
@@ -236,6 +223,8 @@
 													Course name is <strong>required</strong>
 												</mat-error>
 											</mat-form-field>
+											</div>
+											<div class="col-md-6">
 											<mat-form-field class="example-full-width">
 												<mat-label>Course Description</mat-label>
 												<input type="text" matInput formControlName="coursedescription">
@@ -245,16 +234,12 @@
 													Course description is <strong>required</strong>
 												</mat-error>
 											</mat-form-field>
-											<!-- <mat-form-field class="example-full-width">
-												<mat-error
-													*ngIf="UpdateCourseForm.controls['courseimage'].hasError('required')">
-													Course Image is <strong>required</strong>
-												</mat-error>
-										</mat-form-field>	 -->
-
-
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-6">
 											<mat-form-field appearance="fill">
-												<mat-label>{{courseLevel}}</mat-label>
+												<mat-label>Course Level*</mat-label>
 												<mat-select formControlName="courselevel"
 													[(ngModel)]="selectedUpdatedLevel" [value]="selectedUpdatedLevel">
 													<mat-option *ngFor="let level of Levels| enumValues"
@@ -264,11 +249,12 @@
 													</mat-option>
 												</mat-select>
 											</mat-form-field>
-
+										</div>
+										<div class="col-md-6">
 
 
 											<mat-form-field appearance="fill">
-												<mat-label>{{categoryName}}</mat-label>
+												<mat-label>Category Name*</mat-label>
 												<mat-select formControlName="category_Id"
 													[(ngModel)]="selectedUpdatedCategory">
 													<mat-option *ngFor="let cate of categoryService.categories"
@@ -278,15 +264,14 @@
 													</mat-option>
 												</mat-select>
 											</mat-form-field>
-
+										</div>
+</div>
 											<div class="col-12">
 												<div
 													class="text-center justify-content-center align-items-center p-4 p-sm-5 border border-2 border-dashed position-relative rounded-3">
-													<!-- Image -->
-													<img src="assets/images/element/gallery.svg" class="h-50px" alt="">
+												
 													<div>
-														<h6 class="my-2">Upload Cayrgory image here, or<a href="#!"
-																class="text-primary"> Browse</a></h6>
+														<h6 class="my-2">Upload Course image here</h6>
 														<label style="cursor:pointer;">
 															<span>
 
@@ -312,13 +297,11 @@
 											<div class="d-flex justify-content-end mt-3">
 												<button mat-dialog-close class="btn btn-primary next-btn mb-0"
 													[disabled]="UpdateCourseForm.invalid"
-													(click)="UpdateCourse()">Update</button>
+													(click)="UpdateCourse()" style=" background-color:#1d3b53 ;">Update</button>
 											</div>
 										</form>
-									</div>
+									
 
-
-								</div>
 								<!-- Basic information START -->
 							</div>
 							<!-- Step 1 content END -->
@@ -334,7 +317,7 @@
 
 <ng-template #DetailsForm>
 	<!-- Page main content START -->
-	<div class="page-content-wrapper border" style="background-color: #333">
+	<div class="page-content-wrapper border" >
 
 
 
@@ -350,15 +333,29 @@
 						<div class="row g-4">
 							<!-- Course image -->
 							<div class="col-md-6">
-								<img src="../../../assets/HomeAssets/images/courses/4by3/01.jpg" class="rounded" alt="">
-							</div>
+								<h1 style="color:#1d3b53 ">{{ this.courseService.course.coursename }}</h1>
+								<!-- Info -->
+								<hr><ul class="list-group list-group-borderless">
+									<li class="list-group-item">
+								<span>Description:</span>
+								<span class="h6 mb-0" style="color:#1d3b53 ">  {{this.courseService.course.coursedescription}}</span>	
+							</li>
+
+									<li class="list-group-item">
+										<span>Certificate:</span>
+										<span class="h6 mb-0" style="color:#1d3b53 ">Yes</span>
+									</li>
+									<li class="list-group-item">
+										<span>Level:</span>
+										<span class="h6 mb-0"style="color:#1d3b53 " >{{ Levels[this.courseService.course.courselevel] }}</span>
+									</li>
+
+								</ul>	
+									</div>
 							<!-- Course info and avatar -->
 							<div class="col-md-6">
-								<h1>{{ this.courseService.course.coursename }}</h1>
-								<!-- Info -->
-								<h3 class="mb-3">{{this.courseService.course.coursedescription}}</h3>
-
-
+								<img src="../../../assets/HomeAssets/images/{{this.courseService.course.courseimage}}" class="rounded" alt="">
+								
 
 							</div>
 						</div>
@@ -367,37 +364,7 @@
 						<!-- Information START -->
 						<div class="row mt-3">
 
-							<!-- Information item -->
-							<div class="col-md-6">
-								<ul class="list-group list-group-borderless">
-
-
-									<li class="list-group-item">
-										<span>Total Enrolled:</span>
-										<span class="h6 mb-0">12,000+</span>
-									</li>
-
-									<li class="list-group-item">
-										<span>Certificate:</span>
-										<span class="h6 mb-0">Yes</span>
-									</li>
-								</ul>
-							</div>
-
-							<!-- Information item -->
-							<div class="col-md-6">
-								<ul class="list-group list-group-borderless">
-									<li class="list-group-item">
-										<span>Level:</span>
-										<span class="h6 mb-0">{{ this.courseService.course.courselevel }}</span>
-									</li>
-
-									<li class="list-group-item">
-										<span>Total Lecture:</span>
-										<span class="h6 mb-0">30</span>
-									</li>
-								</ul>
-							</div>
+							
 						</div>
 						<!-- Information END -->
 					</div>
@@ -466,7 +433,7 @@
 										<div class="col-md-6">
 									<div>
 										<mat-form-field class="example-full-width">
-											<mat-label>CourseName</mat-label>
+											<mat-label>Course Name</mat-label>
 											<input type="text" matInput formControlName="coursename">
 											<mat-error
 												*ngIf="CreateCourseForm.controls['coursename'].hasError('required')">
@@ -533,7 +500,7 @@
                       </mat-error>
                     </mat-form-field>-->
 										<mat-form-field appearance="fill">
-											<mat-label>Category</mat-label>
+											<mat-label>Category Name</mat-label>
 											<mat-select formControlName="category_Id" [(ngModel)]="selectedCategory">
 												<mat-option *ngFor="let cate of categoryService.categories"
 													[value]="cate.categoryid" (click)="print(cate.categoryname)">
@@ -550,8 +517,7 @@
 											<!-- Image -->
 											<img src="assets/images/element/gallery.svg" class="h-50px" alt="">
 											<div>
-												<h6 class="my-2">Upload Course image here, or<a href="#!"
-														class="text-primary"> Browse</a></h6>
+												<h6 class="my-2">Upload Course image here</h6>
 												<label style="cursor:pointer;">
 													<span>
 
@@ -572,7 +538,7 @@
 									<div class="d-flex justify-content-end mt-3">
 										<button class="btn btn-primary" mat-dialog-close
 											[disabled]="CreateCourseForm.invalid" value="Create"
-											(click)="CreateCourse()">Create</button>
+											(click)="CreateCourse()" style=" background-color:#1d3b53 ;">Create</button>
 									</div>
 								
 

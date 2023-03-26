@@ -130,11 +130,11 @@ export class AllSectionsComponent {
   section?: any
   courseName?: any
   trainerEmail?: any
-  time1?:Time
-  time2?:Time
-  dateFormat:string="2023-03-30";
-  datetimeStart?:Date
-  datetimeEnd?:Date
+  time1?: Time
+  time2?: Time
+  dateFormat: string = "2023-03-30";
+  datetimeStart?: Date
+  datetimeEnd?: Date
   async openUpdateDialog(sectionid: number) {
     await this.sectionService.GetSectionById(sectionid);
     await this.courseService.GetCourseById(this.sectionService.section.course_Id)

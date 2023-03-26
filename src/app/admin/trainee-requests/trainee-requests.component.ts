@@ -3,6 +3,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { RegisterService } from 'src/app/register.service';
 
+
+import * as EmailJS from 'emailjs-com';
+
+
+
+
 @Component({
   selector: 'app-trainee-requests',
   templateUrl: './trainee-requests.component.html',
@@ -25,13 +31,36 @@ export class TraineeRequestsComponent {
     this.TraineeService.GetAllTraineeUser();
   }
   SelectdUserId = 0;
-  ChangeStatus(requestt: any) {
+  async ChangeStatus(requestt: any) {
 
-    this.TraineeService.UpdateRequest(requestt);
-    this.TraineeService.GetAllTraineeUser();
+    this.sendEmail(requestt.user_Id);
+    await this.TraineeService.UpdateRequest(requestt);
+
+    await this.TraineeService.GetAllTraineeUser();
 
     window.location.reload();
-
   }
+
+
+  async sendEmail(id: number) {
+    await this.TraineeService.GetUserById(id);
+    const emailParams = {
+
+      to_email: this.TraineeService.User.email,
+      to_name: this.TraineeService.User.firstname
+    };
+    console.log(emailParams.to_email);
+    console.log(emailParams.to_name);
+    debugger
+
+    EmailJS.send('service_6xav48r', 'template_ge682oo', emailParams, 'dvFAvtYsKpeW3IhUnXlTh').then(
+      (response) => {
+        console.log('SUCCESS!', response.status, response.text);
+      },
+      (error) => { console.log('FAILED...', error); });
+  }
+
+
+
 
 }
