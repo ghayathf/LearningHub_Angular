@@ -27,18 +27,20 @@ export class MainComponent {
   AllSections: any
   async ngOnInit() {
     await this.courseService.GetAllCourses();
-    this.AllCourses = this.courseService.courses;
+    this.AllCourses = this.courseService.courses.length;
     await this.traineeService.GetAllTrainers();
-    this.AllTrainers = this.trainerService.trainers;
+    this.AllTrainers = this.trainerService.trainers.length;
     await this.registerService.GetAllAcceptedTrainee();
-    this.AllTrainees = this.registerService.AcceptedTrainee;
+    this.AllTrainees = this.registerService.AcceptedTrainee.length;
     await this.sectionService.GetAllSections()
-    this.AllSections = this.sectionService.sections;
+    this.AllSections = this.sectionService.sections.length;
     await this.testiomonialService.GetAllAcceptedTestimonilas();
     console.log(this.testiomonialService.Acceptedtestimonials);
 
     await this.Data.GetAllHome();
-
+    await this.categoryService.GetAllCategories()
+    this.cats = this.categoryService.categories
+    console.log(this.cats)
     this.spinner.show();
 
     setTimeout(() => {
@@ -53,14 +55,12 @@ export class MainComponent {
       template:
         "<img src='https://media.giphy.com/media/o8igknyuKs6aY/giphy.gif' />",
     });
-    this.categoryService.GetAllCategories()
+
+
   }
-  GetValues(categoryid: any) {
-    this.courseService.GetCoursesByCategoryId(categoryid)
-    this.router.navigate(["/all-courses"])
-  }
-  selectCategory(categoryid: number) {
-    this.categoryService.GetCategoryById(categoryid);
+
+  async selectCategory(categoryid: number) {
+    await this.categoryService.GetCategoryById(categoryid);
     this.router.navigate(["/category-courses"])
   }
 }
