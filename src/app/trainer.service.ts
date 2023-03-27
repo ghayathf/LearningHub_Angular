@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { CategoryService } from './category.service';
+import emailjs from '@emailjs/browser';
+
 
 @Injectable({
   providedIn: 'root'
@@ -161,4 +163,21 @@ GetTrainerById(trainerId:number){
   )
 }
 
+
+async AbsenceEmail(object:any){
+  return new Promise<void>((resolve, reject) => {
+  emailjs.send('service_fkbaj5y', 'template_k96j9a8', object,  'BvT6kBttjGdEkCxOZ')
+  .then(
+  (response: any) => {
+    
+    console.log("SUCCESS!", response.status, response.text);
+    resolve();
+    
+    },
+    (error: any) => {
+    console.log("FAILED!", error);
+    
+   });
+  })
+}
 }

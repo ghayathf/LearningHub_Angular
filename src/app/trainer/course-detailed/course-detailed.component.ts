@@ -9,6 +9,7 @@ import { UserService } from 'src/app/user.service';
 import { TaskService } from 'src/app/task.service';
 import { DatePipe } from '@angular/common';
 import { SolutionService } from 'src/app/solution.service';
+import { SectionService } from 'src/app/section.service';
 
 @Component({
   selector: 'app-course-detailed',
@@ -27,7 +28,7 @@ export class CourseDetailedComponent {
   @ViewChild('CreateMarkSolution') SolMark:any
 
   constructor(public materialService: MaterialService, public courseService: CourseService, public dialog: MatDialog, public traineeSectionService: TraineeSectionService,
-    public userService: UserService, public taskService: TaskService, public soltionService: SolutionService) { }
+    public userService: UserService, public taskService: TaskService, public soltionService: SolutionService,public sectionService:SectionService, public trainerService:TrainerService) { }
 
   CreateMaterialForm = new FormGroup(
     {
@@ -156,12 +157,23 @@ export class CourseDetailedComponent {
   absenceobj: any
   currDate?: any
   selectedDate: Date | undefined;
-  submitAttendance() {
+  async submitAttendance() {
     console.log(this.combinedArray);
 
     for (let i = 0; i < this.combinedArray.length; i++) {
       if (this.combinedArray[i].attendance == true) {
         this.traineeSectionService.CreateAbsence(this.combinedArray[i].tsid)
+        
+      await this.sectionService.GetSectionById(this.combinedArray[i].section_id)
+      
+      await this.courseService.GetCourseById( this.sectionService.section.course_Id)
+      
+      await this.trainerService.GetTrainerById(this.sectionService.section.trainer_Id)
+      
+      await this.userService.getUserById(this.trainerService.trainer.user_Id)
+      
+        this.sendEmail(this.combinedArray[i].firstname,this.courseService.course.coursename,this.userService.user.firstname,this.userService.user.lastname,this.currentDate,this.combinedArray[i].email);
+          
       }
       else {
         this.traineeSectionService.CreateAttendance(this.combinedArray[i].tsid)
@@ -396,4 +408,16 @@ export class CourseDetailedComponent {
     await this.soltionService.GiveSolutionMark(this.MarkForm.value);
     await this.OpenTaskSolutionDialog(this.TID);
   }
+  async sendEmail(traineename:string , coursename:string,trainerFname:string,TrainerLname:string,Cdate:string,email:string) {
+    const emailParams = {
+      to_name: traineename,
+      CourseName: coursename,
+      TrainerFname: trainerFname,
+      TrainerLname: TrainerLname,
+      CuurentDate: Cdate,
+      email: email
+      };
+      debugger
+      await this.trainerService.AbsenceEmail(emailParams);
+    }
 }
