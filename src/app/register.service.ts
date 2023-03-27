@@ -154,8 +154,9 @@ export class RegisterService {
       error: (err) => {
         console.log(err);
 
-      }
-    })})
+        }
+      })
+    })
   }
   user2: any;
   async UpdateRequest(Request: any) {

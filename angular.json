@@ -29,10 +29,8 @@
               "node_modules/ngx-spinner/animations/square-jelly-box.css",
               "node_modules/ngx-toastr/toastr.css",
               "src/styles.css"
-            ],
-            "scripts": [
-              "node_modules/emailjs-com/dist/email.min.js"
             ]
+          
           },
           "configurations": {
             "production": {
@@ -96,9 +94,6 @@
               "node_modules/ngx-spinner/animations/square-jelly-box.css",
               "node_modules/ngx-toastr/toastr.css",
               "src/styles.css"
-            ],
-            "scripts": [
-              "node_modules/emailjs-com/dist/email.min.js"
             ]
           }
         }
