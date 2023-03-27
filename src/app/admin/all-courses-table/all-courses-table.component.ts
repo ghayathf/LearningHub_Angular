@@ -130,6 +130,8 @@ categoryName?:any
   }
   async openDetailsDialog(courseid: number) {
     await this.courseService.GetCourseById(courseid);
+    await this.categoryService.GetCategoryById(this.courseService.course.category_Id);
+    
     const dialogConfig = new MatDialogConfig();
     dialogConfig.maxWidth = '800px';
     dialogConfig.maxHeight = '80vh';

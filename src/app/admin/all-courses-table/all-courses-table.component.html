@@ -95,7 +95,6 @@
 						<thead style=" background-color:#1d3b53 ;">
 							<tr >
 								<th scope="col" class="border-0 rounded-start" style=" background-color:#1d3b53 ;">Course Name</th>
-								<th scope="col" class="border-0"style=" background-color:#1d3b53 ;">Category</th>
 								<th scope="col" class="border-0"style=" background-color:#1d3b53 ;">Level</th>
 								<th scope="col" class="border-0 rounded-end"style=" background-color:#1d3b53 ;">Action</th>
 							</tr>
@@ -121,17 +120,7 @@
 									</div>
 								</td>
 
-								<!-- Table data -->
-								<td>
-									<div class="d-flex align-items-center mb-3">
-
-										<!-- Info -->
-										<div class="ms-2">
-											<h4 class="mb-0 fw-light">{{ item.category_Id }}</h4>
-										</div>
-									</div>
-								</td>
-
+							
 
 								<!-- Table data -->
 								<td> <span class="badge text-bg-primary">{{Levels[item.courselevel]}}</span> </td>
@@ -349,7 +338,10 @@
 										<span>Level:</span>
 										<span class="h6 mb-0"style="color:#1d3b53 " >{{ Levels[this.courseService.course.courselevel] }}</span>
 									</li>
-
+									<li class="list-group-item">
+										<span>Category:</span>
+										<span class="h6 mb-0"style="color:#1d3b53 " >{{ this.categoryService.category.categoryname }}</span>
+									</li>
 								</ul>	
 									</div>
 							<!-- Course info and avatar -->
