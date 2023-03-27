@@ -372,7 +372,7 @@ export class CourseDetailedComponent {
       // Create an anchor tag and trigger the download by simulating a click
       const a = document.createElement('a');
       a.href = url;
-      a.download = this.taskService.Task.tasktype + '.' + slicedStr;
+      a.download = this.soltionService.solutionByIDD.solutionfile + '.' + slicedStr;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
