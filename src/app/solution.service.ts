@@ -71,6 +71,7 @@ export class SolutionService {
 
   SolutionFile = "";
   UploadSolution(Sol: any) {
+    
     this.spinner.show()
     return new Promise<void>((resolve, reject) => {
       this.http.post("https://localhost:44391/api/Solution/UploadSolution", Sol).subscribe(
@@ -79,9 +80,11 @@ export class SolutionService {
             this.spinner.hide()
             this.SolutionFile = res.solutionfile;
             resolve()
+            debugger
           },
           error: () => {
             this.spinner.hide();
+            debugger
           }
         }
 
@@ -91,7 +94,7 @@ export class SolutionService {
   }
 
   CreateSoltuion(Sol: any) {
-    Sol.solutionmark = 0;
+    Sol.solutionmark = 0.0;
     Sol.solutionfile = this.SolutionFile;
     return new Promise<void>((resolve, reject) => {
       this.spinner.show();
@@ -101,12 +104,12 @@ export class SolutionService {
             this.spinner.hide();
             this.toaster.success("Solution Uploaded Successfuly");
             resolve();
-            
+            debugger
           },
           error: () => {
             this.spinner.hide();
             this.toaster.error("Error");
-            
+            debugger
           }
         }
       )
