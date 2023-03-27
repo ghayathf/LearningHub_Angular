@@ -8,6 +8,7 @@ import { SharedModule } from '../shared/shared.module';
 import { MainComponent } from './main/main.component';
 import { TestimonialComponent } from '../admin/testimonial/testimonial.component';
 import { TestimonialsComponent } from './testimonials/testimonials.component';
+import { AboutusComponent } from './aboutus/aboutus.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: "testimonial",
     component: TestimonialsComponent
+  },
+  {
+    path: "AboutUs",
+    component: AboutusComponent
   }
 ];
 

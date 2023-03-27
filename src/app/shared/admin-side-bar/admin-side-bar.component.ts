@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ContactusService } from 'src/app/contactus.service';
+import { PagesService } from 'src/app/pages.service';
 
 @Component({
   selector: 'app-admin-side-bar',
@@ -7,10 +8,11 @@ import { ContactusService } from 'src/app/contactus.service';
   styleUrls: ['./admin-side-bar.component.css']
 })
 export class AdminSideBarComponent {
-  constructor(public messageService: ContactusService) { }
+  constructor(public messageService: ContactusService, public Data: PagesService) { }
   c?: number;
   ngOnInit() {
     this.c = this.messageService.counter;
+    this.Data.GetAllHome();
   }
 
 

@@ -18,7 +18,7 @@ import { SolutionService } from 'src/app/solution.service';
   styleUrls: ['./course-details.component.css']
 })
 export class CourseDetailsComponent {
-  @ViewChild('UpdateTaskForm') UpdateTask: any
+  @ViewChild('UpdateSolutionDialod') UpdateSolution: any
   @ViewChild('CreateSolutionForm') CreateSolution: any
   section: any
   taskss: any = []
@@ -114,7 +114,6 @@ export class CourseDetailsComponent {
   openDeleteDialog(t: any) { }
   openUpdateDialog(t: any) { }
 
-
   taskfile: any;
   async downloadTask(id: number) {
 
@@ -142,22 +141,6 @@ export class CourseDetailsComponent {
     URL.revokeObjectURL(url);
   }
 
-
-
-  UpdateTaskFormm = new FormGroup(
-    {
-      taskid: new FormControl(''),
-      tasktype: new FormControl('', Validators.required),
-      starttime: new FormControl('', Validators.required),
-      endtime: new FormControl('', Validators.required),
-      weight: new FormControl('', Validators.required),
-      taskstatus: new FormControl(''),
-      taskfile: new FormControl(''),
-      tasknote: new FormControl('', Validators.required),
-      sectionidd: new FormControl('')
-
-    }
-  )
   SolutionForm = new FormGroup(
     {
       solutionid: new FormControl(''),
@@ -169,18 +152,58 @@ export class CourseDetailsComponent {
 
     }
   )
-  async OpenUpdateTask(taskid: number) {
+  UpdateSolutionForm = new FormGroup(
+    {
+      solutionmark: new FormControl(''),
+      solutionfile: new FormControl(''),
+      submitionnote: new FormControl('', Validators.required),
+      t_S_Id: new FormControl(''),
+      task_Id: new FormControl('')
 
-    await this.taskService.GetTaskById(taskid);
-    await this.UpdateTaskFormm.patchValue(this.taskService.Task);
+    }
+  )
+  slectedtaskid:any
+  SelectedSolid:any
+  async CallSolutionDialog(taskid: number)
+  {
+    await this.solutionService.GetAllSolution();
+    this.solutionService.Solutions.forEach((element:any) => {
+      if(element.task_Id == taskid)
+      {
+        if(element.t_S_Id == this.combinedArray.tsid)
+        {
+          this.OpenUpdateSolution(element.solutionid);
+          this.SelectedSolid=element.solutionid
+        }
+        else
+        {
+          this.OpenSolutionDialog(taskid);
+          this.slectedtaskid=taskid;
+        }
+      }
+      else
+        {
+          this.OpenSolutionDialog(taskid);
+          this.slectedtaskid=taskid;
 
+        }
+    });
+    
+  }
+  async OpenUpdateSolution(Solid: number) {
+    await this.solutionService.GetSolutionById(Solid);
+    await this.UpdateSolutionForm.patchValue(this.solutionService.solutionByIDD);
 
     const dialogConfig = new MatDialogConfig();
     dialogConfig.maxWidth = '800px';
     dialogConfig.maxHeight = '80vh';
-    this.dialog.open(this.UpdateTask, dialogConfig)
+    this.dialog.open(this.UpdateSolution, dialogConfig)
   }
-
+  async UpdateSolutionnn() {
+    this.UpdateSolutionForm.controls['t_S_Id'].setValue(this.ts.tsid);
+    this.UpdateSolutionForm.controls['task_Id'].setValue(this.TaskID);
+    await this.solutionService.UpdateSolution(this.UpdateSolutionForm.value);
+  }
   selectedSol: any
   UploadSol(input: any) {
     if (input.files[0] != null) {
@@ -200,11 +223,36 @@ export class CourseDetailsComponent {
     dialogConfig.maxHeight = '80vh';
     this.dialog.open(this.CreateSolution, dialogConfig)
   }
+  soltuionFile: any;
+  async downloadSolution()
+  {
+      await this.solutionService.GetSolutionById(this.SelectedSolid);
+      this.soltuionFile = this.solutionService.solutionByIDD.solutionfile;
+      const filePath = "../../../assets/HomeAssets/Solution/" + this.soltuionFile;
 
+      const response = await fetch(filePath);
+      const lastDotIndex = filePath.lastIndexOf(".");
+      const slicedStr = filePath.slice(lastDotIndex + 1);
+      const blob = await response.blob();
+
+      // Create a URL for the Blob using createObjectURL
+      const url = URL.createObjectURL(blob);
+
+      // Create an anchor tag and trigger the download by simulating a click
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = this.solutionService.solutionByIDD.solutionfile + '.' + slicedStr;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      // Release the object URL after the download is complete
+      URL.revokeObjectURL(url);
+
+  }
   async CreateSoltuion() {
     this.SolutionForm.controls['t_S_Id'].setValue(this.ts.tsid);
     this.SolutionForm.controls['task_Id'].setValue(this.TaskID);
-
     await this.solutionService.CreateSoltuion(this.SolutionForm.value);
   }
 }

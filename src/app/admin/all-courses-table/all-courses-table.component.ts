@@ -7,9 +7,6 @@ import { Dialog } from '@angular/cdk/dialog';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { CategoryService } from 'src/app/category.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-
-
-
 import { EnumValuesPipe } from '../../enum-values.pipe';
 
 
@@ -133,6 +130,8 @@ categoryName?:any
   }
   async openDetailsDialog(courseid: number) {
     await this.courseService.GetCourseById(courseid);
+    await this.categoryService.GetCategoryById(this.courseService.course.category_Id);
+    
     const dialogConfig = new MatDialogConfig();
     dialogConfig.maxWidth = '800px';
     dialogConfig.maxHeight = '80vh';

@@ -1,77 +1,54 @@
 <nav class="navbar sidebar navbar-expand-xl" style=" background-color:#1d3b53 ;">
-	<!-- Navbar brand for xl START -->
+
 	<div class="d-flex align-items-center">
 		<a class="navbar-brand" href="index.html">
-			<img class="navbar-brand-item" src="../../../assets/HomeAssets/images/logo-light.svg" alt="">
+			<img class="navbar-brand-item" src="../../../assets/HomeAssets/images/{{Data.homes[0].logo}}" alt="">
 		</a>
 	</div>
-	<!-- Navbar brand for xl END -->
+
 	<div class="offcanvas offcanvas-start flex-row custom-scrollbar h-100" data-bs-backdrop="true" tabindex="-1"
 		id="offcanvasSidebar">
 		<div class="offcanvas-body sidebar-content d-flex flex-column ">
 
-			<!-- Sidebar menu START -->
+
 			<ul class="navbar-nav flex-column" id="navbar-sidebar">
 
-				<!-- Menu item 1 -->
-				<li class="nav-item"><a routerLink="/Admin" class="nav-link" ><i
+				<li class="nav-item"><a routerLink="/Admin" class="nav-link"><i
 							class="bi bi-house fa-fw me-2"></i>Dashboard</a></li>
 
-				<!-- Title -->
+
 				<li class="nav-item ms-2 my-2">Pages</li>
 
-				<!-- menu item 2 -->
-				<!-- <li class="nav-item"> -->
+
 				<a class="nav-link" data-bs-toggle="collapse" routerLink="/Admin/AllCourses" role="button"
 					aria-expanded="true" aria-controls="collapsepage">
 					<i class="bi bi-book fa-fw me-2"></i>Courses
 				</a>
-				<!-- Submenu -->
-				<!-- <ul class="nav collapse flex-column show" id="collapsepage" data-bs-parent="#navbar-sidebar">
-						<li class="nav-item"> <a class="nav-link" routerLink="/Admin/AllCourses">All Courses</a></li>
-						<li class="nav-item"> <a class="nav-link active" href="admin-course-category.html">Course
-								Category</a></li>
-						<li class="nav-item"> <a class="nav-link" href="admin-course-detail.html">Course Detail</a></li>
-					</ul>
-				</li> -->
 
-				<!-- Menu item 3 -->
 				<li class="nav-item"> <a class="nav-link" routerLink="/Admin/categories"><i
 							class="fa fa-object-group fa-fw me-2"></i>Categories</a></li>
 
-				<!-- Menu item 4 -->
-				<!-- <li class="nav-item"> -->
+
 				<a class="nav-link" data-bs-toggle="collapse" routerLink="/Admin/Employees" role="button"
 					aria-expanded="false" aria-controls="collapseinstructors">
 					<i class="fas fa-user-tie fa-fw me-2"></i>Instructors
 				</a>
-				<!-- Submenu -->
-				<!-- <ul class="nav collapse flex-column" id="collapseinstructors" data-bs-parent="#navbar-sidebar">
-						<li class="nav-item"> <a class="nav-link" href="admin-instructor-list.html">Instructors</a></li>
-						<li class="nav-item"> <a class="nav-link" href="admin-instructor-detail.html">Instructor
-								Detail</a></li>
-						<li class="nav-item">
-							<a class="nav-link" href="admin-instructor-request.html">Instructor requests
-								<span class="badge text-bg-success rounded-circle ms-2">2</span>
-							</a>
-						</li>
-					</ul> -->
-				<!-- </li> -->
 
-				<!-- Menu item 5 -->
 				<li class="nav-item"> <a class="nav-link" routerLink="/Admin/AllMaterials"><i
-          class="far fa-comment-dots fa-fw me-2"></i>Materials</a></li>
-          <li class="nav-item"> <a class="nav-link" routerLink="/Admin/AllSections"><i
-            class="far fa-comment-dots fa-fw me-2"></i>Sections</a></li>
+							class="fa fa-folder fa-fw me-2" aria-hidden=" true"></i>
+						Materials</a></li>
+				<li class="nav-item"> <a class="nav-link" routerLink="/Admin/AllSections"><i
+							class="fa fa-graduation-cap  fa-fw me-2" aria-hidden="true"></i>
+						Sections</a></li>
 				<li class="nav-item"> <a class="nav-link" routerLink="/Admin/contactus"><i
 							class="far fa-comment-dots fa-fw me-2"></i>Messages</a></li>
 
-				<!-- Menu item 6 -->
+
 
 				<li class="nav-item"> <a class="nav-link" routerLink="/Admin/TraineeRequest"><i
 							class="fa fa-user-plus me-2"></i>Trainees Request</a></li>
-				<!-- Menu item 7 -->
-				<li class="nav-item"> <a class="nav-link" href="admin-setting.html"><i
+
+				<li class="nav-item"> <a class="nav-link" routerLink="/Admin/EditProfile"><i
 							class="fas fa-user-cog fa-fw me-2"></i>Admin Settings</a></li>
 
 
@@ -80,29 +57,28 @@
 						<i class="fa fa-comments" aria-hidden="true"></i>
 						Testimonials Request</a></li>
 
+				<li class="nav-item"> <a class="nav-link" routerLink="/Admin/registerd">
+						<i class="fa fa-users" aria-hidden="true"></i>
 
-				<!-- Menu item 8 -->
+						Registerd User</a></li>
+
 				<li class="nav-item">
 					<a class="nav-link" data-bs-toggle="collapse" href="#collapseauthentication" role="button"
 						aria-expanded="false" aria-controls="collapseauthentication">
-						<i class="bi bi-lock fa-fw me-2"></i>Authentication
+						<i class="bi bi-lock fa-fw me-2"></i>Manage pages
 					</a>
-					<!-- Submenu -->
+
 					<ul class="nav collapse flex-column" id="collapseauthentication" data-bs-parent="#navbar-sidebar">
-						<li class="nav-item"> <a class="nav-link" href="sign-up.html">Sign Up</a></li>
-						<li class="nav-item"> <a class="nav-link" href="sign-in.html">Sign In</a></li>
-						<li class="nav-item"> <a class="nav-link" href="forgot-password.html">Forgot Password</a></li>
-						<li class="nav-item"> <a class="nav-link" href="admin-error-404.html">Error 404</a></li>
+						<li class="nav-item"> <a class="nav-link" routerLink="/Admin/Update-Home">Home page</a></li>
+						<li class="nav-item"> <a class="nav-link" routerLink="/Admin/Update-About">Aboutus page</a></li>
+
+
 					</ul>
 				</li>
 
 
 			</ul>
-			<!-- Sidebar menu end -->
 
-			<!-- Sidebar footer START -->
-
-			<!-- Sidebar footer END -->
 		</div>
 	</div>
 </nav>

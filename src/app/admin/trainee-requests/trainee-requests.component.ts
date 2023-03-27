@@ -4,7 +4,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { RegisterService } from 'src/app/register.service';
 
 
-import * as EmailJS from 'emailjs-com';
+
 
 
 

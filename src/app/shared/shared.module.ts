@@ -24,6 +24,7 @@ import { TraineeHeaderComponent } from './trainee-header/trainee-header.componen
 import { TraineeSideBarComponent } from './trainee-side-bar/trainee-side-bar.component';
 import { TraineeBannerComponent } from './trainee-banner/trainee-banner.component';
 
+import { NgxCaptchaModule } from 'ngx-captcha';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { TraineeBannerComponent } from './trainee-banner/trainee-banner.componen
     MatStepperModule,
     NgbDropdownModule,
     MatInputModule,
-    NgChartsModule
+    NgChartsModule,
+    NgxCaptchaModule
 
   ],
   exports: [
@@ -77,6 +79,9 @@ import { TraineeBannerComponent } from './trainee-banner/trainee-banner.componen
     TraineeHeaderComponent,
     TraineeSideBarComponent,
     TraineeBannerComponent,
+    ReactiveFormsModule,
+    NgxCaptchaModule,
+
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
