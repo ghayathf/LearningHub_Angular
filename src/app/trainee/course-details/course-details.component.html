@@ -211,7 +211,7 @@
                               <button (click)="downloadTask(item.taskid)"
                                 class="btn btn-sm btn-primary-soft btn-round mb-0"><i
                                   class="fas fa-fw fa-download"></i></button>
-                              <button (click)="OpenSolutionDialog(item.taskid)"
+                              <button (click)="CallSolutionDialog(item.taskid)"
                                 class="btn btn-sm btn-success-soft btn-round me-1 mb-0"><i
                                   class="far fa-fw fa-edit"></i></button>
 
@@ -560,7 +560,7 @@
       <div class="row">
         <div class="col-12 text-center">
           <!-- Title -->
-          <h1 class="text-white">Upload New Task</h1>
+          <h1 class="text-white">Upload New Solution</h1>
         </div>
       </div>
     </div>
@@ -627,6 +627,99 @@
                 <div class="d-flex justify-content-end mt-3">
                   <button class="btn btn-primary" mat-dialog-close [disabled]=" SolutionForm.invalid" value="Create"
                     (click)="CreateSoltuion()">Upload</button>
+                </div>
+
+
+              </form>
+            </div>
+          </div>
+          <!-- Card body END -->
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- =======================
+Steps END -->
+
+</ng-template>
+<ng-template #UpdateSolutionDialod>
+
+
+
+  <section class="py-0 bg-blue h-100px align-items-center d-flex h-200px rounded-0"
+    style="background:url(../../../assets/HomeAssets/images/pattern/04.png) no-repeat center center; background-size:cover;">
+    <!-- Main banner background image -->
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <!-- Title -->
+          <h1 class="text-white">Update Your Solution</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 mx-auto text-center">
+          <!-- Content -->
+        </div>
+      </div>
+
+      <div class="card bg-transparent border rounded-3 mb-5">
+        <div id="stepper" class="bs-stepper stepper-outline">
+
+
+          <!-- Card body START -->
+          <div class="card-body">
+            <!-- Step content START -->
+            <div class="bs-stepper-content">
+              <form [formGroup]="UpdateSolutionForm">
+
+                <a class="btn btn-sm btn-primary-soft me-1 mb-1 mb-md-0" (click)="downloadSolution()"><i class="bi bi-patch-exclamation-fill me-1" ></i>Download Current Solution File</a>
+                  <div class="col-md-6">
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Note</mat-label>
+                      <input type="text" matInput formControlName="submitionnote">
+
+                      <mat-error *ngIf="UpdateSolutionForm.controls['submitionnote'].hasError('required')">
+                        Note is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+
+                  </div>
+
+               
+                <div class="col-12">
+                  <div
+                    class="text-center justify-content-center align-items-center p-4 p-sm-5 border border-2 border-dashed position-relative rounded-3">
+                    <!-- Image -->
+
+                    <div>
+                      <h6 class="my-2">Upload Solution file here
+                      </h6>
+                      <label style="cursor:pointer;">
+                        <span>
+
+                          <input class="form-control stretched-link" type="file" name="my-image" id="image"
+                            (change)="UploadSol(file)" #file />
+                        </span>
+                      </label>
+                      <p class="small mb-0 mt-2"><b>Note:</b> Only JPG, JPEG and PNG.
+                        Our
+                        suggested dimensions are 600px * 450px. Larger image will be
+                        cropped
+                        to 4:3 to fit our thumbnails/previews.</p>
+
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="d-flex justify-content-end mt-3">
+                  <button class="btn btn-primary" mat-dialog-close [disabled]=" UpdateSolutionForm.invalid" value="Create"
+                    (click)="UpdateSolutionnn()">Upload</button>
                 </div>
 
 

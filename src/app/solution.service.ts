@@ -112,4 +112,40 @@ export class SolutionService {
       )
     })
   }
+
+  updatedTask?: any
+  async UpdateSolution(sol: any) {
+    await this.GetSolutionById(sol.solutionfile)
+    this.updatedTask = this.solutionByIDD.solutionfile;
+
+    if (this.SolutionFile != "")
+    sol.solutionfile = this.SolutionFile;
+    else if (this.solutionByIDD.solutionfile != "") {
+      sol.solutionfile = this.solutionByIDD.solutionfile;
+
+    }
+
+    return new Promise<void>((resolve, reject) => {
+      this.spinner.show();
+      this.http.put("https://localhost:44391/api/Solution/UpdateSolution", sol).subscribe(
+        {
+          next: () => {
+            this.spinner.hide();
+            this.toaster.success("Solution Updated Successfully");
+            resolve();
+            debugger
+          },
+          error: () => {
+            this.spinner.hide();
+            this.toaster.error("Try again");
+            debugger
+
+          }
+
+
+        }
+      )
+    })
+
+  }
 }
