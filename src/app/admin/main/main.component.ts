@@ -5,6 +5,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ChartConfiguration, ChartOptions, Colors } from 'chart.js';
 import { CourseService } from 'src/app/course.service';
 import { CategoryService } from 'src/app/category.service';
+import { jsPDF } from 'jspdf';
+import 'jspdf-autotable';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-main',
@@ -102,5 +105,36 @@ title = 'ng2-charts-demo';
   };
   public lineChartLegend = true;
 
-
+  async MakePDF(){
+  //   const chartContainer = document.getElementById('chart-container');
+  //   const chartCanvas = chartContainer.querySelector('canvas');
+  //   const chartContext = chartCanvas.getContext('2d');
+    
+  //   const chartContainer2 = document.getElementById('chart-container2');
+  //   const chartCanvas2 = chartContainer2.querySelector('canvas');
+  //   const chartContext2 = chartCanvas2.getContext('2d');
+    
+  //   // Create a new jsPDF instance
+  //   const pdf = new jsPDF();
+    
+  //   // Use html2canvas to capture the canvas elements as images
+  //   html2canvas(chartCanvas).then((canvas) => {
+  //     // Add the canvas image to the PDF document
+  //     pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 10, 10, 100, 100);
+    
+  //     // Use html2canvas to capture the second canvas element as an image
+  //     html2canvas(chartCanvas2).then((canvas2) => {
+  //       // Add the second canvas image to the PDF document
+  //       pdf.addImage(canvas2.toDataURL('image/png'), 'PNG', 110, 10, 100, 100);
+    
+  //       // Save the PDF document
+  //       pdf.save('charts.pdf');
+  //     });
+  //   });
+  // }
+  // else
+  // {
+  //   console.error('Element with ID "chart-container" not found');
+  // }
+}
 }

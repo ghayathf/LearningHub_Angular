@@ -103,12 +103,14 @@
                         <div class="card-header p-4 border-bottom">
                             <h5 class="card-header-title">Earnings</h5>
                         </div>
-
+                        <button class="btn btn-danger" style="margin-left: 20px;" (click)="MakePDF()"><i
+                            class="bi bi-file-earmark-pdf-fill"></i>Download
+                          PDF</button>
                         <!-- Card body -->
                         <div class="card-body row">
                             <!-- Apex chart -->
                             <div class="col">
-                                <div style="display: block;">
+                                <div style="display: block;" id="chart-container">
                                   <!-- <canvas baseChart width="400" height="400"
                                     [type]="'line'"
                                     [data]="lineChartData"
@@ -121,13 +123,12 @@
                                   [labels]="radarChartLabels"
                                   [type]="'radar'">
                           </canvas>
-                          
+
                                 </div>
 
-
                             </div>
-                            <div class="col">
-                              <canvas baseChart width="350" height="350"
+                            <div class="col" id="chart-container2">
+                              <canvas baseChart width="350" height="350" 
                                       [type]="'pie'"
                                       [datasets]="pieChartDatasets"
                                       [labels]="pieChartLabels"
