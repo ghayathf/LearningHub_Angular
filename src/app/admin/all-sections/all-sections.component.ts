@@ -33,6 +33,7 @@ export class AllSectionsComponent {
   users: any = []
   trainers: any = []
   combinedArray: any = []
+  combinedArray1: any = []
   UserTrainer?: any
   currentDate: any
   compinedSections:any=[]
@@ -47,28 +48,28 @@ export class AllSectionsComponent {
       const trainer = this.trainers.find((trainer: any) => trainer.user_Id === user.userid)
       return { ...user, ...trainer };
     });
+
     console.log(this.combinedArray)
     this.currentDate = new Date(Date.now()).toISOString().slice(0, 10)
     this.compinedSections =this.sectionService.sections.map((item1:any) => {
       const matchingItem2 = this.trainers.find((item2:any) => item2.trainerid === item1.trainer_Id);
-      if (!matchingItem2) {
-        return null;
-      }
+
       const matchingItem3 = this.users.filter((item3:any) => item3.userid === matchingItem2.user_Id);
-      if (!matchingItem3) {
-        return null;
-      }
-      const matchingItem4 = this.courseService.courses.filter((item4:any) => item4.courseid === item1.course_Id);
-      if (!matchingItem4) {
-        return null;
-      }
+
+      const matchingItem4 = this.courseService.courses.find((item4:any) => item4.courseid === item1.course_Id);
+
       return {
         ...item1,
         ...matchingItem2,
         ...matchingItem3,
         ...matchingItem4
       };
-    }).filter((item:any) => item !== null);
+    })
+    this.combinedArray1 = this.users.filter((x: { roleId: number; }) => x.roleId == 3).map((user: any) => {
+      const trainer = this.trainers.find((trainer: any) => trainer.user_Id === user.userid)
+
+      return { ...user, ...trainer };
+    });
     console.log(this.compinedSections)
   }
   GenerateCertificate(id: number) {
