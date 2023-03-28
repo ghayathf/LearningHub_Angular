@@ -7,12 +7,14 @@ import { SharedModule } from '../shared/shared.module';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { CourseDetailsComponent } from './course-details/course-details.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { TestimonialFormComponent } from './testimonial-form/testimonial-form.component';
 
 @NgModule({
   declarations: [
     MainComponent,
     EditProfileComponent,
-    CourseDetailsComponent
+    CourseDetailsComponent,
+    TestimonialFormComponent
   ],
   imports: [
     CommonModule,

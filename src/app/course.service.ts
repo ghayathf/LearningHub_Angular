@@ -108,8 +108,8 @@ export class CourseService {
     this.updatedImg=this.course.courseimage
    
     if(this.ImgaeName!="")
-    this.course.courseimage = this.ImgaeName;
-    if(this.updatedImg!=null && this.ImgaeName=="")
+    Course.courseimage = this.ImgaeName;
+    if(this.updatedImg!="" && this.ImgaeName=="")
     Course.courseimage=this.updatedImg;
     
     return new Promise<void>((resolve, reject) => {

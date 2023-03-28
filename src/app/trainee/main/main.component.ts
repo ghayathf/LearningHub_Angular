@@ -27,6 +27,7 @@ export class MainComponent {
     trainees:any
     currTrainee:any
     ts:any
+    ts2:any
     sec:any
     course:any
     tasks:any = []
@@ -36,6 +37,7 @@ export class MainComponent {
     fname:any
     lname:any
     name:any
+    x:any
   async ngOnInit() {
     this.user = this.auth.gh
     await this.traineeSectionService.GetAllTrainees()
@@ -50,6 +52,7 @@ export class MainComponent {
     this.userobj = this.userService.user
     this.currTrainee = this.trainees.find((x: { user_Id: any; })=>x.user_Id === this.user)
     this.ts = this.traineeSectionService.TraineeSections.find((x: { trainee_Id: any; })=>x.trainee_Id == this.currTrainee.traineeid)
+    this.ts2 = this.traineeSectionService.TraineeSections.filter((x: { trainee_Id: any; })=>x.trainee_Id == this.currTrainee.traineeid)
     this.sec = this.sectionService.sections.find((x: { sectionid: any; })=>x.sectionid == this.ts.section_id)
     this.course = this.courseService.courses.find((x: { courseid: any; })=>x.courseid == this.sec.course_Id)
     this.tasks = this.taskService.tasks.filter((x: { sectionidd: any; })=>x.sectionidd == this.sec.sectionid)
@@ -60,7 +63,8 @@ export class MainComponent {
       const user = this.userService.users.find((x: any)=>x.userid == this.currTrainee.user_Id)
       return { ...ts, ...section, ...course,...user };
     });
-
+    this.x = this.ts2.length
+console.log(this.x);
     console.log(this.combinedArray);
     this.userService.getUserById(this.user)
     this.fname = this.userService.user.firstname
