@@ -1,7 +1,9 @@
 <body>
   <app-trainee-header></app-trainee-header>
   <main>
-
+    <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="wheat" type="square-jelly-box" [fullScreen]="true">
+      <p style="color: wheat"> Waiting... </p>
+    </ngx-spinner>
     <!-- =======================
   Page intro START -->
     <section class="bg-light py-0 py-sm-5">
@@ -584,7 +586,7 @@
             <div class="bs-stepper-content">
               <form [formGroup]="SolutionForm">
 
-                
+
                   <div class="col-md-6">
                     <mat-form-field class="example-full-width">
                       <mat-label>Note</mat-label>
@@ -597,7 +599,7 @@
 
                   </div>
 
-               
+
                 <div class="col-12">
                   <div
                     class="text-center justify-content-center align-items-center p-4 p-sm-5 border border-2 border-dashed position-relative rounded-3">
@@ -690,7 +692,7 @@ Steps END -->
 
                   </div>
 
-               
+
                 <div class="col-12">
                   <div
                     class="text-center justify-content-center align-items-center p-4 p-sm-5 border border-2 border-dashed position-relative rounded-3">

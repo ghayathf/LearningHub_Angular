@@ -1,5 +1,8 @@
 <app-admin-side-bar></app-admin-side-bar>
 <main>
+  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="wheat" type="square-jelly-box" [fullScreen]="true">
+    <p style="color: wheat"> Waiting... </p>
+  </ngx-spinner>
     <div class="page-content">
 
         <!-- Top bar START -->
@@ -128,7 +131,7 @@
 
                             </div>
                             <div class="col" id="chart-container2">
-                              <canvas baseChart width="350" height="350" 
+                              <canvas baseChart width="350" height="350"
                                       [type]="'pie'"
                                       [datasets]="pieChartDatasets"
                                       [labels]="pieChartLabels"

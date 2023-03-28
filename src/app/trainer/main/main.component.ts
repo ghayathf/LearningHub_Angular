@@ -35,8 +35,11 @@ export class MainComponent {
     await this.courseService.GetAllCourses()
     this.combinedArray = this.sectionService.sections.filter((x: { trainer_Id: any; }) => x.trainer_Id == this.trainerId).map((s: any) => {
       const coursee = this.courseService.courses.find((coursee: any) => coursee.courseid === s.course_Id);
+
       return { ...s, ...coursee };
     });
+    console.log(this.combinedArray);
+
     this.sectionsLength = this.sections.length
   }
 
