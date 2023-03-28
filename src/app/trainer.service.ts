@@ -35,6 +35,7 @@ export class TrainerService {
   lastid:any
   users:any=[]
   async getAllUsersTrainers(){
+
     return new Promise<void>((resolve, reject) => {
     this.http.get("https://localhost:44391/api/User/GetAllUsers").subscribe(
       {
@@ -149,6 +150,7 @@ DeleteUser(trainerId: number) {
 }
 trainer:any
 GetTrainerById(trainerId:number){
+  this.spinner.show()
   this.http.get("https://localhost:44391/api/Trainer/GetTrainerByID/"+trainerId).subscribe(
     {
       next: (res) => {

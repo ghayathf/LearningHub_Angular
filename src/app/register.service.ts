@@ -16,19 +16,14 @@ export class RegisterService {
     this.tr = []
   }
 
-
-
-  CreateUser(User: any) {
+   CreateUser(User: any) {
     this.spinner.show();
     User.roleId = 2;
     this.http.post("https://localhost:44391/api/User/CreateUser", User).subscribe(
       {
-        next: () => {
+        next: async (res) => {
           this.spinner.hide();
-
           this.getAllUsers();
-
-
         },
         error: () => {
           this.spinner.hide();
@@ -36,6 +31,8 @@ export class RegisterService {
       }
     )
   }
+ 
+   
 
   users: any = []
   lastid: any;
@@ -284,4 +281,21 @@ async EnrollmetEmail(object:any){
    });
   })
 }
+
+ImgaeName :any;
+  UploadImage(imageFile: any) {
+    this.spinner.show()
+    return new Promise<void>((resolve, reject) => {
+
+    this.http.post("https://localhost:44391/api/User/UploadImage", imageFile).subscribe(
+      {
+        next: (res: any) => {
+          this.spinner.hide()
+          this.ImgaeName = res.imagename;
+          resolve()
+        },
+        error: () => { }
+      }
+    )})
+  }
 }

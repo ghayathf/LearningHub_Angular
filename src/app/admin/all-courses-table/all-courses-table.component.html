@@ -120,7 +120,7 @@
 									</div>
 								</td>
 
-							
+
 
 								<!-- Table data -->
 								<td> <span class="badge text-bg-primary">{{Levels[item.courselevel]}}</span> </td>
@@ -151,7 +151,7 @@
 			<!-- Card footer START -->
 			<div class="card-footer bg-transparent pt-0">
 				<!-- Pagination START -->
-				
+
 				<!-- Pagination END -->
 			</div>
 			<!-- Card footer END -->
@@ -162,8 +162,7 @@
 
 </div>
 
-<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="wheat" type="square-jelly-box" [fullScreen]="true">
-	<p style="color: wheat"> Waiting... </p>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#76BDF5" type="line-scale-party" [fullScreen]="true">
 </ngx-spinner>
 
 <ng-template #UpdateForm>
@@ -197,9 +196,9 @@
 							<!-- Step 1 content START -->
 							<div id="step-1" role="tabpanel" class="content" aria-labelledby="steppertrigger1">
 								<!-- Title -->
-								
+
 									<!-- Course title -->
-									
+
 										<form [formGroup]="UpdateCourseForm" class="example-form">
 											<div class="row">
 												<div class="col-md-6">
@@ -258,7 +257,7 @@
 											<div class="col-12">
 												<div
 													class="text-center justify-content-center align-items-center p-4 p-sm-5 border border-2 border-dashed position-relative rounded-3">
-												
+
 													<div>
 														<h6 class="my-2">Upload Course image here</h6>
 														<label style="cursor:pointer;">
@@ -289,7 +288,7 @@
 													(click)="UpdateCourse()" style=" background-color:#1d3b53 ;">Update</button>
 											</div>
 										</form>
-									
+
 
 								<!-- Basic information START -->
 							</div>
@@ -327,7 +326,7 @@
 								<hr><ul class="list-group list-group-borderless">
 									<li class="list-group-item">
 								<span>Description:</span>
-								<span class="h6 mb-0" style="color:#1d3b53 ">  {{this.courseService.course.coursedescription}}</span>	
+								<span class="h6 mb-0" style="color:#1d3b53 ">  {{this.courseService.course.coursedescription}}</span>
 							</li>
 
 									<li class="list-group-item">
@@ -342,12 +341,12 @@
 										<span>Category:</span>
 										<span class="h6 mb-0"style="color:#1d3b53 " >{{ this.categoryService.category.categoryname }}</span>
 									</li>
-								</ul>	
+								</ul>
 									</div>
 							<!-- Course info and avatar -->
 							<div class="col-md-6">
 								<img src="../../../assets/HomeAssets/images/{{this.courseService.course.courseimage}}" class="rounded" alt="">
-								
+
 
 							</div>
 						</div>
@@ -356,7 +355,7 @@
 						<!-- Information START -->
 						<div class="row mt-3">
 
-							
+
 						</div>
 						<!-- Information END -->
 					</div>
@@ -419,7 +418,7 @@
 
 								<!-- Step 1 content START -->
 
-							
+
 									<!-- Course title -->
 									<div class="row">
 										<div class="col-md-6">
@@ -453,7 +452,7 @@
 
 
 
-									
+
 										<!-- <label class="form-label">Course level</label>
 										<select class="form-select js-choice border-0 z-index-9 bg-transparent" aria-label=".form-select-sm" data-search-enabled="false" data-remove-item-button="true">
 											<option value="">Select course level</option>
@@ -532,7 +531,7 @@
 											[disabled]="CreateCourseForm.invalid" value="Create"
 											(click)="CreateCourse()" style=" background-color:#1d3b53 ;">Create</button>
 									</div>
-								
+
 
 							</form>
 						</div>
@@ -552,16 +551,16 @@ Steps END -->
         <div class="table-responsive border-0 rounded-3">
             <table class="table table-dark-gray align-middle p-4 mb-0 table-hover" >
                 <!-- Table head -->
-               
+
 					<thead style=" background-color:#1d3b53 ;">
 						<tr >
 							<th scope="col" class="border-0 rounded-start" style=" background-color:#1d3b53 ;">Course Name</th>
-							
+
 							<th scope="col" class="border-0"style=" background-color:#1d3b53 ;">Level</th>
 							<th scope="col" class="border-0 rounded-end"style=" background-color:#1d3b53 ;">Action</th>
 						</tr>
 					</thead>
-              
+
                 <!-- Table body START -->
                 <tbody>
                     <!-- Table row -->
@@ -581,7 +580,7 @@ Steps END -->
 					</td>
 
 					<!-- Table data -->
-				
+
 
 
 					<!-- Table data -->

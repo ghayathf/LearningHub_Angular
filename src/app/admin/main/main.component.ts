@@ -42,6 +42,7 @@ this.cats = this.categoryService.categories
 this.cName = this.cats.map(function(elem: { categoryname: any; }){return elem.categoryname })
 this.pieChartLabels=this.cName
 this.Ccount = this.cats.map(function(elem: { finalCourses: any; }) { return elem.finalCourses.length; });
+
   this.pieChartDatasets[0].data = this.Ccount;
 }
 title2 = 'ng2-charts-demo';

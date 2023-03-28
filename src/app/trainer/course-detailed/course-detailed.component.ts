@@ -171,8 +171,8 @@ export class CourseDetailedComponent {
       await this.trainerService.GetTrainerById(this.sectionService.section.trainer_Id)
       
       await this.userService.getUserById(this.trainerService.trainer.user_Id)
-      
-        this.sendEmail(this.combinedArray[i].firstname,this.courseService.course.coursename,this.userService.user.firstname,this.userService.user.lastname,this.currentDate,this.combinedArray[i].email);
+      debugger
+        this.sendEmail(this.combinedArray[i].firstname,this.courseService.course.coursename,this.userService.user.firstname,this.userService.user.lastname,this.combinedArray[i].email);
           
       }
       else {
@@ -408,13 +408,13 @@ export class CourseDetailedComponent {
     await this.soltionService.GiveSolutionMark(this.MarkForm.value);
     await this.OpenTaskSolutionDialog(this.TID);
   }
-  async sendEmail(traineename:string , coursename:string,trainerFname:string,TrainerLname:string,Cdate:string,email:string) {
+  async sendEmail(traineename:string , coursename:string,trainerFname:string,TrainerLname:string,email:string) {
     const emailParams = {
       to_name: traineename,
       CourseName: coursename,
       TrainerFname: trainerFname,
       TrainerLname: TrainerLname,
-      CuurentDate: Cdate,
+      currentDate: new Date().toISOString().slice(0, 10),
       email: email
       };
       debugger
