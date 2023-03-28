@@ -13,6 +13,7 @@ import { CategoryCoursesComponent } from './category-courses/category-courses.co
 import { ContactComponent } from './contact/contact.component';
 import { TestimonialsComponent } from './testimonials/testimonials.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
+import { DetailsComponent } from './details/details.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { AboutusComponent } from './aboutus/aboutus.component';
 
     ContactComponent,
       TestimonialsComponent,
-      AboutusComponent
+      AboutusComponent,
+      DetailsComponent
   ],
   imports: [
     CommonModule,
