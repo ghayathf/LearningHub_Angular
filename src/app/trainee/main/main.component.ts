@@ -11,6 +11,8 @@ import { AuthGuard } from 'src/app/auth.guard';
 import { SectionService } from 'src/app/section.service';
 import { Route, Router } from '@angular/router';
 import jsPDF from 'jspdf';
+
+
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -66,7 +68,10 @@ export class MainComponent {
     this.name = this.fname + " "+ this.lname
     console.log(this.fname);
     const tss =await this.ts.tsid
-    await this.traineeSectionService.getAllCertificates(this.ts.tsid)
+    await this.traineeSectionService.getAllCertificates(this.ts.tsid,this.ts.section_id);
+    // await this.traineeSectionService.GetAbsentTrainees(this.ts.section_id);
+    
+    await this.traineeSectionService.GetTSById(this.ts.tsid);
   }
    DownloadCertificate(tid:any,StartDate:any,endDate:any,coursename:any,fname:any){
     const doc = new jsPDF('l', 'mm', 'a4');

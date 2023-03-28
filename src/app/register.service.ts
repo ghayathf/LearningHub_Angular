@@ -16,19 +16,14 @@ export class RegisterService {
     this.tr = []
   }
 
-
-
-  CreateUser(User: any) {
+   CreateUser(User: any) {
     this.spinner.show();
     User.roleId = 2;
     this.http.post("https://localhost:44391/api/User/CreateUser", User).subscribe(
       {
-        next: () => {
+        next: async (res) => {
           this.spinner.hide();
-
           this.getAllUsers();
-
-
         },
         error: () => {
           this.spinner.hide();
@@ -36,6 +31,8 @@ export class RegisterService {
       }
     )
   }
+ 
+   
 
   users: any = []
   lastid: any;
@@ -142,7 +139,21 @@ export class RegisterService {
 
 
   }
+  TraineeByID: any;
+  GetTraineeById(id: number) {
+    return new Promise<void>((resolve, reject) => {
+    this.http.get("https://localhost:44391/api/Trainee/GetTraineeById/" + id).subscribe({
+      next: (res) => {
+        this.TraineeByID = res;
+        resolve();
+      },
+      error: (err) => {
+        console.log(err);
 
+        }
+      })
+    })
+  }
   User: any;
   GetUserById(userid: number) {
     return new Promise<void>((resolve, reject) => {
@@ -252,4 +263,39 @@ async RejectEmail(object:any){
    });
   })
 }
+
+async EnrollmetEmail(object:any){
+  return new Promise<void>((resolve, reject) => {
+    debugger
+  emailjs.send('service_fkbaj5y', 'template_rpgeura', object,  'BvT6kBttjGdEkCxOZ')
+  .then(
+  (response: any) => {
+    debugger
+    console.log("SUCCESS!", response.status, response.text);
+    resolve();
+    
+    },
+    (error: any) => {
+    console.log("FAILED!", error);
+    
+   });
+  })
+}
+
+ImgaeName :any;
+  UploadImage(imageFile: any) {
+    this.spinner.show()
+    return new Promise<void>((resolve, reject) => {
+
+    this.http.post("https://localhost:44391/api/User/UploadImage", imageFile).subscribe(
+      {
+        next: (res: any) => {
+          this.spinner.hide()
+          this.ImgaeName = res.imagename;
+          resolve()
+        },
+        error: () => { }
+      }
+    )})
+  }
 }

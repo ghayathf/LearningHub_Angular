@@ -240,11 +240,25 @@ export class AllSectionsComponent {
         t_S_Status: 0,
         totalattendance: 0
       };
+
+      await this.traineeServie.GetTraineeById(this.ExcelData[i].traineeid);
+      await this.userService.getUserById(this.traineeServie.TraineeByID.user_Id)
+      await this.sectionService.GetSectionById(this.selectdImportId)
+      await this.courseService.GetCourseById(this.sectionService.section.course_Id)
       this.trainees.push(newTrainee);
+      this.sendEmail(this.ExcelData[i].firstname, this.userService.user.email, this.courseService.course.coursename)
     }
     for (let j = 0; j < this.trainees.length; j++) {
       await this.traineeSection.CreateTraineeSection(this.trainees[j]);
     }
   }
-
+  async sendEmail(traineename: string, email: string, coursename: string) {
+    const emailParams = {
+      to_name: traineename,
+      CourseName: coursename,
+      email: email
+    };
+    debugger
+    await this.traineeServie.EnrollmetEmail(emailParams);
+  }
 }
