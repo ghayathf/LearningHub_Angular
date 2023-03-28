@@ -104,7 +104,7 @@
                             <tr>
                                 <th scope="col" class="border-0" style=" background-color:#1d3b53 ;">Material Name</th>
                                 <th scope="col" class="border-0 " style=" background-color:#1d3b53 ;">Date Uploaded</th>
-                                <th scope="col" class="border-0 " style=" background-color:#1d3b53 ;">Section ID</th>
+                               
                                 <th scope="col" class="border-0 rounded-end" style=" background-color:#1d3b53 ;">Action</th>
                             </tr>
                         </thead>
@@ -135,15 +135,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td>
-                                    <div class="d-flex align-items-center mb-3">
-
-                                        <!-- Info -->
-                                        <div class="ms-2">
-                                            <h4 class="mb-0 fw-light">{{ item.section_Id }}</h4>
-                                        </div>
-                                    </div>
-                                </td>
+                               
 
 
 
@@ -262,13 +254,13 @@
     <div class="card-body">
         <!-- Course table START -->
         <div class="table-responsive border-0 rounded-3">
-            <table class="table table-dark-gray align-middle p-4 mb-0 table-hover" style="background-color: #3e3e40;">
+            <table class="table table-dark-gray align-middle p-4 mb-0 table-hover" >
                 <!-- Table head -->
                 <thead>
                     <tr>
                         <th scope="col" class="border-0">Material Name</th>
                         <th scope="col" class="border-0 rounded-end">Date Uploaded</th>
-                        <th scope="col" class="border-0 rounded-end">Section ID</th>
+                     
                         <th scope="col" class="border-0 rounded-end">Action</th>
                     </tr>
                 </thead>
@@ -294,14 +286,7 @@
                                 </div>
                             </div>
                         </td>
-                        <td>
-                            <div class="d-flex align-items-center mb-3">
-                                <!-- Info -->
-                                <div class="ms-2">
-                                    <h4 class="mb-0 fw-light">{{ item.section_Id }}</h4>
-                                </div>
-                            </div>
-                        </td>
+                  
                         <td>
                             <button class="btn btn-sm btn-danger-soft mb-0"
                                 (click)="openDeleteDialog(item.materialid)">Delete</button>
