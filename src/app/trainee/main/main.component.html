@@ -111,26 +111,30 @@
               <td>
                 <div class="d-flex align-items-center">
                   <!-- Image -->
-                  <div class="w-100px">
-                    <img src="../../../assets/HomeAssets/images/{{item.courseimage}}" class="rounded" alt="">
+                  <div class="w-70px">
+                    <img src="../../../assets/HomeAssets/images/{{item.courseimage}}" class="avatar-img rounded" alt="">
                   </div>
-                  <div class="mb-0 ms-2">
+                  <div class="mb-0 mt-3 ms-2">
                     <!-- Title -->
-                    <h6><a href="#">{{ item.coursename }}</a></h6>
+                    <h2>{{ item.coursename }}</h2>
                     <!-- Info -->
-                    <div class="overflow-hidden">
-                      <h6 class="mb-0 text-end">85%</h6>
+                      <!-- <h6 class="mb-0 text-end">85%</h6>
                       <div class="progress progress-sm bg-primary bg-opacity-10">
                         <div class="progress-bar bg-primary aos" role="progressbar" data-aos="slide-right" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-in-out" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
                         </div>
-                      </div>
-                    </div>
+                      </div> -->
+                   
                   </div>
                 </div>
               </td>
 
               <!-- Table data -->
-              <td>{{ item.startdate|slice:0:10 }} to {{ item.enddate|slice:0:10 }}</td>
+              <td> <br>{{ item.startdate|slice:0:10 }} to {{ item.enddate|slice:0:10 }}<br> <br>
+                
+                <mat-progress-bar mode="determinate" value="{{this.traineeSectionService.TSIDD.totalmark}}"></mat-progress-bar>
+                
+                
+              </td>
 
               <!-- Table data -->
               <td>{{ item.totalattendance }} of {{ item.sectiondays}}</td>
