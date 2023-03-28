@@ -407,37 +407,15 @@
 					<div class="row">
             <div class="row g-4">
               <!-- Card item START -->
-              <div class="col-sm-6 col-lg-4 col-xl-3" *ngFor="let item of cats">
-                <div class="card shadow h-100" >
+              <div class="col-sm-6 col-md-4 col-xl-3" *ngFor="let item of cats">
+                <div class="card card-body bg-success bg-opacity-10 text-center position-relative btn-transition p-4" (click)="selectCategory(item.categoryid)">
                   <!-- Image -->
-                  <img src="../../../assets/HomeAssets/images/{{item.categoryimage}}" (click)="selectCategory(item.categoryid)" class="card-img-top" alt="course image">
-                  <div class="card-body pb-0">
-                    <!-- Badge and favorite -->
-                    <div class="d-flex justify-content-between mb-2">
-                      <a href="#" class="badge bg-success bg-opacity-10 text-success">Beginner</a>
-                      <a href="#" class="h6 fw-light mb-0"><i class="far fa-heart"></i></a>
-                    </div>
-                    <!-- Title -->
-                    <h5 class="card-title fw-normal"><a href="#">{{ item.categoryname }}</a></h5>
-                    <p class="text-truncate-2 mb-2">Mention Mr manners opinion if garrets enabled.</p>
-                    <!-- Rating star -->
-                    <ul class="list-inline mb-0">
-                      <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                      <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                      <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                      <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                      <li class="list-inline-item me-0 small"><i class="fas fa-star-half-alt text-warning"></i></li>
-                      <li class="list-inline-item ms-2 h6 fw-light mb-0">4.5/5.0</li>
-                    </ul>
+                  <div class="icon-xl bg-body mx-auto rounded mb-3">
+                    <img src="../../../assets/HomeAssets/images/{{item.categoryimage}}"  (click)="selectCategory(item.categoryid)" alt="">
                   </div>
-                  <!-- Card footer -->
-                  <div class="card-footer pt-0 pb-3">
-                    <hr>
-                    <div class="d-flex justify-content-between mt-2">
-                      <span class="h6 fw-light mb-0"><i class="far fa-clock text-danger me-2"></i>10h 00m</span>
-                      <span class="h6 fw-light mb-0"><i class="fas fa-table text-orange me-2"></i>26 lectures</span>
-                    </div>
-                  </div>
+                  <!-- Title -->
+                  <h2 class="mb-2">{{ item.categoryname }}</h2>
+                  <h3 class="mb-0">15 Courses</h3>
                 </div>
               </div>
               <!-- Card item END -->

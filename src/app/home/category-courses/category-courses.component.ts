@@ -14,6 +14,7 @@ export class CategoryCoursesComponent {
   courses:any=[]
   categoryId:any
   async ngOnInit(){
+    
     this.categoryId= this.categoryService.category
     await this.courseService.GetAllCourses()
     this.courses = this.courseService.courses.filter((x: { category_Id: any; })=>x.category_Id == this.categoryId.categoryid)
