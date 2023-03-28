@@ -22,7 +22,8 @@ export class RegisterComponent {
     username: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required, Validators.email]),
     userpassword: new FormControl('', [Validators.required, Validators.minLength(10)]),
-    roleId: new FormControl('')
+    roleId: new FormControl(''),
+    imagename:new FormControl('')
   })
 
   TraineeForm: FormGroup = new FormGroup(
@@ -35,8 +36,14 @@ export class RegisterComponent {
       user_Id: new FormControl('')
     }
   )
-
-  CreateNewUser() {
+ async CreateNewUser() {
+  // const image = new Image();
+  //   image.src="../../../assets/HomeAssets/451-4517876_default-profile-hd-png-download (1).png"
+  //   image.onload = () => {
+  //     const imageUrl = image.src;
+  //     this.UserForm.controls['imagename'].setValue(imageUrl);
+  //   };
+   this.UserForm.controls['imagename'].setValue('451-4517876_default-profile-hd-png-download (1).png');
 
     this.UserService.CreateUser(this.UserForm.value);
   }

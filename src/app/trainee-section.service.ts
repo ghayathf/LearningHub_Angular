@@ -37,6 +37,25 @@ export class TraineeSectionService {
     })
 
   }
+
+  TSIDD: any
+  GetTSById(id: number) {
+    return new Promise<void>((resolve, reject) => {
+      this.spinner.show()
+      this.http.get("https://localhost:44391/api/TraineeSection/GetTraineeSectionByID/" + id).subscribe(
+        {
+          next: (res) => {
+            this.TSIDD=res;
+            this.spinner.hide()
+            resolve()
+          },
+          error: (err) => {
+            console.log(err);
+          }
+        }
+      )
+    })
+  }
   TraineeSections:any = []
   GetAllTraineeSection(){
     this.spinner.show();
@@ -127,7 +146,7 @@ export class TraineeSectionService {
   }
   certificatesFlag:any =false
   certificate:any
-  getAllCertificates(id:number){
+  getAllCertificates(id:number,secID:number){
     this.spinner.show();
     return new Promise<void>((resolve, reject) => {
       this.http.get("https://localhost:44391/api/Certificate/GetTCertificateById/"+id).subscribe({
@@ -135,11 +154,32 @@ export class TraineeSectionService {
           this.certificate = res;
           this.spinner.hide();
           this.certificatesFlag = true
+          this.GetAbsentTrainees(secID)
           resolve();
         },
         error: (err) => {
           this.spinner.hide();
-          this.toaster.error("Error Try Again");
+          // this.toaster.error("Error Try Again");
+          console.log(err);
+        }
+      })
+    })
+  }
+  check:any
+  GetAbsentTrainees(id:number){
+    return new Promise<void>((resolve, reject) => {
+      this.http.get("https://localhost:44391/api/TakeAttendance/GetAbsentTrainees/"+id).subscribe({
+        next: (res) => {
+         this.check=res;
+         this.check.forEach((element:any) => {
+          if(element.tsid2 == this.certificate.t_S_Id) {
+            this.certificatesFlag = false
+           }
+         });
+          resolve();
+        },
+        error: (err) => {
+          
           console.log(err);
         }
       })

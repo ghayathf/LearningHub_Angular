@@ -2,9 +2,8 @@
 <!-- Page content START -->
 
 <div class="page-content">
-    <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="wheat" type="square-jelly-box" [fullScreen]="true">
-        <p style="color: wheat"> Waiting... </p>
-    </ngx-spinner>
+  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#76BDF5" type="line-scale-party" [fullScreen]="true">
+  </ngx-spinner>
     <!-- Top bar START -->
     <app-admin-header></app-admin-header>
     <!-- Top bar END -->
@@ -56,11 +55,11 @@
                 <!-- Search and select START -->
                 <div class="row g-3 align-items-center justify-content-between">
                     <!-- Search bar -->
-                   
+
 
                     <!-- Select option -->
                     <div class="col-md-3">
-                        
+
                     </div>
                 </div>
                 <!-- Search and select END -->
@@ -142,7 +141,7 @@
                 <!-- Pagination START -->
                 <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
                     <!-- Content -->
-                  
+
                 </div>
                 <!-- Pagination END -->
             </div>
@@ -194,7 +193,7 @@
 
                             <!-- Step 1 content START -->
                             <div id="step-1" role="tabpanel" class="content" aria-labelledby="steppertrigger1">
-                              
+
                                 <!-- Basic information START -->
                                     <!-- Course title -->
                                     <div class="col-12">
@@ -215,14 +214,14 @@
                                         <div
                                             class="text-center justify-content-center align-items-center p-4 p-sm-5 border border-2 border-dashed position-relative rounded-3">
                                             <!-- Image -->
-                                           
+
                                             <div>
                                                 <h6 class="my-2">Upload Category image here</h6>
                                                 <label style="cursor:pointer;">
                                                     <span>
 
                                                         <input class="form-control stretched-link" type="file"
-                                                            name="my-image" id="image" 
+                                                            name="my-image" id="image"
                                                             accept="image/gif, image/jpeg, image/png"
                                                             (change)="UploadImage(file)" #file />
                                                     </span>
@@ -244,7 +243,7 @@
                                             [disabled]="UpdateCategoryForm.invalid"
                                             (click)="UpdateCategory()" style=" background-color:#1d3b53 ;">Update</button>
                                     </div>
-                            
+
                                 <!-- Basic information START -->
                             </div>
                             <!-- Step 1 content END -->
@@ -294,7 +293,7 @@
                             <!-- Step 1 content START -->
                             <div id="step-1" role="tabpanel" class="content" aria-labelledby="steppertrigger1">
                                 <!-- Title -->
-                             
+
 
                                     <!-- Course title -->
                                     <div class="col-12">
@@ -317,7 +316,7 @@
                                         <div
                                             class="text-center justify-content-center align-items-center p-4 p-sm-5 border border-2 border-dashed position-relative rounded-3">
                                             <!-- Image -->
-                                        
+
                                             <div>
                                                 <h6 class="my-2">Upload Category image here</h6>
                                                 <label style="cursor:pointer;">
@@ -335,7 +334,7 @@
                                             </div>
                                         </div>
 
-                                      
+
                                     </div>
                                     <!-- Upload image END -->
 
@@ -346,7 +345,7 @@
                                             [disabled]="CreateCategoryForm.invalid"
                                             (click)="createCategory()" style=" background-color:#1d3b53 ;">Create</button>
                                     </div>
-                                
+
                                 <!-- Basic information START -->
                             </div>
                             <!-- Step 1 content END -->

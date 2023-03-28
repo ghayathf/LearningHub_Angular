@@ -1,7 +1,6 @@
 <main>
-    <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="wheat" type="square-jelly-box" [fullScreen]="true">
-        <p style="color: wheat"> Waiting... </p>
-    </ngx-spinner>
+  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#76BDF5" type="line-scale-party" [fullScreen]="true">
+  </ngx-spinner>
     <section class="p-0 d-flex align-items-center position-relative overflow-hidden">
 
         <div class="container-fluid">
@@ -63,12 +62,12 @@
                                 <!-- Email -->
                                 <mat-form-field class="example-full-width">
 
-                                    <mat-label>Email</mat-label>
+                                    <mat-label>Username</mat-label>
                                     <input type="text" matInput formControlName="username"
-                                        placeholder="Ex. pat@example.com">
+                                        placeholder="Ex. Username123">
 
                                     <mat-error *ngIf="LoginformChecking.controls['username'].hasError('required')">
-                                        Email is <strong>required</strong>
+                                        Username is <strong>required</strong>
                                     </mat-error>
                                 </mat-form-field>
                                 <!-- Password -->

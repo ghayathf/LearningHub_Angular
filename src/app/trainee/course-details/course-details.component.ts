@@ -41,6 +41,9 @@ export class CourseDetailsComponent {
   combinedObject: any
   combinedArray: any = []
   currentDate:any
+  AllComments:any=[]
+  commentsArr:any=[]
+  commentDate:any
   async ngOnInit() {
     this.section = this.sectionService.section
     this.currentDate = new Date(Date.now()).toISOString().slice(0, 10)
@@ -49,10 +52,12 @@ export class CourseDetailsComponent {
     this.trainees = this.traineeSectionService.allTrainees
     await this.traineeSectionService.GetAllTraineeSection()
     await this.userService.getUserById(this.user)
+    await this.userService.getAllUsers()
     await this.sectionService.GetAllSections()
     await this.courseService.GetAllCourses()
     await this.taskService.GetAllTasks()
     await this.materialService.GetAllMaterial()
+    await this.sectionService.GetAllComments()
     this.userobj = this.userService.user
     this.currTrainee = this.trainees.find((x: { user_Id: any; }) => x.user_Id === this.user)
     this.ts = this.traineeSectionService.TraineeSections.find((x: { trainee_Id: any; }) => x.trainee_Id == this.currTrainee.traineeid)
@@ -65,6 +70,14 @@ export class CourseDetailsComponent {
       const course = this.courseService.courses.find((x: any) => x.courseid == section.course_Id)
       return { ...ts, ...section, ...course };
     });
+    this.commentsArr = this.sectionService.Comments.filter((x: { section_Id: any; })=>x.section_Id == this.sec.sectionid).map((com:any)=>
+    {
+      const user = this.userService.users.find((x: { userid: any; })=>x.userid == com.user_Id)
+      return{...user,...com}
+    })
+    console.log(this.commentsArr);
+
+
 
     await this.taskService.GetAllTasks()
     await this.materialService.GetAllMaterial()
@@ -144,7 +157,7 @@ export class CourseDetailsComponent {
 
   SolutionForm = new FormGroup(
     {
-     
+
       solutionmark: new FormControl(''),
       solutionfile: new FormControl(''),
       submitionnote: new FormControl('', Validators.required),
@@ -178,21 +191,21 @@ export class CourseDetailsComponent {
         break;
       } else {
         this.flag = 0;
-        
+
       }
     }
     if(this.flag==1){
-    this.OpenUpdateSolution(this.SelectedSolid); 
+    this.OpenUpdateSolution(this.SelectedSolid);
     }
     else if(this.flag==0){
       this.OpenSolutionDialog( this.slectedtaskid);
     }
-       
+
   }
   async OpenUpdateSolution(Solid: number) {
-    
+
     await this.solutionService.GetSolutionById(Solid);
-    
+
     await this.UpdateSolutionForm.patchValue(this.solutionService.solutionByIDD);
 
     const dialogConfig = new MatDialogConfig();
@@ -260,6 +273,26 @@ debugger
   }
   sliceDate(d: any) {
     return d.slice(0, 10)
+  }
+
+
+  CommentForm = new FormGroup(
+    {
+
+      commentmessage: new FormControl('',Validators.required),
+      datepublished: new FormControl(''),
+      user_Id: new FormControl('', Validators.required),
+      section_Id: new FormControl('')
+
+    }
+  )
+  CreateComment(){
+    this.commentDate = new Date(Date.now())
+    this.CommentForm.controls['datepublished'].setValue(this.commentDate)
+    this.CommentForm.controls['user_Id'].setValue(this.user)
+    this.CommentForm.controls['section_Id'].setValue(this.sec.sectionid)
+    this.sectionService.CreateComment(this.CommentForm.value)
+    this.sectionService.GetAllComments()
   }
 }
 enum Levels {

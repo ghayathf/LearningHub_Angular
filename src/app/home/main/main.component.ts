@@ -41,22 +41,6 @@ export class MainComponent {
     await this.categoryService.GetAllCategories()
     this.cats = this.categoryService.categories
     console.log(this.cats)
-    this.spinner.show();
-
-    setTimeout(() => {
-      /** spinner ends after 5 seconds */
-      this.spinner.hide();
-    }, 3000);
-    this.spinner.show("mySpinner", {
-      type: "line-scale-party",
-      size: "large",
-      bdColor: "rgba(0, 0, 0, 1)",
-      color: "red",
-      template:
-        "<img src='https://media.giphy.com/media/o8igknyuKs6aY/giphy.gif' />",
-    });
-
-
   }
 
   async selectCategory(categoryid: number) {
