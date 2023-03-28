@@ -292,6 +292,7 @@ debugger
     this.CommentForm.controls['user_Id'].setValue(this.user)
     this.CommentForm.controls['section_Id'].setValue(this.sec.sectionid)
     this.sectionService.CreateComment(this.CommentForm.value)
+    this.sectionService.GetAllComments()
   }
 }
 enum Levels {
