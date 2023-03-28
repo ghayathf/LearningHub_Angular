@@ -124,5 +124,36 @@ async GenerateCertificate(type:number,sectionId:number){
   })
 }
 
+Comments: any = []
+  GetAllComments() {
+    this.spinner.show()
+    return new Promise<void>((resolve, reject) => {
+    this.http.get("https://localhost:44391/api/Comments/GetAllComments").subscribe(
+      (res) => {
+        this.Comments = res
+      this.spinner.hide()
+    resolve(); },
+      (err) => {
+        console.log(err);
+      }
+    )})
+  }
+  CreateComment(Comment:any){
+    return new Promise<void>((resolve, reject) => {
+    this.spinner.show();
+    this.http.post("https://localhost:44391/api/Comments/CreateComment",Comment).subscribe(
+      {
+        next:()=>{this.spinner.hide()
+          this.toaster.success("Comment Added");
+          resolve();
+         },
+        error:()=>{  this.spinner.hide();
+          this.toaster.error("Error");}
+      }
+    )
+  })
 
+
+
+}
 }
