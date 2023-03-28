@@ -11,18 +11,20 @@ export class CategoryService {
   constructor(private http: HttpClient, private spinner: NgxSpinnerService, private toaster: ToastrService) { }
   categories: any = []
   GetAllCategories() {
+
     this.spinner.show();
+    return new Promise<void>((resolve, reject) => {
     this.http.get("https://localhost:44391/api/Categories/GetAllCategories").subscribe(
       (res) => {
         this.categories = res
         this.spinner.hide();
-
+        resolve()
       },
       (err) => {
         console.log(err);
         this.spinner.hide();
 
-      })
+      })})
 
   }
   category: any

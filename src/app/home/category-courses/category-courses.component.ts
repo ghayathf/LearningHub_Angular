@@ -12,14 +12,38 @@ export class CategoryCoursesComponent {
 
   constructor(private route:ActivatedRoute,public courseService:CourseService,public categoryService:CategoryService) {}
   courses:any=[]
-  categoryID:any
-  ngOnInit(){
-    
-    this.categoryID=this.categoryService.GetSelectedCategory()
-    this.GetCoursesByCategoryId(this.categoryID)
-    console.log(this.categoryID)
+  categoryId:any
+  async ngOnInit(){
+    this.categoryId= this.categoryService.category
+    await this.courseService.GetAllCourses()
+    this.courses = this.courseService.courses.filter((x: { category_Id: any; })=>x.category_Id == this.categoryId.categoryid)
+    console.log(this.categoryId)
+    console.log(this.courseService);
+    for (let i = 0; i < this.courses.length; i++) {
+      if (this.courses[i].courselevel == 1)
+
+    this.courses[i].courselevel = Levels[1]
+
+    else if (this.courses[i].courselevel == 2)
+
+    this.courses[i].courselevel = Levels[2]
+
+    else
+
+    this.courses[i].courselevel = Levels[3]
+
+    }
+
+
   }
-  GetCoursesByCategoryId(categoryId:any){
-    this.courses.filter((x: {category_Id: number}) => x.category_Id == categoryId);
-  }
+
+}
+enum Levels {
+
+  Beginner = 1,
+
+  Intermediate = 2,
+
+  Advanced = 3,
+
 }

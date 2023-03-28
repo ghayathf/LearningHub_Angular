@@ -13,6 +13,8 @@ import { MainComponent } from './main/main.component';
 import { RegisterdUserComponent } from './registerd-user/registerd-user.component';
 import { TestimonialComponent } from './testimonial/testimonial.component';
 import { TraineeRequestsComponent } from './trainee-requests/trainee-requests.component';
+import { UpdateAboutComponent } from './update-about/update-about.component';
+import { UpdateHomeComponent } from './update-home/update-home.component';
 
 const routes: Routes = [
 
@@ -59,6 +61,14 @@ const routes: Routes = [
   {
     path: "registerd",
     component: RegisterdUserComponent
+  },
+  {
+    path: "Update-About",
+    component: UpdateAboutComponent
+  },
+  {
+    path: "Update-Home",
+    component: UpdateHomeComponent
   }
 
 ];

@@ -10,7 +10,7 @@ export class SolutionService {
 
   constructor(private http: HttpClient, private spinner: NgxSpinnerService, private toaster: ToastrService) { }
 
-  Solutions: any = []
+  Solutions: any
   GetAllSolution() {
     return new Promise<void>((resolve, reject) => {
       this.spinner.show()
@@ -104,12 +104,12 @@ export class SolutionService {
             this.spinner.hide();
             this.toaster.success("Solution Uploaded Successfuly");
             resolve();
-            debugger
           },
-          error: () => {
+          error: (err) => {
             this.spinner.hide();
             this.toaster.error("Error");
-            debugger
+            console.log(err);
+            
           }
         }
       )
@@ -118,7 +118,9 @@ export class SolutionService {
 
   updatedTask?: any
   async UpdateSolution(sol: any) {
-    await this.GetSolutionById(sol.solutionfile)
+    
+    await this.GetSolutionById(sol.solutionid)
+    sol.solutionmark = 0;
     this.updatedTask = this.solutionByIDD.solutionfile;
 
     if (this.SolutionFile != "")
@@ -136,12 +138,12 @@ export class SolutionService {
             this.spinner.hide();
             this.toaster.success("Solution Updated Successfully");
             resolve();
-            debugger
+            
           },
           error: () => {
             this.spinner.hide();
             this.toaster.error("Try again");
-            debugger
+            
 
           }
 

@@ -1,0 +1,58 @@
+<app-admin-header></app-admin-header>
+<app-admin-side-bar></app-admin-side-bar>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6" style="margin-top: 200px;">
+            <form class="example-form" [formGroup]="UpdateData">
+
+
+
+                <div class="col-12">
+                    <!-- Image -->
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Leave a comment</mat-label>
+                        <textarea matInput formControlName="paragraph1" matInput
+                            placeholder="Ex. It makes me feel..."></textarea>
+                        <mat-error *ngIf="CreateData.controls['paragraph1'].hasError('required')">
+                            Text is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Leave a comment</mat-label>
+                        <textarea matInput formControlName="paragraph2" matInput
+                            placeholder="Ex. It makes me feel..."></textarea>
+                        <mat-error *ngIf="CreateData.controls['paragraph2'].hasError('required')">
+                            Text is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                    <div
+                        class="text-center justify-content-center align-items-center p-4 p-sm-5 border border-2 border-dashed position-relative rounded-3">
+
+                        <div>
+                            <h6 class="my-2">Upload image here</h6>
+                            <label style="cursor:pointer;">
+                                <span>
+
+                                    <input class="form-control stretched-link" type="file" name="my-image" id="image"
+                                        accept="image/gif, image/jpeg, image/png" (change)="UploadImage(file)" #file />
+                                </span>
+                            </label>
+                            <p class="small mb-0 mt-2"><b>Note:</b> Only JPG, JPEG and PNG. Our
+                                suggested dimensions are 600px * 450px. Larger image will be cropped
+                                to 4:3 to fit our thumbnails/previews.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <input type="submit" value="Update" class="btn btn-primary-soft" style="margin-top:10px ;"
+                    (click)="UpdateAbout()">
+            </form>
+        </div>
+        <div class="col-lg-6">
+            <iframe src="/AboutUs" style="height:1000px;width:1000px;" title="description"></iframe>
+        </div>
+    </div>
+
+</div>

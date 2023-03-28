@@ -142,7 +142,21 @@ export class RegisterService {
 
 
   }
+  TraineeByID: any;
+  GetTraineeById(id: number) {
+    return new Promise<void>((resolve, reject) => {
+    this.http.get("https://localhost:44391/api/Trainee/GetTraineeById/" + id).subscribe({
+      next: (res) => {
+        this.TraineeByID = res;
+        resolve();
+      },
+      error: (err) => {
+        console.log(err);
 
+        }
+      })
+    })
+  }
   User: any;
   GetUserById(userid: number) {
     return new Promise<void>((resolve, reject) => {
@@ -249,6 +263,24 @@ async RejectEmail(object:any){
     },
     (error) => {
     console.log("FAILED!", error);
+   });
+  })
+}
+
+async EnrollmetEmail(object:any){
+  return new Promise<void>((resolve, reject) => {
+    debugger
+  emailjs.send('service_fkbaj5y', 'template_rpgeura', object,  'BvT6kBttjGdEkCxOZ')
+  .then(
+  (response: any) => {
+    debugger
+    console.log("SUCCESS!", response.status, response.text);
+    resolve();
+    
+    },
+    (error: any) => {
+    console.log("FAILED!", error);
+    
    });
   })
 }

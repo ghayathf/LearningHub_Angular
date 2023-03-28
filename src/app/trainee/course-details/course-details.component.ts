@@ -40,9 +40,10 @@ export class CourseDetailsComponent {
   material: any
   combinedObject: any
   combinedArray: any = []
+  currentDate:any
   async ngOnInit() {
     this.section = this.sectionService.section
-
+    this.currentDate = new Date(Date.now()).toISOString().slice(0, 10)
     this.user = this.auth.gh
     await this.traineeSectionService.GetAllTrainees()
     this.trainees = this.traineeSectionService.allTrainees
@@ -143,7 +144,7 @@ export class CourseDetailsComponent {
 
   SolutionForm = new FormGroup(
     {
-      solutionid: new FormControl(''),
+     
       solutionmark: new FormControl(''),
       solutionfile: new FormControl(''),
       submitionnote: new FormControl('', Validators.required),
@@ -154,6 +155,7 @@ export class CourseDetailsComponent {
   )
   UpdateSolutionForm = new FormGroup(
     {
+      solutionid: new FormControl(''),
       solutionmark: new FormControl(''),
       solutionfile: new FormControl(''),
       submitionnote: new FormControl('', Validators.required),
@@ -164,34 +166,33 @@ export class CourseDetailsComponent {
   )
   slectedtaskid:any
   SelectedSolid:any
+   flag:any
   async CallSolutionDialog(taskid: number)
   {
+    this.slectedtaskid = taskid;
     await this.solutionService.GetAllSolution();
-    this.solutionService.Solutions.forEach((element:any) => {
-      if(element.task_Id == taskid)
-      {
-        if(element.t_S_Id == this.combinedArray.tsid)
-        {
-          this.OpenUpdateSolution(element.solutionid);
-          this.SelectedSolid=element.solutionid
-        }
-        else
-        {
-          this.OpenSolutionDialog(taskid);
-          this.slectedtaskid=taskid;
-        }
+    for (const element of this.solutionService.Solutions) {
+      if (element.task_Id === taskid && element.t_S_Id === this.ts.tsid) {
+        this.flag = 1;
+        this.SelectedSolid = element.solutionid;
+        break;
+      } else {
+        this.flag = 0;
+        
       }
-      else
-        {
-          this.OpenSolutionDialog(taskid);
-          this.slectedtaskid=taskid;
-
-        }
-    });
-    
+    }
+    if(this.flag==1){
+    this.OpenUpdateSolution(this.SelectedSolid); 
+    }
+    else if(this.flag==0){
+      this.OpenSolutionDialog( this.slectedtaskid);
+    }
+       
   }
   async OpenUpdateSolution(Solid: number) {
+    
     await this.solutionService.GetSolutionById(Solid);
+    
     await this.UpdateSolutionForm.patchValue(this.solutionService.solutionByIDD);
 
     const dialogConfig = new MatDialogConfig();
@@ -201,7 +202,9 @@ export class CourseDetailsComponent {
   }
   async UpdateSolutionnn() {
     this.UpdateSolutionForm.controls['t_S_Id'].setValue(this.ts.tsid);
-    this.UpdateSolutionForm.controls['task_Id'].setValue(this.TaskID);
+    this.UpdateSolutionForm.controls['task_Id'].setValue(this.slectedtaskid);
+    this.UpdateSolutionForm.controls['solutionid'].setValue(this.SelectedSolid);
+debugger
     await this.solutionService.UpdateSolution(this.UpdateSolutionForm.value);
   }
   selectedSol: any
@@ -254,6 +257,9 @@ export class CourseDetailsComponent {
     this.SolutionForm.controls['t_S_Id'].setValue(this.ts.tsid);
     this.SolutionForm.controls['task_Id'].setValue(this.TaskID);
     await this.solutionService.CreateSoltuion(this.SolutionForm.value);
+  }
+  sliceDate(d: any) {
+    return d.slice(0, 10)
   }
 }
 enum Levels {

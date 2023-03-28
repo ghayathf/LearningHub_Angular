@@ -23,19 +23,23 @@
                             <ul class="avatar-group mb-2 mb-sm-0">
                                 <li class="avatar avatar-sm">
                                     <img class="avatar-img rounded-circle"
-                                    src="../../../assets/HomeAssets/images/{{testimonialService.testimonials[0]?.imagename}}" alt="avatar">
+                                        src="../../../assets/HomeAssets/images/{{testimonialService.testimonials[0]?.imagename}}"
+                                        alt="avatar">
                                 </li>
                                 <li class="avatar avatar-sm">
                                     <img class="avatar-img rounded-circle"
-                                    src="../../../assets/HomeAssets/images/{{testimonialService.testimonials[1]?.imagename}}" alt="avatar">
+                                        src="../../../assets/HomeAssets/images/{{testimonialService.testimonials[1]?.imagename}}"
+                                        alt="avatar">
                                 </li>
                                 <li class="avatar avatar-sm">
                                     <img class="avatar-img rounded-circle"
-                                    src="../../../assets/HomeAssets/images/{{testimonialService.testimonials[2]?.imagename}}" alt="avatar">
+                                        src="../../../assets/HomeAssets/images/{{testimonialService.testimonials[2]?.imagename}}"
+                                        alt="avatar">
                                 </li>
                                 <li class="avatar avatar-sm">
                                     <img class="avatar-img rounded-circle"
-                                    src="../../../assets/HomeAssets/images/{{testimonialService.testimonials[3]?.imagename}}" alt="avatar">
+                                        src="../../../assets/HomeAssets/images/{{testimonialService.testimonials[3]?.imagename}}"
+                                        alt="avatar">
                                 </li>
                             </ul>
                             <!-- Content -->
@@ -102,11 +106,19 @@
                                             [disabled]="LoginformChecking.invalid" (click)="Login()">
                                     </div>
                                 </div>
+                                <div class="align-items-center mt-0">
+                                    <div class="d-grid" style="margin-top:10px;margin-left:140px">
+                                        <ngx-recaptcha2 #captchaElem [siteKey]="siteKey" formControlName="recaptcha">
+                                        </ngx-recaptcha2>
+                                    </div>
+                                </div>
+
                             </form>
+
                             <!-- Form END -->
 
                             <!-- Social buttons and divider -->
-                            
+
 
                             <!-- Sign up link -->
                             <div class="mt-4 text-center">

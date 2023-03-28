@@ -166,8 +166,8 @@
             </svg>
           </figure>
           <!-- Title -->
-          <h1 class="mb-0 display-6">Limitless learning at your
-            <span class="position-relative">fingertips
+          <h1 class="mb-0 display-6">{{Data.homes[0].paragraph1}}
+            <span class="position-relative">
               <!-- SVG START -->
               <span class="position-absolute top-50 start-50 translate-middle ms-3 z-index-n1">
                 <svg width="300px" height="62.1px" enable-background="new 0 0 366 62.1" viewBox="0 0 366 62.1"
@@ -181,8 +181,7 @@
           </h1>
 
           <!-- Content -->
-          <p class="my-4 lead">Online learning and teaching marketplace with 5K+ courses & 10M students. Taught by
-            experts to help you acquire new skills.</p>
+          <p class="my-4 lead">{{Data.homes[0].paragraph2}}</p>
 
           <!-- Info -->
           <ul class="list-inline position-relative justify-content-center justify-content-lg-start mb-4">
@@ -341,7 +340,7 @@
               <div class="d-flex">
                 <h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="10"
                   data-purecounter-delay="200">0</h5>
-                <span class="mb-0 h5">{{this.AllSections.length}}K</span>
+                <span class="mb-0 h5">{{AllSections}}K</span>
               </div>
               <p class="mb-0">Online Lectures</p>
             </div>
@@ -355,7 +354,7 @@
               <div class="d-flex">
                 <h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="200"
                   data-purecounter-delay="200">0</h5>
-                <span class="mb-0 h5">{{this.AllTrainers.length}}+</span>
+                <span class="mb-0 h5">{{AllTrainers}}+</span>
               </div>
               <p class="mb-0">Expert Trainers</p>
             </div>
@@ -369,7 +368,7 @@
               <div class="d-flex">
                 <h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="60"
                   data-purecounter-delay="200">0</h5>
-                <span class="mb-0 h5">{{this.AllTrainees.length}}K+</span>
+                <span class="mb-0 h5">{{AllTrainees}}K+</span>
               </div>
               <p class="mb-0">Online Trainees</p>
             </div>
@@ -383,7 +382,7 @@
               <div class="d-flex">
                 <h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="6"
                   data-purecounter-delay="300">0</h5>
-                <span class="mb-0 h5">{{this.AllCourses.length}}K+</span>
+                <span class="mb-0 h5">{{AllCourses}}K+</span>
               </div>
               <p class="mb-0">Certified Courses</p>
             </div>
@@ -400,10 +399,54 @@
   <section>
     <div class="container">
       <!-- Title -->
-      <div class="row mb-3">
-        <div class="col-lg-8 mx-auto text-center">
+      <div class="row mb-3" >
+        <div class=" mx-auto text-center">
           <h2>Choose a Categories</h2>
           <p class="mb-0">Perceived end knowledge certainly day sweetness why cordially</p>
+          <!-- Card item START -->
+
+					<div class="row">
+            <div class="row g-4">
+              <!-- Card item START -->
+              <div class="col-sm-6 col-lg-4 col-xl-3" *ngFor="let item of cats">
+                <div class="card shadow h-100" >
+                  <!-- Image -->
+                  <img src="../../../assets/HomeAssets/images/{{item.categoryimage}}" (click)="selectCategory(item.categoryid)" class="card-img-top" alt="course image">
+                  <div class="card-body pb-0">
+                    <!-- Badge and favorite -->
+                    <div class="d-flex justify-content-between mb-2">
+                      <a href="#" class="badge bg-success bg-opacity-10 text-success">Beginner</a>
+                      <a href="#" class="h6 fw-light mb-0"><i class="far fa-heart"></i></a>
+                    </div>
+                    <!-- Title -->
+                    <h5 class="card-title fw-normal"><a href="#">{{ item.categoryname }}</a></h5>
+                    <p class="text-truncate-2 mb-2">Mention Mr manners opinion if garrets enabled.</p>
+                    <!-- Rating star -->
+                    <ul class="list-inline mb-0">
+                      <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+                      <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+                      <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+                      <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+                      <li class="list-inline-item me-0 small"><i class="fas fa-star-half-alt text-warning"></i></li>
+                      <li class="list-inline-item ms-2 h6 fw-light mb-0">4.5/5.0</li>
+                    </ul>
+                  </div>
+                  <!-- Card footer -->
+                  <div class="card-footer pt-0 pb-3">
+                    <hr>
+                    <div class="d-flex justify-content-between mt-2">
+                      <span class="h6 fw-light mb-0"><i class="far fa-clock text-danger me-2"></i>10h 00m</span>
+                      <span class="h6 fw-light mb-0"><i class="fas fa-table text-orange me-2"></i>26 lectures</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Card item END -->
+
+              <!-- Card item END -->
+            </div>
+          </div>
+					<!-- Card item END -->
         </div>
       </div>
 
@@ -459,14 +502,15 @@
                 <div class="row align-items-center">
                   <!-- Title -->
                   <div class="col-lg-7">
-                    <h3 class="text-white">Become an Instructor!</h3>
+                    <h3 class="text-white">Become an Student!</h3>
                     <p class="text-white mb-3 mb-lg-0">Speedily say has suitable disposal add boy. On forth doubt miles
                       of child. Exercise joy man children rejoiced. Yet uncommonly his ten who diminution astonished.
                     </p>
                   </div>
                   <!-- Content and input -->
                   <div class="col-lg-5 text-lg-end">
-                    <a href="#" class="btn btn-outline-warning mb-0">Start Teaching Today</a>
+                    <a href="#" class="btn btn-outline-warning mb-0" routerLink="/Auth/register">Start studying
+                      Today</a>
                   </div>
                 </div>
               </div>
