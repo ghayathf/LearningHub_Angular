@@ -65,18 +65,7 @@
 					</div>
 
 					<!-- Select option -->
-					<div class="col-md-3">
-						<!-- Short by filter -->
-						<form>
-							<select class="form-select js-choice border-0 z-index-9" aria-label=".form-select-sm">
-								<option value="">Sort by</option>
-								<option>Newest</option>
-								<option>Oldest</option>
-								<option>Accepted</option>
-								<option>Rejected</option>
-							</select>
-						</form>
-					</div>
+					
 				</div>
 				<!-- Search and select END -->
 			</div>
@@ -92,14 +81,14 @@
 					<!-- Table START -->
 					<table class="table table-dark-gray align-middle p-4 mb-0 table-hover">
 						<!-- Table head -->
-						<thead>
+						<thead >
 							<tr>
-								<th scope="col" class="border-0 rounded-start">Section </th>
-								<th scope="col" class="border-0">StartDate</th>
-								<th scope="col" class="border-0">Trainer</th>
+								<th scope="col" class="border-0 rounded-start" style=" background-color:#1d3b53 ;">Section </th>
+								<th scope="col" class="border-0"style=" background-color:#1d3b53 ;">Trainer </th>
+								<th scope="col" class="border-0"style=" background-color:#1d3b53 ;">StartDate</th>
 
 
-								<th scope="col" class="border-0 rounded-end" style="margin-left: 30px;">Action</th>
+								<th scope="col" class="border-0 rounded-end" style="margin-left: 30px;"style=" background-color:#1d3b53 ;">Action</th>
 
 							</tr>
 						</thead>
@@ -130,14 +119,14 @@
 
 										<!-- Info -->
 										<div class="ms-2">
-											<h4 class="mb-0 fw-light">{{ item.startdate | slice: 0:10 }}</h4>
+											<h4 class="mb-0 fw-light">{{ item[0].firstname }}</h4>
 										</div>
 									</div>
 								</td>
 
 
 								<!-- Table data -->
-								<td> <span class="badge text-bg-primary">{{ item[0].firstname }}</span> </td>
+								<td> <span class="badge text-bg-primary"></span>{{ item.startdate | slice: 0:10 }} </td>
 
 
 
@@ -204,27 +193,7 @@
 			<!-- Card body END -->
 
 			<!-- Card footer START -->
-			<div class="card-footer bg-transparent pt-0">
-				<!-- Pagination START -->
-				<div class="d-sm-flex justify-content-sm-between align-items-sm-center">
-					<!-- Content -->
-					<p class="mb-0 text-center text-sm-start">Showing 1 to 8 of 20 entries</p>
-					<!-- Pagination -->
-					<nav class="d-flex justify-content-center mb-0" aria-label="navigation">
-						<ul
-							class="pagination pagination-sm pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
-							<li class="page-item mb-0"><a class="page-link" href="#" tabindex="-1"><i
-										class="fas fa-angle-left"></i></a></li>
-							<li class="page-item mb-0"><a class="page-link" href="#">1</a></li>
-							<li class="page-item mb-0 active"><a class="page-link" href="#">2</a></li>
-							<li class="page-item mb-0"><a class="page-link" href="#">3</a></li>
-							<li class="page-item mb-0"><a class="page-link" href="#"><i
-										class="fas fa-angle-right"></i></a></li>
-						</ul>
-					</nav>
-				</div>
-				<!-- Pagination END -->
-			</div>
+			
 			<!-- Card footer END -->
 		</div>
 		<!-- Card END -->

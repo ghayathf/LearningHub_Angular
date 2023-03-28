@@ -410,12 +410,13 @@
               <div class="col-sm-6 col-md-4 col-xl-3" *ngFor="let item of cats">
                 <div class="card card-body bg-success bg-opacity-10 text-center position-relative btn-transition p-4" (click)="selectCategory(item.categoryid)">
                   <!-- Image -->
-                  <div class="icon-xl bg-body mx-auto rounded mb-3">
+                  <div class="icon-xl bg-body mx-auto rounded-circle mb-3">
                     <img src="../../../assets/HomeAssets/images/{{item.categoryimage}}"  (click)="selectCategory(item.categoryid)" alt="">
                   </div>
                   <!-- Title -->
                   <h2 class="mb-2">{{ item.categoryname }}</h2>
-                  <h3 class="mb-0">15 Courses</h3>
+                  
+                  <h3 class="mb-0">{{item.finalCourses.length}} Courses</h3>
                 </div>
               </div>
               <!-- Card item END -->
