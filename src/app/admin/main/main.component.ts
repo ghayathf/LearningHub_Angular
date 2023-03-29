@@ -34,9 +34,9 @@ this.avgs = this.courseService.avgs
 this.x = this.avgs.map(function(elem: { coursename: any; }){return elem.coursename })
 this.post = this.avgs.map(function(elem: { avgPostExamSolution: any; }){return elem.avgPostExamSolution })
 this.pre = this.avgs.map(function(elem: { avgPreExamSolution: any; }){return elem.avgPreExamSolution })
-this.lineChartData.labels = this.x;
-this.lineChartData.datasets[0].data = this.pre
-this.lineChartData.datasets[1].data = this.post
+this.radarChartLabels = this.x;
+this.radarChartDatasets[0].data = this.pre
+this.radarChartDatasets[1].data = this.post
 this.categoryService.GetAllCategories()
 this.cats = this.categoryService.categories
 this.cName = this.cats.map(function(elem: { categoryname: any; }){return elem.categoryname })
@@ -130,7 +130,7 @@ title = 'ng2-charts-demo';
   doc.addImage(pieChartDataURL, 'PNG', 10, 120,  100, 100);
   }
   // Add the chart images to the PDF document
- 
+
   // Save the PDF document
   doc.save('charts.pdf');
   }

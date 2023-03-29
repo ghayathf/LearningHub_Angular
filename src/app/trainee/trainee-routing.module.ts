@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CourseDetailsComponent } from './course-details/course-details.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { MainComponent } from './main/main.component';
+import { TestimonialFormComponent } from './testimonial-form/testimonial-form.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path:'CourseDetails',
     component:CourseDetailsComponent
+  },
+  {
+    path:'Testimonial',
+    component:TestimonialFormComponent
   },
 ];
 
