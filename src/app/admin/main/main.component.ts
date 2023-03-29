@@ -54,7 +54,7 @@ public radarChartOptions: ChartConfiguration<"radar">["options"] = {
       suggestedMax: 0,
       display: true,
       grid: {
-        color: 'white',
+        color: 'black',
         lineWidth: 0.5
       },
       ticks: {

@@ -1,53 +1,53 @@
 <app-home-header></app-home-header>
-<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#76BDF5" type="line-scale-party" [fullScreen]="true">
-</ngx-spinner>
+<section class="bg-light position-relative">
+	<!-- SVG Image -->
+	<figure class="position-absolute start-0 bottom-0 mb-0">
+		<img src="assets/images/element/10.svg" class="h-200px" alt="">
+	</figure>
 
-<div class="card shadow p-2">
-	<div class="row g-0">
-		<!-- Image -->
-		<div class="col-md-4">
-			<img src="../../../assets/HomeAssets/assets/images/instructor/01.jpg" class="img-fluid rounded-3" alt="...">
-		</div>
-
-		<!-- Card body -->
-		<div class="col-md-8">
-			<div class="card-body">
-				<!-- Title -->
-				<div class="d-sm-flex justify-content-sm-between mb-2 mb-sm-3">
-					<div>
-						<h5 class="card-title mb-0"><a href="#">Dennis Barrett</a></h5>
-						<p class="small mb-2 mb-sm-0">Professor at Sigma College</p>
-					</div>
-					<span class="text-dark">4.3<i class="fas fa-star text-warning ms-1"></i></span>
-				</div>
-				<!-- Content -->
-				<p class="text-truncate-2 mb-3">Perceived end knowledge certainly day sweetness why cordially. Ask a
-					quick six seven offer see among.</p>
-				<!-- Info -->
-				<div class="d-sm-flex justify-content-sm-between align-items-center">
-					<!-- Title -->
-					<h6 class="text-orange mb-0">Digital Marketing</h6>
-
-					<!-- Social button -->
-					<ul class="list-inline mb-0 social-media-btn mt-3 mt-sm-0">
-						<li class="list-inline-item">
-							<a class="mb-0 me-1 text-facebook" href="#"><i class="fab fa-fw fa-facebook-f"></i></a>
-						</li>
-						<li class="list-inline-item">
-							<a class="mb-0 me-1 text-instagram-gradient" href="#"><i
-									class="fab fa-fw fa-instagram"></i></a>
-						</li>
-						<li class="list-inline-item">
-							<a class="mb-0 me-1 text-twitter" href="#"><i class="fab fa-fw fa-twitter"></i></a>
-						</li>
-						<li class="list-inline-item">
-							<a class="mb-0 text-linkedin" href="#"><i class="fab fa-fw fa-linkedin-in"></i></a>
-						</li>
-					</ul>
-				</div>
+	<div class="container">
+		<!-- Title -->
+		<div class="row mb-4">
+			<div class="col-lg-8 mx-auto text-center">
+				<h2>Our Customer Feedback</h2>
+				<p class="mb-0">Perceived end knowledge certainly day sweetness why cordially</p>
 			</div>
 		</div>
-	</div>
+    <div class="row" >
+<div *ngFor="let item of tests" class="container col-md-4 mt-3">
+		<!-- Feedback START -->
+
+			<!-- Slider START -->
+			<div class="tiny-slider arrow-round arrow-creative arrow-dark arrow-hover">
+				<div class="tiny-slider-inner" data-autoplay="true" data-edge="5" data-arrow="true" data-dots="false" data-items="4" data-items-xl="3" data-items-md="2" data-items-xs="1">
+
+					<!-- Feedback item -->
+					<div>
+						<div class="bg-body text-center p-4 rounded-3 border border-1 position-relative">
+							<!-- Avatar -->
+							<div class="avatar avatar-lg mb-3">
+								<img class="avatar-img rounded-circle" src="../../../assets/HomeAssets/images/{{ item.imagename }}" alt="avatar">
+							</div>
+							<!-- Title -->
+							<h2 class="mb-2">{{ item.firstname }} {{ item.lastname }}</h2>
+              <h4 class="mb-2">{{ item.traineefield }}</h4>
+							<!-- Content -->
+							<blockquote class="mt-1">
+								<p>
+									<span class="me-1 small"><i class="fas fa-quote-left"></i></span>
+										{{ item.testimonialmessage }}
+									<span class="ms-1 small"><i class="fas fa-quote-right"></i></span>
+								</p>
+							</blockquote>
+						</div>
+					</div>
 </div>
 
+				</div>
+			</div>
+			<!-- Slider START -->
+		</div>
+		<!-- Feedback END -->
+	</div>
+</section>
 <app-home-footer></app-home-footer>

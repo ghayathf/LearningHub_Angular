@@ -33,10 +33,16 @@ export class CategoriesComponent {
     }
   )
   constructor(public sectioneService:SectionService,public categoryService: CategoryService, private router: Router, private dialog: MatDialog, public courseService: CourseService, public spinner: NgxSpinnerService) { }
+  catsLength:any
+  CourseLength:any
+  secLength:any
   async ngOnInit() {
    await this.categoryService.GetAllCategories();
+   this.catsLength = this.categoryService.categories.length
    await this.courseService.GetAllCourses();
+   this.CourseLength = this.courseService.courses.length
    await this.sectioneService.GetAllSections();
+   this.secLength = this.sectioneService.sections.length
   }
   GetCategoryById(categoryid: number) {
     this.categoryService.GetCategoryById(categoryid);
