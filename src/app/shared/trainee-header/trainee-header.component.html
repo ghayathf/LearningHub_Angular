@@ -52,7 +52,12 @@
           <ul class="navbar-nav flex-row align-items-center">
 
             <!-- Notification dropdown START -->
-           
+            <li class="nav-item ms-2 ms-md-3 ">
+							<!-- Notification button -->
+							<a class="btn btn-light btn-round mb-0" role="button" routerLink="/Trainee/" >
+                <i class="fa fa-home" aria-hidden="true"></i>
+							</a>
+						</li>
             <!-- Notification dropdown END -->
 
             <!-- Profile dropdown START -->
@@ -63,7 +68,7 @@
                 <img ngbDropdownToggle class="avatar-img rounded-circle"
                   src="../../../assets/HomeAssets/images/{{this.userService.User?.imagename}}" alt="avatar">
                   <!-- <img ngbDropdownToggle class="avatar-img rounded-circle" alt="avatar"
-                  [src]="this.userService.User?.imagename ? ('../../../assets/HomeAssets/images/{{this.userService.User?.imagename}}') : 'https://www.kindpng.com/picc/m/451-4517876_default-profile-hd-png-download.png'" 
+                  [src]="this.userService.User?.imagename ? ('../../../assets/HomeAssets/images/{{this.userService.User?.imagename}}') : 'https://www.kindpng.com/picc/m/451-4517876_default-profile-hd-png-download.png'"
                   alt=""> -->
               </a>
 
@@ -79,7 +84,7 @@
                       <img class="avatar-img rounded-circle shadow"
                         src="../../../assets/HomeAssets/images/{{this.userService.User?.imagename}}" alt="avatar">
                         <!-- <img class="avatar-img rounded-circle shadow" alt="avatar"
-                  [src]="this.userService.User?.imagename ? ('../../../assets/HomeAssets/images/{{this.userService.User?.imagename}}') : 'https://www.kindpng.com/picc/m/451-4517876_default-profile-hd-png-download.png'" 
+                  [src]="this.userService.User?.imagename ? ('../../../assets/HomeAssets/images/{{this.userService.User?.imagename}}') : 'https://www.kindpng.com/picc/m/451-4517876_default-profile-hd-png-download.png'"
                   alt=""> -->
                     </div>
                     <div>
@@ -93,8 +98,8 @@
                   <hr class="dropdown-divider">
                 </li>
                 <!-- Links -->
-                <li><a class="dropdown-item bg-success-soft-hover" href="" routerLink="/Trainee/"><i
-                      class="bi bi-power fa-fw me-2"></i>Dashboard</a></li>
+                <li><a class="dropdown-item bg-success-soft-hover" href="" routerLink="/Trainee/Testimonial"><i class="bi bi-envelope-open-heart"></i>
+                  Make Testimonial</a></li>
                 <li><a class="dropdown-item" routerLink="/Trainee/EditTraineeProfile"><i
                       class="bi bi-person fa-fw me-2"></i>Edit Profile</a></li>
 
