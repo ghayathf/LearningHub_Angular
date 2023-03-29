@@ -172,7 +172,7 @@ export class CourseDetailedComponent {
       
       await this.userService.getUserById(this.trainerService.trainer.user_Id)
       debugger
-        this.sendEmail(this.combinedArray[i].firstname,this.courseService.course.coursename,this.userService.user.firstname,this.userService.user.lastname,this.combinedArray[i].email);
+        await this.sendEmail(this.combinedArray[i].firstname,this.courseService.course.coursename,this.userService.user.firstname,this.userService.user.lastname,this.combinedArray[i].email);
           
       }
       else {
@@ -414,7 +414,7 @@ export class CourseDetailedComponent {
       CourseName: coursename,
       TrainerFname: trainerFname,
       TrainerLname: TrainerLname,
-      currentDate: new Date().toISOString().slice(0, 10),
+      currentDate: new Date(Date.now()).toISOString().slice(0, 10),
       email: email
       };
       debugger

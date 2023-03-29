@@ -167,16 +167,18 @@ GetTrainerById(trainerId:number){
 
 
 async AbsenceEmail(object:any){
+  debugger
   return new Promise<void>((resolve, reject) => {
   emailjs.send('service_fkbaj5y', 'template_k96j9a8', object,  'BvT6kBttjGdEkCxOZ')
   .then(
   (response: any) => {
-    
+    debugger
     console.log("SUCCESS!", response.status, response.text);
     resolve();
     
     },
     (error: any) => {
+      debugger
     console.log("FAILED!", error);
     
    });
