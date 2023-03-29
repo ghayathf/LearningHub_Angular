@@ -10,9 +10,11 @@ import { PagesService } from 'src/app/pages.service';
 export class AdminSideBarComponent {
   constructor(public messageService: ContactusService, public Data: PagesService) { }
   c?: number;
+  cc:any
   ngOnInit() {
     this.c = this.messageService.counter;
     this.Data.GetAllHome();
+    this.cc = this.Data.homes[0].logo
   }
 
 

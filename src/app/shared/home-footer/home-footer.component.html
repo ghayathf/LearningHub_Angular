@@ -24,11 +24,11 @@
 					<div class="col-6 col-md-4">
 						<h5 class="mb-2 mb-md-4">Company</h5>
 						<ul class="nav flex-column">
-							<li class="nav-item"><a class="nav-link" href="#">About us</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">Contact us</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">News and Blogs</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">Library</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">Career</a></li>
+							<li class="nav-item"><a class="nav-link" routerLink="/AboutUs">About us</a></li>
+							<li class="nav-item"><a class="nav-link" routerLink="/Contact">Contact us</a></li>
+							<li class="nav-item"><a class="nav-link" >News and Blogs</a></li>
+							<li class="nav-item"><a class="nav-link" >Library</a></li>
+							<li class="nav-item"><a class="nav-link" >Career</a></li>
 						</ul>
 					</div>
 
@@ -36,10 +36,10 @@
 					<div class="col-6 col-md-4">
 						<h5 class="mb-2 mb-md-4">Community</h5>
 						<ul class="nav flex-column">
-							<li class="nav-item"><a class="nav-link" href="#">Documentation</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">Faq</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">Forum</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">Sitemap</a></li>
+							<li class="nav-item"><a class="nav-link">Documentation</a></li>
+							<li class="nav-item"><a class="nav-link">Faq</a></li>
+							<li class="nav-item"><a class="nav-link">Forum</a></li>
+							<li class="nav-item"><a class="nav-link">Sitemap</a></li>
 						</ul>
 					</div>
 
@@ -47,9 +47,9 @@
 					<div class="col-6 col-md-4">
 						<h5 class="mb-2 mb-md-4">Teaching</h5>
 						<ul class="nav flex-column">
-							<li class="nav-item"><a class="nav-link" href="#">Become a teacher</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">How to guide</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">Terms &amp; Conditions</a></li>
+							<li class="nav-item"><a class="nav-link">Become a teacher</a></li>
+							<li class="nav-item"><a class="nav-link">How to guide</a></li>
+							<li class="nav-item"><a class="nav-link">Terms &amp; Conditions</a></li>
 						</ul>
 					</div>
 				</div>
@@ -61,11 +61,13 @@
 				<h5 class="mb-2 mb-md-4">Contact</h5>
 				<!-- Time -->
 				<p class="mb-2">
-					Toll free:<span class="h6 fw-light ms-2">{{Data.homes[0].companyphonenumber}}</span>
-					<span class="d-block small">{{Data.homes[0].companyaddress}}</span>
+					Phone:<a href="tel:{{Data.homes[0].companyphonenumber}}" class="h6 fw-light ms-2">{{Data.homes[0].companyphonenumber}}</a>
+				</p>
+        <p class="mb-2">
+					<a href="https://www.google.com/maps/place/Harmony+Information+Technology+Solution/@32.5313301,35.8642301,17z/data=!3m1!4b1!4m6!3m5!1s0x151c7733a4c73ee7:0xec12b636b1bc7b92!8m2!3d32.5313256!4d35.8664188!16s%2Fg%2F11n0d_rw5w" target="_blank" class="d-block small">{{Data.homes[0].companyaddress}}</a>
 				</p>
 
-				<p class="mb-0">Email:<span class="h6 fw-light ms-2">{{Data.homes[0].companyemail}}</span></p>
+				<a class="mb-0" href="mailto:{{Data.homes[0].companyemail}}">Email:<span class="h6 fw-light ms-2">{{Data.homes[0].companyemail}}</span></a>
 
 
 			</div>

@@ -27,10 +27,10 @@ pre:any = 0
 cats:any=[]
 cName:any
 Ccount:any
-ngOnInit(){
-this.trainerService.GetAllTrainers()
-this.courseService.charts()
-this.avgs = this.courseService.avgs
+async ngOnInit(){
+await this.trainerService.GetAllTrainers()
+await this.courseService.charts()
+this.avgs =await this.courseService.avgs
 this.x = this.avgs.map(function(elem: { coursename: any; }){return elem.coursename })
 this.post = this.avgs.map(function(elem: { avgPostExamSolution: any; }){return elem.avgPostExamSolution })
 this.pre = this.avgs.map(function(elem: { avgPreExamSolution: any; }){return elem.avgPreExamSolution })
@@ -54,7 +54,7 @@ public radarChartOptions: ChartConfiguration<"radar">["options"] = {
       suggestedMax: 0,
       display: true,
       grid: {
-        color: 'white',
+        color: 'black',
         lineWidth: 0.5
       },
       ticks: {
