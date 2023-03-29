@@ -31,8 +31,8 @@ export class RegisterService {
       }
     )
   }
- 
-   
+
+
 
   users: any = []
   lastid: any;
@@ -83,10 +83,11 @@ export class RegisterService {
       {
         next: () => {
           this.spinner.hide();
-
+          this.toaster.success("Your Register Request Has been sent")
         },
         error: (err) => {
           this.spinner.hide();
+          this.toaster.error("Something wrong !")
           console.log(err);
 
         }
@@ -273,11 +274,11 @@ async EnrollmetEmail(object:any){
     debugger
     console.log("SUCCESS!", response.status, response.text);
     resolve();
-    
+
     },
     (error: any) => {
     console.log("FAILED!", error);
-    
+
    });
   })
 }
