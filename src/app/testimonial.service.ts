@@ -73,17 +73,18 @@ export class TestimonialService {
   }
   CreateTestimonial(message: any) {
     this.spinner.show();
+    message.testimonialstatus=0;
     return new Promise<void>((resolve, reject) => {
       this.http.post("https://localhost:44391/api/Testimonial/CreateTestimonial" , message).subscribe(
         {
           next: () => {
             this.spinner.hide();
-            this.toaster.success("Message Created Successfuly");
+            this.toaster.success("Feedback sent Successfully");
             resolve();
           },
           error: () => {
             this.spinner.hide();
-            this.toaster.error("error");
+            this.toaster.error("Try Again");
           }
         }
       )
