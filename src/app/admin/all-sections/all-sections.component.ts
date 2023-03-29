@@ -36,11 +36,12 @@ export class AllSectionsComponent {
   combinedArray1: any = []
   UserTrainer?: any
   currentDate: any
-  compinedSections:any=[]
+  compinedSections: any = []
   async ngOnInit() {
     this.sectionService.GetAllSections()
     await this.userService.getAllUsers()
     await this.trainerService.GetAllTrainers()
+    await this.traineeServie.GetAllAcceptedTrainee();
     this.courseService.GetAllCourses()
     this.trainers = this.trainerService.trainers
     this.users = this.userService.users
@@ -51,12 +52,12 @@ export class AllSectionsComponent {
 
     console.log(this.combinedArray)
     this.currentDate = new Date(Date.now()).toISOString().slice(0, 10)
-    this.compinedSections =this.sectionService.sections.map((item1:any) => {
-      const matchingItem2 = this.trainers.find((item2:any) => item2.trainerid === item1.trainer_Id);
+    this.compinedSections = this.sectionService.sections.map((item1: any) => {
+      const matchingItem2 = this.trainers.find((item2: any) => item2.trainerid === item1.trainer_Id);
 
-      const matchingItem3 = this.users.filter((item3:any) => item3.userid === matchingItem2.user_Id);
+      const matchingItem3 = this.users.filter((item3: any) => item3.userid === matchingItem2.user_Id);
 
-      const matchingItem4 = this.courseService.courses.find((item4:any) => item4.courseid === item1.course_Id);
+      const matchingItem4 = this.courseService.courses.find((item4: any) => item4.courseid === item1.course_Id);
 
       return {
         ...item1,
