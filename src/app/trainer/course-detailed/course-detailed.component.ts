@@ -194,7 +194,7 @@ await this.sectionService.GetAllSections()
 
       await this.userService.getUserById(this.user)
       debugger
-        this.sendEmail(this.combinedArray[i].firstname,this.courseService.course.coursename,this.userService.user.firstname,this.userService.user.lastname,this.combinedArray[i].email);
+        await this.sendEmail(this.combinedArray[i].firstname,this.courseService.course.coursename,this.userService.user.firstname,this.userService.user.lastname,this.combinedArray[i].email);
 
       }
       else {
