@@ -377,10 +377,14 @@ await this.sectionService.GetAllSections()
   }
   Sol: any
   TID:any
+  traineesNames:any
   async OpenTaskSolutionDialog(ID: any) {
+
+
     this.TID=ID;
-    await this.soltionService.GetAllSolution();
-    this.Sol = this.soltionService.Solutions.filter((x: { task_Id: any; }) => x.task_Id == ID)
+    await this.soltionService.GetAllTaskSolutions(ID);
+    this.Sol = this.soltionService.taskSols
+    console.log(this.Sol);
 
     const dialogConfig = new MatDialogConfig();
     dialogConfig.maxWidth = '800px';

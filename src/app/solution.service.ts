@@ -27,6 +27,23 @@ export class SolutionService {
       )
     })
   }
+  taskSols:any=[]
+  GetAllTaskSolutions(tid:any) {
+    return new Promise<void>((resolve, reject) => {
+      this.spinner.show()
+      this.http.get("https://localhost:44391/api/Solution/getSolsTasks/"+tid).subscribe(
+        (res) => {
+          this.taskSols = res
+          this.spinner.hide()
+          resolve()
+        },
+        (err) => {
+          console.log(err);
+          this.spinner.hide()
+        }
+      )
+    })
+  }
 
   solutionByIDD: any
   GetSolutionById(SId: number) {
@@ -62,7 +79,7 @@ export class SolutionService {
             this.spinner.hide()
             this.toaster.error("Try Again");
             console.log(err);
-            
+
           }
         }
       )
@@ -71,7 +88,7 @@ export class SolutionService {
 
   SolutionFile = "";
   UploadSolution(Sol: any) {
-    
+
     this.spinner.show()
     return new Promise<void>((resolve, reject) => {
       this.http.post("https://localhost:44391/api/Solution/UploadSolution", Sol).subscribe(
@@ -109,7 +126,7 @@ export class SolutionService {
             this.spinner.hide();
             this.toaster.error("Error");
             console.log(err);
-            
+
           }
         }
       )
@@ -118,7 +135,7 @@ export class SolutionService {
 
   updatedTask?: any
   async UpdateSolution(sol: any) {
-    
+
     await this.GetSolutionById(sol.solutionid)
     sol.solutionmark = 0;
     this.updatedTask = this.solutionByIDD.solutionfile;
@@ -138,12 +155,12 @@ export class SolutionService {
             this.spinner.hide();
             this.toaster.success("Solution Updated Successfully");
             resolve();
-            
+
           },
           error: () => {
             this.spinner.hide();
             this.toaster.error("Try again");
-            
+
 
           }
 
