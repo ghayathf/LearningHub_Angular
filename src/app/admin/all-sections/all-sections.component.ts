@@ -41,7 +41,7 @@ export class AllSectionsComponent {
   compinedSections: any = []
   Exp: any
   Acti: any
-  compinedSections: any = []
+  // compinedSections: any = []
   async ngOnInit() {
     await this.sectionService.GetAllSections()
     this.totalSections = this.sectionService.sections.length
