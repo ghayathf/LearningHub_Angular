@@ -4,6 +4,7 @@ import { CourseDetailsComponent } from './course-details/course-details.componen
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { MainComponent } from './main/main.component';
 import { TestimonialFormComponent } from './testimonial-form/testimonial-form.component';
+import { DeleteAccountComponent } from './delete-account/delete-account.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path:'Testimonial',
     component:TestimonialFormComponent
+  },
+  {
+    path:'DeleteAccount',
+    component:DeleteAccountComponent
   },
 ];
 
