@@ -41,11 +41,13 @@ export class AllSectionsComponent {
   compinedSections: any = []
   Exp: any
   Acti: any
+  compinedSections: any = []
   async ngOnInit() {
     await this.sectionService.GetAllSections()
     this.totalSections = this.sectionService.sections.length
     await this.userService.getAllUsers()
     await this.trainerService.GetAllTrainers()
+    await this.traineeServie.GetAllAcceptedTrainee();
     this.courseService.GetAllCourses()
     this.trainers = this.trainerService.trainers
     this.users = this.userService.users

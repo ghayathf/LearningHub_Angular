@@ -8,7 +8,9 @@ import { PagesService } from 'src/app/pages.service';
 })
 export class HomeHeaderComponent {
   constructor(public Data: PagesService) { }
-  ngOnInit() {
-    this.Data.GetAllHome();
+  cc:any
+  async ngOnInit() {
+    await this.Data.GetAllHome();
+    this.cc = await this.Data.homes[0].logo
   }
 }

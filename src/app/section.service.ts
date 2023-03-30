@@ -140,14 +140,14 @@ Comments: any = []
   }
   CreateComment(Comment:any){
     return new Promise<void>((resolve, reject) => {
-    this.spinner.show();
     this.http.post("https://localhost:44391/api/Comments/CreateComment",Comment).subscribe(
       {
-        next:()=>{this.spinner.hide()
+        next:()=>{
           this.toaster.success("Comment Added");
           resolve();
          },
-        error:()=>{  this.spinner.hide();
+        error:()=>{
+          
           this.toaster.error("Error");}
       }
     )

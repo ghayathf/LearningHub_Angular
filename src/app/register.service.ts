@@ -16,7 +16,7 @@ export class RegisterService {
     this.tr = []
   }
 
-   CreateUser(User: any) {
+  CreateUser(User: any) {
     this.spinner.show();
     User.roleId = 2;
     this.http.post("https://localhost:44391/api/User/CreateUser", User).subscribe(
@@ -145,13 +145,13 @@ resolve()
   TraineeByID: any;
   GetTraineeById(id: number) {
     return new Promise<void>((resolve, reject) => {
-    this.http.get("https://localhost:44391/api/Trainee/GetTraineeById/" + id).subscribe({
-      next: (res) => {
-        this.TraineeByID = res;
-        resolve();
-      },
-      error: (err) => {
-        console.log(err);
+      this.http.get("https://localhost:44391/api/Trainee/GetTraineeById/" + id).subscribe({
+        next: (res) => {
+          this.TraineeByID = res;
+          resolve();
+        },
+        error: (err) => {
+          console.log(err);
 
         }
       })
@@ -160,13 +160,13 @@ resolve()
   User: any;
   GetUserById(userid: number) {
     return new Promise<void>((resolve, reject) => {
-    this.http.get("https://localhost:44391/api/User/GetUserByID/" + userid).subscribe({
-      next: (res) => {
-        this.User = res;
-        resolve();
-      },
-      error: (err) => {
-        console.log(err);
+      this.http.get("https://localhost:44391/api/User/GetUserByID/" + userid).subscribe({
+        next: (res) => {
+          this.User = res;
+          resolve();
+        },
+        error: (err) => {
+          console.log(err);
 
         }
       })
@@ -203,23 +203,24 @@ resolve()
   }
 
   AcceptedTrainee: any = [];
-  GetAllAcceptedTrainee() {
+  async GetAllAcceptedTrainee() {
     return new Promise<void>((resolve, reject) => {
-    this.spinner.show();
-    this.http.get("https://localhost:44391/api/Trainee/GetAllAccepted").subscribe(
-      {
-        next: (res) => {
-          this.spinner.hide();
-          this.AcceptedTrainee = res;
-resolve();
-        },
-        error: (err) => {
-          this.spinner.hide();
-          console.log(err);
+      this.spinner.show();
+      this.http.get("https://localhost:44391/api/Trainee/GetAllAccepted").subscribe(
+        {
+          next: (res) => {
+            this.spinner.hide();
+            this.AcceptedTrainee = res;
+            resolve();
 
+          },
+          error: (err) => {
+            this.spinner.hide();
+            console.log(err);
+
+          }
         }
-      }
-    )
+      )
     })
   }
   Registers: any = []
@@ -240,68 +241,69 @@ resolve();
     )
   }
 
-async AcceptEmail(object:any){
-  return new Promise<void>((resolve, reject) => {
-  emailjs.send('service_6xav48r', 'template_ge682oo', object,  'y8NEJ_GRB1cDhZfJM')
-  .then(
-  (response: any) => {
-    console.log("SUCCESS!", response.status, response.text);
-    resolve();
-    debugger
-    },
-    (error: any) => {
-    console.log("FAILED!", error);
-    debugger
-   });
-  })
-}
-async RejectEmail(object:any){
-  return new Promise<void>((resolve, reject) => {
-  emailjs.send('service_6xav48r', 'template_tudzrm5', object,  'y8NEJ_GRB1cDhZfJM')
-  .then(
-  (response) => {
-    console.log("SUCCESS!", response.status, response.text);
-    resolve();
-    },
-    (error) => {
-    console.log("FAILED!", error);
-   });
-  })
-}
+  async AcceptEmail(object: any) {
+    return new Promise<void>((resolve, reject) => {
+      emailjs.send('service_6xav48r', 'template_ge682oo', object, 'y8NEJ_GRB1cDhZfJM')
+        .then(
+          (response: any) => {
+            console.log("SUCCESS!", response.status, response.text);
+            resolve();
+            debugger
+          },
+          (error: any) => {
+            console.log("FAILED!", error);
+            debugger
+          });
+    })
+  }
+  async RejectEmail(object: any) {
+    return new Promise<void>((resolve, reject) => {
+      emailjs.send('service_6xav48r', 'template_tudzrm5', object, 'y8NEJ_GRB1cDhZfJM')
+        .then(
+          (response) => {
+            console.log("SUCCESS!", response.status, response.text);
+            resolve();
+          },
+          (error) => {
+            console.log("FAILED!", error);
+          });
+    })
+  }
 
-async EnrollmetEmail(object:any){
-  return new Promise<void>((resolve, reject) => {
-    debugger
-  emailjs.send('service_fkbaj5y', 'template_rpgeura', object,  'BvT6kBttjGdEkCxOZ')
-  .then(
-  (response: any) => {
-    debugger
-    console.log("SUCCESS!", response.status, response.text);
-    resolve();
+  async EnrollmetEmail(object: any) {
+    return new Promise<void>((resolve, reject) => {
+      debugger
+      emailjs.send('service_fkbaj5y', 'template_rpgeura', object, 'BvT6kBttjGdEkCxOZ')
+        .then(
+          (response: any) => {
+            debugger
+            console.log("SUCCESS!", response.status, response.text);
+            resolve();
 
-    },
-    (error: any) => {
-    console.log("FAILED!", error);
+          },
+          (error: any) => {
+            console.log("FAILED!", error);
 
-   });
-  })
-}
+          });
+    })
+  }
 
-ImgaeName :any;
+  ImgaeName: any;
   UploadImage(imageFile: any) {
     this.spinner.show()
     return new Promise<void>((resolve, reject) => {
 
-    this.http.post("https://localhost:44391/api/User/UploadImage", imageFile).subscribe(
-      {
-        next: (res: any) => {
-          this.spinner.hide()
-          this.ImgaeName = res.imagename;
-          resolve()
-        },
-        error: () => { }
-      }
-    )})
+      this.http.post("https://localhost:44391/api/User/UploadImage", imageFile).subscribe(
+        {
+          next: (res: any) => {
+            this.spinner.hide()
+            this.ImgaeName = res.imagename;
+            resolve()
+          },
+          error: () => { }
+        }
+      )
+    })
   }
   
 }

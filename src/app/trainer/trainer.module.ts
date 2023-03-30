@@ -15,6 +15,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { EnumValuesPipe } from '../enum-values.pipe';
 import { CourseDetailedComponent } from './course-detailed/course-detailed.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
     MatFormFieldModule,
     NgbDropdownModule,
     MatSelectModule,
-    MatDialogModule
+    MatDialogModule,
+    MatProgressBarModule
   ]
 })
 export class TrainerModule { }
