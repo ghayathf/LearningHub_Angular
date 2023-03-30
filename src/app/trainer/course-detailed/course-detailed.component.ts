@@ -10,6 +10,7 @@ import { TaskService } from 'src/app/task.service';
 import { DatePipe } from '@angular/common';
 import { SolutionService } from 'src/app/solution.service';
 import { SectionService } from 'src/app/section.service';
+import { AuthGuard } from 'src/app/auth.guard';
 
 @Component({
   selector: 'app-course-detailed',
@@ -28,7 +29,7 @@ export class CourseDetailedComponent {
   @ViewChild('CreateMarkSolution') SolMark:any
 
   constructor(public materialService: MaterialService, public courseService: CourseService, public dialog: MatDialog, public traineeSectionService: TraineeSectionService,
-    public userService: UserService, public taskService: TaskService, public soltionService: SolutionService,public sectionService:SectionService, public trainerService:TrainerService) { }
+    public userService: UserService, public taskService: TaskService, public auth: AuthGuard, public soltionService: SolutionService,public sectionService:SectionService, public trainerService:TrainerService) { }
 
   CreateMaterialForm = new FormGroup(
     {
@@ -110,39 +111,61 @@ export class CourseDetailedComponent {
   trainee: any = []
   users: any = []
   combinedArray: any = []
+  AllComments:any=[]
+  commentsArr:any=[]
+  commentDate:any
+  userobj: any
+  trainees: any
+  sec: any
+  user: any
+  finalArr:any=[]
   async ngOnInit() {
     this.selectdSectionId = this.courseService.selectedSectionId;
     this.selectedCourseId = this.courseService.selectedCourseId;
 
+await this.sectionService.GetAllSections()
     await this.materialService.GetAllMaterial();
     this.materials = this.materialService.materials.filter((x: { section_Id: any; }) => x.section_Id == this.selectdSectionId)
     await this.traineeSectionService.GetAllTraineeSection()
-    this.traineeSection = this.traineeSectionService.TraineeSections.filter((x: { section_id: any; }) => x.section_id === this.selectdSectionId)
+    this.traineeSection = this.traineeSectionService.TraineeSections.filter((x: { section_id: any; }) => x.section_id == this.selectdSectionId)
+
     await this.traineeSectionService.GetAllTrainees()
     this.trainee = this.traineeSectionService.allTrainees
     this.trainee = this.trainee.filter((t: { traineeid: any; }) => {
-      return this.traineeSection.filter((ts: { trainee_Id: any; }) => ts.trainee_Id === t.traineeid);
+      return this.traineeSection.filter((ts: { trainee_Id: any; }) => ts.trainee_Id == t.traineeid);
     });
     await this.userService.getAllUsers()
     this.users = this.userService.users
     this.users = this.users.filter((u: { userid: any; }) => {
       return this.trainee.some((ts: { user_Id: any; }) => ts.user_Id === u.userid);
     });
+    await this.traineeSectionService.GetAllSecTrainees(this.selectdSectionId)
 
-    this.combinedArray = this.users.filter((x: { roleId: number; }) => x.roleId == 2).map((user: any) => {
-      const trainee = this.trainee.find((trainee: any) => trainee.user_Id === user.userid);
-      const ts = this.traineeSection.find((ts: any) => ts.trainee_Id == trainee.traineeid)
-      const attendance = true
-      return { ...user, ...trainee, ...ts, attendance };
+    this.combinedArray = this.traineeSectionService.secTrainees.map((x: any)=>{
+    const attendance = true
+    return {...x,attendance}
+   })
+    console.log(this.combinedArray);
 
-
-
-    });
-
-    console.log(this.combinedArray)
 
     await this.taskService.GetAllTasks();
     this.tasks = this.taskService.tasks.filter((x: { sectionidd: any; }) => x.sectionidd == this.selectdSectionId)
+    this.user = this.auth.gh
+    await this.userService.getAllUsers()
+    await this.sectionService.GetAllComments()
+    await this.sectionService.GetAllSections()
+    await this.traineeSectionService.GetAllTraineeSection()
+    await this.traineeSectionService.GetAllTrainees()
+    this.trainees = this.traineeSectionService.allTrainees
+    this.userobj = this.userService.user
+    this.userobj = this.userService.user
+    this.sec = this.sectionService.sections.find((x: { sectionid: any; }) => x.sectionid == this.selectdSectionId)
+
+    this.commentsArr = this.sectionService.Comments.filter((x: { section_Id: any; })=>x.section_Id == this.selectdSectionId).map((com:any)=>
+    {
+      const user = this.userService.users.find((x: { userid: any; })=>x.userid == com.user_Id)
+      return{...user,...com}
+    })
   }
 
   absentArr: any[] = []
@@ -150,7 +173,6 @@ export class CourseDetailedComponent {
   async markAbsent(id: number) {
     this.idd = await this.traineeSection.find((item: { trainee_Id: number; }) => item.trainee_Id === id);
     this.absentArr.push(this.idd)
-    console.log(this.absentArr);
 
 
   }
@@ -163,17 +185,17 @@ export class CourseDetailedComponent {
     for (let i = 0; i < this.combinedArray.length; i++) {
       if (this.combinedArray[i].attendance == true) {
         this.traineeSectionService.CreateAbsence(this.combinedArray[i].tsid)
-        
+
       await this.sectionService.GetSectionById(this.combinedArray[i].section_id)
-      
+
       await this.courseService.GetCourseById( this.sectionService.section.course_Id)
-      
+
       await this.trainerService.GetTrainerById(this.sectionService.section.trainer_Id)
-      
-      await this.userService.getUserById(this.trainerService.trainer.user_Id)
+
+      await this.userService.getUserById(this.user)
       debugger
         await this.sendEmail(this.combinedArray[i].firstname,this.courseService.course.coursename,this.userService.user.firstname,this.userService.user.lastname,this.combinedArray[i].email);
-          
+
       }
       else {
         this.traineeSectionService.CreateAttendance(this.combinedArray[i].tsid)
@@ -355,10 +377,14 @@ export class CourseDetailedComponent {
   }
   Sol: any
   TID:any
+  traineesNames:any
   async OpenTaskSolutionDialog(ID: any) {
+
+
     this.TID=ID;
-    await this.soltionService.GetAllSolution();
-    this.Sol = this.soltionService.Solutions.filter((x: { task_Id: any; }) => x.task_Id == ID)
+    await this.soltionService.GetAllTaskSolutions(ID);
+    this.Sol = this.soltionService.taskSols
+    console.log(this.Sol);
 
     const dialogConfig = new MatDialogConfig();
     dialogConfig.maxWidth = '800px';
@@ -414,7 +440,7 @@ export class CourseDetailedComponent {
       CourseName: coursename,
       TrainerFname: trainerFname,
       TrainerLname: TrainerLname,
-      currentDate: new Date(Date.now()).toISOString().slice(0, 10),
+      CuurentDate: new Date(Date.now()).toISOString().slice(0, 10),
       email: email
       };
       debugger
