@@ -121,27 +121,63 @@ export class CourseDetailedComponent {
   sec: any
   user: any
   finalArr:any=[]
+  course:any
+  courseName:any
+  courseDesc:any
+  courseLevel:any
+  courseImage:any
+  startTime:any
+  endTime:any
+  capacity:any
   async ngOnInit() {
+
+    await this.sectionService.GetAllSections()
+    await this.materialService.GetAllMaterial();
+    await this.traineeSectionService.GetAllTraineeSection()
+    await this.traineeSectionService.GetAllTrainees()
+    await this.userService.getAllUsers()
+    await this.taskService.GetAllTasks();
+    await this.sectionService.GetAllComments()
     this.selectdSectionId = this.courseService.selectedSectionId;
     this.selectedCourseId = this.courseService.selectedCourseId;
+    await this.courseService.GetCourseById(this.selectedCourseId)
+    await this.traineeSectionService.GetAllSecTrainees(this.selectdSectionId)
+    await this.sectionService.GetSectionById(this.selectdSectionId)
+    this.startTime = this.sectionService.section.startdate.slice(0,10)
+    this.endTime = this.sectionService.section.enddate.slice(0,10)
+    this.capacity = this.sectionService.section.sectioncapacity
+    
+    if (this.courseService.course.courselevel == 1)
 
-await this.sectionService.GetAllSections()
-    await this.materialService.GetAllMaterial();
+      this.courseLevel = Levels[1]
+
+    else if (this.courseService.course.courselevel == 2)
+
+      this.courseLevel = Levels[2]
+
+    else
+
+      this.courseLevel = Levels[3]
+
+    this.courseName = this.courseService.course.coursename
+    this.courseDesc = this.courseService.course.coursedescription
+    this.courseImage = this.courseService.course.courseimage
+
     this.materials = this.materialService.materials.filter((x: { section_Id: any; }) => x.section_Id == this.selectdSectionId)
-    await this.traineeSectionService.GetAllTraineeSection()
+
     this.traineeSection = this.traineeSectionService.TraineeSections.filter((x: { section_id: any; }) => x.section_id == this.selectdSectionId)
 
-    await this.traineeSectionService.GetAllTrainees()
+
     this.trainee = this.traineeSectionService.allTrainees
     this.trainee = this.trainee.filter((t: { traineeid: any; }) => {
       return this.traineeSection.filter((ts: { trainee_Id: any; }) => ts.trainee_Id == t.traineeid);
     });
-    await this.userService.getAllUsers()
+
     this.users = this.userService.users
     this.users = this.users.filter((u: { userid: any; }) => {
       return this.trainee.some((ts: { user_Id: any; }) => ts.user_Id === u.userid);
     });
-    await this.traineeSectionService.GetAllSecTrainees(this.selectdSectionId)
+
 
     this.combinedArray = this.traineeSectionService.secTrainees.map((x: any)=>{
     const attendance = true
@@ -150,14 +186,10 @@ await this.sectionService.GetAllSections()
     console.log(this.combinedArray);
 
 
-    await this.taskService.GetAllTasks();
+
     this.tasks = this.taskService.tasks.filter((x: { sectionidd: any; }) => x.sectionidd == this.selectdSectionId)
     this.user = this.auth.gh
-    await this.userService.getAllUsers()
-    await this.sectionService.GetAllComments()
-    await this.sectionService.GetAllSections()
-    await this.traineeSectionService.GetAllTraineeSection()
-    await this.traineeSectionService.GetAllTrainees()
+
     this.trainees = this.traineeSectionService.allTrainees
     this.userobj = this.userService.user
     this.userobj = this.userService.user
@@ -356,7 +388,7 @@ await this.sectionService.GetAllSections()
     this.dialog.open(this.traineeSolutions, dialogConfig)
 
   }
-  
+
   selectedTask2 = 0;
   openDeleteTask(TaskId: number) {
     this.selectedTask2 = TaskId
@@ -464,4 +496,32 @@ await this.sectionService.GetAllSections()
       debugger
       await this.trainerService.AbsenceEmail(emailParams);
     }
+
+    CommentForm = new FormGroup(
+      {
+
+        commentmessage: new FormControl('',Validators.required),
+        datepublished: new FormControl(''),
+        user_Id: new FormControl('', Validators.required),
+        section_Id: new FormControl('')
+
+      }
+    )
+    async CreateComment(){
+      this.commentDate = new Date(Date.now())
+      this.CommentForm.controls['datepublished'].setValue(this.commentDate)
+      this.CommentForm.controls['user_Id'].setValue(this.user)
+      this.CommentForm.controls['section_Id'].setValue(this.sec.sectionid)
+      await this.sectionService.CreateComment(this.CommentForm.value)
+      await this.sectionService.GetAllComments()
+    }
+}
+enum Levels {
+
+  Beginner = 1,
+
+  Intermediate = 2,
+
+  Advanced = 3,
+
 }

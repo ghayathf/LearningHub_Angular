@@ -293,7 +293,6 @@ debugger
     this.CommentForm.controls['section_Id'].setValue(this.sec.sectionid)
     this.sectionService.CreateComment(this.CommentForm.value)
     this.sectionService.GetAllComments()
-    window.location.reload()
   }
 }
 enum Levels {

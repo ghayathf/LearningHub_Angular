@@ -63,6 +63,8 @@ export class MainComponent {
   async goingDialog(secId: number, courseid: number) {
     this.courseService.selectedSectionId = secId
     this.courseService.selectedCourseId = courseid
+    console.log(courseid);
+
     await this.router.navigate(['/Trainer/CourseDetailed']);
   }
 
