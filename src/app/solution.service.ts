@@ -27,6 +27,7 @@ export class SolutionService {
       )
     })
   }
+  
   taskSols:any=[]
   GetAllTaskSolutions(tid:any) {
     return new Promise<void>((resolve, reject) => {

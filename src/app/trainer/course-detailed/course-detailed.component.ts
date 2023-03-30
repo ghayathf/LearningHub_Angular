@@ -11,7 +11,8 @@ import { DatePipe } from '@angular/common';
 import { SolutionService } from 'src/app/solution.service';
 import { SectionService } from 'src/app/section.service';
 import { AuthGuard } from 'src/app/auth.guard';
-
+import { MatProgressBar } from '@angular/material/progress-bar';
+import { NgxSpinner, NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-course-detailed',
   templateUrl: './course-detailed.component.html',
@@ -27,9 +28,10 @@ export class CourseDetailedComponent {
   @ViewChild('UpdateTaskForm') UpdateTask: any
   @ViewChild('ShowSolution') SolDialog: any
   @ViewChild('CreateMarkSolution') SolMark:any
-
+  @ViewChild('TraineeSolutions') traineeSolutions:any
   constructor(public materialService: MaterialService, public courseService: CourseService, public dialog: MatDialog, public traineeSectionService: TraineeSectionService,
-    public userService: UserService, public taskService: TaskService, public auth: AuthGuard, public soltionService: SolutionService,public sectionService:SectionService, public trainerService:TrainerService) { }
+    public userService: UserService, public taskService: TaskService, public auth: AuthGuard, public soltionService: SolutionService,public sectionService:SectionService,
+     public trainerService:TrainerService,public spinner:NgxSpinnerService) { }
 
   CreateMaterialForm = new FormGroup(
     {
@@ -338,7 +340,23 @@ await this.sectionService.GetAllSections()
     await this.taskService.GetAllTasks();
     this.tasks = this.taskService.tasks.filter((x: { sectionidd: any; }) => x.sectionidd == this.selectdSectionId)
   }
+  solsArr:any
+  solutions:any=[]
+  async OpenSolsDialog(id:any){
+    this.solsArr = this.combinedArray.find((x: { tsid: any; })=> x.tsid == id)
+    await this.soltionService.GetAllSolution()
+    await this.taskService.GetAllTasks()
+    this.solutions = this.soltionService.Solutions.filter((x: { t_S_Id: any; })=>x.t_S_Id == this.solsArr.tsid).map((t: { task_Id: any; })=>{
+      const task = this.taskService.tasks.find((ta: { taskid: any; })=>ta.taskid == t.task_Id);
+      return {...t,...task}
+    })
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.maxWidth = '800px';
+    dialogConfig.maxHeight = '80vh';
+    this.dialog.open(this.traineeSolutions, dialogConfig)
 
+  }
+  
   selectedTask2 = 0;
   openDeleteTask(TaskId: number) {
     this.selectedTask2 = TaskId

@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { resolve } from 'chart.js/dist/helpers/helpers.options';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -126,7 +127,7 @@ export class TraineeSectionService {
       this.http.post("https://localhost:44391/api/TakeAttendance/CreateAbsence",this.absenceobj).subscribe({
         next: () => {
           this.spinner.hide();
-          this.toaster.success("attendance created successfully");
+          this.toaster.success("Absence created successfully");
           resolve();
         },
         error: (err) => {
@@ -137,6 +138,7 @@ export class TraineeSectionService {
       })
     })
   }
+  
   CreateAttendance(tsid:any){
     this.currDate = new Date(Date.now())
     const datePipe = new DatePipe('en-US');

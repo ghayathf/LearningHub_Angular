@@ -57,7 +57,7 @@
                   <li class="nav-item me-2 me-sm-4" role="presentation">
                     <button class="nav-link mb-2 mb-md-0" id="course-pills-tab-2" data-bs-toggle="pill"
                       data-bs-target="#course-pills-2" type="button" role="tab" aria-controls="course-pills-2"
-                      aria-selected="false">Curriculum</button>
+                      aria-selected="false">Take Attendance</button>
                   </li>
                   <!-- Tab item -->
                   <li class="nav-item me-2 me-sm-4" role="presentation">
@@ -152,7 +152,7 @@
                   </div>
                   <!-- Content END -->
 
-                  <!-- Content START -->
+                  <!-- TakeAttendance START -->
                   <div class="tab-pane fade" id="course-pills-2" role="tabpanel" aria-labelledby="course-pills-tab-2">
                     <!-- Course accordion START -->
                     <table class="table table-dark-gray align-middle p-4 mb-0 table-hover" id="excel-table">
@@ -219,70 +219,80 @@
                     <!-- Course accordion END -->
                   </div>
                   <!-- Content END -->
-<!--All Trainees Start -->    
+<!--All Trainees Start -->
 <div class="tab-pane fade" id="course-pills-7" role="tabpanel" aria-labelledby="course-pills-tab-7">
+  <div class="row g-3 align-items-center justify-content-between mb-4">
+    <!-- Search -->
+    <div class="col-md-8">
+      <form class="rounded position-relative">
+        <input class="form-control pe-5 bg-transparent" type="search" placeholder="Search" aria-label="Search">
+        <button class="bg-transparent p-2 position-absolute top-50 end-0 translate-middle-y border-0 text-primary-hover text-reset" type="submit">
+      <i class="fas fa-search fs-6 "></i>
+    </button>
+      </form>
+    </div>
+  </div>
   <!-- Course accordion START -->
-  <table class="table table-dark-gray align-middle p-4 mb-0 table-hover" id="excel-table">
-    <!-- Table head -->
+  <div class="table-responsive border-0">
+    <table class="table table-dark-gray align-middle p-4 mb-0 table-hover">
+      <!-- Table head -->
+      <thead>
+        <tr>
+          <th scope="col" class="border-0 rounded-start">Student name</th>
+          <th scope="col" class="border-0">Total Mark</th>
+          <th scope="col" class="border-0">Total Attendance</th>
+          <th scope="col" class="border-0">Email</th>
+          <th scope="col" class="border-0 rounded-end">Action</th>
+        </tr>
+      </thead>
 
-    <thead>
-      <tr>
-        <th scope="col" class="border-0">Trainee Name</th>
-        <th scope="col" class="border-0 rounded-end">Email</th>
-        <th scope="col" class="border-0 rounded-end">Phone Number</th>
-        <th scope="col" class="border-0 rounded-end">Is Absent</th>
-      </tr>
-    </thead>
+      <!-- Table body START -->
+      <tbody>
 
-    <!-- Table body START -->
-    <tbody>
-
-      <!-- Table row -->
-      <tr *ngFor="let item of combinedArray">
-
-
-        <!-- Table data -->
-        <td>
-          <div class="d-flex align-items-center mb-3">
-
-            <!-- Info -->
-            <div class="ms-2">
-              <h4 class="mb-0 fw-light">{{ item.firstname }} {{ item.lastname }}</h4>
+        <!-- Table item -->
+        <tr *ngFor="let item of combinedArray">
+          <!-- Table data -->
+          <td>
+            <div class="d-flex align-items-center position-relative">
+              <!-- Image -->
+              <div class="avatar avatar-md mb-2 mb-md-0">
+                <img src="../../../assets/HomeAssets/images/{{ item.imagename }}" class="rounded" alt="">
+              </div>
+              <div class="mb-0 ms-2">
+                <!-- Title -->
+                <h6 class="mb-0"><a href="#" class="stretched-link">{{ item.firstname }} {{ item.lastname }}</a></h6>
+                <!-- Address -->
+              </div>
             </div>
-          </div>
-        </td>
-        <td>
-          <div class="d-flex align-items-center mb-3">
+          </td>
 
-            <!-- Info -->
-            <div class="ms-2">
-              <h4 class="mb-0 fw-light">{{ item.email }}</h4>
-            </div>
-          </div>
-        </td>
-        <td>
-          <div class="d-flex align-items-center mb-3">
+          <!-- Table data -->
+          <td class="text-center text-sm-start">
+            <div class=" overflow-hidden">
+              <h4 class="mb-0 bold">{{ item.totalmark }}%</h4>
+              <div class="progress progress-sm bg-primary bg-opacity-10">
+                  <mat-progress-bar mode="determinate" value="{{ item?.totalmark }}"></mat-progress-bar>
 
-            <!-- Info -->
-            <div class="ms-2">
-              <h4 class="mb-0 fw-light">{{ item.phonenumber }}</h4>
-            </div>
-          </div>
-        </td>
+                </div>
+              </div>
+          </td>
 
-        <td>
-          <div>
-            <input type="checkbox" [(ngModel)]="item.attendance">
-          </div>
-        </td>
+          <!-- Table data -->
+          <td>{{ item.totalattendance }}</td>
 
+          <!-- Table data -->
+          <td>{{ item.email }}</td>
 
-      </tr>
-      <input type="submit" (click)="submitAttendance()" class="btn btn-info" value="Submit">
+          <!-- Table data -->
+          <td>
+            <a (click)="OpenSolsDialog(item.tsid)" class="btn btn-success-soft btn-round me-1 mb-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Message"><i class="far fa-envelope"></i></a>
+          </td>
+        </tr>
 
-    </tbody>
-    <!-- Table body END -->
-  </table>
+      </tbody>
+      <!-- Table body END -->
+    </table>
+  </div>
   <!-- Course accordion END -->
 </div>
 
@@ -1374,3 +1384,61 @@ Steps END -->
 Steps END -->
 
 </ng-template>
+
+<ng-template #TraineeSolutions>
+  <section class="py-0 bg-blue h-100px align-items-center d-flex h-200px rounded-0"
+  style="background:url(../../../assets/HomeAssets/images/pattern/04.png) no-repeat center center; background-size:cover;">
+  <!-- Main banner background image -->
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <!-- Title -->
+        <h1 class="text-white">Soltuion</h1>
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="table-responsive border-0">
+    <table class="table table-dark-gray align-middle p-4 mb-0 table-hover" style="width: 80%; table-layout: fixed; margin: auto;">
+      <!-- Table head -->
+      <thead>
+        <tr>
+          <th scope="col" class="border-0 rounded-start" style=" background-color:#1d3b53 ;">Task Name</th>
+          <th scope="col" class="border-0" style=" background-color:#1d3b53 ;">Solution Mark</th>
+        </tr>
+      </thead>
+
+      <!-- Table body START -->
+      <tbody>
+
+
+
+        <!-- Table item -->
+        <tr *ngFor="let item of solutions">
+          <!-- Course item -->
+          <td>
+            <div class="d-flex align-items-center">
+              <!-- Image -->
+
+              <div class="mb-0 ms-2">
+                <!-- Title -->
+                <h4>{{item.tasktype}}</h4>
+                <!-- Info -->
+
+              </div>
+            </div>
+          </td>
+
+          <!-- Enrolled item -->
+          <td class="text-center text-sm-start">{{item.solutionmark}}</td>
+
+        </tr>
+
+      </tbody>
+      <!-- Table body END -->
+    </table>
+  </div>
+</section>
+</ng-template>
+
