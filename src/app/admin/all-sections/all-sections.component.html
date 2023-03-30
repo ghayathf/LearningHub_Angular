@@ -13,7 +13,10 @@
 		<div class="row mb-3">
 			<div class="col-12 d-sm-flex justify-content-between align-items-center">
 				<h1 class="h3 mb-2 mb-sm-0">Sections</h1>
-				<a (click)="OpenDialog()" class="btn btn-sm btn-primary mb-0">Create a Section</a>
+				<!-- <a (click)="OpenDialog()" class="btn btn-sm btn-primary mb-0">Create a Section</a> -->
+				<a class="btn btn-sm btn-primary mb-0" (click)="OpenDialog()" style=" background-color:#1d3b53 ;">Create
+					a Section</a>
+
 			</div>
 		</div>
 
@@ -23,7 +26,7 @@
 			<div class="col-sm-6 col-lg-4">
 				<div class="text-center p-4 bg-primary bg-opacity-10 border border-primary rounded-3">
 					<h5>Total Sections</h5>
-					<h2 class="mb-0 fs-1 text-primary">{{ this.sectionService.sections.length }}</h2>
+					<h2 class="mb-0 fs-1 text-primary">{{ this.totalSections }}</h2>
 				</div>
 			</div>
 
@@ -31,15 +34,15 @@
 			<div class="col-sm-6 col-lg-4">
 				<div class="text-center p-4 bg-success bg-opacity-10 border border-success rounded-3">
 					<h6>Activated Sections</h6>
-					<h2 class="mb-0 fs-1 text-success">996</h2>
+					<h2 class="mb-0 fs-1 text-success">{{this.Acti}}</h2>
 				</div>
 			</div>
 
 			<!-- Course item -->
 			<div class="col-sm-6 col-lg-4">
 				<div class="text-center p-4  bg-warning bg-opacity-15 border border-warning rounded-3">
-					<h6>Pending Sections</h6>
-					<h2 class="mb-0 fs-1 text-warning">200</h2>
+					<h6>Expired Sections</h6>
+					<h2 class="mb-0 fs-1 text-warning">{{this.Exp}}</h2>
 				</div>
 			</div>
 		</div>
@@ -49,26 +52,7 @@
 		<div class="card bg-transparent border">
 
 			<!-- Card header START -->
-			<div class="card-header bg-light border-bottom">
-				<!-- Search and select START -->
-				<div class="row g-3 align-items-center justify-content-between">
-					<!-- Search bar -->
-					<div class="col-md-8">
-						<form class="rounded position-relative">
-							<input class="form-control bg-body" type="search" placeholder="Search" aria-label="Search">
-							<button
-								class="bg-transparent p-2 position-absolute top-50 end-0 translate-middle-y border-0 text-primary-hover text-reset"
-								type="submit">
-								<i class="fas fa-search fs-6 "></i>
-							</button>
-						</form>
-					</div>
 
-					<!-- Select option -->
-
-				</div>
-				<!-- Search and select END -->
-			</div>
 			<!-- Card header END -->
 
 			<!-- Card body START -->
@@ -81,14 +65,16 @@
 					<!-- Table START -->
 					<table class="table table-dark-gray align-middle p-4 mb-0 table-hover">
 						<!-- Table head -->
-						<thead >
+						<thead>
 							<tr>
-								<th scope="col" class="border-0 rounded-start" style=" background-color:#1d3b53 ;">Section </th>
-								<th scope="col" class="border-0"style=" background-color:#1d3b53 ;">Trainer </th>
-								<th scope="col" class="border-0"style=" background-color:#1d3b53 ;">StartDate</th>
+								<th scope="col" class="border-0 rounded-start" style=" background-color:#1d3b53 ;">
+									Section </th>
+								<th scope="col" class="border-0" style=" background-color:#1d3b53 ;">Trainer </th>
+								<th scope="col" class="border-0" style=" background-color:#1d3b53 ;">StartDate</th>
 
 
-								<th scope="col" class="border-0 rounded-end" style="margin-left: 30px;"style=" background-color:#1d3b53 ;">Action</th>
+								<th scope="col" class="border-0 rounded-end" style="margin-left: 30px;"
+									style=" background-color:#1d3b53 ;">Action</th>
 
 							</tr>
 						</thead>
@@ -108,7 +94,8 @@
 										</div>
 										<!-- Title -->
 										<h4 class="table-responsive-title mb-0 ms-2">
-											<a (click)="openDetailsDialog(item.sectionid)" class="stretched-link">{{ item.coursename }}</a>
+											<a (click)="openDetailsDialog(item.sectionid)" class="stretched-link">{{
+												item.coursename }}</a>
 										</h4>
 									</div>
 								</td>
@@ -143,7 +130,7 @@
 										class="btn btn-sm btn-warning-soft mb-0"
 										style="margin-left: 15px;">Update</button>
 
-									<button *ngIf="sliceDate(item.enddate) < this.currentDate"
+									<button *ngIf="sliceDate(item.enddate) < this.currentDate2"
 										(click)="GenerateCertificate(item.sectionid)"
 										class="btn btn-sm btn-success-soft mb-0" style="margin-left: 15px;">Generate
 										Certificate</button>
@@ -207,20 +194,20 @@
 <ng-template #DeleteForm>
 	<h2 mat-dialog-content>Would you like to Delete this Section ?</h2>
 	<div mat-dialog-actions>
-		<input type="button" mat-dialog-close class="btn btn-success" value="Yes" (click)="DeleteSection()">
+		<input type="button" mat-dialog-close class="btn btn-danger" value="Yes" (click)="DeleteSection()">
 		<input type="button" mat-dialog-close class="btn btn-error" value="No">
 	</div>
 </ng-template>
 <ng-template #CreateSection>
 
-	<section class="py-0 bg-blue h-100px align-items-center d-flex h-100px rounded-0"
+	<section class="py-0 bg-blue h-100px align-items-center d-flex h-200px rounded-0"
 		style="background:url(../../../assets/HomeAssets/images/pattern/04.png) no-repeat center center; background-size:cover;">
 		<!-- Main banner background image -->
 		<div class="container">
 			<div class="row">
 				<div class="col-12 text-center">
 					<!-- Title -->
-					<h1 class="text-white">Submit a new Section</h1>
+					<h1 class="text-white">Create a new Section</h1>
 				</div>
 			</div>
 		</div>
@@ -228,122 +215,125 @@
 
 	<section>
 		<div class="container">
-			<div class="row">
-				<div class="col-md-8 mx-auto text-center">
-					<!-- Content -->
-				</div>
-			</div>
-
 			<div class="card bg-transparent border rounded-3 mb-5">
 				<div id="stepper" class="bs-stepper stepper-outline">
-
-
-					<!-- Card body START -->
 					<div class="card-body">
-						<!-- Step content START -->
 						<div class="bs-stepper-content">
-							<form [formGroup]="CreateForm">
+							<div id="step-1" role="tabpanel" class="content" aria-labelledby="steppertrigger1">
+								<form [formGroup]="CreateForm">
 
-								<!-- Step 1 content START -->
+									<div class="row">
+										<div class="col-md-6">
+											<label for="start-time" class="col-sm-3 col-form-label">Start Time</label>
+											<div class="col-sm-9">
+												<input type="time" id="start-time" name="start-time"
+													class="form-control form-control-lg" formControlName="starttime"
+													step="60">
+											</div>
+										</div>
 
-								<!-- Title -->
-								<h4>Section details</h4>
+										<div class="col-md-6">
+											<label for="end-time" class="col-sm-3 col-form-label">End Time</label>
+											<div class="col-sm-9">
+												<input type="time" id="end-time" name="end-time"
+													class="form-control form-control-lg" formControlName="endtime"
+													step="60">
+											</div>
+										</div>
+									</div>
 
-								<hr> <!-- Divider -->
+									<div class="row">
+										<div class="col-md-6">
+											<mat-form-field appearance="fill">
+												<mat-label>Start Date</mat-label>
+												<input matInput [matDatepicker]="picker3" formControlName='startdate'
+													name="startDate">
+												<mat-datepicker-toggle matSuffix
+													[for]="picker3"></mat-datepicker-toggle>
+												<mat-datepicker #picker3></mat-datepicker>
+											</mat-form-field>
+										</div>
 
-								<!-- Basic information START -->
+										<div class="col-md-6">
+											<mat-form-field appearance="fill">
+												<mat-label>End Date</mat-label>
+												<input matInput [matDatepicker]="picker4" formControlName='enddate'
+													name="startDate">
+												<mat-datepicker-toggle matSuffix
+													[for]="picker4"></mat-datepicker-toggle>
+												<mat-datepicker #picker4></mat-datepicker>
+											</mat-form-field>
+										</div>
+									</div>
 
-								<!-- Course title -->
-								<div class="row mb-3">
-                  <label for="start-time" class="col-sm-3 col-form-label">Start Time</label>
-                  <div class="col-sm-9">
-                    <input type="time" id="start-time" name="start-time" class="form-control form-control-lg" formControlName="starttime" step="60">
-                  </div>
-                </div>
-                <div class="row mb-3">
-                  <label for="end-time" class="col-sm-3 col-form-label">End Time</label>
-                  <div class="col-sm-9">
-                    <input type="time" id="end-time" name="end-time" class="form-control form-control-lg" formControlName="endtime" step="60">
-                  </div>
-                </div>
+									<div class="row">
+										<div class="col-md-6">
+											<mat-form-field class="example-full-width">
+												<mat-label>Meeting Url</mat-label>
+												<input type="text" matInput formControlName='meetingurl'>
+												<mat-error
+													*ngIf="CreateForm.controls['meetingurl'].hasError('required')">
+													Meeting Url is <strong>required</strong>
+												</mat-error>
+											</mat-form-field>
+										</div>
 
-								<div class="row g-4">
-									<mat-form-field appearance="fill">
-										<mat-label>Start Date</mat-label>
-										<input matInput [matDatepicker]="picker3" formControlName='startdate'
-											name="startDate">
-										<mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-										<mat-datepicker #picker3></mat-datepicker>
-									</mat-form-field>
-								</div>
-								<div class="row g-4">
-									<mat-form-field appearance="fill">
-										<mat-label>End Date</mat-label>
-										<input matInput [matDatepicker]="picker4" formControlName='enddate'
-											name="startDate">
-										<mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
-										<mat-datepicker #picker4></mat-datepicker>
-									</mat-form-field>
-								</div>
+										<div class="col-md-6">
+											<mat-form-field class="example-full-width">
+												<mat-label>Section Capacity</mat-label>
+												<input type="number" matInput formControlName='sectioncapacity' min="5">
+												<mat-error
+													*ngIf="CreateForm.controls['sectioncapacity'].hasError('required')">
+													Section Capacity is <strong>required</strong>
+												</mat-error>
+											</mat-form-field>
+										</div>
+									</div>
 
-								<div class="col-12">
-									<mat-form-field class="example-full-width">
-										<mat-label>Meeting Url</mat-label>
-										<input type="text" matInput formControlName='meetingurl'>
-										<mat-error *ngIf="CreateForm.controls['meetingurl'].hasError('required')">
-											Meeting Url is <strong>required</strong>
-										</mat-error>
-									</mat-form-field>
-								</div>
-								<div class="col-12">
-									<mat-form-field class="example-full-width">
-										<mat-label>Section Capacity</mat-label>
-										<input type="number" matInput formControlName='sectioncapacity' min="5">
-										<mat-error *ngIf="CreateForm.controls['sectioncapacity'].hasError('required')">
-											Section Capacity is <strong>required</strong>
-										</mat-error>
-									</mat-form-field>
-								</div>
-
-										<!-- Course level -->
-										<div class="col-12">
+									<!-- Course level -->
+									<div class="row">
+										<div class="col-md-6">
 											<mat-form-field appearance="fill">
 												<mat-label>Select Course</mat-label>
 												<mat-select formControlName="course_Id" [(ngModel)]="selectedCourse">
-												  <mat-option *ngFor="let course of courseService.courses" [value]="course.courseid" >
-													{{course.coursename}}
+													<mat-option *ngFor="let course of courseService.courses"
+														[value]="course.courseid">
+														{{course.coursename}}
 
-												  </mat-option>
+													</mat-option>
 												</mat-select>
-											  </mat-form-field>
-										</div>
-										<div class="col-12">
-										<mat-form-field appearance="fill">
-											<mat-label>Select Triner</mat-label>
-											<mat-select formControlName="trainer_Id" [(ngModel)]="selectedTrainer">
-												<mat-option *ngFor="let trainer of combinedArray" [value]="trainer.trainerid" >
-													{{ trainer.email }}
-												  </mat-option>
-											  </mat-select>
-										  </mat-form-field>
+											</mat-form-field>
 										</div>
 
+										<div class="col-md-6">
+											<mat-form-field appearance="fill">
+												<mat-label>Select Triner</mat-label>
+												<mat-select formControlName="trainer_Id" [(ngModel)]="selectedTrainer">
+													<mat-option *ngFor="let trainer of combinedArray"
+														[value]="trainer.trainerid">
+														{{ trainer.email }}
+													</mat-option>
+												</mat-select>
+											</mat-form-field>
+										</div>
+									</div>
 
 
 
-								<!-- Step 1 button -->
-								<div class="d-flex justify-content-end mt-3">
-									<button class="btn btn-primary" mat-dialog-close [disabled]="CreateForm.invalid"
-										value="Create" (click)="CreateSections()">Create</button>
-								</div>
 
-								<!-- Basic information START -->
+									<!-- Step 1 button -->
+									<div class="d-flex justify-content-end mt-3">
+										<button class="btn btn-primary" mat-dialog-close [disabled]="CreateForm.invalid"
+											value="Create" (click)="CreateSections()">Create</button>
+									</div>
 
-								<!-- Step 1 content END -->
-							</form>
+									<!-- Basic information START -->
+
+									<!-- Step 1 content END -->
+								</form>
+							</div>
 						</div>
 					</div>
-					<!-- Card body END -->
 				</div>
 			</div>
 		</div>
@@ -366,203 +356,218 @@
 
 	<section>
 		<div class="container">
-
-
 			<div class="card bg-transparent border rounded-3 mb-5">
 				<div id="stepper" class="bs-stepper stepper-outline">
-
-
-					<!-- Card body START -->
 					<div class="card-body">
-						<!-- Step content START -->
 						<div class="bs-stepper-content">
-
-
-							<!-- Step 1 content START -->
 							<div id="step-1" role="tabpanel" class="content" aria-labelledby="steppertrigger1">
-								<!-- Title -->
-								<h4>Update Section </h4>
+								<form [formGroup]="UpdateForm" class="example-form">
+									<div class="row">
+										<div class="col-md-6">
+											<label for="start-time" class="col-sm-3 col-form-label">Start
+												Time</label>
+											<div class="col-sm-9">
+												<input type="time" id="start-time" name="start-time"
+													class="form-control form-control-lg" formControlName="starttime"
+													step="60">
+											</div>
+										</div>
 
-								<hr> <!-- Divider -->
 
-								<!-- Basic information START -->
-								<div class="row g-4">
-									<!-- Course title -->
-									<div class="col-12">
-										<form [formGroup]="UpdateForm" class="example-form">
-											<div class="row mb-3">
-                        <label for="start-time" class="col-sm-3 col-form-label">Start Time</label>
-                        <div class="col-sm-9">
-                          <input type="time" id="start-time" name="start-time" class="form-control form-control-lg" formControlName="starttime" step="60">
-                        </div>
-                      </div>
-                      <div class="row mb-3">
-                        <label for="end-time" class="col-sm-3 col-form-label">End Time</label>
-                        <div class="col-sm-9">
-                          <input type="time" id="end-time" name="end-time" class="form-control form-control-lg" formControlName="endtime" step="60">
-                        </div>
-                      </div>
+										<div class="col-md-6">
+											<label for="end-time" class="col-sm-3 col-form-label">End
+												Time</label>
+											<div class="col-sm-9">
+												<input type="time" id="end-time" name="end-time"
+													class="form-control form-control-lg" formControlName="endtime"
+													step="60">
+											</div>
+										</div>
+									</div>
 
-													<div class="row g-4">
-														<mat-form-field appearance="fill" >
-															<mat-label>Start Date</mat-label>
-															<input matInput [matDatepicker]="picker3" formControlName='startdate' name="startDate">
-															<mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-															<mat-datepicker #picker3></mat-datepicker>
-														  </mat-form-field>
-														</div>
-														<div class="row g-4">
-															<mat-form-field appearance="fill" >
-																<mat-label>End Date</mat-label>
-																<input matInput [matDatepicker]="picker4" formControlName='enddate' name="startDate">
-																<mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
-																<mat-datepicker #picker4></mat-datepicker>
-															  </mat-form-field>
-															</div>
-															<div class="col-12">
-																<mat-form-field class="example-full-width">
-											  <mat-label>Meeting Url</mat-label>
-											  <input type="text" matInput formControlName='meetingurl'>
-											  <mat-error *ngIf="UpdateForm.controls['meetingurl'].hasError('required')">
-												Meeting Url is <strong>required</strong>
-											  </mat-error>
+									<div class="row">
+										<div class="col-md-6">
+											<mat-form-field appearance="fill">
+												<mat-label>Start Date</mat-label>
+												<input matInput [matDatepicker]="picker3" formControlName='startdate'
+													name="startDate">
+												<mat-datepicker-toggle matSuffix
+													[for]="picker3"></mat-datepicker-toggle>
+												<mat-datepicker #picker3></mat-datepicker>
 											</mat-form-field>
-															</div>
-															<div class="col-12">
-																<mat-form-field class="example-full-width">
-																	<mat-label>Section Capacity</mat-label>
-																	<input type="number" matInput formControlName='sectioncapacity' min="5">
-																	<mat-error *ngIf="UpdateForm.controls['sectioncapacity'].hasError('required')">
-																		Section Capacity is <strong>required</strong>
-																	</mat-error>
-																</mat-form-field>
-															</div>
-															<div class="col-12">
-																<mat-form-field appearance="fill">
-																	<mat-label>Select Course </mat-label>
-																	<mat-select formControlName="course_Id" [(ngModel)]="selectedUpdatedCourse">
-																	  <mat-option *ngFor="let course of courseService.courses" [value]="course.courseid" >
-																		{{course.coursename}}
+										</div>
 
-																	  </mat-option>
-																	</mat-select>
-																  </mat-form-field>
-															</div>
-															<div class="col-12">
-																<mat-form-field appearance="fill">
-																	<mat-label>Select Trainer </mat-label>
-																	<mat-select formControlName="trainer_Id" [(ngModel)]="selectedUpdatedTrainer">
-																		<mat-option *ngFor="let trainer of combinedArray" [value]="trainer.trainerid" >
-																			{{ trainer.email }}
-																		  </mat-option>
-																	  </mat-select>
-																  </mat-form-field>
-															</div>
+										<div class="col-md-6">
+											<mat-form-field appearance="fill">
+												<mat-label>End Date</mat-label>
+												<input matInput [matDatepicker]="picker4" formControlName='enddate'
+													name="startDate">
+												<mat-datepicker-toggle matSuffix
+													[for]="picker4"></mat-datepicker-toggle>
+												<mat-datepicker #picker4></mat-datepicker>
+											</mat-form-field>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<mat-form-field class="example-full-width">
+												<mat-label>Meeting Url</mat-label>
+												<input type="text" matInput formControlName='meetingurl'>
+												<mat-error
+													*ngIf="UpdateForm.controls['meetingurl'].hasError('required')">
+													Meeting Url is <strong>required</strong>
+												</mat-error>
+											</mat-form-field>
+										</div>
 
-										</form>
+										<div class="col-md-6">
+											<mat-form-field class="example-full-width">
+												<mat-label>Section Capacity</mat-label>
+												<input type="number" matInput formControlName='sectioncapacity' min="5">
+												<mat-error
+													*ngIf="UpdateForm.controls['sectioncapacity'].hasError('required')">
+													Section Capacity is <strong>required</strong>
+												</mat-error>
+											</mat-form-field>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<mat-form-field appearance="fill">
+												<mat-label>Select Course </mat-label>
+												<mat-select formControlName="course_Id"
+													[(ngModel)]="selectedUpdatedCourse">
+													<mat-option *ngFor="let course of courseService.courses"
+														[value]="course.courseid">
+														{{course.coursename}}
+
+													</mat-option>
+												</mat-select>
+											</mat-form-field>
+										</div>
+										<div class="col-md-6">
+											<mat-form-field appearance="fill">
+												<mat-label>Select Trainer </mat-label>
+												<mat-select formControlName="trainer_Id"
+													[(ngModel)]="selectedUpdatedTrainer">
+													<mat-option *ngFor="let trainer of combinedArray"
+														[value]="trainer.trainerid">
+														{{ trainer.email }}
+													</mat-option>
+												</mat-select>
+											</mat-form-field>
+										</div>
 									</div>
 
-
-
-
-
-									<!-- Step 1 button -->
-									<div class="d-flex justify-content-end mt-3">
-										<button mat-dialog-close class="btn btn-primary next-btn mb-0"
-
-											(click)="UpdateSectionForm()">Update</button>
-									</div>
+								</form>
+								<div class="d-flex justify-content-end mt-3">
+									<button mat-dialog-close class="btn btn-primary next-btn mb-0"
+										(click)="UpdateSectionForm()">Update</button>
 								</div>
-								<!-- Basic information START -->
 							</div>
-							<!-- Step 1 content END -->
-
 						</div>
 					</div>
-					<!-- Card body END -->
+				</div>
+			</div>
+		</div>
+
+	</section>
+</ng-template>
+
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#76BDF5" type="line-scale-party" [fullScreen]="true">
+</ngx-spinner>
+<ng-template #DetailsForm>
+	<section class="py-0 bg-blue h-100px align-items-center d-flex h-200px rounded-0"
+		style="background:url(../../../assets/HomeAssets/images/pattern/04.png) no-repeat center center; background-size:cover;">
+		<!-- Main banner background image -->
+		<div class="container">
+			<div class="row">
+				<div class="col-12 text-center">
+					<!-- Title -->
+					<h1 class="text-white">Section Details</h1>
 				</div>
 			</div>
 		</div>
 	</section>
-</ng-template>
-<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#76BDF5" type="line-scale-party" [fullScreen]="true">
-</ngx-spinner>
-<ng-template #DetailsForm>
-  <section class="py-0 bg-blue h-100px align-items-center d-flex h-200px rounded-0"
-  style="background:url(../../../assets/HomeAssets/images/pattern/04.png) no-repeat center center; background-size:cover;">
-  <!-- Main banner background image -->
-  <div class="container">
-    <div class="row">
-      <div class="col-12 text-center">
-        <!-- Title -->
-        <h1 class="text-white">Section Details</h1>
-      </div>
-    </div>
-  </div>
-</section>
-	<!-- Page main content START -->
-	<div class="page-content-wrapper border" style="background-color: #fff">
-
-
-
-		<div class="row g-4">
-
-			<!-- Course information START -->
-			<div class="col-xxl-12">
-				<div class="card bg-transparent border rounded-3 h-100">
-					<!-- Card body START -->
+	<section>
+		<div class="container">
+			<div class="card bg-transparent border rounded-3 mb-5">
+				<div id="stepper" class="bs-stepper stepper-outline">
 					<div class="card-body">
+						<div class="bs-stepper-content">
+							<!-- Card body START -->
+							<div class="card-body">
 
-						<!-- Course image and info START -->
-						<div class="row g-4">
-							<!-- Course image -->
+								<!-- Course image and info START -->
 
-							<!-- Course info and avatar -->
-							<div class="col-md-6">
-								<h3>Start Time : {{this.sectionService.section.starttime}}</h3>
-                <hr>
-								<!-- Info -->
-								<h3 class="mb-3">End Time : {{this.sectionService.section.endtime}}</h3>
-                <hr>
-								<h3 class="mb-3">Start Date : {{this.sectionService.section.startdate}}</h3>
-                <hr>
-								<h3 class="mb-3">End Date : {{this.sectionService.section.enddate}}</h3>
-                <hr>
-							</div>
-						</div>
-						<!-- Course image and info END -->
+								<!-- Course image -->
 
-						<!-- Information START -->
-						<div class="row mt-3">
-							<h3 class="mb-3">Section Capacity : {{this.sectionService.section.sectioncapacity}}</h3>
-              <hr>
-							<h3 class="mb-3"><a class="btn btn-info" target="_blank" href="{{ this.sectionService.section.meetingurl }}">Meeting Url</a></h3>
-              <hr>
+								<!-- Course info and avatar -->
+								<div class="row">
+									<div class="col-md-6">
+										<h3>Start Time : {{this.sectionService.section.starttime}}</h3>
+										<hr>
+									</div>
+									<!-- Info -->
+									<div class="col-md-6">
+										<h3 class="mb-3">End Time : {{this.sectionService.section.endtime}}</h3>
+										<hr>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<h3 class="mb-3">Start Date : {{this.sectionService.section.startdate}}</h3>
+										<hr>
+									</div>
+									<div class="col-md-6">
+										<h3 class="mb-3">End Date : {{this.sectionService.section.enddate}}</h3>
+										<hr>
+									</div>
+								</div>
+
+								<!-- Course image and info END -->
+
+								<!-- Information START -->
+								<div class="row">
+									<div class="col-md-6">
+										<h3 class="mb-3">Section Capacity :
+											{{this.sectionService.section.sectioncapacity}}</h3>
+										<hr>
+									</div>
+									<div class="col-md-6">
+										<h3 class="mb-3"><a class="btn btn-info" target="_blank"
+												href="{{ this.sectionService.section.meetingurl }}">Meeting Url</a></h3>
+										<hr>
+									</div>
+								</div>
+								<!-- <div class="row">
+				<div class="col-md-6">
 							<h3 class="mb-3">Course : {{this.sectionService.section.course_Id}}</h3>
-              <hr>
+              <hr></div>
+				<div class="col-md-6">
 							<h3 class="mb-3">Trainer: {{this.sectionService.section.trainer_Id}}</h3>
+</div>
 
-
+						</div> -->
+								<!-- Information END -->
+							</div>
+							<!-- Card body END -->
 						</div>
-						<!-- Information END -->
 					</div>
-					<!-- Card body END -->
-				</div>
+					<!-- Course information END -->
+
+
+					<!-- Student review END -->
+
+				</div> <!-- Row END -->
 			</div>
-			<!-- Course information END -->
-
-
-			<!-- Student review END -->
-
-		</div> <!-- Row END -->
-	</div>
+		</div>
+	</section>
 </ng-template>
-
-
 <ng-template #ImportForm>
-	<app-admin-side-bar></app-admin-side-bar>
-  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#76BDF5" type="line-scale-party" [fullScreen]="true">
-  </ngx-spinner>
+	<!-- <app-admin-side-bar></app-admin-side-bar> -->
+	<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#76BDF5" type="line-scale-party" [fullScreen]="true">
+	</ngx-spinner>
 
 	<section class="py-0 bg-blue h-100px align-items-center d-flex h-200px rounded-0"
 		style="background:url(../../../assets/HomeAssets/images/pattern/04.png) no-repeat center center; background-size:cover;">
@@ -577,7 +582,7 @@
 		</div>
 	</section>
 
-	<section style="background-color:#2a2c31">
+	<section>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 mx-auto text-center">
@@ -601,7 +606,7 @@
 										<!-- Image -->
 										<img src="assets/images/element/gallery.svg" class="h-50px" alt="">
 										<div>
-											<h6 class="my-2">Upload Cayrgory image here, or<a href="#!"
+											<h6 class="my-2">Upload Trainee File here, or<a href="#!"
 													class="text-primary"> Browse</a></h6>
 											<label style="cursor:pointer;">
 												<span>

@@ -150,19 +150,22 @@ DeleteUser(trainerId: number) {
 }
 trainer:any
 GetTrainerById(trainerId:number){
+  return new Promise<void>((resolve, reject) => {
   this.spinner.show()
+  
   this.http.get("https://localhost:44391/api/Trainer/GetTrainerByID/"+trainerId).subscribe(
     {
       next: (res) => {
         this.trainer = res
         this.spinner.hide();
+        resolve()
       },
       error: (err) => {
         console.log(err);
         this.spinner.hide();
       }
     }
-  )
+  )})
 }
 
 

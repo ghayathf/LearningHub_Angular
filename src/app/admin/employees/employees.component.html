@@ -13,8 +13,8 @@
     <!-- Title -->
     <div class="row mb-3">
       <div class="col-12 d-sm-flex justify-content-between align-items-center">
-        <h1 class="h3 mb-2 mb-sm-0">Instructors</h1>
-        <a class="btn btn-sm btn-primary mb-0" (click)="OpenDialog()" style=" background-color:#1d3b53 ;">Create New Trainer</a>
+        <h1 class="h3 mb-2 mb-sm-0">Trainers</h1>
+        <a class="btn btn-sm btn-primary mb-0" (click)="OpenDialog()" style=" background-color:#1d3b53 ;">Add New Trainer</a>
       </div>
     </div>
 
@@ -23,24 +23,24 @@
       <!-- Course item -->
       <div class="col-sm-6 col-lg-4">
         <div class="text-center p-4 bg-primary bg-opacity-10 border border-primary rounded-3">
-          <h5>Total Materials</h5>
-          <h2 class="mb-0 fs-1 text-primary">{{ this.trainerService.tr.length }}</h2>
+          <h5>Total Trainers</h5>
+          <h2 class="mb-0 fs-1 text-primary">{{ this.totalTrainers }}</h2>
         </div>
       </div>
 
       <!-- Course item -->
       <div class="col-sm-6 col-lg-4">
         <div class="text-center p-4 bg-success bg-opacity-10 border border-success rounded-3">
-          <h6>Activated Courses</h6>
-          <h2 class="mb-0 fs-1 text-success">996</h2>
+          <h6>Total Users</h6>
+          <h2 class="mb-0 fs-1 text-success">{{this.totalUsers}}</h2>
         </div>
       </div>
 
       <!-- Course item -->
       <div class="col-sm-6 col-lg-4">
         <div class="text-center p-4  bg-warning bg-opacity-15 border border-warning rounded-3">
-          <h6>Pending Courses</h6>
-          <h2 class="mb-0 fs-1 text-warning">200</h2>
+          <h6>Total Trainees</h6>
+          <h2 class="mb-0 fs-1 text-warning">{{this.totalTrainees}}</h2>
         </div>
       </div>
     </div>
@@ -50,39 +50,7 @@
     <div class="card bg-transparent border">
 
       <!-- Card header START -->
-      <div class="card-header bg-light border-bottom">
-        <!-- Search and select START -->
-        <div class="row g-3 align-items-center justify-content-between">
-          <!-- Search bar -->
-          <div class="col-md-8">
-            <form class="rounded position-relative">
-              <input class="form-control bg-body" type="search" placeholder="Search" aria-label="Search">
-              <button
-                class="bg-transparent p-2 position-absolute top-50 end-0 translate-middle-y border-0 text-primary-hover text-reset"
-                type="submit">
-                <i class="fas fa-search fs-6 "></i>
-              </button>
-            </form>
-          </div>
-
-
-
-          <!-- Select option -->
-          <div class="col-md-3">
-            <!-- Short by filter -->
-            <form>
-              <select class="form-select js-choice border-0 z-index-9" aria-label=".form-select-sm">
-                <option value="">Sort by</option>
-                <option>Newest</option>
-                <option>Oldest</option>
-                <option>Accepted</option>
-                <option>Rejected</option>
-              </select>
-            </form>
-          </div>
-        </div>
-        <!-- Search and select END -->
-      </div>
+     
       <!-- Card header END -->
 
       <!-- Card body START -->
@@ -167,21 +135,7 @@
       <!-- Card footer START -->
       <div class="card-footer bg-transparent pt-0">
         <!-- Pagination START -->
-        <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
-          <!-- Content -->
-          <p class="mb-0 text-center text-sm-start">Showing 1 to 8 of 20 entries</p>
-          <!-- Pagination -->
-          <nav class="d-flex justify-content-center mb-0" aria-label="navigation">
-            <ul class="pagination pagination-sm pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
-              <li class="page-item mb-0"><a class="page-link" href="#" tabindex="-1"><i
-                    class="fas fa-angle-left"></i></a></li>
-              <li class="page-item mb-0"><a class="page-link" href="#">1</a></li>
-              <li class="page-item mb-0 active"><a class="page-link" href="#">2</a></li>
-              <li class="page-item mb-0"><a class="page-link" href="#">3</a></li>
-              <li class="page-item mb-0"><a class="page-link" href="#"><i class="fas fa-angle-right"></i></a></li>
-            </ul>
-          </nav>
-        </div>
+       
         <!-- Pagination END -->
       </div>
       <!-- Card footer END -->
@@ -197,15 +151,34 @@
 <ng-template #DeleteForm>
   <h2 mat-dialog-content>Would you like to Delete this Trainer ?</h2>
   <div mat-dialog-actions>
-    <input type="button" mat-dialog-close class="btn btn-success" value="Yes" (click)="DeleteTrainer()">
+    <input type="button" mat-dialog-close class="btn btn-danger" value="Yes" (click)="DeleteTrainer()">
     <input type="button" mat-dialog-close class="btn btn-error" value="No">
   </div>
 </ng-template>
 
 <ng-template #CreateForm>
+  <section class="py-0 bg-blue h-100px align-items-center d-flex h-200px rounded-0"
+		style="background:url(../../../assets/HomeAssets/images/pattern/04.png) no-repeat center center; background-size:cover;">
+		<!-- Main banner background image -->
+		<div class="container">
+			<div class="row">
+				<div class="col-12 text-center">
+					<!-- Title -->
+					<h1 class="text-white">Add New Trainer</h1>
+				</div>
+			</div>
+		</div>
+	</section>
+  <section>
+    <div class="container">
+    <div class="card bg-transparent border rounded-3 mb-5">
+      <div id="stepper" class="bs-stepper stepper-outline">
+        <div class="card-body">
+          <div class="bs-stepper-content">
   <form [formGroup]="CreateUserForm" class="example-form">
     <!-- <input type="file" #file (change)="UploadImage(file)"> -->
-    <div>
+    <div class="row">
+      <div class="col-md-6">
       <mat-form-field class="example-full-width">
         <mat-label>User Name</mat-label>
         <input type="text" matInput formControlName="username">
@@ -215,7 +188,7 @@
         </mat-error>
       </mat-form-field>
     </div>
-    <div>
+    <div class="col-md-6">
       <mat-form-field class="example-full-width">
         <mat-label>Password</mat-label>
         <input type="password" matInput formControlName="userpassword">
@@ -225,7 +198,9 @@
         </mat-error>
       </mat-form-field>
     </div>
-    <div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
       <mat-form-field class="example-full-width">
         <mat-label>Email</mat-label>
         <input type="text" matInput formControlName="email">
@@ -235,7 +210,8 @@
         </mat-error>
       </mat-form-field>
     </div>
-    <div>
+    
+      <div class="col-md-6">
       <mat-form-field class="example-full-width">
         <mat-label>Phone number</mat-label>
         <input type="text" matInput formControlName="phonenumber">
@@ -244,8 +220,10 @@
           price is <strong>required</strong>
         </mat-error>
       </mat-form-field>
-    </div>
-    <div>
+    </div></div>
+
+    <div class="row">
+      <div class="col-md-6">
       <mat-form-field class="example-full-width">
         <mat-label>First Number</mat-label>
         <input type="text" matInput formControlName="firstname">
@@ -255,7 +233,8 @@
         </mat-error>
       </mat-form-field>
     </div>
-    <div>
+   
+      <div class="col-md-6">
       <mat-form-field class="example-full-width">
         <mat-label>Last Name</mat-label>
         <input type="text" matInput formControlName="lastname">
@@ -264,12 +243,16 @@
           price is <strong>required</strong>
         </mat-error>
       </mat-form-field>
+    </div></div>
+
+    <div class="d-flex justify-content-end mt-3">
+      <button class="btn btn-primary" mat-dialog-close
+        [disabled]="CreateUserForm.invalid" value="Create"
+        (click)="CreateUser()"style=" background-color:#1d3b53 ;">Complete</button>
     </div>
-
-
-    <div><input type="button" mat-dialog-close value="create" (click)="CreateUser()"></div>
-  </form>
-
+    <!-- <div><input type="button" mat-dialog-close value="create" (click)="CreateUser()"></div> -->
+  </form></div></div></div></div></div>
+</section>
 
 
 
@@ -278,9 +261,28 @@
 
 
 <ng-template #CreateTrainerrForm>
+  <section class="py-0 bg-blue h-100px align-items-center d-flex h-200px rounded-0"
+  style="background:url(../../../assets/HomeAssets/images/pattern/04.png) no-repeat center center; background-size:cover;">
+  <!-- Main banner background image -->
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <!-- Title -->
+        <h1 class="text-white">Complete Process</h1>
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="container">
+    <div class="card bg-transparent border rounded-3 mb-5">
+      <div id="stepper" class="bs-stepper stepper-outline">
+        <div class="card-body">
+          <div class="bs-stepper-content">
   <form [formGroup]="CreateTrainerForm" class="example-form">
     <!-- <input type="file" #file (change)="UploadImage(file)"> -->
-    <div>
+    <div class="row">
+      <div class="col-md-6">
       <mat-form-field class="example-full-width">
         <mat-label>Salary</mat-label>
         <input type="number" matInput formControlName="salary">
@@ -290,7 +292,8 @@
         </mat-error>
       </mat-form-field>
     </div>
-    <div>
+    
+      <div class="col-md-6">
       <mat-form-field class="example-full-width">
         <mat-label>Trainer Position</mat-label>
         <input type="text" matInput formControlName="trainerposition">
@@ -299,8 +302,9 @@
           price is <strong>required</strong>
         </mat-error>
       </mat-form-field>
-    </div>
-    <div>
+    </div></div>
+    <div class="row">
+      <div class="col-md-6">
       <mat-form-field class="example-full-width">
         <mat-label>Qualification</mat-label>
         <input type="text" matInput formControlName="qualification">
@@ -309,8 +313,15 @@
           CategoryId is <strong>required</strong>
         </mat-error>
       </mat-form-field>
-    </div>
+    </div></div>
 
-    <div><input type="button" mat-dialog-close value="create" (click)="CreateTrainerr()"></div>
-  </form>
+    <div class="d-flex justify-content-end mt-3">
+      <button class="btn btn-primary" mat-dialog-close
+        [disabled]="CreateTrainerForm.invalid" value="Create"
+        (click)="CreateTrainerr()" style=" background-color:#1d3b53 ;">ADD</button>
+    </div>
+    <!-- <div><input type="button" mat-dialog-close value="create" (click)="CreateTrainerr()"></div> -->
+  </form></div></div></div>
+    </div></div>
+</section>
 </ng-template>

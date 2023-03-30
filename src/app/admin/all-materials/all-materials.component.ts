@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { MaterialService } from 'src/app/material.service';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { TaskService } from 'src/app/task.service';
+import { SolutionService } from 'src/app/solution.service';
 
 
 @Component({
@@ -18,11 +20,19 @@ export class AllMaterialsComponent {
    *
    */
 
-  constructor(public materialService:MaterialService, private router: Router, public dialog: MatDialog,public spinner:NgxSpinnerService) {
+  constructor(public materialService:MaterialService, private router: Router, public dialog: MatDialog,public spinner:NgxSpinnerService,public taskService:TaskService,public solutionService:SolutionService) {
 
   }
-  ngOnInit() {
-    this.materialService.GetAllMaterial();
+  totalMaterials:any
+  totalTasks:any
+  totalSolutions:any
+  async ngOnInit() {
+   await this.materialService.GetAllMaterial();
+    this.totalMaterials=this.materialService.materials.length 
+    await this.taskService.GetAllTasks()
+    this.totalTasks = this.taskService.tasks.length
+    await this.solutionService.GetAllSolution()
+    this.totalSolutions = this.solutionService.Solutions.length
   }
   @ViewChild('CreateForm') Create: any
   @ViewChild('UpdateForm') Update: any

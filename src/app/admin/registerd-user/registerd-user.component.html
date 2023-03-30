@@ -14,8 +14,8 @@
         <!-- Title -->
         <div class="row mb-3">
             <div class="col-12 d-sm-flex justify-content-between align-items-center">
-                <h1 class="h3 mb-2 mb-sm-0">Categories</h1>
-                <a class="btn btn-sm btn-primary mb-0" style=" background-color:#1d3b53 ;">Create User</a>
+                <h1 class="h3 mb-2 mb-sm-0">Registered Users</h1>
+                
             </div>
         </div>
 
@@ -24,24 +24,24 @@
             <!-- Course item -->
             <div class="col-sm-6 col-lg-4">
                 <div class="text-center p-4 bg-primary bg-opacity-10 border border-primary rounded-3">
-                    <h5>Total Users</h5>
-                    <h2 class="mb-0 fs-1 text-primary">{{ this.RegisterUser.Registers.length }}</h2>
+                    <h5>Total Admins</h5>
+                    <h2 class="mb-0 fs-1 text-primary">{{ this.totalAdmins}}</h2>
                 </div>
             </div>
 
             <!-- Course item -->
             <div class="col-sm-6 col-lg-4">
                 <div class="text-center p-4 bg-success bg-opacity-10 border border-success rounded-3">
-                    <h6>Activated Courses</h6>
-                    <h2 class="mb-0 fs-1 text-success">996</h2>
+                    <h6>Total Trainers</h6>
+                    <h2 class="mb-0 fs-1 text-success">{{ this.totalTrainers }}</h2>
                 </div>
             </div>
 
             <!-- Course item -->
             <div class="col-sm-6 col-lg-4">
                 <div class="text-center p-4  bg-warning bg-opacity-15 border border-warning rounded-3">
-                    <h6>Pending Courses</h6>
-                    <h2 class="mb-0 fs-1 text-warning">200</h2>
+                    <h6>Total Trainees</h6>
+                    <h2 class="mb-0 fs-1 text-warning">{{this.totalTrainees}}</h2>
                 </div>
             </div>
         </div>
@@ -51,37 +51,7 @@
         <div class="card bg-transparent border">
 
             <!-- Card header START -->
-            <div class="card-header bg-light border-bottom">
-                <!-- Search and select START -->
-                <div class="row g-3 align-items-center justify-content-between">
-                    <!-- Search bar -->
-                    <div class="col-md-8">
-                        <form class="rounded position-relative">
-                            <input class="form-control bg-body" type="search" placeholder="Search" aria-label="Search">
-                            <button
-                                class="bg-transparent p-2 position-absolute top-50 end-0 translate-middle-y border-0 text-primary-hover text-reset"
-                                type="submit">
-                                <i class="fas fa-search fs-6 "></i>
-                            </button>
-                        </form>
-                    </div>
-
-                    <!-- Select option -->
-                    <div class="col-md-3">
-                        <!-- Short by filter -->
-                        <form>
-                            <select class="form-select js-choice border-0 z-index-9" aria-label=".form-select-sm">
-                                <option value="">Sort by</option>
-                                <option>Newest</option>
-                                <option>Oldest</option>
-                                <option>Accepted</option>
-                                <option>Rejected</option>
-                            </select>
-                        </form>
-                    </div>
-                </div>
-                <!-- Search and select END -->
-            </div>
+          
             <!-- Card header END -->
 
             <!-- Card body START -->
@@ -100,13 +70,13 @@
                         <!-- Table head -->
                         <thead>
                             <tr>
-                                <th scope="col" class="border-0" style=" background-color:#1d3b53 ;">First Name</th>
+                                <th scope="col" class="border-0 rounded-start" style=" background-color:#1d3b53 ;">First Name</th>
                                 <th scope="col" class="border-0" style=" background-color:#1d3b53 ;">Last Name</th>
                                 <th scope="col" class="border-0" style=" background-color:#1d3b53 ;">Phone Number</th>
                                 <th scope="col" class="borded-0" style=" background-color:#1d3b53 ;">Account Type</th>
                                 <th scope="col" class="border-0" style=" background-color:#1d3b53 ;">User Name</th>
 
-                                <th scope="col" class="border-0 ">Action</th>
+                                <!-- <th scope="col" class="border-0 rounded-end" style=" background-color:#1d3b53 ;">Action</th> -->
                             </tr>
                         </thead>
 
@@ -175,14 +145,14 @@
                                         </h4>
                                     </div>
                                 </td>
-                                <td>
+                                <!-- <td>
 
                                     <button class="btn btn-sm btn-danger-soft mb-0"
                                         *ngIf="item.roleId==2 || item.roleId==3">Delete</button>
 
                                     <button class="btn btn-sm btn-primary-soft mb-0"
                                         *ngIf="item.roleId==2 || item.roleId==3">Update</button>
-                                </td>
+                                </td> -->
                             </tr>
 
 
@@ -196,27 +166,7 @@
             <!-- Card body END -->
 
             <!-- Card footer START -->
-            <div class="card-footer bg-transparent pt-0">
-                <!-- Pagination START -->
-                <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
-                    <!-- Content -->
-                    <p class="mb-0 text-center text-sm-start">Showing 1 to 8 of 20 entries</p>
-                    <!-- Pagination -->
-                    <nav class="d-flex justify-content-center mb-0" aria-label="navigation">
-                        <ul
-                            class="pagination pagination-sm pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
-                            <li class="page-item mb-0"><a class="page-link" href="#" tabindex="-1"><i
-                                        class="fas fa-angle-left"></i></a></li>
-                            <li class="page-item mb-0"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item mb-0 active"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item mb-0"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item mb-0"><a class="page-link" href="#"><i
-                                        class="fas fa-angle-right"></i></a></li>
-                        </ul>
-                    </nav>
-                </div>
-                <!-- Pagination END -->
-            </div>
+            
             <!-- Card footer END -->
         </div>
         <!-- Card END -->
