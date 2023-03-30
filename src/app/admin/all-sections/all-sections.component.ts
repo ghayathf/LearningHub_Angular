@@ -36,9 +36,15 @@ export class AllSectionsComponent {
   combinedArray1: any = []
   UserTrainer?: any
   currentDate: any
+  currentDate2: any
+  totalSections: any
+  compinedSections: any = []
+  Exp: any
+  Acti: any
   compinedSections: any = []
   async ngOnInit() {
-    this.sectionService.GetAllSections()
+    await this.sectionService.GetAllSections()
+    this.totalSections = this.sectionService.sections.length
     await this.userService.getAllUsers()
     await this.trainerService.GetAllTrainers()
     await this.traineeServie.GetAllAcceptedTrainee();
@@ -49,7 +55,16 @@ export class AllSectionsComponent {
       const trainer = this.trainers.find((trainer: any) => trainer.user_Id === user.userid)
       return { ...user, ...trainer };
     });
+    this.currentDate2 = new Date(Date.now()).toISOString().slice(0, 19);
 
+
+
+    const count = this.sectionService.sections.filter((x: { enddate: Date; }) => (x.enddate > this.currentDate2)).length;
+    const count2 = this.sectionService.sections.filter((x: { enddate: Date; }) => (x.enddate < this.currentDate2)).length;
+
+
+    this.Acti = count;
+    this.Exp = count2
     console.log(this.combinedArray)
     this.currentDate = new Date(Date.now()).toISOString().slice(0, 10)
     this.compinedSections = this.sectionService.sections.map((item1: any) => {
@@ -79,20 +94,19 @@ export class AllSectionsComponent {
   sliceDate(d: any) {
     return d.slice(0, 10)
 
-
   }
   selectdImportId: any;
   OpenImportDialog(sectionid: number) {
     this.selectdImportId = sectionid;
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.maxWidth = '500px';
-    dialogConfig.maxHeight = '90vh';
+    dialogConfig.maxWidth = '800px';
+    dialogConfig.maxHeight = '80vh';
     this.dialog.open(this.Import, dialogConfig);
   }
   OpenDialog() {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.maxWidth = '500px';
-    dialogConfig.maxHeight = '90vh';
+    dialogConfig.maxWidth = '800px';
+    dialogConfig.maxHeight = '80vh';
     this.dialog.open(this.Create, dialogConfig)
   }
   CreateForm = new FormGroup(
@@ -161,22 +175,29 @@ export class AllSectionsComponent {
   async openUpdateDialog(sectionid: number) {
     await this.sectionService.GetSectionById(sectionid);
     await this.courseService.GetCourseById(this.sectionService.section.course_Id)
-    await this.trainerService.GetTrainerById(this.sectionService.section.trainee_Id)
-    await this.UpdateForm.patchValue(this.sectionService.section);
+    console.log(this.sectionService.section);
+    console.log(this.sectionService.section.trainer_Id);
+    console.log(this.sectionService.section.trainee_Id);
+    await this.trainerService.GetTrainerById(this.sectionService.section.trainer_Id)
+    // await this.trainerService.GetTrainerById(this.sectionService.section.trainee_Id)
+    // await this.UpdateForm.patchValue(this.sectionService.section);
     this.section = this.sectionService.section
     this.selectedUpdatedCourse = this.sectionService.section.course_Id
     this.selectedUpdatedTrainer = this.sectionService.section.trainer_Id
-    this.courseName = this.courseService.course.coursename
+    this.courseName = this.courseService.course.coursenam
     for (let i = 0; i < this.combinedArray.length; i++) {
       if (this.combinedArray[i].trainer_Id == this.selectedUpdatedTrainer) {
         this.trainerEmail = this.combinedArray[i].email;
       }
     }
-    this.time1 = this.sectionService.section.starttime
-    this.time2 = this.sectionService.section.endtime
+    await (this.time1 = this.sectionService.section.starttime)
+    await (this.time2 = this.sectionService.section.endtime)
+    // *******************************************************
+    await this.UpdateForm.patchValue(this.sectionService.section);
+    // *******************************************************
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.maxWidth = '500px';
-    dialogConfig.maxHeight = '90vh';
+    dialogConfig.maxWidth = '800px';
+    dialogConfig.maxHeight = '80vh';
     this.dialog.open(this.Update, dialogConfig);
 
   }
@@ -220,8 +241,8 @@ export class AllSectionsComponent {
 
     await this.sectionService.GetSectionById(sectionid);
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.maxWidth = '500px';
-    dialogConfig.maxHeight = '90vh';
+    dialogConfig.maxWidth = '800px';
+    dialogConfig.maxHeight = '80vh';
     this.dialog.open(this.Details, dialogConfig);
   }
   ExcelData: any;
@@ -263,7 +284,6 @@ export class AllSectionsComponent {
         t_S_Status: 0,
         totalattendance: 0
       };
-
       await this.traineeServie.GetTraineeById(this.ExcelData[i].traineeid);
       await this.userService.getUserById(this.traineeServie.TraineeByID.user_Id)
       await this.sectionService.GetSectionById(this.selectdImportId)

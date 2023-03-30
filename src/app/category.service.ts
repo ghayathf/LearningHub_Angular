@@ -9,7 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 export class CategoryService {
 
   constructor(private http: HttpClient, private spinner: NgxSpinnerService, private toaster: ToastrService) { }
-  categories: any = []
+  categories: any
   GetAllCategories() {
 
     this.spinner.show();

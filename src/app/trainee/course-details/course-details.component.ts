@@ -11,6 +11,8 @@ import { SectionService } from 'src/app/section.service';
 import { Route, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SolutionService } from 'src/app/solution.service';
+import { CategoryService } from 'src/app/category.service';
+import { RegisterService } from 'src/app/register.service';
 
 @Component({
   selector: 'app-course-details',
@@ -27,8 +29,8 @@ export class CourseDetailsComponent {
   coursename: any
   courseLevel: any
   constructor(public materialService: MaterialService, public courseService: CourseService, public dialog: MatDialog, public traineeSectionService: TraineeSectionService,
-    public userService: UserService, public taskService: TaskService, public auth: AuthGuard, public sectionService: SectionService, public router: Router, public solutionService: SolutionService) { }
-
+    public userService: UserService, public taskService: TaskService, public auth: AuthGuard, public sectionService: SectionService, public router: Router, public solutionService: SolutionService,
+    public categoryService: CategoryService, public trainerService: TrainerService, public UserRegService: RegisterService) { }
   user: any
   userobj: any
   trainees: any
@@ -40,52 +42,99 @@ export class CourseDetailsComponent {
   material: any
   combinedObject: any
   combinedArray: any = []
-  currentDate:any
-  AllComments:any=[]
-  commentsArr:any=[]
-  commentDate:any
+  currentDate: any
+  AllComments: any = []
+  commentsArr: any = []
+  commentDate: any
+  categoryname: any
+  desc: any
+  img: any
+  SD: any
+  ED: any
+  meeting: any
+  TrainerImg: any
+  Trainerfname: any
+  Trainerlname: any
+  Traineremail: any
+  qualif: any
+  imgg2: any
+  SecCount: any
+  pos: any
+  TrainerUser: any
+  thisTrainer: any
+  SectionForTrainer:any
   async ngOnInit() {
-    this.section = this.sectionService.section
-    this.currentDate = new Date(Date.now()).toISOString().slice(0, 10)
-    this.user = this.auth.gh
+
+    await (this.currentDate = new Date(Date.now()).toISOString().slice(0, 10))
+    await (this.user = this.auth.gh)
     await this.traineeSectionService.GetAllTrainees()
-    this.trainees = this.traineeSectionService.allTrainees
+    await (this.trainees = this.traineeSectionService.allTrainees)
     await this.traineeSectionService.GetAllTraineeSection()
     await this.userService.getUserById(this.user)
+    await console.log("trainee" + this.userService.user.firstname);
+
     await this.userService.getAllUsers()
     await this.sectionService.GetAllSections()
+    await (this.section = this.sectionService.section)
     await this.courseService.GetAllCourses()
     await this.taskService.GetAllTasks()
     await this.materialService.GetAllMaterial()
     await this.sectionService.GetAllComments()
-    this.userobj = this.userService.user
-    this.currTrainee = this.trainees.find((x: { user_Id: any; }) => x.user_Id === this.user)
-    this.ts = this.traineeSectionService.TraineeSections.find((x: { trainee_Id: any; }) => x.trainee_Id == this.currTrainee.traineeid)
-    this.sec = this.sectionService.sections.find((x: { sectionid: any; }) => x.sectionid == this.ts.section_id)
-    this.course = this.courseService.courses.find((x: { courseid: any; }) => x.courseid == this.sec.course_Id)
-    this.tasks = this.taskService.tasks.filter((x: { sectionidd: any; }) => x.sectionidd == this.sec.sectionid)
-    this.material = this.materialService.materials.filter((x: { section_Id: any; }) => x.section_Id == this.sec.sectionid)
-    this.combinedArray = this.traineeSectionService.TraineeSections.filter((x: { trainee_Id: number; }) => x.trainee_Id === this.currTrainee.traineeid).map((ts: any) => {
+    await (this.userobj = this.userService.user)
+    await (this.currTrainee = this.trainees.find((x: { user_Id: any; }) => x.user_Id === this.user))
+    await (this.ts = this.traineeSectionService.TraineeSections.find((x: { trainee_Id: any; }) => x.trainee_Id == this.currTrainee.traineeid))
+    await (this.sec = this.sectionService.sections.find((x: { sectionid: any; }) => x.sectionid == this.ts.section_id))
+    await (this.course = this.courseService.courses.find((x: { courseid: any; }) => x.courseid == this.sec.course_Id))
+    await (this.tasks = this.taskService.tasks.filter((x: { sectionidd: any; }) => x.sectionidd == this.sec.sectionid))
+    await (this.material = this.materialService.materials.filter((x: { section_Id: any; }) => x.section_Id == this.sec.sectionid))
+    await (this.combinedArray = this.traineeSectionService.TraineeSections.filter((x: { trainee_Id: number; }) => x.trainee_Id === this.currTrainee.traineeid).map((ts: any) => {
       const section = this.sectionService.sections.find((sec: any) => sec.sectionid == ts.section_id);
       const course = this.courseService.courses.find((x: any) => x.courseid == section.course_Id)
       return { ...ts, ...section, ...course };
-    });
-    this.commentsArr = this.sectionService.Comments.filter((x: { section_Id: any; })=>x.section_Id == this.sec.sectionid).map((com:any)=>
-    {
-      const user = this.userService.users.find((x: { userid: any; })=>x.userid == com.user_Id)
-      return{...user,...com}
-    })
+    }))
+    await (this.commentsArr = this.sectionService.Comments.filter((x: { section_Id: any; }) => x.section_Id == this.sec.sectionid).map((com: any) => {
+      const user = this.userService.users.find((x: { userid: any; }) => x.userid == com.user_Id)
+      return { ...user, ...com }
+    }))
     console.log(this.commentsArr);
+    console.log(this.section.trainer_Id);
+    await (this.meeting = this.section.meetingurl)
+    await this.trainerService.GetTrainerById(this.section.trainer_Id)
+    await this.userService.getAllUsers();
+    await (this.TrainerUser = this.userService.users.find((x: { userid: any; }) => x.userid == this.trainerService.trainer.user_Id))
+    // console.log(this.TrainerUser);
+    // await(this.UserRegService.GetUserById(this.TrainerUser.user_Id));
+    await (this.TrainerImg = this.TrainerUser.imagename)
+    await (this.Trainerfname = this.TrainerUser.firstname)
+    await (this.Trainerlname = this.TrainerUser.lastname)
+    await (this.Traineremail = this.TrainerUser.email)
+    await (this.qualif = this.trainerService.trainer.qualification)
+    await this.trainerService.GetAllTrainers()
+    await (this.thisTrainer = this.trainerService.trainers.find((x: { trainerid: any; }) => x.trainerid == this.section.trainer_Id))
+    // await (this.SecCount = this.thisTrainer.finalSections.length)
+    // console.log(this.trainerService.trainers);
+    // console.log(this.trainerService.trainer);
+    await this.sectionService.GetAllSections()
+    await (this.SecCount=this.sectionService.sections.filter((x: { trainer_Id: any; })=>x.trainer_Id==this.section.trainer_Id).length)
+    await (this.pos = this.trainerService.trainer.trainerposition)
+    //  console.log("trainer"+this.TrainerUser.firstname);
 
 
 
     await this.taskService.GetAllTasks()
     await this.materialService.GetAllMaterial()
     await this.courseService.GetAllCourses()
-    this.tasks = await this.taskService.tasks.filter((x: { sectionidd: any; }) => x.sectionidd == this.section.sectionid)
-    this.mats = await this.materialService.materials.filter((x: { section_Id: any; }) => x.section_Id == this.section.sectionid)
-    this.thisCourse = await this.courseService.courses.find((x: { courseid: any; }) => x.courseid == this.section.course_Id)
-    this.coursename = await this.thisCourse.coursename
+    await (this.tasks = await this.taskService.tasks.filter((x: { sectionidd: any; }) => x.sectionidd == this.section.sectionid))
+    await (this.mats = await this.materialService.materials.filter((x: { section_Id: any; }) => x.section_Id == this.section.sectionid))
+    await (this.thisCourse = await this.courseService.courses.find((x: { courseid: any; }) => x.courseid == this.section.course_Id))
+    await (this.coursename = await this.thisCourse.coursename)
+    await (this.desc = this.thisCourse.coursedescription)
+    await (this.img = this.thisCourse.courseimage)
+    await this.categoryService.GetCategoryById(this.thisCourse.category_Id)
+    await (this.categoryname = this.categoryService.category.categoryname)
+    await (this.SD = this.section.starttime)
+    await (this.ED = this.section.endtime)
+    await (this.imgg2 = this.userService.user.imagename)
     if (this.thisCourse.courselevel == 1)
 
       this.courseLevel = Levels[1]
@@ -154,16 +203,13 @@ export class CourseDetailsComponent {
     // Release the object URL after the download is complete
     URL.revokeObjectURL(url);
   }
-
   SolutionForm = new FormGroup(
     {
-
       solutionmark: new FormControl(''),
       solutionfile: new FormControl(''),
       submitionnote: new FormControl('', Validators.required),
       t_S_Id: new FormControl(''),
       task_Id: new FormControl('')
-
     }
   )
   UpdateSolutionForm = new FormGroup(
@@ -177,11 +223,10 @@ export class CourseDetailsComponent {
 
     }
   )
-  slectedtaskid:any
-  SelectedSolid:any
-   flag:any
-  async CallSolutionDialog(taskid: number)
-  {
+  slectedtaskid: any
+  SelectedSolid: any
+  flag: any
+  async CallSolutionDialog(taskid: number) {
     this.slectedtaskid = taskid;
     await this.solutionService.GetAllSolution();
     for (const element of this.solutionService.Solutions) {
@@ -194,11 +239,11 @@ export class CourseDetailsComponent {
 
       }
     }
-    if(this.flag==1){
-    this.OpenUpdateSolution(this.SelectedSolid);
+    if (this.flag == 1) {
+      this.OpenUpdateSolution(this.SelectedSolid);
     }
-    else if(this.flag==0){
-      this.OpenSolutionDialog( this.slectedtaskid);
+    else if (this.flag == 0) {
+      this.OpenSolutionDialog(this.slectedtaskid);
     }
 
   }
@@ -217,7 +262,7 @@ export class CourseDetailsComponent {
     this.UpdateSolutionForm.controls['t_S_Id'].setValue(this.ts.tsid);
     this.UpdateSolutionForm.controls['task_Id'].setValue(this.slectedtaskid);
     this.UpdateSolutionForm.controls['solutionid'].setValue(this.SelectedSolid);
-debugger
+    debugger
     await this.solutionService.UpdateSolution(this.UpdateSolutionForm.value);
   }
   selectedSol: any
@@ -240,30 +285,29 @@ debugger
     this.dialog.open(this.CreateSolution, dialogConfig)
   }
   soltuionFile: any;
-  async downloadSolution()
-  {
-      await this.solutionService.GetSolutionById(this.SelectedSolid);
-      this.soltuionFile = this.solutionService.solutionByIDD.solutionfile;
-      const filePath = "../../../assets/HomeAssets/Solution/" + this.soltuionFile;
+  async downloadSolution() {
+    await this.solutionService.GetSolutionById(this.SelectedSolid);
+    this.soltuionFile = this.solutionService.solutionByIDD.solutionfile;
+    const filePath = "../../../assets/HomeAssets/Solution/" + this.soltuionFile;
 
-      const response = await fetch(filePath);
-      const lastDotIndex = filePath.lastIndexOf(".");
-      const slicedStr = filePath.slice(lastDotIndex + 1);
-      const blob = await response.blob();
+    const response = await fetch(filePath);
+    const lastDotIndex = filePath.lastIndexOf(".");
+    const slicedStr = filePath.slice(lastDotIndex + 1);
+    const blob = await response.blob();
 
-      // Create a URL for the Blob using createObjectURL
-      const url = URL.createObjectURL(blob);
+    // Create a URL for the Blob using createObjectURL
+    const url = URL.createObjectURL(blob);
 
-      // Create an anchor tag and trigger the download by simulating a click
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = this.solutionService.solutionByIDD.solutionfile + '.' + slicedStr;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
+    // Create an anchor tag and trigger the download by simulating a click
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = this.solutionService.solutionByIDD.solutionfile + '.' + slicedStr;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
 
-      // Release the object URL after the download is complete
-      URL.revokeObjectURL(url);
+    // Release the object URL after the download is complete
+    URL.revokeObjectURL(url);
 
   }
   async CreateSoltuion() {
@@ -279,14 +323,14 @@ debugger
   CommentForm = new FormGroup(
     {
 
-      commentmessage: new FormControl('',Validators.required),
+      commentmessage: new FormControl('', Validators.required),
       datepublished: new FormControl(''),
       user_Id: new FormControl('', Validators.required),
       section_Id: new FormControl('')
 
     }
   )
-  CreateComment(){
+  CreateComment() {
     this.commentDate = new Date(Date.now())
     this.CommentForm.controls['datepublished'].setValue(this.commentDate)
     this.CommentForm.controls['user_Id'].setValue(this.user)

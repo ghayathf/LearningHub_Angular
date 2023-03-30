@@ -17,7 +17,7 @@ export class TestimonialsComponent {
 tests:any = []
   async ngOnInit() {
     await this.testiomonialService.GetAllAcceptedTestimonilas();
-    this.tests = this.testiomonialService.testimonials
+    this.tests = this.testiomonialService.Acceptedtestimonials
     console.log(this.tests);
 
   }

@@ -16,10 +16,12 @@ export class TraineeHeaderComponent {
   }
 
   firstnamee: any
-  ngOnInit() {
-    this.auth.gh
-    this.Data.GetAllHome();
-    this.userService.GetUserById(this.auth.gh)
+  logo:any
+  async ngOnInit() {
+    await(this.auth.gh)
+    await(this.Data.GetAllHome())
+    await(this.userService.GetUserById(this.auth.gh))
+    await(this.logo=this.Data.homes[0].logo)
   }
   logout() {
     this.authService.logout()

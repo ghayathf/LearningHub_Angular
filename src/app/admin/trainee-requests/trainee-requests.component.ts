@@ -17,8 +17,15 @@ import { RegisterService } from 'src/app/register.service';
 export class TraineeRequestsComponent {
   @ViewChild('DeleteForm') Delete: any
   constructor(public TraineeService: RegisterService, private dialog: MatDialog, public spinner: NgxSpinnerService) { }
-  ngOnInit() {
-    this.TraineeService.GetAllTraineeUser();
+  pending:any
+  accepted:any
+  
+  async ngOnInit() {
+   await this.TraineeService.GetAllTraineeUser();
+    this.pending=this.TraineeService.filterData.length
+    await this.TraineeService.GetAllAcceptedTrainee();
+    this.accepted=this.TraineeService.AcceptedTrainee.length
+
   }
   selectedItem = 0
   openDeleteDialog(id: number) {
@@ -29,6 +36,7 @@ export class TraineeRequestsComponent {
   async DeleteRequest() {
     await this .TraineeService.GetUserById(this.selectedItem);
     await this.TraineeService.DeleteRequest(this.selectedItem);
+   
     this.UserInfo = this.TraineeService.User;
     await this.sendRejectEmail(this.UserInfo.email,this.UserInfo.firstname);
     this.TraineeService.GetAllTraineeUser();

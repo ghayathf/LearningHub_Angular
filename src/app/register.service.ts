@@ -95,17 +95,17 @@ export class RegisterService {
     )
   }
 
-  filterData: any = [];
+  filterData: any ;
 
   GetAllTraineeUser() {
-
+    return new Promise<void>((resolve, reject) => {
     this.spinner.show();
     this.http.get("https://localhost:44391/api/Trainee/GetAllTraineeUser").subscribe(
       {
         next: (res) => {
           this.spinner.hide();
           this.filterData = res;
-
+resolve()
         },
         error: (err) => {
           this.spinner.hide();
@@ -114,6 +114,7 @@ export class RegisterService {
         }
       }
     )
+    })
 
   }
 
@@ -128,6 +129,7 @@ export class RegisterService {
           next: () => {
             this.spinner.hide();
             this.toaster.success("Request Deleted Successfuly");
+    
             resolve();
           },
           error: () => {
@@ -303,4 +305,5 @@ export class RegisterService {
       )
     })
   }
+  
 }
