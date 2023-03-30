@@ -8,13 +8,15 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { CourseDetailsComponent } from './course-details/course-details.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { TestimonialFormComponent } from './testimonial-form/testimonial-form.component';
+import { DeleteAccountComponent } from './delete-account/delete-account.component';
 
 @NgModule({
   declarations: [
     MainComponent,
     EditProfileComponent,
     CourseDetailsComponent,
-    TestimonialFormComponent
+    TestimonialFormComponent,
+    DeleteAccountComponent
   ],
   imports: [
     CommonModule,
