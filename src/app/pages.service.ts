@@ -13,6 +13,7 @@ export class PagesService {
 
   updatedFile?: any
   async UpdateAboutus(obj: any) {
+    return new Promise<void>(async (resolve, reject) => {
     await this.GetAllAbout()
     this.updatedFile = this.abouts[0].aboutimage;
 
@@ -24,9 +25,9 @@ export class PagesService {
     }
 
 
-    return new Promise<void>((resolve, reject) => {
+
       this.http.put("https://localhost:44391/api/Aboutus/UpdateAbout", obj).subscribe({
-        next: (res) => {
+        next: () => {
           this.toaster.success("Updated Successfuly")
           resolve();
 
@@ -116,7 +117,6 @@ export class PagesService {
           resolve()
         },
         (err) => {
-          console.log(err);
           this.spinner.hide()
         }
       )
@@ -126,6 +126,7 @@ export class PagesService {
 
   updatedFile2?: any
   async UpdateHome(obj: any) {
+    return new Promise<void>(async (resolve, reject) => {
     await this.GetAllHome()
     this.updatedFile2 = this.homes[0].logo;
 
@@ -137,9 +138,9 @@ export class PagesService {
     }
 
 
-    return new Promise<void>((resolve, reject) => {
+
       this.http.put("https://localhost:44391/api/Home/UpdateHomePage", obj).subscribe({
-        next: (res) => {
+        next: () => {
           this.toaster.success("Updated Successfuly")
           resolve();
           debugger

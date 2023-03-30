@@ -60,10 +60,10 @@ export class MainComponent {
     return this.obj.coursename
 
   }
-  goingDialog(secId: number, courseid: number) {
+  async goingDialog(secId: number, courseid: number) {
     this.courseService.selectedSectionId = secId
     this.courseService.selectedCourseId = courseid
-    this.router.navigate(['/Trainer/CourseDetailed']);
+    await this.router.navigate(['/Trainer/CourseDetailed']);
   }
 
 }

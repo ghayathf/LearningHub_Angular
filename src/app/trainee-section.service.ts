@@ -92,6 +92,24 @@ export class TraineeSectionService {
       })
     })
   }
+  secTrainees:any=[]
+  GetAllSecTrainees(secId:any){
+    this.spinner.show();
+    return new Promise<void>((resolve, reject) => {
+      this.http.get("https://localhost:44391/api/Trainee/GetSecTrainees/"+secId).subscribe({
+        next: (res) => {
+          this.secTrainees = res;
+          this.spinner.hide();
+          resolve();
+        },
+        error: (err) => {
+          this.spinner.hide();
+          this.toaster.error("Error Try Again");
+          console.log(err);
+        }
+      })
+    })
+  }
   absenceobj:any
   currDate?:any
   CreateAbsence(tsid:any){
@@ -135,11 +153,13 @@ export class TraineeSectionService {
           this.spinner.hide();
           this.toaster.success("attendance created successfully");
           resolve();
+          debugger
         },
         error: (err) => {
           this.spinner.hide();
           this.toaster.error("Error Try Again");
           console.log(err);
+          debugger
         }
       })
     })
@@ -179,7 +199,7 @@ export class TraineeSectionService {
           resolve();
         },
         error: (err) => {
-          
+
           console.log(err);
         }
       })

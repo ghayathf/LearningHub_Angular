@@ -25,6 +25,8 @@ export class MainComponent {
   AllTrainees: any
   AllTrainers: any
   AllSections: any
+  par1:any
+  par2:any
   async ngOnInit() {
     await this.courseService.GetAllCourses();
     this.AllCourses = this.courseService.courses.length;
@@ -41,6 +43,8 @@ export class MainComponent {
     await this.categoryService.GetAllCategories()
     this.cats = this.categoryService.categories
     console.log(this.cats)
+    this.par1 = this.Data.homes[0].paragraph1
+    this.par2 = this.Data.homes[0].paragraph2
   }
 
   async selectCategory(categoryid: number) {
