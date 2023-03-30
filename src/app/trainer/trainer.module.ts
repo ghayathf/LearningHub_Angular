@@ -16,12 +16,14 @@ import { EnumValuesPipe } from '../enum-values.pipe';
 import { CourseDetailedComponent } from './course-detailed/course-detailed.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { DeleteAccountComponent } from './delete-account/delete-account.component';
 
 @NgModule({
   declarations: [
     MainComponent,
     CourseDetailedComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    DeleteAccountComponent
   ],
   imports: [
     CommonModule,

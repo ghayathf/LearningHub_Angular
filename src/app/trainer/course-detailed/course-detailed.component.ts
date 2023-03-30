@@ -146,7 +146,7 @@ export class CourseDetailedComponent {
     this.startTime = this.sectionService.section.startdate.slice(0,10)
     this.endTime = this.sectionService.section.enddate.slice(0,10)
     this.capacity = this.sectionService.section.sectioncapacity
-    
+
     if (this.courseService.course.courselevel == 1)
 
       this.courseLevel = Levels[1]
