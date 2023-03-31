@@ -28,25 +28,18 @@ export class MainComponent {
   newArray: any = []
   sectionsLength:any
   allStds:any
+  foundArray:any
+  trainsLen:any
+  trainerPos:any
   async ngOnInit() {
     this.userId = this.auth.gh
-    await this.tsService.GetAllTraineeSection()
-    await this.trainerService.GetAllTrainers()
-    this.trainerId = this.trainerService.trainers.find((x: { user_Id: any; }) => x.user_Id == this.userId).trainerid
+    await this.trainerService.GetTrainerByUser(this.userId)
+    this.combinedArray = this.trainerService.myTrainer
+    this.trainerId = this.combinedArray[0].trainerid
+    this.trainerPos = this.combinedArray[0].trainerposition
+    this.trainsLen = this.combinedArray[0].qualification
     await this.sectionService.GetAllSections()
     this.sections = this.sectionService.sections.filter((x: { trainer_Id: any; }) => x.trainer_Id == this.trainerId)
-    await this.courseService.GetAllCourses()
-    this.combinedArray = this.sectionService.sections.filter((x: { trainer_Id: any; }) => x.trainer_Id == this.trainerId).map((s: any) => {
-      const coursee = this.courseService.courses.find((coursee: any) => coursee.courseid === s.course_Id);
-
-      return { ...s, ...coursee };
-    });
-    console.log(this.combinedArray);
-    this.allStds =this.sectionService.sections.filter((x: { trainer_Id: any; }) => x.trainer_Id == this.trainerId).map((s: any) => {
-      const stds = this.tsService.TraineeSections.find((x: { section_id: any; })=>x.section_id == s.sectionid)
-      return {...s,...stds}
-    })
-    console.log(this.allStds.length);
 
     this.sectionsLength = this.sections.length
   }

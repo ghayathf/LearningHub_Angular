@@ -382,72 +382,81 @@
 
                   <!-- Content START -->
                   <div class="tab-pane fade" id="course-pills-6" role="tabpanel" aria-labelledby="course-pills-tab-6">
+
                     <!-- Review START -->
+
                     <div class="row">
-                      <div class="col-12">
-                        <h5 class="mb-4">Ask Your Question</h5>
 
-                        <!-- Comment box -->
-                        <div class="d-flex mb-4">
-                          <!-- Avatar -->
-                          <div class="avatar avatar-sm flex-shrink-0 me-2">
-                            <a href="#"> <img class="avatar-img rounded-circle"
-                                src="../../../assets/HomeAssets/images/avatar/09.jpg" alt=""> </a>
-                          </div>
+                        <div class="col-12">
 
-                          <form class="w-100 d-flex" [formGroup]="CommentForm">
-                            <mat-form-field class="example-full-width">
-                              <mat-label>Leave a comment</mat-label>
-                              <textarea matInput formControlName="commentmessage" matInput
-                                  placeholder="Ex. It makes me feel..." class="one form-control pe-4 bg-light"></textarea>
-                          </mat-form-field>
-                            <button class="btn btn-primary" (click)="CreateComment()" type="button">Post</button>
-                          </form>
-                        </div>
+                            <h5 class="mb-4">Ask Your Question</h5>
 
-                        <!-- Comment item START -->
-                        <div class="border p-2 p-sm-4 rounded-3 mb-4">
-                          <ul class="list-unstyled mb-0">
-                            <li class="comment-item"  *ngFor="let item of commentsArr">
-                              <div class="d-flex mb-3">
+                            <!-- Comment box -->
+                            <div class="d-flex mb-4">
+
                                 <!-- Avatar -->
-                                <div class="avatar avatar-sm flex-shrink-0">
-                                  <a href="#"><img class="avatar-img rounded-circle"
-                                      src="../../../assets/HomeAssets/images/{{ item.imagename }}" alt=""></a>
+                                <div class="avatar avatar-sm flex-shrink-0 me-2">
+                                    <a href="#"> <img class="avatar-img rounded-circle"
+                                            src="../../../assets/HomeAssets/images/avatar/09.jpg" alt=""> </a>
                                 </div>
-                                <div class="ms-2">
-                                  <!-- Comment by -->
-                                  <div class="bg-light p-3 rounded">
-                                    <div class="d-flex justify-content-center">
-                                      <div class="me-2">
-                                        <h3 class="fw-bold">{{ item.firstname }} {{ item.lastname }}</h3>
-                                        <h6 class="mb-1 "> <a href="#!">  </a></h6>
-                                        <p class="">{{item.commentmessage}}</p>
-                                      </div>
-                                      <div style="display: flex; flex-direction: column;">
-                                        <small>{{ item.datepublished | slice:5:10 }}</small>
-                                        <small>{{ item.datepublished | slice:11:16 }}</small>
-                                      </div>
 
-                                    </div>
-                                  </div>
-                                  <!-- Comment react -->
+                                <form [formGroup]="CommentForm">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Leave a comment</mat-label>
+                                        <textarea matInput formControlName="commentmessage" matInput placeholder="Ex. It makes me feel..."
+                                            class="one form-control pe-4 bg-light w-150px"
+                                            style="width: 150px; min-width: 150px; max-width: 150px;"></textarea>
+                                    </mat-form-field>
+                                    <button class="btn btn-primary ms-2" (click)="CreateComment()" type="button">Post</button>
+                                </form>
 
-                                </div>
-                              </div>
+                            </div>
 
-                              <!-- Comment item nested START -->
+                            <!-- Comment item START -->
+                            <div class="border p-2 p-sm-4 rounded-3 mb-4">
+                                <ul class="list-unstyled mb-0">
+                                    <li class="comment-item " *ngFor="let item of commentsArr">
+                                        <div class="mb-3">
 
-                              <!-- Comment item nested END -->
-                            </li>
-                          </ul>
+                                            <!-- Avatar -->
+                                            <div class="avatar avatar-sm flex-shrink-0">
+                                                <a href="#"><img class="avatar-img rounded-circle"
+                                                        src="../../../assets/HomeAssets/images/{{ item.imagename }}" alt=""></a>
+                                            </div>
+
+                                            <div class="ms-2">
+                                                <!-- Comment by -->
+                                                <div class="bg-light p-3 rounded">
+                                                    <div class="justify-content-center">
+                                                        <div class="me-2">
+                                                          <div style="display: flex; flex-direction: row;">
+                                                            <h3 class="fw-bold">{{ item.firstname }} {{ item.lastname }}</h3>
+                                                            <div style="display: flex; flex-direction: column;margin-left: auto;">
+                                                              <small class="bi bi-calendar-event">  {{ item.datepublished | slice:5:10 }}</small>
+                                                              <small class="bi bi-alarm">  {{ item.datepublished | slice:11:16 }}</small>
+                                                          </div>
+                                                          </div>
+
+                                                            <h6 class="mb-1 "> <a href="#!"> </a></h6>
+                                                            <p class="">{{item.commentmessage}}</p>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <!-- Comment react -->
+                                            </div>
+                                        </div>
+
+                                        <!-- Comment item nested START -->
+                                        <!-- Comment item nested END -->
+
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- Comment item END -->
                         </div>
-                        <!-- Comment item END -->
-
-                      </div>
-
                     </div>
-                  </div>
+                </div>
                   <!-- Content END -->
 
                 </div>

@@ -147,13 +147,24 @@ Comments: any = []
           resolve();
          },
         error:()=>{
-          
+
           this.toaster.error("Error");}
       }
     )
   })
-
-
-
 }
+myComments: any = []
+  GetCommentsBySection(secId:any) {
+    this.spinner.show()
+    return new Promise<void>((resolve, reject) => {
+    this.http.get("https://localhost:44391/api/Comments/GetCommentsBySecId/"+secId).subscribe(
+      (res) => {
+        this.myComments = res
+      this.spinner.hide()
+    resolve(); },
+      (err) => {
+        console.log(err);
+      }
+    )})
+  }
 }

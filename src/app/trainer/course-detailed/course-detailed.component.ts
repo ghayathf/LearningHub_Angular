@@ -194,12 +194,8 @@ export class CourseDetailedComponent {
     this.userobj = this.userService.user
     this.userobj = this.userService.user
     this.sec = this.sectionService.sections.find((x: { sectionid: any; }) => x.sectionid == this.selectdSectionId)
-
-    this.commentsArr = this.sectionService.Comments.filter((x: { section_Id: any; })=>x.section_Id == this.selectdSectionId).map((com:any)=>
-    {
-      const user = this.userService.users.find((x: { userid: any; })=>x.userid == com.user_Id)
-      return{...user,...com}
-    })
+    await this.sectionService.GetCommentsBySection(this.selectdSectionId)
+    this.commentsArr = this.sectionService.myComments
   }
 
   absentArr: any[] = []
@@ -508,12 +504,12 @@ export class CourseDetailedComponent {
       }
     )
     async CreateComment(){
-      this.commentDate = new Date(Date.now())
-      this.CommentForm.controls['datepublished'].setValue(this.commentDate)
-      this.CommentForm.controls['user_Id'].setValue(this.user)
-      this.CommentForm.controls['section_Id'].setValue(this.sec.sectionid)
+      this.commentDate = await new Date(Date.now())
+      await this.CommentForm.controls['datepublished'].setValue(this.commentDate)
+      await this.CommentForm.controls['user_Id'].setValue(this.user)
+      await this.CommentForm.controls['section_Id'].setValue(this.sec.sectionid)
       await this.sectionService.CreateComment(this.CommentForm.value)
-      await this.sectionService.GetAllComments()
+      this.ngOnInit()
     }
 }
 enum Levels {
