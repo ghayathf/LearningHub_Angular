@@ -138,7 +138,7 @@ export class TraineeSectionService {
       })
     })
   }
-  
+
   CreateAttendance(tsid:any){
     this.currDate = new Date(Date.now())
     const datePipe = new DatePipe('en-US');
@@ -202,6 +202,24 @@ export class TraineeSectionService {
         },
         error: (err) => {
 
+          console.log(err);
+        }
+      })
+    })
+  }
+  currentTrainee:any=[]
+  GetAllInfoAboutTrainee(usid:any){
+    //this.spinner.show();
+    return new Promise<void>((resolve, reject) => {
+      this.http.get("https://localhost:44391/api/Trainee/GetSecTraineesInfos/"+usid).subscribe({
+        next: (res) => {
+          this.currentTrainee = res;
+          //this.spinner.hide();
+          resolve();
+        },
+        error: (err) => {
+          this.spinner.hide();
+          this.toaster.error("Error Try Again");
           console.log(err);
         }
       })

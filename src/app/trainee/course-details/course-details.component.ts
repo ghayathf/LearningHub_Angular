@@ -92,11 +92,7 @@ export class CourseDetailsComponent {
       const course = this.courseService.courses.find((x: any) => x.courseid == section.course_Id)
       return { ...ts, ...section, ...course };
     }))
-    await (this.commentsArr = this.sectionService.Comments.filter((x: { section_Id: any; }) => x.section_Id == this.sec.sectionid).map((com: any) => {
-      const user = this.userService.users.find((x: { userid: any; }) => x.userid == com.user_Id)
-      return { ...user, ...com }
-    }))
-    console.log(this.commentsArr);
+
     console.log(this.section.trainer_Id);
     await (this.meeting = this.section.meetingurl)
     await this.trainerService.GetTrainerById(this.section.trainer_Id)
@@ -146,6 +142,8 @@ export class CourseDetailsComponent {
     else
 
       this.courseLevel = Levels[3]
+      await this.sectionService.GetCommentsBySection(this.section.sectionid)
+    this.commentsArr = this.sectionService.myComments
   }
 
   submitAttendance() { }
@@ -336,7 +334,7 @@ export class CourseDetailsComponent {
     this.CommentForm.controls['user_Id'].setValue(this.user)
     this.CommentForm.controls['section_Id'].setValue(this.sec.sectionid)
     this.sectionService.CreateComment(this.CommentForm.value)
-    this.sectionService.GetAllComments()
+    this.ngOnInit()
   }
 }
 enum Levels {
