@@ -129,6 +129,7 @@ export class CourseDetailedComponent {
   endTime:any
   capacity:any
   myarr:any
+  Trimg:any
   async ngOnInit() {
     this.selectdSectionId = this.courseService.selectedSectionId;
     await this.sectionService.GetSectionInfo(this.selectdSectionId)
@@ -144,6 +145,9 @@ export class CourseDetailedComponent {
     this.courseImage = this.sectionService.mySec[0].courseimage
     this.materials = this.sectionService.mySec
     this.trainee = this.traineeSectionService.secTrainees
+    this.Trimg=this.auth.loggedUser.Imagename
+    // console.log( this.auth.loggedUser);
+    
     this.combinedArray = this.traineeSectionService.secTrainees.map((x: any)=>{
     const attendance = true
     return {...x,attendance}

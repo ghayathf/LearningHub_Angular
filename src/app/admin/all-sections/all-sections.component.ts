@@ -117,9 +117,7 @@ export class AllSectionsComponent {
       meetingurl: new FormControl('', Validators.required),
       sectioncapacity: new FormControl('', Validators.required),
       course_Id: new FormControl('', Validators.required),
-      trainer_Id: new FormControl('', Validators.required),
-      sectiondays:new FormControl('', Validators.required)
-    }
+      trainer_Id: new FormControl('', Validators.required)    }
   )
   UpdateForm = new FormGroup(
     {
@@ -130,7 +128,6 @@ export class AllSectionsComponent {
       enddate: new FormControl('', Validators.required),
       meetingurl: new FormControl('', Validators.required),
       sectioncapacity: new FormControl('', Validators.required),
-      sectiondays:new FormControl('', Validators.required),
       course_Id: new FormControl(''),
       trainer_Id: new FormControl('')
     }
