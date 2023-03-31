@@ -1,1 +1,34 @@
-<p>delete-account works!</p>
+<body>
+    <app-trainer-header></app-trainer-header>
+    <main>
+          <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#76BDF5" type="line-scale-party" [fullScreen]="true">
+          </ngx-spinner>
+          <div class="row ">
+            <app-trainer-banner></app-trainer-banner>
+           </div>
+    <div class="container">
+        <!-- Title and select START -->
+        <div class="card border bg-transparent rounded-3 justify-content-center">
+            <!-- Card header -->
+            <div class="card-header bg-transparent border-bottom">
+                <h1 class="card-header-title ">Deactivate Account</h1>
+            </div>
+            <!-- Card body -->
+            <div class="card-body">
+                <h3>Before you go...</h3>
+                <ul>
+                    <li>Are You Sure You want to delete your account?</li>
+                    <li>If you delete your account, you will lose your all data.</li>
+                </ul>
+                <div class="form-check form-check-md ">
+                   <br>
+                   <hr>
+                </div>
+               
+                <a (click)="logout()" class="btn btn-danger">Yes, I'd like to delete my account</a>
+            </div>
+        </div>
+        <!-- Title and select END -->
+    </div>
+    </main>
+    </body>

@@ -110,16 +110,16 @@ CreateUser(user: any): Promise<any> {
 
 DeleteTrainer(trainerId: number) {
   return new Promise<void>((resolve, reject) => {
-    this.spinner.show();
+    // this.spinner.show();
     this.http.delete("https://localhost:44391/api/Trainer/DeleteTrainer/"+trainerId).subscribe(
       {
         next: () => {
-          this.spinner.hide();
-          this.toaster.success("Trainer Deleted Successfuly");
+          // this.spinner.hide();
+          // this.toaster.success("Trainer Deleted Successfuly");
           resolve();
         },
         error: () => {
-          this.spinner.hide();
+          // this.spinner.hide();
           this.toaster.error("Error");
         }
       }
