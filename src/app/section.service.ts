@@ -167,4 +167,18 @@ myComments: any = []
       }
     )})
   }
+  mySec: any = []
+  GetSectionInfo(secId:any) {
+    this.spinner.show()
+    return new Promise<void>((resolve, reject) => {
+    this.http.get("https://localhost:44391/api/Section/GetSecInfo/"+secId).subscribe(
+      (res) => {
+        this.mySec = res
+      this.spinner.hide()
+    resolve(); },
+      (err) => {
+        console.log(err);
+      }
+    )})
+  }
 }

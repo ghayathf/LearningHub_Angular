@@ -194,7 +194,7 @@
             <div class=" overflow-hidden">
               <h4 class="mb-0 bold">{{ item.totalmark }}%</h4>
               <div class="progress progress-sm bg-primary bg-opacity-10">
-                  <mat-progress-bar mode="determinate" value="{{ item?.totalmark }}"></mat-progress-bar>
+                  <mat-progress-bar mode="determinate" value="{{ item.totalmark }}"></mat-progress-bar>
 
                 </div>
               </div>
@@ -339,29 +339,29 @@
 
 
                           <!-- Table item -->
-                          <tr *ngFor="let item of materials">
+                          <tr  *ngFor="let item of materials" >
                             <!-- Course item -->
-                            <td>
+                            <td *ngIf="item.materialname">
                               <div class="d-flex align-items-center">
                                 <!-- Image -->
 
                                 <div class="mb-0 ms-2">
                                   <!-- Title -->
-                                  <h4>{{item.materialname}}</h4>
+                                  <h4 >{{item.materialname}}</h4>
                                   <!-- Info -->
 
                                 </div>
                               </div>
                             </td>
                             <!-- Enrolled item -->
-                            <td class="text-center text-sm-start">{{item.dateuploaded | slice:0:10 }}</td>
+                            <td *ngIf="item.materialname" class="text-center text-sm-start">{{item.dateuploaded | slice:0:10 }}</td>
 
                             <!-- Price item -->
-                            <td> <button class="btn btn-sm btn-primary-soft btn-round mb-0"><i
+                            <td *ngIf="item.materialname"> <button class="btn btn-sm btn-primary-soft btn-round mb-0"><i
                                   class="fas fa-fw fa-download" (click)="downloadFile(item.materialid)"></i></button>
                             </td>
                             <!-- Action item -->
-                            <td>
+                            <td *ngIf="item.materialname">
                               <button href="#" class="btn btn-sm btn-success-soft btn-round me-1 mb-0"><i
                                   class="far fa-fw fa-edit" (click)="openUpdateDialog(item.materialid)"></i></button>
                               <button class=" btn btn-sm btn-danger-soft btn-round mb-0"><i class="fas fa-fw fa-times"
