@@ -110,16 +110,16 @@ CreateUser(user: any): Promise<any> {
 
 DeleteTrainer(trainerId: number) {
   return new Promise<void>((resolve, reject) => {
-    this.spinner.show();
+    // this.spinner.show();
     this.http.delete("https://localhost:44391/api/Trainer/DeleteTrainer/"+trainerId).subscribe(
       {
         next: () => {
-          this.spinner.hide();
-          this.toaster.success("Trainer Deleted Successfuly");
+          // this.spinner.hide();
+          // this.toaster.success("Trainer Deleted Successfuly");
           resolve();
         },
         error: () => {
-          this.spinner.hide();
+          // this.spinner.hide();
           this.toaster.error("Error");
         }
       }
@@ -150,19 +150,22 @@ DeleteUser(trainerId: number) {
 }
 trainer:any
 GetTrainerById(trainerId:number){
+  return new Promise<void>((resolve, reject) => {
   this.spinner.show()
+
   this.http.get("https://localhost:44391/api/Trainer/GetTrainerByID/"+trainerId).subscribe(
     {
       next: (res) => {
         this.trainer = res
         this.spinner.hide();
+        resolve()
       },
       error: (err) => {
         console.log(err);
         this.spinner.hide();
       }
     }
-  )
+  )})
 }
 
 
@@ -175,13 +178,30 @@ async AbsenceEmail(object:any){
     debugger
     console.log("SUCCESS!", response.status, response.text);
     resolve();
-    
+
     },
     (error: any) => {
       debugger
     console.log("FAILED!", error);
-    
+
    });
   })
 }
+myTrainer:any=[]
+  async GetTrainerByUser(id:any){
+
+    return new Promise<void>((resolve, reject) => {
+    this.http.get("https://localhost:44391/api/User/GetUserByTraineeInfo/"+id).subscribe(
+      {
+        next:(res)=>{
+        this.myTrainer=res
+        this.spinner.hide()
+        resolve()
+    },
+        error:(err)=>{this.spinner.hide()
+        console.log(err);
+        }
+      }
+    )})
+  }
 }

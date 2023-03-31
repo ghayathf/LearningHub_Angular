@@ -8,7 +8,7 @@
         <!-- Logo START -->
         <a class="navbar-brand" routerLink="/Trainee">
           <img class="dark-mode-item navbar-brand-item h-30px"
-            src="../../../assets/HomeAssets/images/{{Data.homes[0].logo}}" alt="">
+            src="../../../assets/HomeAssets/images/{{logo}}" alt="">
         </a>
         <!-- Logo END -->
 
@@ -98,11 +98,12 @@
                   <hr class="dropdown-divider">
                 </li>
                 <!-- Links -->
-                <li><a class="dropdown-item bg-success-soft-hover" href="" routerLink="/Trainee/Testimonial"><i class="bi bi-envelope-open-heart"></i>
+                <li><a class="dropdown-item bg-success-soft-hover" routerLink="/Trainee/Testimonial"><i class="bi bi-envelope-open-heart"></i>
                   Make Testimonial</a></li>
                 <li><a class="dropdown-item" routerLink="/Trainee/EditTraineeProfile"><i
                       class="bi bi-person fa-fw me-2"></i>Edit Profile</a></li>
-
+                      <li><a class="dropdown-item" routerLink="/Trainee/DeleteAccount"><i
+                        class="bi bi-trash3 fa-fw me-2"></i>Delete Account</a></li>
                 <li><a class="dropdown-item bg-danger-soft-hover" href="" (click)="logout()"><i
                       class="bi bi-power fa-fw me-2"></i>Sign Out</a></li>
 

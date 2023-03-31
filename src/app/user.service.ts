@@ -56,7 +56,7 @@ export class UserService {
         {
           next: () => {
             this.spinner.hide();
-            this.toaster.success("User Deleted Successfuly");
+            // this.toaster.success("User Deleted Successfuly");
             resolve();
           },
           error: () => {

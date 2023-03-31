@@ -25,23 +25,23 @@
             <div class="col-sm-6 col-lg-4">
                 <div class="text-center p-4 bg-primary bg-opacity-10 border border-primary rounded-3">
                     <h5>Total Materials</h5>
-                    <h2 class="mb-0 fs-1 text-primary">{{ this.materialService.materials.length }}</h2>
+                    <h2 class="mb-0 fs-1 text-primary">{{ this.totalMaterials}}</h2>
                 </div>
             </div>
 
             <!-- Course item -->
             <div class="col-sm-6 col-lg-4">
                 <div class="text-center p-4 bg-success bg-opacity-10 border border-success rounded-3">
-                    <h6>Activated Courses</h6>
-                    <h2 class="mb-0 fs-1 text-success">996</h2>
+                    <h6>Total Tasks</h6>
+                    <h2 class="mb-0 fs-1 text-success">{{this.totalTasks}}</h2>
                 </div>
             </div>
 
             <!-- Course item -->
             <div class="col-sm-6 col-lg-4">
                 <div class="text-center p-4  bg-warning bg-opacity-15 border border-warning rounded-3">
-                    <h6>Pending Courses</h6>
-                    <h2 class="mb-0 fs-1 text-warning">200</h2>
+                    <h6>Total Solutions</h6>
+                    <h2 class="mb-0 fs-1 text-warning">{{this.totalSolutions}}</h2>
                 </div>
             </div>
         </div>
@@ -156,27 +156,7 @@
             <!-- Card body END -->
 
             <!-- Card footer START -->
-            <div class="card-footer bg-transparent pt-0">
-                <!-- Pagination START -->
-                <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
-                    <!-- Content -->
-                    <p class="mb-0 text-center text-sm-start">Showing 1 to 8 of 20 entries</p>
-                    <!-- Pagination -->
-                    <nav class="d-flex justify-content-center mb-0" aria-label="navigation">
-                        <ul
-                            class="pagination pagination-sm pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
-                            <li class="page-item mb-0"><a class="page-link" href="#" tabindex="-1"><i
-                                        class="fas fa-angle-left"></i></a></li>
-                            <li class="page-item mb-0"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item mb-0 active"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item mb-0"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item mb-0"><a class="page-link" href="#"><i
-                                        class="fas fa-angle-right"></i></a></li>
-                        </ul>
-                    </nav>
-                </div>
-                <!-- Pagination END -->
-            </div>
+          
             <!-- Card footer END -->
         </div>
         <!-- Card END -->
@@ -190,7 +170,7 @@
 <ng-template #DeleteForm>
     <h2 mat-dialog-content>Would you like to Delete this course ?</h2>
     <div mat-dialog-actions>
-        <input type="button" mat-dialog-close class="btn btn-success" value="Yes" (click)="DeleteMaterial()">
+        <input type="button" mat-dialog-close class="btn btn-danger" value="Yes" (click)="DeleteMaterial()">
         <input type="button" mat-dialog-close class="btn btn-error" value="No">
     </div>
 </ng-template>

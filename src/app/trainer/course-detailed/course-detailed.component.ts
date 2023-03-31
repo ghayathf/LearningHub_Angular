@@ -107,7 +107,6 @@ export class CourseDetailedComponent {
     this.dialog.open(this.Create)
   }
   selectdSectionId: any;
-  selectedCourseId: any;
   materials: any;
   traineeSection: any = []
   trainee: any = []
@@ -129,77 +128,34 @@ export class CourseDetailedComponent {
   startTime:any
   endTime:any
   capacity:any
+  myarr:any
+  Trimg:any
   async ngOnInit() {
-
-    await this.sectionService.GetAllSections()
-    await this.materialService.GetAllMaterial();
-    await this.traineeSectionService.GetAllTraineeSection()
-    await this.traineeSectionService.GetAllTrainees()
-    await this.userService.getAllUsers()
-    await this.taskService.GetAllTasks();
-    await this.sectionService.GetAllComments()
     this.selectdSectionId = this.courseService.selectedSectionId;
-    this.selectedCourseId = this.courseService.selectedCourseId;
-    await this.courseService.GetCourseById(this.selectedCourseId)
+    await this.sectionService.GetSectionInfo(this.selectdSectionId)
     await this.traineeSectionService.GetAllSecTrainees(this.selectdSectionId)
-    await this.sectionService.GetSectionById(this.selectdSectionId)
-    this.startTime = this.sectionService.section.startdate.slice(0,10)
-    this.endTime = this.sectionService.section.enddate.slice(0,10)
-    this.capacity = this.sectionService.section.sectioncapacity
+    await this.taskService.GetAllTasks();
+    await this.sectionService.GetCommentsBySection(this.selectdSectionId)
+    this.startTime = this.sectionService.mySec[0].startdate.slice(0,10)
+    this.endTime = this.sectionService.mySec[0].enddate.slice(0,10)
+    this.capacity = this.sectionService.mySec[0].sectioncapacity
+    this.courseLevel = Levels[this.sectionService.mySec[0].courselevel]
+    this.courseName = this.sectionService.mySec[0].coursename
+    this.courseDesc = this.sectionService.mySec[0].coursedescription
+    this.courseImage = this.sectionService.mySec[0].courseimage
+    this.materials = this.sectionService.mySec
+    this.trainee = this.traineeSectionService.secTrainees
+    this.Trimg=this.auth.loggedUser.Imagename
+    // console.log( this.auth.loggedUser);
     
-    if (this.courseService.course.courselevel == 1)
-
-      this.courseLevel = Levels[1]
-
-    else if (this.courseService.course.courselevel == 2)
-
-      this.courseLevel = Levels[2]
-
-    else
-
-      this.courseLevel = Levels[3]
-
-    this.courseName = this.courseService.course.coursename
-    this.courseDesc = this.courseService.course.coursedescription
-    this.courseImage = this.courseService.course.courseimage
-
-    this.materials = this.materialService.materials.filter((x: { section_Id: any; }) => x.section_Id == this.selectdSectionId)
-
-    this.traineeSection = this.traineeSectionService.TraineeSections.filter((x: { section_id: any; }) => x.section_id == this.selectdSectionId)
-
-
-    this.trainee = this.traineeSectionService.allTrainees
-    this.trainee = this.trainee.filter((t: { traineeid: any; }) => {
-      return this.traineeSection.filter((ts: { trainee_Id: any; }) => ts.trainee_Id == t.traineeid);
-    });
-
-    this.users = this.userService.users
-    this.users = this.users.filter((u: { userid: any; }) => {
-      return this.trainee.some((ts: { user_Id: any; }) => ts.user_Id === u.userid);
-    });
-
-
     this.combinedArray = this.traineeSectionService.secTrainees.map((x: any)=>{
     const attendance = true
     return {...x,attendance}
    })
-    console.log(this.combinedArray);
-
-
-
     this.tasks = this.taskService.tasks.filter((x: { sectionidd: any; }) => x.sectionidd == this.selectdSectionId)
     this.user = this.auth.gh
-
     this.trainees = this.traineeSectionService.allTrainees
-    this.userobj = this.userService.user
-    this.userobj = this.userService.user
-    this.sec = this.sectionService.sections.find((x: { sectionid: any; }) => x.sectionid == this.selectdSectionId)
-
-    this.commentsArr = this.sectionService.Comments.filter((x: { section_Id: any; })=>x.section_Id == this.selectdSectionId).map((com:any)=>
-    {
-      const user = this.userService.users.find((x: { userid: any; })=>x.userid == com.user_Id)
-      return{...user,...com}
-    })
+    this.commentsArr = this.sectionService.myComments
   }
 
   absentArr: any[] = []
@@ -220,15 +176,15 @@ export class CourseDetailedComponent {
       if (this.combinedArray[i].attendance == true) {
         this.traineeSectionService.CreateAbsence(this.combinedArray[i].tsid)
 
-      await this.sectionService.GetSectionById(this.combinedArray[i].section_id)
+       await this.sectionService.GetSectionById(this.combinedArray[i].section_id)
 
-      await this.courseService.GetCourseById( this.sectionService.section.course_Id)
+      /*await this.courseService.GetCourseById( this.sectionService.section.course_Id) */
 
       await this.trainerService.GetTrainerById(this.sectionService.section.trainer_Id)
 
       await this.userService.getUserById(this.user)
-      debugger
-        await this.sendEmail(this.combinedArray[i].firstname,this.courseService.course.coursename,this.userService.user.firstname,this.userService.user.lastname,this.combinedArray[i].email);
+
+        await this.sendEmail(this.combinedArray[i].firstname,this.sectionService.mySec[0].coursename,this.userService.user.firstname,this.userService.user.lastname,this.combinedArray[i].email);
 
       }
       else {
@@ -376,12 +332,16 @@ export class CourseDetailedComponent {
   solutions:any=[]
   async OpenSolsDialog(id:any){
     this.solsArr = this.combinedArray.find((x: { tsid: any; })=> x.tsid == id)
+    console.log(this.solsArr);
+
     await this.soltionService.GetAllSolution()
     await this.taskService.GetAllTasks()
     this.solutions = this.soltionService.Solutions.filter((x: { t_S_Id: any; })=>x.t_S_Id == this.solsArr.tsid).map((t: { task_Id: any; })=>{
       const task = this.taskService.tasks.find((ta: { taskid: any; })=>ta.taskid == t.task_Id);
       return {...t,...task}
     })
+    console.log(this.solutions);
+
     const dialogConfig = new MatDialogConfig();
     dialogConfig.maxWidth = '800px';
     dialogConfig.maxHeight = '80vh';
@@ -508,12 +468,12 @@ export class CourseDetailedComponent {
       }
     )
     async CreateComment(){
-      this.commentDate = new Date(Date.now())
-      this.CommentForm.controls['datepublished'].setValue(this.commentDate)
-      this.CommentForm.controls['user_Id'].setValue(this.user)
-      this.CommentForm.controls['section_Id'].setValue(this.sec.sectionid)
+      this.commentDate = await new Date(Date.now())
+      await this.CommentForm.controls['datepublished'].setValue(this.commentDate)
+      await this.CommentForm.controls['user_Id'].setValue(this.user)
+      await this.CommentForm.controls['section_Id'].setValue(this.selectdSectionId)
       await this.sectionService.CreateComment(this.CommentForm.value)
-      await this.sectionService.GetAllComments()
+      this.ngOnInit()
     }
 }
 enum Levels {

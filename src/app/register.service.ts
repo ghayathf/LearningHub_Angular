@@ -61,6 +61,7 @@ export class RegisterService {
 
   Trainee: any = [];
   GetAllTrainee() {
+    return new Promise<void>((resolve, reject) => {
 
     this.http.get("https://localhost:44391/api/Trainee/gatAllTrainees").subscribe(
       {
@@ -68,12 +69,13 @@ export class RegisterService {
           this.Trainee = res;
 
           this.spinner.hide();
+          resolve()
         },
         error: () => {
           this.spinner.hide();
         }
       }
-    )
+    )})
   }
 
   CreateTrainne(Trainee: any) {
@@ -95,17 +97,17 @@ export class RegisterService {
     )
   }
 
-  filterData: any = [];
+  filterData: any ;
 
   GetAllTraineeUser() {
-
+    return new Promise<void>((resolve, reject) => {
     this.spinner.show();
     this.http.get("https://localhost:44391/api/Trainee/GetAllTraineeUser").subscribe(
       {
         next: (res) => {
           this.spinner.hide();
           this.filterData = res;
-
+resolve()
         },
         error: (err) => {
           this.spinner.hide();
@@ -114,6 +116,7 @@ export class RegisterService {
         }
       }
     )
+    })
 
   }
 
@@ -128,6 +131,7 @@ export class RegisterService {
           next: () => {
             this.spinner.hide();
             this.toaster.success("Request Deleted Successfuly");
+    
             resolve();
           },
           error: () => {
@@ -302,5 +306,27 @@ export class RegisterService {
         }
       )
     })
+  }
+  
+
+  DeleteTrainee(id: any) {
+    // this.spinner.show();
+    return new Promise<void>((resolve, reject) => {
+      this.http.delete("https://localhost:44391/api/Trainee/DeleteTrainee/" + id).subscribe(
+        {
+          next: () => {
+            // this.spinner.hide();
+            // this.toaster.success("Account Deleted Successfuly");
+            resolve();
+          },
+          error: () => {
+            // this.spinner.hide();
+            this.toaster.error("error");
+          }
+        }
+      )
+    })
+
+
   }
 }

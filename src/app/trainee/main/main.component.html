@@ -32,9 +32,9 @@
         <span class="display-6 lh-1 text-purple mb-0"><i class="fas fa-clipboard-check fa-fw"></i></span>
         <div class="ms-4">
           <div class="d-flex">
-            <h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="52"	data-purecounter-delay="200">{{this.ts?.finalSolutions.length}}</h5>
+            <h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="52"	data-purecounter-delay="200">{{this.combinedArray[0].traineefield}}</h5>
           </div>
-          <p class="mb-0 h6 fw-light">Submitted Solutions</p>
+          <p class="mb-0 h6 fw-light">Trainee Field</p>
         </div>
       </div>
     </div>
@@ -44,9 +44,9 @@
         <span class="display-6 lh-1 text-success mb-0"><i class="fas fa-medal fa-fw"></i></span>
         <div class="ms-4">
           <div class="d-flex">
-            <h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="8" data-purecounter-delay="300">{{this.ts?.finalCertificates.length}}</h5>
+            <h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="8" data-purecounter-delay="300">{{this.combinedArray[0].university}}</h5>
           </div>
-          <p class="mb-0 h6 fw-light">Achieved Certificates</p>
+          <p class="mb-0 h6 fw-light">University</p>
         </div>
       </div>
     </div>
@@ -65,7 +65,7 @@
 
       <!-- Search and select START -->
       <!-- <div class="row g-3 align-items-center justify-content-between mb-4">
-        
+
         <div class="col-md-8">
           <form class="rounded position-relative">
             <input class="form-control pe-5 bg-transparent" type="search" placeholder="Search" aria-label="Search">
@@ -75,8 +75,8 @@
           </form>
         </div>
 
-       
-        
+
+
       </div> -->
       <!-- Search and select END -->
 
@@ -88,7 +88,7 @@
             <tr>
               <th scope="col" class="border-0 rounded-start" style=" background-color:#1d3b53 ;">Course</th>
               <!-- <th scope="col" class="border-0 " style=" background-color:#1d3b53 ;"></th> -->
-              
+
               <th scope="col" class="border-0"style=" background-color:#1d3b53 ;">Period</th>
               <th scope="col" class="border-0"style=" background-color:#1d3b53 ;">Total Attendance</th>
               <th scope="col" class="border-0 rounded-end"style=" background-color:#1d3b53 ;">Action</th>
@@ -101,7 +101,7 @@
             <tr *ngFor="let item of combinedArray">
               <!-- Table data -->
               <!-- <td> -->
-                
+
                   <!-- Image -->
                   <!-- <div class="w-70px">
                     <img src="../../../assets/HomeAssets/images/{{item.courseimage}}" class="avatar-img rounded" alt="">
@@ -121,8 +121,8 @@
                         </div>
                       </div> -->
    </div></td>
-               
-              
+
+
 
               <!-- Table data -->
               <td> <br>{{ item.startdate|slice:0:10 }} to {{ item.enddate|slice:0:10 }}<br> <br>
@@ -148,7 +148,7 @@
       </div>
       <!-- Course list table END -->
 
-   
+
       <!-- Pagination END -->
     </div>
     <!-- Card body START -->
@@ -158,7 +158,7 @@
 
 </div>
     <!-- </div> -->
-  
+
 </section>
 </main>
 </body>

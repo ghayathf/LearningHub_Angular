@@ -4,6 +4,7 @@ import { NgxSpinnerService, Spinner } from 'ngx-spinner';
 import { AuthGuard } from 'src/app/auth.guard';
 import { CourseService } from 'src/app/course.service';
 import { SectionService } from 'src/app/section.service';
+import { TraineeSectionService } from 'src/app/trainee-section.service';
 import { TrainerService } from 'src/app/trainer.service';
 
 @Component({
@@ -16,7 +17,7 @@ export class MainComponent {
   /**
    *
    */
-  constructor(public trainerService: TrainerService, public sectionService: SectionService, public auth: AuthGuard, public courseService: CourseService, private router: Router, public spinner: NgxSpinnerService) {
+  constructor(public trainerService: TrainerService, public sectionService: SectionService, public auth: AuthGuard, public courseService: CourseService, private router: Router,public tsService:TraineeSectionService, public spinner: NgxSpinnerService) {
 
   }
   userId: any
@@ -26,19 +27,19 @@ export class MainComponent {
   combinedArray: any = []
   newArray: any = []
   sectionsLength:any
+  allStds:any
+  foundArray:any
+  trainsLen:any
+  trainerPos:any
   async ngOnInit() {
     this.userId = this.auth.gh
-    await this.trainerService.GetAllTrainers()
-    this.trainerId = this.trainerService.trainers.find((x: { user_Id: any; }) => x.user_Id == this.userId).trainerid
+    await this.trainerService.GetTrainerByUser(this.userId)
+    this.combinedArray = this.trainerService.myTrainer
+    this.trainerId = this.combinedArray[0].trainerid
+    this.trainerPos = this.combinedArray[0].trainerposition
+    this.trainsLen = this.combinedArray[0].qualification
     await this.sectionService.GetAllSections()
     this.sections = this.sectionService.sections.filter((x: { trainer_Id: any; }) => x.trainer_Id == this.trainerId)
-    await this.courseService.GetAllCourses()
-    this.combinedArray = this.sectionService.sections.filter((x: { trainer_Id: any; }) => x.trainer_Id == this.trainerId).map((s: any) => {
-      const coursee = this.courseService.courses.find((coursee: any) => coursee.courseid === s.course_Id);
-
-      return { ...s, ...coursee };
-    });
-    console.log(this.combinedArray);
 
     this.sectionsLength = this.sections.length
   }

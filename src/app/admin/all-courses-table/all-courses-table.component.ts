@@ -44,11 +44,11 @@ export class AllCoursesTableComponent {
       courselevel: new FormControl(''),
       category_Id: new FormControl(''),
     })
-
-  ngOnInit() {
-    this.courseService.GetAllCourses()
-    this.categoryService.GetAllCategories()
-    
+  tcourse: any
+  async ngOnInit() {
+    await this.courseService.GetAllCourses()
+    await this.categoryService.GetAllCategories()
+    this.tcourse = this.courseService.courses.length
   }
   GetCourseById(courseid: number) {
     this.courseService.GetCourseById(courseid)
@@ -63,14 +63,14 @@ export class AllCoursesTableComponent {
     await this.courseService.deleteCourse(this.selectedItem)
     this.courseService.GetAllCourses()
   }
-course:any
-selectedUpdatedCategory:any
-selectedUpdatedLevel:any
-currentImg:any
-courseLevel?:any
-courseCategory?:any
-category?:any
-categoryName?:any
+  course: any
+  selectedUpdatedCategory: any
+  selectedUpdatedLevel: any
+  currentImg: any
+  courseLevel?: any
+  courseCategory?: any
+  category?: any
+  categoryName?: any
   async openUpdateDialog(courseid: number) {
     await this.courseService.GetCourseById(courseid);
     await this.UpdateCourseForm.patchValue(this.courseService.course);
@@ -78,48 +78,49 @@ categoryName?:any
     const dialogConfig = new MatDialogConfig();
     dialogConfig.maxWidth = '800px';
     dialogConfig.maxHeight = '80vh';
-    this.course=this.courseService.course
-    this.selectedUpdatedCategory=this.course.category_Id
-    this.selectedUpdatedLevel=this.course.courselevel
-    if(this.course.courselevel==1)
-    this.courseLevel=Levels.Beginner
-    else if(this.course.courselevel==2)
-    this.courseLevel=Levels[2]
+    this.course = this.courseService.course
+    this.selectedUpdatedCategory = this.course.category_Id
+    this.selectedUpdatedLevel = this.course.courselevel
+    if (this.course.courselevel == 1)
+      this.courseLevel = Levels.Beginner
+    else if (this.course.courselevel == 2)
+      this.courseLevel = Levels[2]
     else
-    this.courseLevel=Levels[3]
-    this.category=this.categoryService.GetCategoryById(this.course.category_Id)
-    this.CourseName=this.category.categoryname
-    this.currentImg=this.course.courseimage
+      this.courseLevel = Levels[3]
+    this.category = this.categoryService.GetCategoryById(this.course.category_Id)
+    this.CourseName = this.category.categoryname
+    this.currentImg = this.course.courseimage
     this.dialog.open(this.Update, dialogConfig);
   }
-  
-  async UpdateCourse() {
-    if(this.selectedUpdatedCategory!=null)
-    this.UpdateCourseForm.patchValue({
-      category_Id: this.selectedUpdatedCategory
-    });
-    else{
-      this.selectedUpdatedCategory=this.course.category_Id
-    this.UpdateCourseForm.patchValue({
-      category_Id: this.selectedUpdatedCategory
-    });}
 
-    if(this.selectedUpdatedLevel!=null)
-    this.UpdateCourseForm.patchValue({
-      courselevel: this.selectedUpdatedLevel
-    });
-    else{
-      this.selectedUpdatedLevel=this.course.courselevel
+  async UpdateCourse() {
+    if (this.selectedUpdatedCategory != null)
+      this.UpdateCourseForm.patchValue({
+        category_Id: this.selectedUpdatedCategory
+      });
+    else {
+      this.selectedUpdatedCategory = this.course.category_Id
+      this.UpdateCourseForm.patchValue({
+        category_Id: this.selectedUpdatedCategory
+      });
+    }
+
+    if (this.selectedUpdatedLevel != null)
+      this.UpdateCourseForm.patchValue({
+        courselevel: this.selectedUpdatedLevel
+      });
+    else {
+      this.selectedUpdatedLevel = this.course.courselevel
       this.UpdateCourseForm.patchValue({
         courselevel: this.selectedUpdatedLevel
       });
     }
-    if(this.selectedImg!=null)
-    this.UpdateCourseForm.patchValue({
-      courseimage: this.selectedImg
-    });
-    else
-    { this.selectedImg=this.currentImg
+    if (this.selectedImg != null)
+      this.UpdateCourseForm.patchValue({
+        courseimage: this.selectedImg
+      });
+    else {
+      this.selectedImg = this.currentImg
       this.UpdateCourseForm.patchValue({
         courseimage: this.selectedImg
       });
@@ -131,11 +132,11 @@ categoryName?:any
   async openDetailsDialog(courseid: number) {
     await this.courseService.GetCourseById(courseid);
     await this.categoryService.GetCategoryById(this.courseService.course.category_Id);
-    
+
     const dialogConfig = new MatDialogConfig();
     dialogConfig.maxWidth = '800px';
     dialogConfig.maxHeight = '80vh';
-    this.dialog.open(this.Details,dialogConfig);
+    this.dialog.open(this.Details, dialogConfig);
   }
   OpenCreateDialog() {
     const dialogConfig = new MatDialogConfig();
@@ -175,7 +176,7 @@ categoryName?:any
   print(category: string) {
     console.log(category)
   }
- selectedImg:any
+  selectedImg: any
   UploadImage(input: any) {
     if (input.files[0] != null) {
       let uplodedFile = input.files[0]; // image fille
@@ -183,7 +184,7 @@ categoryName?:any
       formdata.append('file', uplodedFile);
       this.courseService.UploadImage(formdata);
     }
-    this.selectedImg=input
+    this.selectedImg = input
   }
   Levels = Levels;
 }

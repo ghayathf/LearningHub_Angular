@@ -36,7 +36,8 @@ export class TestimonialService {
       this.spinner.show();
       this.http.get("https://localhost:44391/api/Testimonial/GetAllAcceptedTestimonial").subscribe(
         (res) => {
-          this.testimonials = res
+         
+          this.Acceptedtestimonials=res
           this.spinner.hide();
           resolve();
         },
