@@ -10,6 +10,7 @@ import { TestimonialComponent } from '../admin/testimonial/testimonial.component
 import { TestimonialsComponent } from './testimonials/testimonials.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { DetailsComponent } from './details/details.component';
+import { RegisterDoneComponent } from './register-done/register-done.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path: "details",
     component: DetailsComponent
+  },
+  {
+    path: "done",
+    component: RegisterDoneComponent
   }
 ];
 

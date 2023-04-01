@@ -47,7 +47,7 @@ export class AllSectionsComponent {
     await this.userService.getAllUsers()
     await this.trainerService.GetAllTrainers()
     await this.traineeServie.GetAllAcceptedTrainee();
-    this.courseService.GetAllCourses()
+    await this.courseService.GetAllCourses()
     this.trainers = this.trainerService.trainers
     this.users = this.userService.users
     this.combinedArray = this.users.filter((x: { roleId: number; }) => x.roleId == 3).map((user: any) => {
@@ -117,8 +117,7 @@ export class AllSectionsComponent {
       meetingurl: new FormControl('', Validators.required),
       sectioncapacity: new FormControl('', Validators.required),
       course_Id: new FormControl('', Validators.required),
-      trainer_Id: new FormControl('', Validators.required)
-    }
+      trainer_Id: new FormControl('', Validators.required)    }
   )
   UpdateForm = new FormGroup(
     {
@@ -147,8 +146,15 @@ export class AllSectionsComponent {
     this.CreateForm.patchValue({
       trainer_Id: this.selectedTrainer
     });
+    
     await this.sectionService.CreateSection(this.CreateForm.value);
-    this.sectionService.GetAllSections();
+    await this.sectionService.GetAllSections();
+    await this.userService.getAllUsers()
+    await this.trainerService.GetAllTrainers()
+    await this.traineeServie.GetAllAcceptedTrainee();
+    await this.courseService.GetAllCourses()
+
+
 
   }
   selectedItem: number = 0
@@ -158,7 +164,7 @@ export class AllSectionsComponent {
   }
   async DeleteSection() {
     await this.sectionService.DeleteSection(this.selectedItem)
-    this.sectionService.GetAllSections()
+    await this.sectionService.GetAllSections()
   }
 
   selectedUpdatedCourse: any
@@ -234,7 +240,7 @@ export class AllSectionsComponent {
     });
 
     await this.sectionService.UpdateSection(this.UpdateForm.value);
-    this.sectionService.GetAllSections();
+   await this.sectionService.GetAllSections();
   }
   async openDetailsDialog(sectionid: number) {
 

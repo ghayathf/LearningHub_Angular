@@ -318,7 +318,7 @@
 										</div>
 									</div>
 
-
+									
 
 
 									<!-- Step 1 button -->
@@ -458,6 +458,7 @@
 											</mat-form-field>
 										</div>
 									</div>
+								
 
 								</form>
 								<div class="d-flex justify-content-end mt-3">
@@ -505,22 +506,22 @@
 								<!-- Course info and avatar -->
 								<div class="row">
 									<div class="col-md-6">
-										<h3>Start Time : {{this.sectionService.section.starttime}}</h3>
+										<h3>Start Time: {{this.sectionService.section.starttime}}</h3>
 										<hr>
 									</div>
 									<!-- Info -->
 									<div class="col-md-6">
-										<h3 class="mb-3">End Time : {{this.sectionService.section.endtime}}</h3>
+										<h3 class="mb-3">End Time: {{this.sectionService.section.endtime}}</h3>
 										<hr>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-md-6">
-										<h3 class="mb-3">Start Date : {{this.sectionService.section.startdate}}</h3>
+										<h3 class="mb-3">Start Date: {{this.sectionService.section.startdate | slice: 0:10}}</h3>
 										<hr>
 									</div>
 									<div class="col-md-6">
-										<h3 class="mb-3">End Date : {{this.sectionService.section.enddate}}</h3>
+										<h3 class="mb-3">End Date: {{this.sectionService.section.enddate | slice: 0:10}}</h3>
 										<hr>
 									</div>
 								</div>
@@ -530,7 +531,7 @@
 								<!-- Information START -->
 								<div class="row">
 									<div class="col-md-6">
-										<h3 class="mb-3">Section Capacity :
+										<h3 class="mb-3">Section Capacity:
 											{{this.sectionService.section.sectioncapacity}}</h3>
 										<hr>
 									</div>
@@ -538,6 +539,12 @@
 										<h3 class="mb-3"><a class="btn btn-info" target="_blank"
 												href="{{ this.sectionService.section.meetingurl }}">Meeting Url</a></h3>
 										<hr>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<h3 class="mb-3">Section Days:
+											{{this.sectionService.section.sectiondays}}</h3>
 									</div>
 								</div>
 								<!-- <div class="row">

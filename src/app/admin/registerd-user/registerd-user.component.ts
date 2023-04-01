@@ -48,6 +48,16 @@ export class RegisterdUserComponent {
     //  pdf.text('Paranyan loves jsPDF', 35, 25)
 
     autoTable(pdf, { html: "#excel-table" });
+    const currentDate = new Date();
+    const formattedDate = `${currentDate.getDate()}-${currentDate.getMonth() + 1}-${currentDate.getFullYear()}`;
+
+
+    pdf.text("Register User Report", pdf.internal.pageSize.getWidth() / 2, 5, {
+      align: 'center'
+    });
+    pdf.text("Date : " + formattedDate, pdf.internal.pageSize.getWidth() / 2, 11, {
+      align: 'center'
+    });
 
     pdf.save("Users.pdf");
 
