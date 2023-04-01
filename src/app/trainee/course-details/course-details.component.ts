@@ -13,6 +13,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SolutionService } from 'src/app/solution.service';
 import { CategoryService } from 'src/app/category.service';
 import { RegisterService } from 'src/app/register.service';
+import jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-course-details',
@@ -63,83 +64,100 @@ export class CourseDetailsComponent {
   TrainerUser: any
   thisTrainer: any
   SectionForTrainer:any
+  name:any
   async ngOnInit() {
 
     await (this.currentDate = new Date(Date.now()).toISOString().slice(0, 10))
     await (this.user = this.auth.gh)
-    await this.traineeSectionService.GetAllTrainees()
-    await (this.trainees = this.traineeSectionService.allTrainees)
-    await this.traineeSectionService.GetAllTraineeSection()
-    await this.userService.getUserById(this.user)
-    await console.log("trainee" + this.userService.user.firstname);
+    this.name = this.auth.loggedUser.Firstname+" "+this.auth.loggedUser.Lastname
 
-    await this.userService.getAllUsers()
-    await this.sectionService.GetAllSections()
+    //await this.traineeSectionService.GetAllTrainees()
+    //await (this.trainees = this.traineeSectionService.allTrainees)
+    //await (this.currTrainee = this.trainees.find((x: { user_Id: any; }) => x.user_Id === this.user))
+
+    //await this.traineeSectionService.GetAllTraineeSection()
+    //await this.userService.getUserById(this.user)
+    //await console.log("trainee" + this.userService.user.firstname);
+
+    //await this.userService.getAllUsers()
+    //await this.sectionService.GetAllSections()
     await (this.section = this.sectionService.section)
-    await this.courseService.GetAllCourses()
-    await this.taskService.GetAllTasks()
+    this.currTrainee = this.sectionService.selectedTraineeId
+    await this.sectionService.GettsInfo(this.section.sectionid,this.sectionService.selectedTraineeId)
+    console.log(this.combinedArray[0]);
+
+    //await this.courseService.GetAllCourses()
+    //await this.taskService.GetAllTasks()
     await this.materialService.GetAllMaterial()
-    await this.sectionService.GetAllComments()
+    //await this.sectionService.GetAllComments()
     await (this.userobj = this.userService.user)
-    await (this.currTrainee = this.trainees.find((x: { user_Id: any; }) => x.user_Id === this.user))
-    await (this.ts = this.traineeSectionService.TraineeSections.find((x: { trainee_Id: any; }) => x.trainee_Id == this.currTrainee.traineeid))
-    await (this.sec = this.sectionService.sections.find((x: { sectionid: any; }) => x.sectionid == this.ts.section_id))
-    await (this.course = this.courseService.courses.find((x: { courseid: any; }) => x.courseid == this.sec.course_Id))
-    await (this.tasks = this.taskService.tasks.filter((x: { sectionidd: any; }) => x.sectionidd == this.sec.sectionid))
-    await (this.material = this.materialService.materials.filter((x: { section_Id: any; }) => x.section_Id == this.sec.sectionid))
-    await (this.combinedArray = this.traineeSectionService.TraineeSections.filter((x: { trainee_Id: number; }) => x.trainee_Id === this.currTrainee.traineeid).map((ts: any) => {
+    await (this.combinedArray = this.sectionService.currentts)
+    await (this.ts = this.combinedArray[0])
+    await (this.sec = this.combinedArray[0])
+    await (this.course = this.combinedArray[0])
+    await (this.tasks = this.combinedArray)
+    await (this.material = this.materialService.materials.filter((x: { section_Id: any; }) => x.section_Id == this.combinedArray[0].sectionid))
+
+      /* this.traineeSectionService.TraineeSections.filter((x: { trainee_Id: number; }) => x.trainee_Id === this.currTrainee.traineeid).map((ts: any) => {
       const section = this.sectionService.sections.find((sec: any) => sec.sectionid == ts.section_id);
       const course = this.courseService.courses.find((x: any) => x.courseid == section.course_Id)
       return { ...ts, ...section, ...course };
-    }))
+    }) */
 
-    console.log(this.section.trainer_Id);
-    await (this.meeting = this.section.meetingurl)
-    await this.trainerService.GetTrainerById(this.section.trainer_Id)
-    await this.userService.getAllUsers();
-    await (this.TrainerUser = this.userService.users.find((x: { userid: any; }) => x.userid == this.trainerService.trainer.user_Id))
-    await (this.TrainerImg = this.TrainerUser.imagename)
-    await (this.Trainerfname = this.TrainerUser.firstname)
-    await (this.Trainerlname = this.TrainerUser.lastname)
-    await (this.Traineremail = this.TrainerUser.email)
-    await (this.qualif = this.trainerService.trainer.qualification)
-    await this.trainerService.GetAllTrainers()
-    await (this.thisTrainer = this.trainerService.trainers.find((x: { trainerid: any; }) => x.trainerid == this.section.trainer_Id))
+    //console.log(this.section.trainer_Id);
+    await (this.meeting = this.combinedArray[0].meetingurl)
+    //await this.trainerService.GetTrainerById(this.section.trainer_Id)
+    await (this.TrainerImg = this.combinedArray[0].imagename)
+    await (this.Trainerfname = this.combinedArray[0].firstname)
+    await (this.Trainerlname = this.combinedArray[0].lastname)
+    await (this.Traineremail = this.combinedArray[0].email)
+    await (this.qualif = this.combinedArray[0].qualification)
+    //await this.trainerService.GetAllTrainers()
+    //await (this.thisTrainer = this.trainerService.trainers.find((x: { trainerid: any; }) => x.trainerid == this.section.trainer_Id))
 
-    await this.sectionService.GetAllSections()
-    await (this.SecCount=this.sectionService.sections.filter((x: { trainer_Id: any; })=>x.trainer_Id==this.section.trainer_Id).length)
-    await (this.pos = this.trainerService.trainer.trainerposition)
+    //await this.sectionService.GetAllSections()
+    //await (this.SecCount=this.sectionService.sections.filter((x: { trainer_Id: any; })=>x.trainer_Id==this.section.trainer_Id).length)
+    await (this.pos = this.combinedArray[0].trainerposition)
 
 
-    await this.taskService.GetAllTasks()
+    //await this.taskService.GetAllTasks()
     await this.materialService.GetAllMaterial()
-    await this.courseService.GetAllCourses()
-    await (this.tasks = await this.taskService.tasks.filter((x: { sectionidd: any; }) => x.sectionidd == this.section.sectionid))
-    await (this.mats = await this.materialService.materials.filter((x: { section_Id: any; }) => x.section_Id == this.section.sectionid))
-    await (this.thisCourse = await this.courseService.courses.find((x: { courseid: any; }) => x.courseid == this.section.course_Id))
-    await (this.coursename = await this.thisCourse.coursename)
-    await (this.desc = this.thisCourse.coursedescription)
-    await (this.img = this.thisCourse.courseimage)
-    await this.categoryService.GetCategoryById(this.thisCourse.category_Id)
-    await (this.categoryname = this.categoryService.category.categoryname)
-    await (this.SD = this.section.starttime)
-    await (this.ED = this.section.endtime)
-    await (this.imgg2 = this.userService.user.imagename)
-    if (this.thisCourse.courselevel == 1)
-
-      this.courseLevel = Levels[1]
-
-    else if (this.course.courselevel == 2)
-
-      this.courseLevel = Levels[2]
-
-    else
-
-      this.courseLevel = Levels[3]
-      await this.sectionService.GetCommentsBySection(this.section.sectionid)
-    this.commentsArr = this.sectionService.myComments
+    //await this.courseService.GetAllCourses()
+    //await (this.tasks = await this.taskService.tasks.filter((x: { sectionidd: any; }) => x.sectionidd == this.section.sectionid))
+    await (this.mats = await this.materialService.materials.filter((x: { section_Id: any; }) => x.section_Id == this.combinedArray[0].sectionid))
+    //await (this.thisCourse = await this.courseService.courses.find((x: { courseid: any; }) => x.courseid == this.section.course_Id))
+    await (this.coursename = await this.combinedArray[0].coursename)
+    await (this.desc = this.combinedArray[0].coursedescription)
+    await (this.img = this.combinedArray[0].courseimage)
+    //await this.categoryService.GetCategoryById(this.thisCourse.category_Id)
+    await (this.categoryname = this.combinedArray[0].categoryname)
+    await (this.SD = this.combinedArray[0].startdate)
+    await (this.ED = this.combinedArray[0].enddate)
+    await (this.imgg2 = this.combinedArray[0].imagename)
+    this.courseLevel = Levels[this.combinedArray[0].courselevel]
+      await this.sectionService.GetCommentsBySection(this.combinedArray[0].sectionid)
+      debugger
+    this.commentsArr = await this.sectionService.myComments
+    await this.traineeSectionService.getAllCertificates(this.combinedArray[0].tsid,this.combinedArray[0].sectionid);
   }
+  DownloadCertificate(tid:any,StartDate:any,endDate:any,coursename:any,fname:any){
+    const doc = new jsPDF('l', 'mm', 'a4');
+    const certificateTemplate = new Image();
+    certificateTemplate.src = "../../../assets/HomeAssets/certificate.png"; // Replace with the path to your certificate design file
 
+    certificateTemplate.onload = function() {
+      doc.addImage(certificateTemplate, 'PNG', 0, 0, doc.internal.pageSize.height+90, doc.internal.pageSize.width-85);
+      doc.setFontSize(47.5);
+      doc.text(fname, 110, 120); // Replace the "Student Name" placeholder with the actual student name
+      doc.setFontSize(23);
+      doc.text(coursename, 155, 145 ); // Replace the "Course Completed" placeholder with the actual course completed
+      doc.setFontSize(19.3);
+      doc.text(StartDate.slice(0,10), 95, 154);
+      doc.setFontSize(19.3);
+      doc.text(endDate.slice(0,10), 157, 154);
+      doc.save('certificate.pdf');
+    }
+}
   submitAttendance() { }
   OpenDialog() { }
   async downloadFile(t: any) {

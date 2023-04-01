@@ -65,6 +65,7 @@ export class SectionService {
     })
   }
   section:any
+  selectedTraineeId:any
   GetSectionById(sectionId:number){
     return new Promise<void>((resolve, reject) => {
     this.spinner.show()
@@ -178,6 +179,23 @@ myComments: any = []
     resolve(); },
       (err) => {
         console.log(err);
+      }
+    )})
+  }
+  currentts: any = []
+  GettsInfo(secId:any,traineeId:any) {
+    this.spinner.show()
+    return new Promise<void>((resolve, reject) => {
+    this.http.get("https://localhost:44391/api/Section/GetTSInfos/"+secId+"/"+traineeId).subscribe(
+      (res) => {
+        this.currentts = res
+      this.spinner.hide()
+    resolve();
+    debugger
+  },
+      (err) => {
+        console.log(err);
+        debugger
       }
     )})
   }

@@ -16,14 +16,15 @@
             <p>{{desc}}</p>
             <!-- Content -->
             <ul class="list-inline mb-0">
-              <li class="list-inline-item h6 me-3 mb-1 mb-sm-0"><i class="fas fa-calendar text-warning me-2"></i>from {{ SD }} to {{ ED }}
+              <li class="list-inline-item h6 me-3 mb-1 mb-sm-0"><i class="fas fa-calendar text-warning me-2"></i>from {{ SD|slice:0:10 }} to {{ ED|slice:0:10  }}
               </li>
               <li class="list-inline-item h6 me-3 mb-1 mb-sm-0"><i class="fas fa-signal text-success me-2"></i>{{ courseLevel }}</li>
 
               <li class="list-inline-item h6 me-3 mb-1 mb-sm-0"><i class="bi bi-folder-fill text-primary me-2">
               </i>
              {{categoryname}}</li>
-              
+             <li>                <a *ngIf="this.traineeSectionService.certificatesFlag" class="btn btn-sm btn-success-soft me-1 mb-1 mb-md-0" (click)="DownloadCertificate(this.combinedArray[0].tsid,this.combinedArray[0].startdate,this.combinedArray[0].enddate,this.combinedArray[0].coursename,name)"><i class="bi bi-play-circle me-1" ></i>Certificate</a>
+             </li>
             </ul>
           </div>
         </div>
@@ -44,7 +45,7 @@
               <div class="card-header border-bottom px-4 py-3">
                 <ul class="nav nav-pills nav-tabs-line py-0" id="course-pills-tab" role="tablist">
                   <!-- Tab item -->
-                
+
                   <!-- Tab item -->
                   <li class="nav-item me-2 me-sm-4" role="presentation">
                     <button class="nav-link mb-2 mb-md-0" id="course-pills-tab-2" data-bs-toggle="pill"
@@ -83,7 +84,7 @@
               <div class="card-body p-4">
                 <div class="tab-content pt-2" id="course-pills-tabContent">
                   <!-- Content START -->
-                  
+
                   <!-- Content END -->
 
                   <!-- Content START -->
@@ -96,24 +97,24 @@
 
                   <!-- Content START -->
                   <div class="tab-pane fade" id="course-pills-3" role="tabpanel" aria-labelledby="course-pills-tab-3">
-                 
+
                     <div class="card mb-0 mb-md-4">
                       <div class="row g-0 align-items-center">
                         <div class="col-md-5">
-                        
+
                           <img src="../../../assets/HomeAssets/images/{{TrainerImg}}" class="img-fluid rounded-3"
                             alt="instructor-image">
                         </div>
                         <div class="col-md-7">
-                      
+
                           <div class="card-body">
-                         
+
                             <h3 class="card-title mb-0">T. {{Trainerfname}} {{Trainerlname}}</h3>
                             <p class="mb-2"><a href="mailto:{{Traineremail}}">{{Traineremail}}</a> </p>
-                            
-                           
 
-                         
+
+
+
                             <ul class="list-inline">
                               <li class="list-inline-item">
                                 <div class="d-flex align-items-center me-3 mb-2">
@@ -136,15 +137,15 @@
                                   <span class="h6 fw-light mb-0 ms-2">{{SecCount}}</span>
                                 </div>
                               </li>
-                           
+
                             </ul>
                           </div>
                         </div>
                       </div>
                     </div>
-               
 
-               
+
+
                   </div>
                   <!-- Content END -->
 
@@ -161,6 +162,7 @@
 
                             <th scope="col" class="border-0"style=" background-color:#1d3b53 ;">End Date</th>
                             <th scope="col" class="border-0 "style=" background-color:#1d3b53 ;">weight</th>
+                            <th scope="col" class="border-0 "style=" background-color:#1d3b53 ;">solution mark</th>
                             <th scope="col" class="border-0 "style=" background-color:#1d3b53 ;">Note</th>
                             <th scope="col" class="border-0 rounded-end"style=" background-color:#1d3b53 ;">Action</th>
 
@@ -192,7 +194,7 @@
                             <td class="text-center text-sm-start">{{item.starttime | slice:0:10 }}</td>
                             <td class="text-center text-sm-start">{{item.endtime | slice:0:10 }}</td>
                             <td class="text-center text-sm-start">{{item.weight }}</td>
-
+                            <td class="text-center text-sm-start">{{item.solutionmark }}</td>
                             <td class="text-center text-sm-start">{{item.tasknote }}</td>
 
 
@@ -294,7 +296,7 @@
                           <!-- Avatar -->
                           <div class="avatar avatar-sm flex-shrink-0 me-2">
                              <img class="avatar-img rounded-circle"
-                                src="../../../assets/HomeAssets/images/{{imgg2}}" alt=""> 
+                                src="../../../assets/HomeAssets/images/{{imgg2}}" alt="">
                           </div>
 
                           <form class="w-100 d-flex" [formGroup]="CommentForm">
@@ -370,15 +372,15 @@
                   <div class="overflow-hidden rounded-3">
                     <img src="../../../assets/HomeAssets/images/{{img}}" class="card-img"
                       alt="course image">
-                 
+
                   </div>
 
-               
+
                 </div>
                 <!-- Video END -->
 
                 <!-- Course info START -->
-                
+
                 <!-- Course info END -->
               </div>
 

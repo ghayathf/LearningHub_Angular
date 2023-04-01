@@ -127,7 +127,7 @@
               <!-- Table data -->
               <td> <br>{{ item.startdate|slice:0:10 }} to {{ item.enddate|slice:0:10 }}<br> <br>
 
-                <mat-progress-bar mode="determinate" value="{{this.traineeSectionService.TSIDD?.totalmark}}"></mat-progress-bar>
+                <mat-progress-bar mode="determinate" value="{{item.totalmark}}"></mat-progress-bar>
 
 
               </td>
@@ -138,7 +138,6 @@
               <!-- Table data -->
               <td>
                 <a class="btn btn-sm btn-primary-soft me-1 mb-1 mb-md-0" (click)="OpenDetailedCourse(item.sectionid)"><i class="bi bi-play-circle me-1" ></i>More Details</a>
-                <a *ngIf="this.traineeSectionService.certificatesFlag" class="btn btn-sm btn-success-soft me-1 mb-1 mb-md-0" (click)="DownloadCertificate(item.tsid,item.startdate,item.enddate,item.coursename,this.name)"><i class="bi bi-play-circle me-1" ></i>Certificate</a>
               </td>
             </tr>
 

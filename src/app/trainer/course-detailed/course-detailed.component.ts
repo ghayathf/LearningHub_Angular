@@ -130,6 +130,7 @@ export class CourseDetailedComponent {
   capacity:any
   myarr:any
   Trimg:any
+  taskweight:any
   async ngOnInit() {
     this.selectdSectionId = this.courseService.selectedSectionId;
     await this.sectionService.GetSectionInfo(this.selectdSectionId)
@@ -147,7 +148,7 @@ export class CourseDetailedComponent {
     this.trainee = this.traineeSectionService.secTrainees
     this.Trimg=this.auth.loggedUser.Imagename
     // console.log( this.auth.loggedUser);
-    
+
     this.combinedArray = this.traineeSectionService.secTrainees.map((x: any)=>{
     const attendance = true
     return {...x,attendance}
@@ -340,6 +341,7 @@ export class CourseDetailedComponent {
       const task = this.taskService.tasks.find((ta: { taskid: any; })=>ta.taskid == t.task_Id);
       return {...t,...task}
     })
+
     console.log(this.solutions);
 
     const dialogConfig = new MatDialogConfig();
@@ -394,7 +396,9 @@ export class CourseDetailedComponent {
     this.TID=ID;
     await this.soltionService.GetAllTaskSolutions(ID);
     this.Sol = this.soltionService.taskSols
-    console.log(this.Sol);
+    this.taskweight = this.Sol[0].weight
+
+    console.log(this.taskweight);
 
     const dialogConfig = new MatDialogConfig();
     dialogConfig.maxWidth = '800px';

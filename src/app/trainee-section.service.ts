@@ -176,7 +176,9 @@ export class TraineeSectionService {
           this.certificate = res;
           this.spinner.hide();
           this.certificatesFlag = true
+          if(this.certificatesFlag)
           this.GetAbsentTrainees(secID)
+          
           resolve();
         },
         error: (err) => {
@@ -208,19 +210,23 @@ export class TraineeSectionService {
     })
   }
   currentTrainee:any=[]
+
   GetAllInfoAboutTrainee(usid:any){
     //this.spinner.show();
     return new Promise<void>((resolve, reject) => {
       this.http.get("https://localhost:44391/api/Trainee/GetSecTraineesInfos/"+usid).subscribe({
         next: (res) => {
           this.currentTrainee = res;
+
           //this.spinner.hide();
           resolve();
+          debugger
         },
         error: (err) => {
           this.spinner.hide();
           this.toaster.error("Error Try Again");
           console.log(err);
+          debugger
         }
       })
     })

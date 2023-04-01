@@ -1129,7 +1129,7 @@ Steps END -->
                 <div class="row">
                     <mat-form-field class="example-full-width">
                       <mat-label>Mark</mat-label>
-                      <input type="number" matInput formControlName="solutionmark">
+                      <input type="number" matInput formControlName="solutionmark" min="5" [max]="taskweight">
 
                       <mat-error *ngIf="MarkForm.controls['solutionmark'].hasError('required')">
                         Mark is <strong>required</strong>
