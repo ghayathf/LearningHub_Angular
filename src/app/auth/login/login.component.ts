@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   siteKey: any;
   public aFormGroup!: FormGroup;
-  constructor(public auth: AuthService, public testimonialService: TestimonialService, private formBuilder: FormBuilder) {
+  constructor(public auth: AuthService, public testiomonialService: TestimonialService, private formBuilder: FormBuilder) {
 
   }
 
@@ -25,7 +25,8 @@ export class LoginComponent implements OnInit {
     //   recaptcha: ['', Validators.required]
     // });
     this.siteKey = "6LcrbjIlAAAAAG5AqbaPW-a0r6sF4vQ_gUegXXwj";
-    await this.testimonialService.GetAllAcceptedTestimonilas();
+    
+    await this.testiomonialService.GetAllAcceptedTestimonilas();
   }
   LoginformChecking: FormGroup = new FormGroup({
     username: new FormControl('', [Validators.required]),
