@@ -98,8 +98,6 @@ export class CourseDetailsComponent {
     await this.trainerService.GetTrainerById(this.section.trainer_Id)
     await this.userService.getAllUsers();
     await (this.TrainerUser = this.userService.users.find((x: { userid: any; }) => x.userid == this.trainerService.trainer.user_Id))
-    // console.log(this.TrainerUser);
-    // await(this.UserRegService.GetUserById(this.TrainerUser.user_Id));
     await (this.TrainerImg = this.TrainerUser.imagename)
     await (this.Trainerfname = this.TrainerUser.firstname)
     await (this.Trainerlname = this.TrainerUser.lastname)
@@ -107,14 +105,10 @@ export class CourseDetailsComponent {
     await (this.qualif = this.trainerService.trainer.qualification)
     await this.trainerService.GetAllTrainers()
     await (this.thisTrainer = this.trainerService.trainers.find((x: { trainerid: any; }) => x.trainerid == this.section.trainer_Id))
-    // await (this.SecCount = this.thisTrainer.finalSections.length)
-    // console.log(this.trainerService.trainers);
-    // console.log(this.trainerService.trainer);
+
     await this.sectionService.GetAllSections()
     await (this.SecCount=this.sectionService.sections.filter((x: { trainer_Id: any; })=>x.trainer_Id==this.section.trainer_Id).length)
     await (this.pos = this.trainerService.trainer.trainerposition)
-    //  console.log("trainer"+this.TrainerUser.firstname);
-
 
 
     await this.taskService.GetAllTasks()

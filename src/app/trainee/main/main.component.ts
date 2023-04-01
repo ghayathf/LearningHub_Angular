@@ -40,27 +40,8 @@ export class MainComponent {
     x:any
   async ngOnInit() {
     this.user = this.auth.gh
-    //await this.traineeSectionService.GetAllTrainees()
-    //this.trainees = this.traineeSectionService.allTrainees
-    /* await this.traineeSectionService.GetAllTraineeSection()
-    await this.userService.getAllUsers()
-    await this.userService.getUserById(this.user)
-    await this.sectionService.GetAllSections()
-    await this.courseService.GetAllCourses()
-    this.userobj = this.userService.user
-    this.currTrainee = this.trainees.find((x: { user_Id: any; })=>x.user_Id === this.user)
-    this.ts = this.traineeSectionService.TraineeSections.find((x: { trainee_Id: any; })=>x.trainee_Id == this.currTrainee.traineeid)
-    this.ts2 = this.traineeSectionService.TraineeSections.filter((x: { trainee_Id: any; })=>x.trainee_Id == this.currTrainee.traineeid)
-    this.sec = this.sectionService.sections.find((x: { sectionid: any; })=>x.sectionid == this.ts.section_id)
-    this.course = this.courseService.courses.find((x: { courseid: any; })=>x.courseid == this.sec.course_Id) */
     await this.traineeSectionService.GetAllInfoAboutTrainee(this.user)
     this.combinedArray = this.traineeSectionService.currentTrainee
-    /* await this.traineeSectionService.TraineeSections.filter((x: { trainee_Id: number; }) => x.trainee_Id === this.currTrainee.traineeid).map( (ts: any) => {
-      const section = this.sectionService.sections.find((sec: any) => sec.sectionid == ts.section_id);
-      const course = this.courseService.courses.find((x: any)=>x.courseid == section.course_Id)
-      const user = this.userService.users.find((x: any)=>x.userid == this.currTrainee.user_Id)
-      return { ...ts, ...section, ...course,...user };
-    }); */
     this.x = this.combinedArray.length
     console.log(this.x);
     console.log(this.combinedArray);
@@ -70,9 +51,6 @@ export class MainComponent {
     console.log(this.fname);
     const tss =await this.ts.tsid
     await this.traineeSectionService.getAllCertificates(this.ts.tsid,this.ts.section_id);
-    // await this.traineeSectionService.GetAbsentTrainees(this.ts.section_id);
-
-    //await this.traineeSectionService.GetTSById(this.ts.tsid);
   }
    DownloadCertificate(tid:any,StartDate:any,endDate:any,coursename:any,fname:any){
     const doc = new jsPDF('l', 'mm', 'a4');
