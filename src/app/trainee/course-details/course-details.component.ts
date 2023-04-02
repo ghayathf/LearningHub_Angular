@@ -74,12 +74,11 @@ export class CourseDetailsComponent {
     await (this.section = this.sectionService.section)
     this.currTrainee = this.sectionService.selectedTraineeId
     await this.sectionService.GettsInfo(this.section.sectionid,this.sectionService.selectedTraineeId)
- 
+
 
     await this.materialService.GetAllMaterial()
     await (this.userobj = this.userService.user)
-    await (this.combinedArray = this.sectionService.currentts) 
-      console.log(this.sectionService.currentts);
+    await (this.combinedArray = this.sectionService.currentts)
     await (this.ts = this.combinedArray[0])
     await (this.sec = this.combinedArray[0])
     await (this.course = this.combinedArray[0])
@@ -207,7 +206,7 @@ export class CourseDetailsComponent {
     await this.solutionService.GetAllSolution();
     if(this.solutionService.Solutions.length==0){this.flag = 0}
     // console.log(this.solutionService.Solutions);
-    
+
     for (const element of this.solutionService.Solutions) {
       if (element.task_Id === taskid && element.t_S_Id === this.ts.tsid) {
         this.flag = 1;
