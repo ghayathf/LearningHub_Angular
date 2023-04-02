@@ -32,7 +32,6 @@ export class SectionService {
         next:()=>{this.spinner.hide()
           this.toaster.success("Section Created Successfuly");
           resolve();
-          debugger
          },
         error:()=>{  this.spinner.hide();
           this.toaster.error("Error");}
@@ -170,13 +169,12 @@ myComments: any = []
   }
   mySec: any = []
   GetSectionInfo(secId:any) {
-    this.spinner.show()
     return new Promise<void>((resolve, reject) => {
     this.http.get("https://localhost:44391/api/Section/GetSecInfo/"+secId).subscribe(
       (res) => {
         this.mySec = res
-      this.spinner.hide()
-    resolve(); },
+    resolve();
+  },
       (err) => {
         console.log(err);
       }
@@ -184,12 +182,11 @@ myComments: any = []
   }
   currentts: any = []
   GettsInfo(secId:any,traineeId:any) {
-    this.spinner.show()
+    debugger
     return new Promise<void>((resolve, reject) => {
     this.http.get("https://localhost:44391/api/Section/GetTSInfos/"+secId+"/"+traineeId).subscribe(
       (res) => {
         this.currentts = res
-      this.spinner.hide()
     resolve();
     debugger
   },

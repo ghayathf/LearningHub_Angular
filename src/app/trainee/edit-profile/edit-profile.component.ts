@@ -39,7 +39,7 @@ export class EditProfileComponent {
   }
   loggedUser:any
   user:any
-  role:any = 1
+  role:any = 2
   async ngOnInit(){
     this.loggedUser = this.auth.gh
     await this.userService.getUserById(this.loggedUser)

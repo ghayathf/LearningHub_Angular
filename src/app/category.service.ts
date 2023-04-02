@@ -109,7 +109,6 @@ updatedImg?:string=''
             this.spinner.hide();
             this.toaster.success("Category Update Successfully");
             resolve();
-            debugger
           },
 
           error: () => {

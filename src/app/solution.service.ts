@@ -98,11 +98,9 @@ export class SolutionService {
             this.spinner.hide()
             this.SolutionFile = res.solutionfile;
             resolve()
-            debugger
           },
           error: () => {
             this.spinner.hide();
-            debugger
           }
         }
 

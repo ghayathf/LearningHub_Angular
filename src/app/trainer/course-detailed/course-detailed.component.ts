@@ -93,8 +93,8 @@ export class CourseDetailedComponent {
     await this.UpdateMaterialForm.patchValue(this.materialService.Material);
 
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.maxWidth = '500px';
-    dialogConfig.maxHeight = '90vh';
+    dialogConfig.maxWidth = '800px';
+    dialogConfig.maxHeight = '80vh';
     this.categoryImg = this.materialService.Material.filePath;
     this.dialog.open(this.Update, dialogConfig);
   }
@@ -390,13 +390,13 @@ export class CourseDetailedComponent {
   Sol: any
   TID:any
   traineesNames:any
-  async OpenTaskSolutionDialog(ID: any) {
+  async OpenTaskSolutionDialog(ID: any,weight:any) {
 
 
     this.TID=ID;
     await this.soltionService.GetAllTaskSolutions(ID);
     this.Sol = this.soltionService.taskSols
-    this.taskweight = this.Sol[0].weight
+    this.taskweight = weight
 
     console.log(this.taskweight);
 
@@ -446,7 +446,7 @@ export class CourseDetailedComponent {
   async GiveMark()
   { this.MarkForm.controls['solutionid'].setValue(this.SolID);
     await this.soltionService.GiveSolutionMark(this.MarkForm.value);
-    await this.OpenTaskSolutionDialog(this.TID);
+    await this.OpenTaskSolutionDialog(this.TID,this.taskweight);
   }
   async sendEmail(traineename:string , coursename:string,trainerFname:string,TrainerLname:string,email:string) {
     const emailParams = {
