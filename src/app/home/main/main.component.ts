@@ -28,21 +28,16 @@ export class MainComponent {
   par1:any
   par2:any
   async ngOnInit() {
-    await this.courseService.GetAllCourses();
-    this.AllCourses = this.courseService.courses.length;
-    await this.traineeService.GetAllTrainers();
-    this.AllTrainers = this.trainerService.trainers.length;
-    await this.registerService.GetAllAcceptedTrainee();
-    this.AllTrainees = this.registerService.AcceptedTrainee.length;
-    await this.sectionService.GetAllSections()
-    this.AllSections = this.sectionService.sections.length;
+    await this.Data.GetLengths()
     await this.testiomonialService.GetAllAcceptedTestimonilas();
-    console.log(this.testiomonialService.Acceptedtestimonials);
-
     await this.Data.GetAllHome();
     await this.categoryService.GetAllCategories()
+    this.AllCourses = this.Data.lengths[0].tableLength;
+    this.AllTrainers = this.Data.lengths[1].tableLength;
+    this.AllTrainees = this.Data.lengths[2].tableLength;
+    this.AllSections = this.Data.lengths[3].tableLength;
+
     this.cats = this.categoryService.categories
-    console.log(this.cats)
     this.par1 = this.Data.homes[0].paragraph1
     this.par2 = this.Data.homes[0].paragraph2
   }

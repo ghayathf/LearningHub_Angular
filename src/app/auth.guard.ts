@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
+import { TraineeSectionService } from './trainee-section.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,18 +11,21 @@ export class AuthGuard implements CanActivate {
   /**
    *
    */
-  constructor(private toastr:ToastrService,private router:Router) {
+  constructor(private toastr:ToastrService,private router:Router,public tsService:TraineeSectionService) {
 
   }
   gh:any
   loggedUser:any
-  canActivate(
+  trainee:any
+
+  async canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    state: RouterStateSnapshot): Promise<boolean | UrlTree>{
     const token = localStorage.getItem('token')
     let user:any = localStorage.getItem('user')
     user = JSON.parse(user)
-
+    await this.tsService.GetAllTrainees()
+    this.trainee = this.tsService.allTrainees.find((x: { user_Id: any; })=>x.user_Id == user.Userid)?.registerstatus
 
     if(token)
     {
@@ -43,7 +47,7 @@ export class AuthGuard implements CanActivate {
       }
       else if(state.url.includes('Trainee'))
       {
-        if(user.RoleId == 2)
+        if(user.RoleId == 2 && this.trainee == 1)
         {
           this.toastr.success('Welcome Trainee '+user.Username)
           this.gh = parseInt(user.Userid)
