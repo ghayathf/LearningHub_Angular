@@ -105,7 +105,7 @@
 
 
                           <!-- Table data -->
-                          <td>
+                          <td *ngIf="item.firstname">
                             <div class="d-flex align-items-center theadmb-3">
 
                               <!-- Info -->
@@ -114,7 +114,7 @@
                               </div>
                             </div>
                           </td>
-                          <td>
+                          <td *ngIf="item.firstname">
                             <div class="d-flex align-items-center mb-3">
 
                               <!-- Info -->
@@ -123,7 +123,7 @@
                               </div>
                             </div>
                           </td>
-                          <td>
+                          <td *ngIf="item.firstname">
                             <div class="d-flex align-items-center mb-3">
 
                               <!-- Info -->
@@ -133,7 +133,7 @@
                             </div>
                           </td>
 
-                          <td>
+                          <td *ngIf="item.firstname">
                             <div>
                               <input type="checkbox" [(ngModel)]="item.attendance">
                             </div>
@@ -175,7 +175,7 @@
         <!-- Table item -->
         <tr *ngFor="let item of combinedArray">
           <!-- Table data -->
-          <td>
+          <td *ngIf="item.firstname">
             <div class="d-flex align-items-center position-relative">
               <!-- Image -->
               <div class="avatar avatar-md mb-2 mb-md-0">
@@ -190,7 +190,7 @@
           </td>
 
           <!-- Table data -->
-          <td class="text-center text-sm-start">
+          <td *ngIf="item.firstname" class="text-center text-sm-start">
             <div class=" overflow-hidden">
               <h4 class="mb-0 bold">{{ item.totalmark }}%</h4>
               <div class="progress progress-sm bg-primary bg-opacity-10">
@@ -201,13 +201,13 @@
           </td>
 
           <!-- Table data -->
-          <td>{{ item.totalattendance }}</td>
+          <td *ngIf="item.firstname">{{ item.totalattendance }}</td>
 
           <!-- Table data -->
-          <td>{{ item.email }}</td>
+          <td *ngIf="item.firstname">{{ item.email }}</td>
 
           <!-- Table data -->
-          <td>
+          <td *ngIf="item.firstname">
             <a (click)="OpenSolsDialog(item.tsid)" class="btn btn-success-soft btn-round me-1 mb-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Message"><i class="bi bi-info-circle"></i></a>
           </td>
         </tr>
@@ -257,7 +257,7 @@
                           <!-- Table item -->
                           <tr *ngFor="let item of tasks">
                             <!-- Course item -->
-                            <td>
+                            <td *ngIf="item.tasktype">
                               <div class="d-flex align-items-center">
                                 <!-- Image -->
 
@@ -271,19 +271,19 @@
                             </td>
 
                             <!-- Enrolled item -->
-                            <td class="text-center text-sm-start">{{item.starttime | slice:0:10 }}</td>
-                            <td class="text-center text-sm-start">{{item.endtime | slice:0:10 }}</td>
-                            <td class="text-center text-sm-start">{{item.weight }}</td>
+                            <td *ngIf="item.tasktype" class="text-center text-sm-start">{{item.starttime | slice:0:10 }}</td>
+                            <td *ngIf="item.tasktype" class="text-center text-sm-start">{{item.endtime | slice:0:10 }}</td>
+                            <td *ngIf="item.tasktype" class="text-center text-sm-start">{{item.weight }}</td>
 
-                            <td class="text-center text-sm-start">{{item.tasknote }}</td>
-                            <!-- <td class="text-center text-sm-start">{{item.taskstatus }}</td> -->
+                            <td *ngIf="item.tasktype" class="text-center text-sm-start">{{item.tasknote }}</td>
+                            <!-- <td *ngIf="item.tasktype" class="text-center text-sm-start">{{item.taskstatus }}</td> -->
 
 
 
                             <!-- Price item -->
 
                             <!-- Action item -->
-                            <td>
+                            <td *ngIf="item.tasktype">
                               <button (click)="downloadTask(item.taskid)"
                                 class="btn btn-sm btn-primary-soft btn-round mb-0"><i
                                   class="fas fa-fw fa-download"></i></button>
@@ -1047,7 +1047,7 @@ Steps END -->
         <!-- Table item -->
         <tr *ngFor="let item of Sol">
           <!-- Course item -->
-          <td>
+          <td *ngIf="item.firstname">
             <div class="d-flex align-items-center">
               <!-- Image -->
 
@@ -1061,15 +1061,15 @@ Steps END -->
           </td>
 
           <!-- Enrolled item -->
-          <td class="text-center text-sm-start">{{item.solutionmark}}</td>
-          <td class="text-center text-sm-start">{{item.submitionnote}}</td>
+          <td *ngIf="item.firstname" class="text-center text-sm-start">{{item.solutionmark}}</td>
+          <td *ngIf="item.firstname" class="text-center text-sm-start">{{item.submitionnote}}</td>
 
 
 
           <!-- Price item -->
 
           <!-- Action item -->
-          <td>
+          <td *ngIf="item.firstname">
             <button (click)="downloadSolution(item.solutionid)"
               class="btn btn-sm btn-primary-soft btn-round mb-0"><i
                 class="fas fa-fw fa-download"></i></button>

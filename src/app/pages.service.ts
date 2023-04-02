@@ -150,7 +150,22 @@ export class PagesService {
     })
   }
 
-
+  lengths: any = []
+  GetLengths() {
+    return new Promise<void>((resolve, reject) => {
+      
+      this.http.get("https://localhost:44391/api/Home/Lengths").subscribe(
+        (res) => {
+          this.lengths = res
+          this.spinner.hide()
+          resolve()
+        },
+        (err) => {
+          this.spinner.hide()
+        }
+      )
+    })
+  }
 
 
 

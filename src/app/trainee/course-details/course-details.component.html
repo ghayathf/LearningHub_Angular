@@ -177,7 +177,7 @@
                           <!-- Table item -->
                           <tr *ngFor="let item of tasks">
                             <!-- Course item -->
-                            <td>
+                            <td *ngIf="item.tasktype">
                               <div class="d-flex align-items-center">
                                 <!-- Image -->
 
@@ -191,18 +191,18 @@
                             </td>
 
                             <!-- Enrolled item -->
-                            <td class="text-center text-sm-start">{{item.starttime | slice:0:10 }}</td>
-                            <td class="text-center text-sm-start">{{item.endtime | slice:0:10 }}</td>
-                            <td class="text-center text-sm-start">{{item.weight }}</td>
-                            <td class="text-center text-sm-start">{{item.solutionmark }}</td>
-                            <td class="text-center text-sm-start">{{item.tasknote }}</td>
+                            <td *ngIf="item.tasktype" class="text-center text-sm-start">{{item.starttime | slice:0:10 }}</td>
+                            <td *ngIf="item.tasktype" class="text-center text-sm-start">{{item.endtime | slice:0:10 }}</td>
+                            <td *ngIf="item.tasktype" class="text-center text-sm-start">{{item.weight }}</td>
+                            <td *ngIf="item.tasktype" class="text-center text-sm-start">{{item.solutionmark }}</td>
+                            <td *ngIf="item.tasktype" class="text-center text-sm-start">{{item.tasknote }}</td>
 
 
 
                             <!-- Price item -->
 
                             <!-- Action item -->
-                            <td>
+                            <td *ngIf="item.tasktype">
                               <button (click)="downloadTask(item.taskid)"
                                 class="btn btn-sm btn-primary-soft btn-round mb-0"><i
                                   class="fas fa-fw fa-download"></i></button>
@@ -250,7 +250,7 @@
                           <!-- Table item -->
                           <tr *ngFor="let item of mats">
                             <!-- Course item -->
-                            <td>
+                            <td *ngIf="item.materialname">
                               <div class="d-flex align-items-center">
                                 <!-- Image -->
 
@@ -263,10 +263,10 @@
                               </div>
                             </td>
                             <!-- Enrolled item -->
-                            <td class="text-center text-sm-start">{{item.dateuploaded | slice:0:10 }}</td>
+                            <td *ngIf="item.materialname" class="text-center text-sm-start">{{item.dateuploaded | slice:0:10 }}</td>
 
                             <!-- Price item -->
-                            <td> <button class="btn btn-sm btn-primary-soft btn-round mb-0"><i
+                            <td *ngIf="item.materialname"> <button class="btn btn-sm btn-primary-soft btn-round mb-0"><i
                                   class="fas fa-fw fa-download" (click)="downloadFile(item.materialid)"></i></button>
                             </td>
                             <!-- Action item -->
@@ -292,18 +292,20 @@
                         <h5 class="mb-4">Ask Your Question</h5>
 
                         <!-- Comment box -->
-                        <div class="d-flex mb-4">
+                        <div >
                           <!-- Avatar -->
                           <div class="avatar avatar-sm flex-shrink-0 me-2">
                              <img class="avatar-img rounded-circle"
                                 src="../../../assets/HomeAssets/images/{{imgg2}}" alt="">
                           </div>
 
-                          <form class="w-100 d-flex" [formGroup]="CommentForm">
-                            <mat-form-field class="example-full-width">
+                          <form class="w-200 " style="width: 200;" [formGroup]="CommentForm">
+                            <mat-form-field style="width: 200px;" >
                               <mat-label>Leave a comment</mat-label>
+
                               <textarea matInput formControlName="commentmessage" matInput
-                                  placeholder="Ex. It makes me feel..." class="one form-control pe-4 bg-light"></textarea>
+                                  placeholder="Ex. It makes me feel..." class="form-control" id="textAreaExample" rows="4" cols="200" style="background: #fff;width: 800px;"></textarea>
+
                           </mat-form-field>
                             <button class="btn btn-primary" (click)="CreateComment()" type="button">Post</button>
                           </form>
@@ -312,40 +314,44 @@
                         <!-- Comment item START -->
                         <div class="border p-2 p-sm-4 rounded-3 mb-4">
                           <ul class="list-unstyled mb-0">
-                            <li class="comment-item"  *ngFor="let item of commentsArr">
-                              <div class="d-flex mb-3">
-                                <!-- Avatar -->
-                                <div class="avatar avatar-sm flex-shrink-0">
-                                  <a href="#"><img class="avatar-img rounded-circle"
-                                      src="../../../assets/HomeAssets/images/{{ item.imagename }}" alt=""></a>
-                                </div>
-                                <div class="ms-2">
-                                  <!-- Comment by -->
-                                  <div class="bg-light p-3 rounded">
-                                    <div class="d-flex justify-content-center">
-                                      <div class="me-2">
-                                        <h3 class="fw-bold">{{ item.firstname }} {{ item.lastname }}</h3>
-                                        <h6 class="mb-1 "> <a href="#!">  </a></h6>
-                                        <p class="">{{item.commentmessage}}</p>
-                                      </div>
-                                      <div style="display: flex; flex-direction: column;">
-                                        <small>{{ item.datepublished | slice:5:10 }}</small>
-                                        <small>{{ item.datepublished | slice:11:16 }}</small>
+                              <li class="comment-item " *ngFor="let item of commentsArr">
+                                  <div class="mb-3">
+
+                                      <!-- Avatar -->
+                                      <div class="avatar avatar-sm flex-shrink-0">
+                                          <a href="#"><img class="avatar-img rounded-circle"
+                                                  src="../../../assets/HomeAssets/images/{{ item.imagename }}" alt=""></a>
                                       </div>
 
-                                    </div>
+                                      <div class="ms-2">
+                                          <!-- Comment by -->
+                                          <div class="bg-light p-3 rounded">
+                                              <div class="justify-content-center">
+                                                  <div class="me-2">
+                                                    <div style="display: flex; flex-direction: row;">
+                                                      <h3 class="fw-bold">{{ item.firstname }} {{ item.lastname }}</h3>
+                                                      <div style="display: flex; flex-direction: column;margin-left: auto;">
+                                                        <small class="bi bi-calendar-event">  {{ item.datepublished | slice:5:10 }}</small>
+                                                        <small class="bi bi-alarm">  {{ item.datepublished | slice:11:16 }}</small>
+                                                    </div>
+                                                    </div>
+
+                                                      <h6 class="mb-1 "> <a href="#!"> </a></h6>
+                                                      <p class="">{{item.commentmessage}}</p>
+                                                  </div>
+
+                                              </div>
+                                          </div>
+                                          <!-- Comment react -->
+                                      </div>
                                   </div>
-                                  <!-- Comment react -->
 
-                                </div>
-                              </div>
+                                  <!-- Comment item nested START -->
+                                  <!-- Comment item nested END -->
 
-                              <!-- Comment item nested START -->
-
-                              <!-- Comment item nested END -->
-                            </li>
+                              </li>
                           </ul>
-                        </div>
+                      </div>
                         <!-- Comment item END -->
 
 

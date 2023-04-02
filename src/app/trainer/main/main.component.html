@@ -92,7 +92,7 @@
                           <!-- Table item -->
                           <tr *ngFor="let item of combinedArray">
                             <!-- Course item -->
-                            <td>
+                            <td *ngIf="item.coursename">
                               <div class="d-flex align-items-center">
                                 <!-- Image -->
                                 <div class="w-60px">
@@ -106,16 +106,16 @@
                               </div>
                             </td>
                             <!-- Selling item -->
-                            <td>{{ item.sectioncapacity }}</td>
+                            <td *ngIf="item.coursename">{{ item.sectioncapacity }}</td>
                             <!-- Amount item -->
-                            <td>{{ item.starttime.slice(0,10) }}</td>
+                            <td *ngIf="item.coursename">{{ item.starttime.slice(0,10) }}</td>
                             <!-- Period item -->
-                            <td>
+                            <td *ngIf="item.coursename">
                               <span class="badge bg-primary bg-opacity-10 text-primary">{{
                                 getDaysDifference(item.startdate, item.enddate) }} days</span>
                             </td>
                             <!-- Action item -->
-                            <td>
+                            <td *ngIf="item.coursename">
                               <button class="btn btn-sm btn-success-soft btn-round mb-0"
                                 (click)="goingDialog(item.sectionid,item.course_Id)"><i class="fas fa-share"
                                   aria-hidden="true"></i></button>

@@ -107,7 +107,7 @@
                     <img src="../../../assets/HomeAssets/images/{{item.courseimage}}" class="avatar-img rounded" alt="">
                   </div> -->
                 <!-- </td> -->
-                <td>
+                <td *ngIf="item.coursename">
                 <div class="d-flex align-items-center">
 
                     <!-- Title -->
@@ -125,7 +125,7 @@
 
 
               <!-- Table data -->
-              <td> <br>{{ item.startdate|slice:0:10 }} to {{ item.enddate|slice:0:10 }}<br> <br>
+              <td *ngIf="item.coursename"> <br>{{ item.startdate|slice:0:10 }} to {{ item.enddate|slice:0:10 }}<br> <br>
 
                 <mat-progress-bar mode="determinate" value="{{item.totalmark}}"></mat-progress-bar>
 
@@ -133,10 +133,10 @@
               </td>
 
               <!-- Table data -->
-              <td>{{ item.totalattendance }} of {{ item.sectiondays}}</td>
+              <td *ngIf="item.coursename">{{ item.totalattendance }} of {{ item.sectiondays}}</td>
 
               <!-- Table data -->
-              <td>
+              <td *ngIf="item.coursename">
                 <a class="btn btn-sm btn-primary-soft me-1 mb-1 mb-md-0" (click)="OpenDetailedCourse(item.sectionid)"><i class="bi bi-play-circle me-1" ></i>More Details</a>
               </td>
             </tr>
