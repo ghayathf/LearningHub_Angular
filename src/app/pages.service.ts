@@ -93,7 +93,6 @@ export class PagesService {
             this.spinner.hide()
             this.Filepath2 = res.logo;
             resolve()
-            debugger
           },
           error: () => {
             this.spinner.hide();
@@ -143,11 +142,9 @@ export class PagesService {
         next: () => {
           this.toaster.success("Updated Successfuly")
           resolve();
-          debugger
         },
         error: (err) => {
           console.log(err);
-          debugger
         }
       })
     })

@@ -155,13 +155,11 @@ export class TraineeSectionService {
           this.spinner.hide();
           this.toaster.success("attendance created successfully");
           resolve();
-          debugger
         },
         error: (err) => {
           this.spinner.hide();
           this.toaster.error("Error Try Again");
           console.log(err);
-          debugger
         }
       })
     })
@@ -175,9 +173,10 @@ export class TraineeSectionService {
         next: (res) => {
           this.certificate = res;
           this.spinner.hide();
-          this.certificatesFlag = true
-          if(this.certificatesFlag)
-          this.GetAbsentTrainees(secID)
+          if(res){this.certificatesFlag = true}
+          
+          if(this.certificatesFlag){this.GetAbsentTrainees(secID)}
+          
           
           resolve();
         },
@@ -220,13 +219,11 @@ export class TraineeSectionService {
 
           //this.spinner.hide();
           resolve();
-          debugger
         },
         error: (err) => {
           this.spinner.hide();
           this.toaster.error("Error Try Again");
           console.log(err);
-          debugger
         }
       })
     })

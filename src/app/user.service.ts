@@ -106,7 +106,6 @@ console.log(user.imagename)
           this.spinner.hide();
           this.toaster.success("User Account Updated Successfuly");
           resolve();
-          debugger
         },
         error: (err) => {
           console.log(err);

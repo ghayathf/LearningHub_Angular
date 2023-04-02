@@ -77,12 +77,10 @@ export class TaskService {
             this.spinner.hide();
             this.toaster.success("Task Created Successfuly");
             resolve();
-            debugger
           },
           error: () => {
             this.spinner.hide();
             this.toaster.error("Error");
-            debugger
           }
         }
       )

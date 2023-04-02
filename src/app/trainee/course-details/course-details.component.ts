@@ -71,74 +71,40 @@ export class CourseDetailsComponent {
     await (this.user = this.auth.gh)
     this.name = this.auth.loggedUser.Firstname+" "+this.auth.loggedUser.Lastname
 
-    //await this.traineeSectionService.GetAllTrainees()
-    //await (this.trainees = this.traineeSectionService.allTrainees)
-    //await (this.currTrainee = this.trainees.find((x: { user_Id: any; }) => x.user_Id === this.user))
-
-    //await this.traineeSectionService.GetAllTraineeSection()
-    //await this.userService.getUserById(this.user)
-    //await console.log("trainee" + this.userService.user.firstname);
-
-    //await this.userService.getAllUsers()
-    //await this.sectionService.GetAllSections()
     await (this.section = this.sectionService.section)
     this.currTrainee = this.sectionService.selectedTraineeId
     await this.sectionService.GettsInfo(this.section.sectionid,this.sectionService.selectedTraineeId)
-    console.log(this.combinedArray[0]);
+ 
 
-    //await this.courseService.GetAllCourses()
-    //await this.taskService.GetAllTasks()
     await this.materialService.GetAllMaterial()
-    //await this.sectionService.GetAllComments()
     await (this.userobj = this.userService.user)
-    await (this.combinedArray = this.sectionService.currentts)
+    await (this.combinedArray = this.sectionService.currentts) 
+      console.log(this.sectionService.currentts);
     await (this.ts = this.combinedArray[0])
     await (this.sec = this.combinedArray[0])
     await (this.course = this.combinedArray[0])
     await (this.tasks = this.combinedArray)
-    await (this.material = this.materialService.materials.filter((x: { section_Id: any; }) => x.section_Id == this.combinedArray[0].sectionid))
-
-      /* this.traineeSectionService.TraineeSections.filter((x: { trainee_Id: number; }) => x.trainee_Id === this.currTrainee.traineeid).map((ts: any) => {
-      const section = this.sectionService.sections.find((sec: any) => sec.sectionid == ts.section_id);
-      const course = this.courseService.courses.find((x: any) => x.courseid == section.course_Id)
-      return { ...ts, ...section, ...course };
-    }) */
-
-    //console.log(this.section.trainer_Id);
+    await (this.material = this.materialService.materials.filter((x: { section_Id: any; }) => x.section_Id == this.section.sectionid))
     await (this.meeting = this.combinedArray[0].meetingurl)
-    //await this.trainerService.GetTrainerById(this.section.trainer_Id)
     await (this.TrainerImg = this.combinedArray[0].imagename)
     await (this.Trainerfname = this.combinedArray[0].firstname)
     await (this.Trainerlname = this.combinedArray[0].lastname)
     await (this.Traineremail = this.combinedArray[0].email)
     await (this.qualif = this.combinedArray[0].qualification)
-    //await this.trainerService.GetAllTrainers()
-    //await (this.thisTrainer = this.trainerService.trainers.find((x: { trainerid: any; }) => x.trainerid == this.section.trainer_Id))
-
-    //await this.sectionService.GetAllSections()
-    //await (this.SecCount=this.sectionService.sections.filter((x: { trainer_Id: any; })=>x.trainer_Id==this.section.trainer_Id).length)
     await (this.pos = this.combinedArray[0].trainerposition)
-
-
-    //await this.taskService.GetAllTasks()
     await this.materialService.GetAllMaterial()
-    //await this.courseService.GetAllCourses()
-    //await (this.tasks = await this.taskService.tasks.filter((x: { sectionidd: any; }) => x.sectionidd == this.section.sectionid))
-    await (this.mats = await this.materialService.materials.filter((x: { section_Id: any; }) => x.section_Id == this.combinedArray[0].sectionid))
-    //await (this.thisCourse = await this.courseService.courses.find((x: { courseid: any; }) => x.courseid == this.section.course_Id))
+    await (this.mats = await this.materialService.materials.filter((x: { section_Id: any; }) => x.section_Id == this.section.sectionid))
     await (this.coursename = await this.combinedArray[0].coursename)
     await (this.desc = this.combinedArray[0].coursedescription)
     await (this.img = this.combinedArray[0].courseimage)
-    //await this.categoryService.GetCategoryById(this.thisCourse.category_Id)
     await (this.categoryname = this.combinedArray[0].categoryname)
     await (this.SD = this.combinedArray[0].startdate)
     await (this.ED = this.combinedArray[0].enddate)
-    await (this.imgg2 = this.combinedArray[0].imagename)
+    await (this.imgg2 = this.auth.loggedUser.Imagename)
     this.courseLevel = Levels[this.combinedArray[0].courselevel]
-      await this.sectionService.GetCommentsBySection(this.combinedArray[0].sectionid)
-      debugger
+    await this.sectionService.GetCommentsBySection(this.section.sectionid)
     this.commentsArr = await this.sectionService.myComments
-    await this.traineeSectionService.getAllCertificates(this.combinedArray[0].tsid,this.combinedArray[0].sectionid);
+    await this.traineeSectionService.getAllCertificates(this.combinedArray[0].tsid,this.section.sectionid);
   }
   DownloadCertificate(tid:any,StartDate:any,endDate:any,coursename:any,fname:any){
     const doc = new jsPDF('l', 'mm', 'a4');
@@ -239,6 +205,9 @@ export class CourseDetailsComponent {
   async CallSolutionDialog(taskid: number) {
     this.slectedtaskid = taskid;
     await this.solutionService.GetAllSolution();
+    if(this.solutionService.Solutions.length==0){this.flag = 0}
+    // console.log(this.solutionService.Solutions);
+    
     for (const element of this.solutionService.Solutions) {
       if (element.task_Id === taskid && element.t_S_Id === this.ts.tsid) {
         this.flag = 1;
@@ -246,7 +215,6 @@ export class CourseDetailsComponent {
         break;
       } else {
         this.flag = 0;
-
       }
     }
     if (this.flag == 1) {
@@ -272,7 +240,6 @@ export class CourseDetailsComponent {
     this.UpdateSolutionForm.controls['t_S_Id'].setValue(this.ts.tsid);
     this.UpdateSolutionForm.controls['task_Id'].setValue(this.slectedtaskid);
     this.UpdateSolutionForm.controls['solutionid'].setValue(this.SelectedSolid);
-    debugger
     await this.solutionService.UpdateSolution(this.UpdateSolutionForm.value);
   }
   selectedSol: any

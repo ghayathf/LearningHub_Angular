@@ -36,6 +36,7 @@ export class EmployeesComponent {
       firstname: new FormControl('', Validators.required),
       lastname: new FormControl('', Validators.required),
       roleId: new FormControl(''),
+      imagename: new FormControl('')
     }
   )
   totalUsers:any
@@ -68,6 +69,7 @@ export class EmployeesComponent {
   }
   userId: any
   async CreateUser() {
+    this.CreateUserForm.controls['imagename'].setValue('451-4517876_default-profile-hd-png-download (1).png');
     await this.trainerService.CreateUser(this.CreateUserForm.value)
     const dialogConfig = new MatDialogConfig();
     dialogConfig.maxWidth = '800px';

@@ -59,7 +59,6 @@ export class MainComponent {
    await this.sectionService.GetSectionById(secid)
    this.sectionService.selectedTraineeId = this.combinedArray[0].traineeid
    console.log(this.combinedArray[0].traineeid);
-   debugger
    await this.router.navigate(["Trainee/CourseDetails"])
   }
 }

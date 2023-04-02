@@ -43,11 +43,12 @@ export class AllSectionsComponent {
   Acti: any
   async ngOnInit() {
     await this.sectionService.GetAllSections()
-    this.totalSections = this.sectionService.sections.length
     await this.userService.getAllUsers()
     await this.trainerService.GetAllTrainers()
     await this.traineeServie.GetAllAcceptedTrainee();
     await this.courseService.GetAllCourses()
+    this.totalSections = this.sectionService.sections.length
+    
     this.trainers = this.trainerService.trainers
     this.users = this.userService.users
     this.combinedArray = this.users.filter((x: { roleId: number; }) => x.roleId == 3).map((user: any) => {

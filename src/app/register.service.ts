@@ -250,11 +250,9 @@ resolve()
           (response: any) => {
             console.log("SUCCESS!", response.status, response.text);
             resolve();
-            debugger
           },
           (error: any) => {
             console.log("FAILED!", error);
-            debugger
           });
     })
   }
@@ -274,13 +272,10 @@ resolve()
 
   async EnrollmetEmail(object: any) {
     return new Promise<void>((resolve, reject) => {
-      debugger
       emailjs.send('service_fkbaj5y', 'template_rpgeura', object, 'BvT6kBttjGdEkCxOZ')
         .then(
           (response: any) => {
-            debugger
             console.log("SUCCESS!", response.status, response.text);
-            resolve();
 
           },
           (error: any) => {
