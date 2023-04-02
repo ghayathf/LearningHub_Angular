@@ -93,8 +93,8 @@ export class CourseDetailedComponent {
     await this.UpdateMaterialForm.patchValue(this.materialService.Material);
 
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.maxWidth = '500px';
-    dialogConfig.maxHeight = '90vh';
+    dialogConfig.maxWidth = '800px';
+    dialogConfig.maxHeight = '80vh';
     this.categoryImg = this.materialService.Material.filePath;
     this.dialog.open(this.Update, dialogConfig);
   }
