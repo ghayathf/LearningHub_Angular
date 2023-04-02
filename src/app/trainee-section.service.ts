@@ -166,18 +166,22 @@ export class TraineeSectionService {
   }
   certificatesFlag:any =false
   certificate:any
+  myCertificate:any =[]
   getAllCertificates(id:number,secID:number){
     this.spinner.show();
     return new Promise<void>((resolve, reject) => {
-      this.http.get("https://localhost:44391/api/Certificate/GetTCertificateById/"+id).subscribe({
+      this.http.get("https://localhost:44391/api/Certificate/GetAllCertificates").subscribe({
         next: (res) => {
           this.certificate = res;
+          this.myCertificate = this.certificate.find((x: { t_S_Id: number; })=>x.t_S_Id == id)
+          if(this.myCertificate != null)
+          this.certificatesFlag = true
           this.spinner.hide();
-          if(res){this.certificatesFlag = true}
-          
+
+
           if(this.certificatesFlag){this.GetAbsentTrainees(secID)}
-          
-          
+          debugger
+
           resolve();
         },
         error: (err) => {
@@ -200,6 +204,7 @@ export class TraineeSectionService {
            }
          });
           resolve();
+          debugger
         },
         error: (err) => {
 

@@ -182,17 +182,14 @@ myComments: any = []
   }
   currentts: any = []
   GettsInfo(secId:any,traineeId:any) {
-    debugger
     return new Promise<void>((resolve, reject) => {
     this.http.get("https://localhost:44391/api/Section/GetTSInfos/"+secId+"/"+traineeId).subscribe(
       (res) => {
         this.currentts = res
     resolve();
-    debugger
   },
       (err) => {
         console.log(err);
-        debugger
       }
     )})
   }
