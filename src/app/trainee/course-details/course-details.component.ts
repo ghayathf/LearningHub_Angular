@@ -103,7 +103,7 @@ export class CourseDetailsComponent {
     this.courseLevel = Levels[this.combinedArray[0].courselevel]
     await this.sectionService.GetCommentsBySection(this.section.sectionid)
     this.commentsArr = await this.sectionService.myComments
-    await this.traineeSectionService.getAllCertificates(this.combinedArray[0].tsid,this.section.sectionid);
+    await this.traineeSectionService.getAllCertificates(this.combinedArray[0].tsid,this.section.sectionid,this.currTrainee);
   }
   DownloadCertificate(tid:any,StartDate:any,endDate:any,coursename:any,fname:any){
     const doc = new jsPDF('l', 'mm', 'a4');

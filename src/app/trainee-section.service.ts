@@ -167,12 +167,17 @@ export class TraineeSectionService {
   certificatesFlag:any =false
   certificate:any
   myCertificate:any =[]
-  getAllCertificates(id:number,secID:number){
+  selectedid:any
+  selectedTrainee:any
+  getAllCertificates(id:number,secID:number,TID:number){
     this.spinner.show();
     return new Promise<void>((resolve, reject) => {
       this.http.get("https://localhost:44391/api/Certificate/GetAllCertificates").subscribe({
         next: (res) => {
           this.certificate = res;
+          this.selectedid=id
+          this.selectedTrainee=TID
+
           this.myCertificate = this.certificate.find((x: { t_S_Id: number; })=>x.t_S_Id == id)
           if(this.myCertificate != null)
           this.certificatesFlag = true
@@ -199,7 +204,7 @@ export class TraineeSectionService {
         next: (res) => {
          this.check=res;
          this.check.forEach((element:any) => {
-          if(element.tsid2 == this.certificate.t_S_Id) {
+          if(element.traineeid == this.selectedTrainee) {
             this.certificatesFlag = false
            }
          });

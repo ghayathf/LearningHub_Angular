@@ -102,10 +102,11 @@ export class SectionService {
 
   }
 
-async GenerateCertificate(type:number,sectionId:number){
+ GenerateCertificate(type:number,sectionId:number){
   return new Promise<void>((resolve, reject) => {
     this.spinner.show();
-    this.http.post(`https://localhost:44391/api/Admin/GenerateCertificate/${type}/${sectionId}`,{}).subscribe(
+    this.http.post("https://localhost:44391/api/Admin/GenerateCertificate/"+type+"/"+sectionId, {}).subscribe(
+
       {
         next: () => {
           this.spinner.hide();
